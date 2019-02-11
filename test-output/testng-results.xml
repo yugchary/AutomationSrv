@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="3" total="5" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="23656" started-at="2019-02-10T18:47:39Z" finished-at="2019-02-10T18:48:03Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="23656" started-at="2019-02-10T18:47:39Z" finished-at="2019-02-10T18:48:03Z">
+      <class name="com.lco.qa.testcases.OnePersonQuoteTest">
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.lco.qa.testcases.OnePersonQuoteTest@782663d3]" name="setup" is-config="true" duration-ms="6587" started-at="2019-02-10T18:47:40Z" finished-at="2019-02-10T18:47:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="onePersonQuoteTest11(java.lang.String, java.lang.String)[pri:0, instance:com.lco.qa.testcases.OnePersonQuoteTest@782663d3]" name="onePersonQuoteTest11" duration-ms="3729" started-at="2019-02-10T18:47:46Z" data-provider="getData" finished-at="2019-02-10T18:47:50Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Yug]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[05.01.1987]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- onePersonQuoteTest11 -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.lco.qa.testcases.OnePersonQuoteTest@782663d3]" name="tearDown" is-config="true" duration-ms="668" started-at="2019-02-10T18:47:50Z" finished-at="2019-02-10T18:47:51Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=onePersonQuoteTest11 status=SUCCESS method=OnePersonQuoteTest.onePersonQuoteTest11(java.lang.String, java.lang.String)[pri:0, instance:com.lco.qa.testcases.OnePersonQuoteTest@782663d3] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.lco.qa.testcases.OnePersonQuoteTest@782663d3]" name="setup" is-config="true" duration-ms="8096" started-at="2019-02-10T18:47:51Z" finished-at="2019-02-10T18:47:59Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="onePersonQuoteTest11(java.lang.String, java.lang.String)[pri:0, instance:com.lco.qa.testcases.OnePersonQuoteTest@782663d3]" name="onePersonQuoteTest11" duration-ms="3499" started-at="2019-02-10T18:47:59Z" data-provider="getData" finished-at="2019-02-10T18:48:02Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[Swe]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[05.01.2001]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- onePersonQuoteTest11 -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.lco.qa.testcases.OnePersonQuoteTest@782663d3]" name="tearDown" is-config="true" duration-ms="678" started-at="2019-02-10T18:48:02Z" finished-at="2019-02-10T18:48:03Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[[TestResult name=onePersonQuoteTest11 status=SUCCESS method=OnePersonQuoteTest.onePersonQuoteTest11(java.lang.String, java.lang.String)[pri:0, instance:com.lco.qa.testcases.OnePersonQuoteTest@782663d3] output={null}]]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- com.lco.qa.testcases.OnePersonQuoteTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
