@@ -14,12 +14,12 @@ import org.testng.annotations.Test;
 
 import com.lco.qa.base.TestBase;
 import com.lco.qa.util.Testutil;
+import com.lco.qa.util.Xlsutil;
 
 public class OnePersonGatherInfoPage extends TestBase {
 	
 	//Page Factory - OR
 	
-
 	
 	@FindBy(xpath="//p[contains(text(),'One person')]")	
 	//@FindBy(css=".active-image")
@@ -27,9 +27,6 @@ public class OnePersonGatherInfoPage extends TestBase {
 	//@FindBy(xpath="//div[@class='c-select-one-person active col-sm-3']//p")
 	//@FindBy(xpath="//img[@class='active-image']")
 	WebElement onePImg;	
-	
-	
-	
 	
 	@FindBy(name="first-applicant-name-0")
 	WebElement first_applicant_name_0;
@@ -39,13 +36,12 @@ public class OnePersonGatherInfoPage extends TestBase {
 	
 	@FindBy(xpath="//label[contains(text(), 'Male')]")
 	WebElement mradioBtn;
-	
-	
+		
 	
 	@FindBy(xpath="//input[@placeholder='MM/DD/YYYY']")
 	WebElement DOB;
 	
-	//@FindBy(xpath="//div[@class='react-datepicker__week']//div[@aria-label='day-" + days + "']")
+	@FindBy(xpath="//div[@class='react-datepicker__week']//div[@aria-label='day-12']")
 	WebElement dateSelect;
 	
 	
@@ -100,13 +96,14 @@ public class OnePersonGatherInfoPage extends TestBase {
 	}
 	
 	
-	public ProductSelectionPage Quote11(String FirstName, String DateOfBirth) {
+	public ProductSelectionPage Quote11(String FirstName, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate, String stateCode) {
 		
 		
 		onePImg.click();
 		
 		first_applicant_name_0.sendKeys(FirstName);
-		fradioBtn.click();
+		driver.findElement(By.xpath("//label[contains(text(), '" + Gender + "')]")).click();
+		//fradioBtn.click();
 		
 		DOB.sendKeys(DateOfBirth);
 		String[] array = DateOfBirth.split("/", -1);
@@ -118,13 +115,16 @@ public class OnePersonGatherInfoPage extends TestBase {
 		//dateSelect.click();
 		
 				
-		stateValue.sendKeys("Alaska");
-		selectItem.click();		
-		
-		rateHealth.sendKeys("Excellent");
+		stateValue.sendKeys(State);
 		selectItem.click();	
 		
-		tobUseY.click();
+		
+		
+		rateHealth.sendKeys(healthRate);
+		selectItem.click();	
+		
+		//tobUseY.click();
+		driver.findElement(By.xpath("//label[contains(text(), '" + tobaccoUse + "')]")).click();
 		nextBtn.click();
 		
 		return new ProductSelectionPage();
@@ -145,7 +145,14 @@ public class OnePersonGatherInfoPage extends TestBase {
 		
 				
 		stateValue.sendKeys("Alaska");
-		selectItem.click();		
+		selectItem.click();	
+		
+		
+		String state_code = driver.findElement(By.xpath("//div[contains(text(),'State')]//following-sibling::*//input")).getAttribute("value");
+		System.out.println(state_code);			
+		xls.setCellData("Quote1", "State_Code", 2, state_code);
+		
+		
 		
 		rateHealth.sendKeys("Excellent");
 		selectItem.click();	

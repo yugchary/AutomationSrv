@@ -7,7 +7,7 @@ import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 
 import org.testng.annotations.BeforeMethod;
-
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 
@@ -40,10 +40,15 @@ public class ProductSelectionTest extends TestBase {
 		initialization();
 		productSelectionPage = new ProductSelectionPage();
 		onePersonGatherInfoPage = new OnePersonGatherInfoPage();
-		productSelectionPage = onePersonGatherInfoPage.Quote1();
+		
+	}
+	
+	@DataProvider
+	Object[][] getData() throws Exception {
+		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Quote1");
 	}
 
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void ProductSelectionPageTitleTest() {	
 		log.info("****************************** Starting ProductSelectionPageTitleTest test cases execution *****************************************");
 		extentTest = extent.startTest("loginPageTitleTest");		
@@ -52,23 +57,30 @@ public class ProductSelectionTest extends TestBase {
 		log.info("****************************** Ending ProductSelectionPageTitleTest test cases execution *****************************************");
 	}
 
-	@Test(enabled = true)
-	public void validateOnePersonQuoteInfo() {
+	@Test(dataProvider = "getData", enabled = false)
+	public void validateOnePersonQuoteInfo(String FirstName, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate, String stateCode) {
+		
+	
 		log.info("****************************** Starting validateOnePersonQuoteInfo test cases execution *****************************************");
 		extentTest = extent.startTest("validateOnePersonQuoteInfo");
-		productSelectionPage = productSelectionPage.GetPersonInfo();
+		DateOfBirth = DateOfBirth.replace(".", "/");
+		productSelectionPage = onePersonGatherInfoPage.Quote11(FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate, stateCode);
+		productSelectionPage = productSelectionPage.GetPersonInfo(FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate, stateCode);
 		log.info("****************************** Ending validateOnePersonQuoteInfo test cases execution *****************************************");
 	}
 	
-	@Test(enabled = true)
-	public void selectProduct() {
+	@Test(dataProvider = "getData", enabled = true)
+	public void selectProduct(String FirstName, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate, String stateCode) {
 		log.info("****************************** Starting selectProduct test cases execution *****************************************");
 		extentTest = extent.startTest("selectProduct");
+		DateOfBirth = DateOfBirth.replace(".", "/");
+		productSelectionPage = onePersonGatherInfoPage.Quote11(FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate, stateCode);
+		
 		productSelectionPage = productSelectionPage.ProductSelection();
 		log.info("****************************** Ending selectProduct test cases execution *****************************************");
 	}
 	
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public void FinalizeProduct() {		
 		
 		log.info("****************************** Starting FinalizeProduct test cases execution *****************************************");

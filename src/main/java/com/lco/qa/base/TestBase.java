@@ -15,6 +15,7 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import com.lco.qa.util.Testutil;
 import com.lco.qa.util.WebEventListener;
+import com.lco.qa.util.Xlsutil;
 import com.relevantcodes.extentreports.ExtentReports;
 
 public class TestBase {
@@ -25,7 +26,7 @@ public class TestBase {
 	public static WebEventListener eventListener;
 	public static Logger log = Logger.getLogger("TestAutomationLogger");
 	public static ExtentReports extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/LIC_TestExecutoinReport_Extent.html", true);
-	
+	public static Xlsutil xls = new Xlsutil(Testutil.TESTDATA_SHEET_PATH);	
 
 	
 	public TestBase(){

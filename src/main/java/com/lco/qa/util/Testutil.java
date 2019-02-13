@@ -28,7 +28,7 @@ public class Testutil extends TestBase {
 	public static long implicitlyWait = 180;
 	public static long waitTime = 5000;
 
-	public static String TESTDATA_SHEET_PATH = "C:\\Users\\akkyu01\\eclipse-workspace\\Google.xlsx";
+	public static String TESTDATA_SHEET_PATH = "C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\testdata\\LCO_TestData.xlsx";
 
 	static Workbook book;
 	static Sheet sheet;
@@ -88,7 +88,8 @@ public class Testutil extends TestBase {
 		
 		//int totalCols = sheet.getCol
 
-		tabArray = new String[totalCols][totalRows-1];
+		//tabArray = new String[totalCols][totalRows-1];
+		tabArray = new String[totalRows-1][totalCols];
 
 		ci = 0;
 

@@ -32,7 +32,7 @@ public class OnePersonQuoteTest extends TestBase {
 	ProductSelectionPage productSelectionPage;
 	ExtentTest extentTest;
 	
-	public static String TESTDATA_SHEET_PATH = "C:\\Users\\akkyu01\\eclipse-workspace\\Google.xlsx";
+	//public static String TESTDATA_SHEET_PATH = "C:\\Users\\akkyu01\\eclipse-workspace\\Google.xlsx";
 
 	//ExtentReports extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/LIC_TestExecutoinReport_Extent.html", true);
 
@@ -48,7 +48,7 @@ public class OnePersonQuoteTest extends TestBase {
 	
 	@DataProvider
 	Object[][] getData() throws Exception {
-		return Testutil.getTableArray(TESTDATA_SHEET_PATH,"Quote1");
+		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Quote1");
 	}
 	
 
@@ -65,11 +65,11 @@ public class OnePersonQuoteTest extends TestBase {
 	
 
 	@Test(dataProvider = "getData", enabled = true) 
-	public void onePersonQuoteTest11(String FirstName, String DateOfBirth){
+	public void onePersonQuoteTest11(String FirstName, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate, String stateCode){
 		log.info("****************************** Starting onePersonQuoteTest test cases execution *****************************************");
 		extentTest = extent.startTest("onePersonQuoteTest");
 		DateOfBirth = DateOfBirth.replace(".", "/");
-		onePerson.Quote11(FirstName, DateOfBirth);
+		onePerson.Quote11(FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate, stateCode);
 		log.info("****************************** Ending onePersonQuoteTest test cases execution *****************************************");
 	}
 
@@ -86,7 +86,7 @@ public class OnePersonQuoteTest extends TestBase {
 	public void onePersonQuoteTest1() throws ParseException {
 		
 		
-		Xlsutil xl = new Xlsutil(TESTDATA_SHEET_PATH);
+		Xlsutil xl = new Xlsutil(Testutil.TESTDATA_SHEET_PATH);
 		String FirstName,DateOfBirth;
 		int rowCount, colCount;
 		rowCount = xl.getRowCount("Quote1");
@@ -103,7 +103,7 @@ public class OnePersonQuoteTest extends TestBase {
 				DateOfBirth = DateOfBirth.replace(".", "/");
 				
 				
-				productSelectionPage = onePerson.Quote11(FirstName, DateOfBirth);
+				//productSelectionPage = onePerson.Quote11(FirstName, DateOfBirth);
 				log.info("****************************** Ending onePersonQuoteTest test cases execution *****************************************");
 			}
 		
