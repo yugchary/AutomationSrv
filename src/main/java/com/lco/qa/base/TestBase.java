@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.*;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
@@ -34,7 +34,8 @@ public class TestBase {
 		prop = new Properties();
 		try {
 			//FileInputStream ip = new FileInputStream("C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\FreeCRMTests\\src\\main\\java\\com\\crm\\qa\\config\\config.properties");
-			FileInputStream ip = new FileInputStream("C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\config\\config.properties");
+			//FileInputStream ip = new FileInputStream("C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\config\\config.properties");
+			FileInputStream ip = new FileInputStream("/home/yugandher/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/config/config.properties");
 			prop.load(ip);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -63,8 +64,14 @@ public class TestBase {
 		} else if (BrowserType.equalsIgnoreCase("FF")) {
 
 			//System.setProperty("webdriver.gecko.driver","C:\\Yug\\From Old Laptop\\From LoanLap\\Yug\\Selenium\\geckodriver.exe");
-			System.setProperty("webdriver.gecko.driver",BinariesLoc+"geckodriver.exe");
-			driver = new FirefoxDriver();
+			//System.setProperty("webdriver.gecko.driver",BinariesLoc+"geckodriver.exe");
+			System.setProperty("webdriver.gecko.driver",BinariesLoc+"geckodriver");
+			//driver = new FirefoxDriver();
+			
+			FirefoxOptions options = new FirefoxOptions();
+			
+			options.setCapability("marionette", true);
+			driver = new FirefoxDriver(options);
 
 		}
 		
