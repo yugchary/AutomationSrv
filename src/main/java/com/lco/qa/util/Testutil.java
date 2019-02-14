@@ -24,11 +24,13 @@ import com.lco.qa.base.TestBase;
 
 public class Testutil extends TestBase {
 
-	public static long pageLoadTimeout = 180;
-	public static long implicitlyWait = 180;
+	public static long pageLoadTimeout = 45;
+	public static long implicitlyWait = 45;
 	public static long waitTime = 5000;
 
-	public static String TESTDATA_SHEET_PATH = "C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\testdata\\LCO_TestData.xlsx";
+	//public static String TESTDATA_SHEET_PATH = "C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\testdata\\LCO_TestData.xlsx";
+	public static String TESTDATA_SHEET_PATH = "/home/yugandher/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/LCO_TestData.xlsx";
+	
 
 	static Workbook book;
 	static Sheet sheet;

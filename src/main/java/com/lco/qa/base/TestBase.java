@@ -54,7 +54,8 @@ public class TestBase {
 
 		if (BrowserType.equalsIgnoreCase("CHROME")) {
 			//System.setProperty("webdriver.chrome.driver","C:\\Yug\\From Old Laptop\\From LoanLap\\Yug\\Selenium\\chromedriver.exe");
-			System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver.exe");
+			//System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver");
 			driver = new ChromeDriver();
 		} else if (BrowserType.equalsIgnoreCase("IE")) {
 
@@ -83,7 +84,7 @@ public class TestBase {
 		driver = e_driver;
 		
 		driver.manage().deleteAllCookies();
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 		driver.manage().timeouts().pageLoadTimeout(Testutil.pageLoadTimeout, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(Testutil.implicitlyWait, TimeUnit.SECONDS);
 		

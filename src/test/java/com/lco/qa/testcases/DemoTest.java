@@ -57,8 +57,19 @@ public class DemoTest extends TestBase {
 		Assert.assertEquals(title, "OrangeHRM");
 		log.info("****************************** Ending loginPageTitleTest test cases execution *****************************************");
 	}
-
+	
 	@Test
+	public void Test1(){
+		
+		
+		
+	}
+	
+	
+	
+	
+
+	@Test(enabled = false)
 	public void Test() throws ParseException {
 		//demoPage = demoPage.SampleTest(prop.getProperty("username"), prop.getProperty("password"));
 		
@@ -77,6 +88,11 @@ public class DemoTest extends TestBase {
 			System.out.println(ec.get(i));
 		
 	}
+	
+	
+	
+	
+	
 	
 	static HashMap<Integer, String> ProductList() {
 		
