@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.By.ByCssSelector;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -19,6 +20,9 @@ public class PersonalPage extends TestBase {
 	@FindBy(css = ".test")
 	WebElement select1Item;
 
+	@FindBy(css = ".form-group")
+	WebElement formElement;
+
 	@FindBy(xpath = "//div[contains(text(),'State')]//following-sibling::*//div[@class='Select-multi-value-wrapper']//input")
 	WebElement stateValue;
 
@@ -26,7 +30,7 @@ public class PersonalPage extends TestBase {
 	WebElement selectItem;
 
 	@FindBy(xpath = "//div[@class='c-submit-person-info-btn c-center']//button[1]")
-	// @FindBy(xpath="//div[@class='c-submit-person-info-btn
+	// @FindBy(xpath="//div[@class='c-submit-person-info-bftn
 	// c-center']//button[@class='c-button-default.visible.btn-default']")
 	// button[@class='c-button-default circular hidden-xs active btn
 	// btn-default']
@@ -59,116 +63,209 @@ public class PersonalPage extends TestBase {
 
 	public void FillTextFields() {
 
-		//
+		/*
 		List<WebElement> listField = null;
 		Iterator<WebElement> f = null;
-		// List<WebElement> list =
-		// driver.findElements(By.xpath("//input[@type='text']"));
 		List<WebElement> listLabel = driver.findElements(By.cssSelector(".form-group"));
-		System.out.println(listLabel.size());
-		if (listLabel.size() > 0) {
-			listField = driver.findElements(By.cssSelector(".form-group .field .form-control"));
-			System.out.println(listField.size());
-			f = listField.iterator();
-		}
+
+		List<WebElement> listCheckbox = null;
+		Iterator<WebElement> cb = null;
+		List<WebElement> listCheckboxLabel = driver.findElements(By.cssSelector(".custom-checkbox-container"));
+
+		
+		 * System.out.println("Label count" + listLabel.size()); if
+		 * (listLabel.size() > 0) { listField =
+		 * driver.findElements(By.cssSelector(".form-group .field .form-control"
+		 * )); System.out.println(listField.size()); f = listField.iterator(); }
+		 * 
+		 * System.out.println("check box count" + listCheckboxLabel.size()); if
+		 * (listCheckboxLabel.size() > 0) { listCheckbox =
+		 * driver.findElements(By.
+		 * cssSelector(".custom-checkbox-container .custom-checkbox-checkmark"))
+		 * ; System.out.println(listField.size()); cb = listCheckbox.iterator();
+		 * }
+		 */
 
 		int i = 0;
 
-		if (listLabel.size() > 0) {
+		String pageType = "def";
 
-			Iterator<WebElement> l = listLabel.iterator();
-			while (f.hasNext() && l.hasNext()) {
-				i++;
+		By byFormL = By.cssSelector(".form-group");
+		By byCheckboxL = By.cssSelector(".custom-checkbox-container");
 
-				WebElement elementL = l.next();
-				WebElement elementF = f.next();
+		By byFormF = By.cssSelector(".form-group .field .form-control");
+		By byCheckboxF = By.cssSelector(".custom-checkbox-container .custom-checkbox-checkmark");
 
-				// String returnText =element.getAttribute("type").toString();
-				String returnText = elementL.getText().toString();
+		int formFlag = CheckWebElements(byFormL);
+		if (formFlag > 0)
+			pageType = "form";
+		int checkboxFlag = CheckWebElements(byCheckboxL);
+		if (checkboxFlag > 0)
+			pageType = "checkbox";
 
-				// t.next().click();
-				System.out.println("i value: " + i + returnText);
+		do {
 
-				String QuestionType;
+			//Iterator<WebElement> l = listLabel.iterator();
 
-				switch (returnText) {
-				case "Phone (HOME/CELL)":
-				case "Phone (WORK)":
-					QuestionType = "Phone";
+			// l = CheckNextElement(By.cssSelector(".form-group"))
 
-					System.out.println("This is a text field WebElement" + returnText);
-					break;
-				case "ZIP":
-				case "*Annual Income":
-				case "*What is your annual household income?":
-					QuestionType = "Number";
-					System.out.println("This is a ZIP WebElement" + returnText);
-					break;
-				case "City":
-					QuestionType = "Text";
-					System.out.println("This is a City WebElement" + returnText);
-					break;
+			// CheckNextElement(By.cssSelector(".form-group")).hasNext();
 
-				default:
-					QuestionType = "Text";
-					System.out.println("This is a default  WebElement" + returnText);
-					break;
+			switch (pageType) {
 
-				}
-
-				switch (QuestionType) {
-				case "Text":
-					if (FieldType(elementF, "text"))
-						elementF.sendKeys("999");
-
-					break;
-				case "Phone":
-					if (FieldType(elementF, "9999999999"))
-						elementF.sendKeys("text");
-					break;
-				case "Number":
-					elementF.sendKeys("12345");
-					break;
-				case "DropDown":
-					stateValue.sendKeys("Alabama (AL)");
-					selectItem.click();
-					break;
-				case "Button":
-					break;
-				case "MultiSelection":
-					break;
-				case "SuggestionBox":
-					break;
-				default:
-					elementF.sendKeys("default");
-					break;
-
-				}
-				
-				if(i==listLabel.size()){
-					driver.findElement(By.xpath("//button[contains(text(), 'Next')]")).click();
-					
-					listLabel = driver.findElements(By.cssSelector(".form-group"));
-					l = listLabel.iterator();
-					
-					if (listLabel.size()>0){
-						  listField = driver.findElements(By.cssSelector(".form-group .field .form-control"));
-							System.out.println(listField.size());
-							 f = listField.iterator();
-							 
-							 
-						}
-				}
+			case "checkbox":
+				System.out.println("This is a page filled with " + pageType);
+				checkPage(CheckNextElement(byCheckboxL, byCheckboxF), CheckNextElement(byCheckboxL, byCheckboxF), byCheckboxL, byCheckboxF, pageType);
+				break;
+			case "form":
+				System.out.println("This is a page filled with " + pageType);
+				checkPage(CheckNextElement(byFormL, byFormF), CheckNextElement(byFormL, byFormF), byFormL, byFormF, pageType);
+				break;
+			default:
+				System.out.println("This is a page filled with default");
+				break;
 
 			}
 
-		} else {
+			if (formFlag < 1 && checkboxFlag < 1) {
 
-			driver.findElement(By.xpath("//button[contains(text(), 'Yes')]")).click();
-		}
+				driver.findElement(By.xpath("//button[contains(text(), 'Yes')]")).click();
+			}
+			
+			formFlag = CheckWebElements(byFormL);
+			if (formFlag > 0)
+				pageType = "form";
+			checkboxFlag = CheckWebElements(byCheckboxL);
+			if (checkboxFlag > 0)
+				pageType = "checkbox";
+
+		}while (formFlag > 0 || checkboxFlag > 0);												
 
 		//
 		// return new PersonalPage();
+
+	}
+
+	public int CheckWebElements(By by) {
+
+		List<WebElement> listWebElementLabel = driver.findElements(by);
+
+		return listWebElementLabel.size();
+
+		/*
+		 * if (listWebElementLabel.size() > 0) { return true; } else return
+		 * false;
+		 */
+
+	}
+
+	public Iterator<WebElement> CheckNextElement(By byL, By byF) {
+
+		if (CheckWebElements(byL) > 0) {
+			List<WebElement> listWebElementField = driver.findElements(byF);
+			System.out.println(listWebElementField.size());
+			return listWebElementField.iterator();
+		} else
+			return null;
+
+	}
+
+	public void checkPage(Iterator<WebElement> l, Iterator<WebElement> f, By byL, By byF, String pageType) {
+
+		int i = 0;
+
+		while (l.hasNext() && f.hasNext()) {
+			i++;
+
+			FillPage(l, f, i, pageType);
+
+			if (i == CheckWebElements(byL)) {
+				driver.findElement(By.xpath("//button[contains(text(), 'Next')]")).click();
+
+				l = CheckNextElement(byL, byF);
+
+				f = CheckNextElement(byL, byF);
+			}
+
+		}
+
+	}
+
+	public void FillPage(Iterator<WebElement> l, Iterator<WebElement> f, int i, String pageType) {
+
+		WebElement elementL = l.next();
+		WebElement elementF = f.next();
+
+		// String returnText =element.getAttribute("type").toString();
+		String returnText = elementL.getText().toString();
+
+		// t.next().click();
+		System.out.println("i value: " + i + returnText);
+
+		String QuestionType;
+
+		switch (returnText) {
+		case "Phone (HOME/CELL)":
+		case "Phone (WORK)":
+			QuestionType = "Phone";
+
+			System.out.println("This is a text field WebElement" + returnText);
+			break;
+		case "ZIP":
+		case "*Annual Income":
+		case "*What is your annual household income?":
+			QuestionType = "Number";
+			System.out.println("This is a ZIP WebElement" + returnText);
+			break;
+		case "City":
+			QuestionType = "Text";
+			System.out.println("This is a City WebElement" + returnText);
+			break;
+		case "checkbox":
+			QuestionType = "Text";
+			System.out.println("This is a City WebElement" + returnText);
+			break;				
+
+		default:			
+			if (pageType.contains("checkbox")) QuestionType = "Checkbox";
+			else			
+			 QuestionType = "Text";
+			System.out.println("This is a default  WebElement" + returnText);
+			break;
+
+		}
+
+		switch (QuestionType) {
+		case "Text":
+			if (FieldType(elementF, "text"))
+				elementF.sendKeys("999");
+
+			break;
+		case "Phone":
+			if (FieldType(elementF, "9999999999"))
+				elementF.sendKeys("text");
+			break;
+		case "Number":
+			elementF.sendKeys("12345");
+			break;
+		case "DropDown":
+			stateValue.sendKeys("Alabama (AL)");
+			selectItem.click();
+			break;			
+		case "Checkbox":
+			elementF.click();
+			break;
+		case "Button":
+			break;
+		case "MultiSelection":
+			break;
+		case "SuggestionBox":
+			break;
+		default:
+			elementF.sendKeys("default");
+			break;
+
+		}
 
 	}
 
