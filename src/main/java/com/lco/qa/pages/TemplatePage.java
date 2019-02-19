@@ -29,6 +29,9 @@ public class TemplatePage extends TestBase{
 	
 	public TemplatePage SampleTest(String un, String pwd) {
 		
+		//driver.findElement(By.xpath(""));
+		//driver.findElement(By.cssSelector("")).click();
+		
 		return new TemplatePage();
 		
 	}

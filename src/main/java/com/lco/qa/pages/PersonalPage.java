@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 
 import com.lco.qa.base.TestBase;
+import com.lco.qa.util.ProductUtil;
 import com.lco.qa.util.Testutil;
 
 public class PersonalPage extends TestBase {
@@ -101,25 +102,28 @@ public class PersonalPage extends TestBase {
 		// By byDropdownF =
 
 		By byDropdownF = By.cssSelector(".Select-placeholder");
-		//By byButtonF = By.cssSelector(".single-select-btn-container .c-button-default"); byNoButtonF
+		By byButtonF = By.cssSelector(".single-select-btn-container .c-button-default"); 
 		
-		By  byButtonF = By.cssSelector("button[class='c-button-default circular single-select-btn  btn btn-default']");
-				
-				
+		By  byNoButtonF = By.cssSelector("button[class='c-button-default circular single-select-btn  btn btn-default']");
+		
+		By byautoSuggF = By.xpath("//input[@autocomplete='off']");
+		By byDatepickerF = By.cssSelector(".react-datepicker-wrapper");
 		
 		//driver.findElement(By.xpath("//div[starts-with(@class,'Add')]//following-sibling::*//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]")).click();
 		
-		//driver.findElement(By.xpath("//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]"));
+		/*
 		
-		//driver.findElement(By.xpath(""));
 		
-		//click esign
+		driver.findElement(By.xpath("//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]"));
 		
-		/*driver.findElement(By.cssSelector("div > button")).click();
+		//driver.findElement(By.xpath(""));		
+	
+		
+		driver.findElement(By.cssSelector("div > button")).click();
 		LoadingNextPage();
 		
 		driver.findElement(By.xpath("//label[contains(text(), 'I agree to use electronic records and signatures.')]")).click();
-		*/
+		
 		
 		System.out.println("clicked continue");
 		
@@ -142,12 +146,10 @@ public class PersonalPage extends TestBase {
 		//driver.findElement(By.xpath("//button[contains(text(), 'Adopt and Sign')]")).click();
 		
 		
-		
-		
-		//div[starts-with(@class,'Add')]//following-sibling::*//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]
+		//click esign
 		//button[contains(text(), 'ESIGN AND SUBMIT')]
 		
-		
+	
 		
 		WebElement wbCanvas = driver.findElement(By.cssSelector(".signature-draw .canvas-wrapper"));
 		
@@ -168,13 +170,12 @@ public class PersonalPage extends TestBase {
 		
 		//driver.findElement(By.xpath("//button[contains(text(), 'Adopt and Sign')]")).click();
 		
-
-		By byautoSuggF = By.xpath("//input[@autocomplete='off']");
-		By byDatepickerF = By.cssSelector(".react-datepicker-wrapper");
+		
+		*/		
 		
 		
 
-		// input[@autocomplete='off']
+
 
 		int formFlag = 0;
 		int checkboxFlag = 0;
@@ -259,7 +260,8 @@ public class PersonalPage extends TestBase {
 
 			driver.findElement(By.xpath("//button[@class='c-button-default circular  action btn btn-default']"))
 					.click();
-			CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+			
+			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
 
 			formFlag = 0;
 			checkboxFlag = 0;
@@ -450,6 +452,11 @@ public class PersonalPage extends TestBase {
 			QuestionType = "SSN";
 			System.out.println("This is a SSN WebElement " + returnText);
 			break;
+		case "*Driver's license #":
+		case "Driver's license #":
+			QuestionType = "DL";
+			System.out.println("This is a SSN WebElement " + returnText);
+			break;
 		case "City":
 			QuestionType = "Text";
 			System.out.println("This is a City WebElement " + returnText);
@@ -507,6 +514,9 @@ public class PersonalPage extends TestBase {
 			break;
 		case "SSN":
 			elementF.sendKeys("222222222");
+			break;
+		case "DL":
+			elementF.sendKeys("753475837");
 			break;
 
 		case "Dropdown":
@@ -619,28 +629,6 @@ public class PersonalPage extends TestBase {
 	}
 	
 	
-	public void CheckElementDoNotExists(String css, boolean flag) {
-
-		//boolean present = true;
-
-		while (flag) {
-
-			try {
-				driver.findElement(By.cssSelector(css));
-				try {
-					System.out.println("waiting for " + Testutil.waitTime + " milliseconds");
-					Thread.sleep(Testutil.waitTime);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				flag = true;
-			} catch (NoSuchElementException e) {
-				flag = false;
-			}
-
-		}
-
-	}
+	
 
 }

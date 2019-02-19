@@ -84,10 +84,7 @@ public class OnePersonGatherInfoPage extends TestBase {
 		
 	}
 	
-	
-	
-
-	
+		
 	
 	//Actions:
 	
