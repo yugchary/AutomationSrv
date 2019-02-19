@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.Wait;
 import com.lco.qa.base.TestBase;
 import com.lco.qa.util.ProductUtil;
 import com.lco.qa.util.Testutil;
+import com.lco.qa.util.Xlsutil;
 
 public class PersonalPage extends TestBase {
 
@@ -83,13 +84,13 @@ public class PersonalPage extends TestBase {
 		driver.navigate().to(url);
 
 		// for(int i=0;i<5; i++)
-		FillTextFields();
+		FillTextFields("yug", "text");
 
 		return new PersonalPage();
 
 	}
 
-	public void FillTextFields() {
+	public void FillTextFields(String FieldName, String FieldValue) {
 
 		By byFormL = By.cssSelector(".form-group");
 		By byCheckboxL = By.cssSelector(".custom-checkbox-container");
@@ -393,6 +394,8 @@ public class PersonalPage extends TestBase {
 
 		// String returnText =element.getAttribute("type").toString();
 		String returnText = elementL.getText().toString();
+		
+		String FieldValue = Testutil.GetfromXls("Questions", "Question", returnText);
 
 		if (returnText.isEmpty())
 			returnText = pageType;
@@ -407,7 +410,7 @@ public class PersonalPage extends TestBase {
 
 		QuestionType = IdentifyWebElementType(elementL, returnText);
 
-		ClickWebElement(elementF, QuestionType);
+		FillData(elementF, QuestionType, FieldValue);
 
 	}
 
@@ -417,25 +420,27 @@ public class PersonalPage extends TestBase {
 
 		// String returnText =element.getAttribute("type").toString();
 		// String returnText = elementL.getText().toString();
+		
+		String FieldValue = null;
 
 		// t.next().click();
 		System.out.println("i value: " + i + pageType);
 
-		String QuestionType;
+		String FieldType;
 
-		QuestionType = IdentifyWebElementType(elementF, pageType);
+		FieldType = IdentifyWebElementType(elementF, pageType);
 
-		ClickWebElement(elementF, QuestionType);
+		FillData(elementF, FieldType, FieldValue);
 
 	}
 
 	public String IdentifyWebElementType(WebElement elementL, String returnText) {
 
-		String QuestionType;
+		String FieldType;
 		switch (returnText) {
 		case "*Phone (HOME/CELL)":
 		case "Phone (WORK)":
-			QuestionType = "Phone";
+			FieldType = "Phone";
 			System.out.println("This is a text field WebElement " + returnText);
 			break;
 		case "*Zip":
@@ -444,86 +449,93 @@ public class PersonalPage extends TestBase {
 		case "ZIP":
 		case "*Annual Income":
 		case "*What is your annual household income?":
-			QuestionType = "Number";
+			FieldType = "Number";
 			System.out.println("This is a ZIP WebElement " + returnText);
 			break;
 
 		case "*Social Security #":
-			QuestionType = "SSN";
+			FieldType = "SSN";
 			System.out.println("This is a SSN WebElement " + returnText);
 			break;
 		case "*Driver's license #":
 		case "Driver's license #":
-			QuestionType = "DL";
+			FieldType = "DL";
 			System.out.println("This is a SSN WebElement " + returnText);
 			break;
 		case "City":
-			QuestionType = "Text";
+			FieldType = "Text";
 			System.out.println("This is a City WebElement " + returnText);
 			break;
 		case "checkbox":
-			QuestionType = "Checkbox";
+			FieldType = "Checkbox";
 			System.out.println("This is a Checkbox WebElement " + returnText);
 			break;
 		case "button":
-			QuestionType = "Button";
+			FieldType = "Button";
 			System.out.println("This is a Button WebElement " + returnText);
 			break;
 		case "dropdown":
-			QuestionType = "Dropdown";
+			FieldType = "Dropdown";
 			System.out.println("This is a Dropdown WebElement " + returnText);
 			break;
 		case "autoSugg":
-			QuestionType = "AutoSugg";
+			FieldType = "AutoSugg";
 			System.out.println("This is a Dropdown WebElement " + returnText);
 			break;
 		case "datepicker":
-			QuestionType = "DatePicker";
+			FieldType = "DatePicker";
 			System.out.println("This is a Dropdown WebElement " + returnText);
 			break;
 
 		default:
-			QuestionType = "Text";
+			FieldType = "Text";
 			System.out.println("This is a default  WebElement " + returnText);
 			break;
 
 		}
-		return QuestionType;
+		return FieldType;
 	}
 
-	public void ClickWebElement(WebElement elementF, String QuestionType) {
+	public void FillData(WebElement elementF, String FieldType, String FieldValue) {
 
-		switch (QuestionType) {
+		switch (FieldType) {
 		case "Text":
 
-			if (FieldType(elementF, "text")) {
-				elementF.sendKeys("999");
+			if (EnterInputData(elementF, "text")) {
+				//elementF.sendKeys("999");
+				elementF.sendKeys(FieldValue);
 				System.out.println("typed number");
 			}
 			break;
 		case "Phone":
 
-			if (FieldType(elementF, "9999999999")) {
+			if (EnterInputData(elementF, "9999999999")) {
 				System.out.println("typed text");
-				elementF.sendKeys("text");
+				//elementF.sendKeys("text");
+				elementF.sendKeys(FieldValue);
 			}
 
 			break;
 		case "Number":
-			elementF.sendKeys("12345");
+			//elementF.sendKeys("12345");
+			elementF.sendKeys(FieldValue);
 			break;
 		case "SSN":
-			elementF.sendKeys("222222222");
+			//elementF.sendKeys("222222222");
+			elementF.sendKeys(FieldValue);
 			break;
 		case "DL":
-			elementF.sendKeys("753475837");
+			//elementF.sendKeys("753475837");
+			elementF.sendKeys(FieldValue);
 			break;
 
 		case "Dropdown":
-			dropdown.click();
+			//dropdown.click();
+			//stateValue.sendKeys("Alabama (AL)");
+			stateValue.sendKeys(FieldValue);
 			selectItem.click();
 			// .Select-placeholder
-			// stateValue.sendKeys("Alabama (AL)");
+			// 
 			// selectItem.click();
 
 			break;
@@ -553,7 +565,8 @@ public class PersonalPage extends TestBase {
 
 			break;
 		case "DatePicker":
-			DOB.sendKeys("03/12/1979");
+			//DOB.sendKeys("03/12/1979");
+			DOB.sendKeys(FieldValue);
 			dateSelect.click();
 			break;
 
@@ -565,7 +578,7 @@ public class PersonalPage extends TestBase {
 
 	}
 
-	public boolean FieldType(WebElement ele, String text) {
+	public boolean EnterInputData(WebElement ele, String text) {
 
 		boolean returnType;
 		ele.sendKeys(text);
@@ -586,6 +599,7 @@ public class PersonalPage extends TestBase {
 
 	}
 
+	
 	public void selectOptionWithIndex(int indexToSelect) {
 
 		try {
@@ -604,6 +618,7 @@ public class PersonalPage extends TestBase {
 		}
 	}
 
+	
 	public void CheckElementExists(String css, boolean flag) {
 
 		//boolean present = true;

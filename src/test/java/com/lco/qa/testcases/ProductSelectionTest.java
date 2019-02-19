@@ -51,14 +51,14 @@ public class ProductSelectionTest extends TestBase {
 	@Test(enabled = false)
 	public void ProductSelectionPageTitleTest() {	
 		log.info("****************************** Starting ProductSelectionPageTitleTest test cases execution *****************************************");
-		extentTest = extent.startTest("loginPageTitleTest");		
+		extentTest = extent.startTest("ProductSelectionPageTitleTest");		
 		String title = productSelectionPage.validateProductSelectionPageTitle();
 		Assert.assertEquals(title, "LifeCo Insurance Company");
 		log.info("****************************** Ending ProductSelectionPageTitleTest test cases execution *****************************************");
 	}
 
 	@Test(dataProvider = "getData", enabled = false)
-	public void validateOnePersonQuoteInfo(String FirstName, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate, String stateCode) {
+	public void validateOnePersonQuoteInfoTest(String FirstName, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate, String stateCode) {
 		
 	
 		log.info("****************************** Starting validateOnePersonQuoteInfo test cases execution *****************************************");

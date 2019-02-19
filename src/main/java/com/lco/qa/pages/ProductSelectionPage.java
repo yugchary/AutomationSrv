@@ -171,34 +171,7 @@ public class ProductSelectionPage extends TestBase {
 
 	public void FinalizeProductSelection() {
 
-		/*
-		 * List<WebElement> listAmount = driver
-		 * .findElements(By.cssSelector(".plan-sider-info-text.row .plan-cost-amount"));
-		 * 
-		 * System.out.println("total plan:"+ listAmount.size());
-		 * 
-		 * Iterator<WebElement> $label = listAmount.iterator();
-		 * 
-		 * int i = 0; while ($label.hasNext()) { i++;
-		 * 
-		 * while($label.next().getText().isEmpty()) {
-		 * 
-		 * try { Thread.sleep(5000); } catch (InterruptedException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); }
-		 * 
-		 * listAmount = driver.findElements(By.
-		 * cssSelector(".plan-sider-info-text.row .plan-cost-amount")); $label =
-		 * listAmount.iterator(); //returnText =
-		 * $label.next().getAttribute("innerHTML").toString(); }
-		 * 
-		 * 
-		 * 
-		 * if($label.next().isDisplayed()) { System.out.println("i displayed value: " +
-		 * i ); }else { $label.next(); System.out.println("Not displayed: "+i); }
-		 * 
-		 * 
-		 * }
-		 */
+		
 
 		WaitForAzaxComponentToLoad(By.cssSelector(".plan-sider-info-text.row .plan-cost-amount"));
 

@@ -96,7 +96,7 @@ public class OnePersonGatherInfoPage extends TestBase {
 	public ProductSelectionPage Quote11(String FirstName, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate, String stateCode) {
 		
 		
-		onePImg.click();
+		//onePImg.click();
 		
 		first_applicant_name_0.sendKeys(FirstName);
 		driver.findElement(By.xpath("//label[contains(text(), '" + Gender + "')]")).click();

@@ -2,6 +2,7 @@ package com.lco.qa.testcases;
 
 import java.io.IOException;
 
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -31,6 +32,8 @@ public class TemplateTest extends TestBase {
 	public TemplateTest() {
 		super();
 	}
+	
+	
 
 	@BeforeMethod
 	public void setup() {

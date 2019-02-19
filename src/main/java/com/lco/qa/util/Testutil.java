@@ -28,9 +28,10 @@ public class Testutil extends TestBase {
 	public static long implicitlyWait = 20;
 	public static long waitTime = 5000;
 
-	//public static String TESTDATA_SHEET_PATH = "C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\testdata\\LCO_TestData.xlsx";
+	// public static String TESTDATA_SHEET_PATH =
+	// "C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\testdata\\LCO_TestData.xlsx";
 	public static String TESTDATA_SHEET_PATH = "/home/yugandher/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/LCO_TestData.xlsx";
-	
+	public static String email_ID = "yugandher@sureify.com";
 
 	static Workbook book;
 	static Sheet sheet;
@@ -78,20 +79,20 @@ public class Testutil extends TestBase {
 
 		int ci, cj;
 
-		//int totalRows = sheet.getLastRowNum();
-		
+		// int totalRows = sheet.getLastRowNum();
+
 		int totalRows = xl.getRowCount(SheetName);
 
 		// you can write a function as well to get Column count
 
-		//int totalCols = 3;
-		
-		int totalCols = xl.getColumnCount(SheetName);
-		
-		//int totalCols = sheet.getCol
+		// int totalCols = 3;
 
-		//tabArray = new String[totalCols][totalRows-1];
-		tabArray = new String[totalRows-1][totalCols];
+		int totalCols = xl.getColumnCount(SheetName);
+
+		// int totalCols = sheet.getCol
+
+		// tabArray = new String[totalCols][totalRows-1];
+		tabArray = new String[totalRows - 1][totalCols];
 
 		ci = 0;
 
@@ -101,10 +102,9 @@ public class Testutil extends TestBase {
 
 			for (int j = startCol; j <= totalCols; j++, cj++) {
 
-				//tabArray[ci][cj] = getCellData(i, j);
-				
-				tabArray[ci][cj] = xl.getCellData(SheetName, j-1, i);
-				
+				// tabArray[ci][cj] = getCellData(i, j);
+
+				tabArray[ci][cj] = xl.getCellData(SheetName, j - 1, i);
 
 				System.out.println(tabArray[ci][cj]);
 
@@ -115,45 +115,37 @@ public class Testutil extends TestBase {
 		return (tabArray);
 
 	}
-	
-	
-	
-	
+
 	public static String getCellData(int RowNum, int ColNum) throws Exception {
-		 
-		 try{
-		 
-		 Cell = (XSSFCell) sheet.getRow(RowNum).getCell(ColNum);
-		 
-		 int dataType = Cell.getCellType();
-		 
-		 if  (dataType == 3) {
-		 
-		 return "";
-		 
-		 }else{
-			 
-			
-		 
-		 //String CellData = Cell.getStringCellValue();
-		 
-		 String CellData = Cell.getRawValue();
-		 
-		 return CellData;
-		 
-		 }
-		 }catch (Exception e){
-		 
-		 System.out.println(e.getMessage());
-		 
-		 throw (e);
-		 
-		 }
-		 
-		 }
-	
-	
-	
+
+		try {
+
+			Cell = (XSSFCell) sheet.getRow(RowNum).getCell(ColNum);
+
+			int dataType = Cell.getCellType();
+
+			if (dataType == 3) {
+
+				return "";
+
+			} else {
+
+				// String CellData = Cell.getStringCellValue();
+
+				String CellData = Cell.getRawValue();
+
+				return CellData;
+
+			}
+		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
+
+			throw (e);
+
+		}
+
+	}
 
 	public static void takeScreenshotAtEndOfTest() throws IOException {
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -176,4 +168,13 @@ public class Testutil extends TestBase {
 		return destination;
 	}
 
+	public static String GetfromXls(String sheetName, String colName, String cellValue){
+		
+		Xlsutil xl = new Xlsutil(TESTDATA_SHEET_PATH);
+		int rowNum = xl.getCellRowNum(sheetName, colName, cellValue);
+		int colNum = 2;
+		
+		return xl.getCellData(sheetName, colNum, rowNum);
+	}
+	
 }

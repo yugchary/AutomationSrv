@@ -22,7 +22,7 @@ public class ActionPage extends TestBase{
 		@FindBy(css=".hidden-xs.c-button-default")
 		WebElement nextButton;
 		
-		@FindBy(name=".email-1")
+		@FindBy(name="email-1")
 		WebElement emailAddress;
 		
 		@FindBy(xpath="//button[contains(text(), 'SUBMIT')]")
@@ -40,7 +40,7 @@ public class ActionPage extends TestBase{
 	
 	//Actions:
 	
-	public String validateLoginPageTitle() {
+	public String validateActionPageTitle() {
 		return driver.getTitle();
 	}
 	

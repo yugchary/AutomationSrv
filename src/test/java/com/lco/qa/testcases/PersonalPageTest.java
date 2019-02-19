@@ -40,12 +40,12 @@ public class PersonalPageTest extends TestBase {
 	}
 
 	@Test(enabled = false)
-	public void loginPageTitleTest() {
-		log.info("****************************** Starting loginPageTitleTest test cases execution *****************************************");
+	public void personalPageTitleTest() {
+		log.info("****************************** Starting personalPageTitleTest test cases execution *****************************************");
 		extentTest = extent.startTest("loginPageTitleTest");
 		String title = personalPage.validateLoginPageTitle();
 		Assert.assertEquals(title, "LifeCo Insurance Company");
-		log.info("****************************** Ending loginPageTitleTest test cases execution *****************************************");
+		log.info("****************************** Ending personalPageTitleTest test cases execution *****************************************");
 	}
 
 	@Test
