@@ -1,6 +1,7 @@
 package com.lco.qa.testcases;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -17,6 +18,7 @@ import org.testng.annotations.Test;
 import com.lco.qa.base.TestBase;
 import com.lco.qa.pages.ActionPage;
 import com.lco.qa.pages.OnePersonGatherInfoPage;
+import com.lco.qa.pages.PersonalPage;
 import com.lco.qa.pages.ProductSelectionPage;
 import com.lco.qa.pages.TemplatePage;
 import com.lco.qa.util.Testutil;
@@ -29,8 +31,9 @@ public class ActionPageTest extends TestBase {
 	ProductSelectionPage productSelectionPage;
 	OnePersonGatherInfoPage onePersonGatherInfoPage;
 	ActionPage actionPage;
-	ExtentTest extentTest;
-	ProductSelectionTest productSelectionTest;
+	ExtentTest extentTest;	
+	PersonalPage personalPage;
+	//HashMap<String, String> inputData = new HashMap<String, String>();
 
 	
 
@@ -43,6 +46,7 @@ public class ActionPageTest extends TestBase {
 		initialization();
 		productSelectionPage = new ProductSelectionPage();
 		onePersonGatherInfoPage = new OnePersonGatherInfoPage();
+		personalPage = new PersonalPage();
 		actionPage = new ActionPage();
 		
 	}
@@ -72,6 +76,8 @@ public class ActionPageTest extends TestBase {
 		productSelectionPage.FinalizeProductSelection();	
 		System.out.println("selected quote");
 		actionPage.selectAction("Continue to application", Testutil.email_ID);
+		personalPage.FillTextFields();
+		
 		log.info("****************************** Ending continueToApplication test cases execution *****************************************");
 
 		

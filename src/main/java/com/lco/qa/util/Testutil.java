@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -168,7 +169,7 @@ public class Testutil extends TestBase {
 		return destination;
 	}
 
-	public static String GetfromXls(String sheetName, String colName, String cellValue){
+	public static String getFromXls(String sheetName, String colName, String cellValue){
 		
 		Xlsutil xl = new Xlsutil(TESTDATA_SHEET_PATH);
 		int rowNum = xl.getCellRowNum(sheetName, colName, cellValue);
@@ -177,4 +178,13 @@ public class Testutil extends TestBase {
 		return xl.getCellData(sheetName, colNum, rowNum);
 	}
 	
+	public static String getFromHashMap(HashMap<String, String> inputData, String key){
+		
+		return inputData.get(key);		
+	
+	
+	
+	}
+
+
 }

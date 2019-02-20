@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import com.lco.qa.base.TestBase;
+import com.lco.qa.util.ProductUtil;
 
 public class ActionPage extends TestBase{
 	
@@ -70,7 +71,36 @@ public class ActionPage extends TestBase{
 		
 		nextButton.click();
 		emailAddress.sendKeys(email);
+		
+		
+		
+		String currenURL = driver.getCurrentUrl();
+		//driver.navigate().to(currenURL);
+		
+		//driver.get("https://linkedin.com")
+		String winHandleBefore = driver.getWindowHandle();
+		
 		submitButton.click();
+		
+		ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+
+		// Perform the click operation that opens new window
+
+		// Switch to new window opened
+		for(String winHandle : driver.getWindowHandles()){
+		    driver.switchTo().window(winHandle);
+		}
+		
+		System.out.println("switching the handle");
+
+		// Perform the actions on new window
+
+		// Close the new window, if that window no more required
+		//driver.close();
+
+		// Switch back to original browser (first window)
+		driver.switchTo().window(winHandleBefore);
+		
 		
 		
 		

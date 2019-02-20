@@ -1,6 +1,7 @@
 package com.lco.qa.testcases;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -26,6 +27,7 @@ public class PersonalPageTest extends TestBase {
 
 	PersonalPage personalPage;
 	ExtentTest extentTest;
+	
 
 	
 
