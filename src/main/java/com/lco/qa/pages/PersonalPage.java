@@ -81,6 +81,7 @@ public class PersonalPage extends TestBase {
 
 		String url = "https://vantislifeinsurancestg.sureify.com/questions?user=bmtwR3Y3VnZadE5NLy83SkkxbG1vQT09&text_accepted=No&vdtca&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&ipAddress=192.168.1.110&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1550364678937&q_id=d3B1RlpsUUpMNkdYY2Y0MStFQ1Nydz09&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&auth_code=Lq5nLFCGGzXq6dOb1ZkTO7vx1Wc4lM";
 
+		url = "https://vantislifeinsurancestg.sureify.com/questions?user=bWZiQ3Fpd1A2UGdVTEVOTTUxT1FNdz09&text_accepted=No&vdtca&transaction_id=5b12f1b0-3435-11e9-8650-d3e467413c44_1550573937739&ipAddress=10.134.118.34&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1550573962837&q_id=djFJRGJucTNqNzdSS3J1RVpZc0tFdz09&transaction_id=5b12f1b0-3435-11e9-8650-d3e467413c44_1550573937739&auth_code=Acr3Uw5DPXpoTkD6Hdp9gHIlmi1FQX";
 		driver.navigate().to(url);
 
 		// for(int i=0;i<5; i++)
@@ -193,7 +194,7 @@ public class PersonalPage extends TestBase {
 			
 			
 
-			if (i == 0) {
+			/*if (i == 0) {
 				System.out.println("checking for autoSugg fields");
 				autoSuggFlag = CheckWebElements(byautoSuggF);
 			}
@@ -223,7 +224,7 @@ public class PersonalPage extends TestBase {
 				checkPage(CheckNextElement(checkboxFlag, byCheckboxL), CheckNextElement(checkboxFlag, byCheckboxF),
 						byCheckboxL, byCheckboxF, pageType);
 			}
-
+*/
 			if (i == 0) {
 				System.out.println("checking for form fields");
 				formFlag = CheckWebElements(byFormL);
@@ -395,6 +396,10 @@ public class PersonalPage extends TestBase {
 		// String returnText =element.getAttribute("type").toString();
 		String returnText = elementL.getText().toString();
 		
+		int len = returnText.length();
+				
+		if (returnText.charAt(0)=='*' && len >1) returnText = returnText.substring(len - (len-1));
+		
 		String FieldValue = Testutil.GetfromXls("Questions", "Question", returnText);
 
 		if (returnText.isEmpty())
@@ -419,9 +424,9 @@ public class PersonalPage extends TestBase {
 		WebElement elementF = f.next();
 
 		// String returnText =element.getAttribute("type").toString();
-		// String returnText = elementL.getText().toString();
+		String returnText = elementF.getText().toString();
 		
-		String FieldValue = null;
+		String FieldValue = Testutil.GetfromXls("Questions", "Question", returnText);
 
 		// t.next().click();
 		System.out.println("i value: " + i + pageType);
@@ -438,6 +443,13 @@ public class PersonalPage extends TestBase {
 
 		String FieldType;
 		switch (returnText) {
+		
+		case "*First Name":
+		case "First Name":
+			FieldType = "First Name";
+			System.out.println("This is a text field WebElement " + returnText);
+			break;
+		
 		case "*Phone (HOME/CELL)":
 		case "Phone (WORK)":
 			FieldType = "Phone";
@@ -506,6 +518,11 @@ public class PersonalPage extends TestBase {
 				elementF.sendKeys(FieldValue);
 				System.out.println("typed number");
 			}
+			break;
+			
+		case "First Name":
+			//elementF.sendKeys("12345");
+			elementF.sendKeys(FieldValue);
 			break;
 		case "Phone":
 

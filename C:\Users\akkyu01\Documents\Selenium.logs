@@ -1,4 +1,0 @@
-17/02/2019 22:27:38 TestAutomationLogger Exception occured: org.openqa.selenium.UnsupportedCommandException: actions
-Build info: version: '3.13.0', revision: '2f0d292', time: '2018-06-25T15:24:21.231Z'
-System info: host: 'sureifyadmin-Inspiron-15-3567', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '4.4.0-142-generic', java.version: '1.8.0_201'
-Driver info: driver.version: EventFiringWebDriver

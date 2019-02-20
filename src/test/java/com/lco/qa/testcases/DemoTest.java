@@ -9,13 +9,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map.Entry;
 
+import org.apache.commons.collections4.iterators.EntrySetMapIterator;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 
 import org.testng.annotations.BeforeMethod;
-
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 
@@ -35,7 +37,7 @@ public class DemoTest extends TestBase {
 	DemoPage demoPage;
 	ExtentTest extentTest;
 
-	
+	HashMap<String, String> inputData = new HashMap<String, String>();
 
 	public DemoTest() {
 		super();
@@ -43,8 +45,13 @@ public class DemoTest extends TestBase {
 
 	@BeforeMethod
 	public void setup() {
-		initialization();
-		demoPage = new DemoPage();
+		//initialization();
+		//demoPage = new DemoPage();
+	}
+	
+	@DataProvider
+	Object[][] getData() throws Exception {
+		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Questions");
 	}
 
 	@Test(enabled = false)
@@ -58,13 +65,98 @@ public class DemoTest extends TestBase {
 		log.info("****************************** Ending loginPageTitleTest test cases execution *****************************************");
 	}
 	
-	@Test
+	@Test(enabled = false)
 	public void Test1(){
 		
+		String input = "123456789";     //input string
+		String lastFourDigits = "";     //substring containing last 4 characters
+		
+		int len = input.length();
+		if (input.length() > 4)
+		{
+		    lastFourDigits = input.substring(len - 1);
+		    
+		}
+		else
+		{
+		    lastFourDigits = input;
+		}
+		
+		input = input.substring(0, input.length() - 1);
+		
+		System.out.println(input);
 		
 		
 	}
 	
+	@Test(dataProvider = "getData", enabled = false)
+	public void Test2(String Question, String FieldType, String FieldValue){		
+		
+		extentTest = extent.startTest("Test2");
+		inputData.put(Question, FieldType + "_" + FieldValue );
+		
+		
+	}
+	
+	
+	public void Test4() {
+		
+		Object[][] x = null;
+		try {
+			x = Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Questions");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String line=null;
+		
+		//Object data;
+		
+		for (Object[] innerArray: x) {
+			StringBuilder sb = new StringBuilder();
+	        for(Object data: innerArray) {        	
+	        
+	        	sb.append(data).append("_");      
+	          
+	        }
+	       
+	        
+	      
+	       //System.out.println(sb);
+	        
+	       line = sb.toString();
+	        
+	        String[] arrOfStr = line.split("_", 2); 
+	        
+	        for (String a : arrOfStr) {
+	        	int len = arrOfStr[1].length();
+	        	String str = arrOfStr[1].substring(0, len - 1);
+	        	//returnText = arrOfStr[1].substring(len -1);
+	        	inputData.put(arrOfStr[0], str);
+	        	
+	        }
+	        	
+	        	
+	        //System.out.println("read line");
+	     }
+	}
+	
+	
+	@Test(enabled = true)
+	public void Test3(){
+		
+		extentTest = extent.startTest("Test3");
+		
+		Test4();
+		
+		for(Entry data: inputData.entrySet()){
+			
+			String line = data.getKey() + " " + data.getValue();
+			System.out.println(line);
+			
+		}
+	}
 	
 	
 	

@@ -106,7 +106,7 @@ public class Testutil extends TestBase {
 
 				tabArray[ci][cj] = xl.getCellData(SheetName, j - 1, i);
 
-				System.out.println(tabArray[ci][cj]);
+				//System.out.println(tabArray[ci][cj]);
 
 			}
 
@@ -172,7 +172,7 @@ public class Testutil extends TestBase {
 		
 		Xlsutil xl = new Xlsutil(TESTDATA_SHEET_PATH);
 		int rowNum = xl.getCellRowNum(sheetName, colName, cellValue);
-		int colNum = 2;
+		int colNum = 3;
 		
 		return xl.getCellData(sheetName, colNum, rowNum);
 	}
