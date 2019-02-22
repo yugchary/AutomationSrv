@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Thu Feb 21 00:06:31 IST 2019</td>
+<td>Started on:</td><td>Sat Feb 23 04:15:08 IST 2019</td>
 </tr>
-<tr><td>Total time:</td><td>114 seconds (114418 ms)</td>
+<tr><td>Total time:</td><td>17 seconds (17248 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,10 +76,11 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='com.lco.qa.testcases.PersonalPageTest.loginTest()'><b>loginTest</b><br>Test class: com.lco.qa.testcases.PersonalPageTest</td>
-<td><div><pre>java.lang.ArrayIndexOutOfBoundsException: 0
-	at com.lco.qa.pages.PersonalPage.FillPage(PersonalPage.java:452)
-	at com.lco.qa.pages.PersonalPage.checkPage(PersonalPage.java:388)
-	at com.lco.qa.pages.PersonalPage.FillTextFields(PersonalPage.java:251)
+<td><div><pre>java.lang.NullPointerException
+	at com.lco.qa.pages.PersonalPage.FillData(PersonalPage.java:616)
+	at com.lco.qa.pages.PersonalPage.FillPage(PersonalPage.java:404)
+	at com.lco.qa.pages.PersonalPage.checkPage(PersonalPage.java:323)
+	at com.lco.qa.pages.PersonalPage.FillTextFields(PersonalPage.java:151)
 	at com.lco.qa.pages.PersonalPage.SampleTest(PersonalPage.java:97)
 	at com.lco.qa.testcases.PersonalPageTest.loginTest(PersonalPageTest.java:56)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -107,11 +108,12 @@ function toggleAllBoxes() {
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:114)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1412656257", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1412656257'><pre>java.lang.ArrayIndexOutOfBoundsException: 0
-	at com.lco.qa.pages.PersonalPage.FillPage(PersonalPage.java:452)
-	at com.lco.qa.pages.PersonalPage.checkPage(PersonalPage.java:388)
-	at com.lco.qa.pages.PersonalPage.FillTextFields(PersonalPage.java:251)
+</pre></div><a href='#' onClick='toggleBox("stack-trace1174881426", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1174881426'><pre>java.lang.NullPointerException
+	at com.lco.qa.pages.PersonalPage.FillData(PersonalPage.java:616)
+	at com.lco.qa.pages.PersonalPage.FillPage(PersonalPage.java:404)
+	at com.lco.qa.pages.PersonalPage.checkPage(PersonalPage.java:323)
+	at com.lco.qa.pages.PersonalPage.FillTextFields(PersonalPage.java:151)
 	at com.lco.qa.pages.PersonalPage.SampleTest(PersonalPage.java:97)
 	at com.lco.qa.testcases.PersonalPageTest.loginTest(PersonalPageTest.java:56)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -140,7 +142,7 @@ function toggleAllBoxes() {
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 </pre></div></td>
-<td>101</td>
+<td>11</td>
 <td>com.lco.qa.testcases.PersonalPageTest@6aaceffd</td></tr>
 </table><p>
 </body>

@@ -2,25 +2,23 @@
 <testng-results skipped="0" failed="1" ignored="1" total="2" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="114418" started-at="2019-02-20T18:36:31Z" finished-at="2019-02-20T18:38:26Z">
+  <suite name="Default suite" duration-ms="17248" started-at="2019-02-22T22:45:08Z" finished-at="2019-02-22T22:45:25Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="114418" started-at="2019-02-20T18:36:31Z" finished-at="2019-02-20T18:38:26Z">
+    <test name="Default test" duration-ms="17248" started-at="2019-02-22T22:45:08Z" finished-at="2019-02-22T22:45:25Z">
       <class name="com.lco.qa.testcases.PersonalPageTest">
-        <test-method status="PASS" signature="setup()[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@6aaceffd]" name="setup" is-config="true" duration-ms="12449" started-at="2019-02-20T18:36:31Z" finished-at="2019-02-20T18:36:44Z">
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@6aaceffd]" name="setup" is-config="true" duration-ms="5430" started-at="2019-02-22T22:45:08Z" finished-at="2019-02-22T22:45:13Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method status="FAIL" signature="loginTest()[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@6aaceffd]" name="loginTest" duration-ms="101673" started-at="2019-02-20T18:36:44Z" finished-at="2019-02-20T18:38:26Z">
-          <exception class="java.lang.ArrayIndexOutOfBoundsException">
-            <message>
-              <![CDATA[0]]>
-            </message>
+        <test-method status="FAIL" signature="loginTest()[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@6aaceffd]" name="loginTest" duration-ms="11632" started-at="2019-02-22T22:45:13Z" finished-at="2019-02-22T22:45:25Z">
+          <exception class="java.lang.NullPointerException">
             <full-stacktrace>
-              <![CDATA[java.lang.ArrayIndexOutOfBoundsException: 0
-at com.lco.qa.pages.PersonalPage.FillPage(PersonalPage.java:452)
-at com.lco.qa.pages.PersonalPage.checkPage(PersonalPage.java:388)
-at com.lco.qa.pages.PersonalPage.FillTextFields(PersonalPage.java:251)
+              <![CDATA[java.lang.NullPointerException
+at com.lco.qa.pages.PersonalPage.FillData(PersonalPage.java:616)
+at com.lco.qa.pages.PersonalPage.FillPage(PersonalPage.java:404)
+at com.lco.qa.pages.PersonalPage.checkPage(PersonalPage.java:323)
+at com.lco.qa.pages.PersonalPage.FillTextFields(PersonalPage.java:151)
 at com.lco.qa.pages.PersonalPage.SampleTest(PersonalPage.java:97)
 at com.lco.qa.testcases.PersonalPageTest.loginTest(PersonalPageTest.java:56)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -50,11 +48,11 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.ArrayIndexOutOfBoundsException -->
+          </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginTest -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@6aaceffd]" name="tearDown" is-config="true" duration-ms="267" started-at="2019-02-20T18:38:26Z" finished-at="2019-02-20T18:38:26Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@6aaceffd]" name="tearDown" is-config="true" duration-ms="138" started-at="2019-02-22T22:45:25Z" finished-at="2019-02-22T22:45:25Z">
           <params>
             <param index="0">
               <value>

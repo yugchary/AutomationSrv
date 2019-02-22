@@ -105,7 +105,10 @@ public class PersonalPage extends TestBase {
 		By byFormL = By.cssSelector(".form-group");
 		By byCheckboxL = By.cssSelector(".custom-checkbox-container");
 		By byDropdownL = By.cssSelector(".c-subheader-text.fs18");
-		By byButtonL = By.cssSelector(".c-subheader-text.fs18");
+		By byButtonL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
+		By byAutoSuggL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
+		By byDatepickerL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
+		
 
 		By byFormF = By.cssSelector(".form-group .field .form-control");
 		By byCheckboxF = By.cssSelector(".custom-checkbox-container .custom-checkbox-checkmark");
@@ -121,81 +124,8 @@ public class PersonalPage extends TestBase {
 
 		By byautoSuggF = By.xpath("//input[@autocomplete='off']");
 		By byDatepickerF = By.cssSelector(".react-datepicker-wrapper");
-		
-		
-		
 
 		inputData = ProductUtil.GetInputData("Questions");
-
-		// String value =
-
-		// driver.findElement(By.xpath("//div[starts-with(@class,'Add')]//following-sibling::*//button[contains(text(),
-		// 'ADD PRIMARY BENEFICIARY')]")).click();
-
-		/*
-		 * 
-		 * 
-		 * driver.findElement(By.
-		 * xpath("//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]"));
-		 * 
-		 * //driver.findElement(By.xpath(""));
-		 * 
-		 * 
-		 * driver.findElement(By.cssSelector("div > button")).click();
-		 * LoadingNextPage();
-		 * 
-		 * driver.findElement(By.
-		 * xpath("//label[contains(text(), 'I agree to use electronic records and signatures.')]"
-		 * )).click();
-		 * 
-		 * 
-		 * System.out.println("clicked continue");
-		 * 
-		 * driver.findElement(By.xpath("//button[@track='continue-button']")).
-		 * click();
-		 * 
-		 * System.out.println("clicked finish/start");
-		 * 
-		 * driver.findElement(By.xpath("//button[@track='top-finish-button']")).
-		 * click();
-		 * 
-		 * System.out.println("clicked sign arrow");
-		 * 
-		 * CheckElementExists(".signature-tab-content .tab-image-arrow", true);
-		 * 
-		 * driver.findElement(By.
-		 * cssSelector(".signature-tab-content .tab-image-arrow")).click();
-		 * 
-		 * System.out.println("clicked draw");
-		 * 
-		 * driver.findElement(By.xpath("//button[contains(text(), 'Draw')]")).
-		 * click();
-		 * 
-		 * //driver.findElement(By.
-		 * xpath("//button[contains(text(), 'Adopt and Sign')]")).click();
-		 * 
-		 * 
-		 * //click esign //button[contains(text(), 'ESIGN AND SUBMIT')]
-		 * 
-		 * 
-		 * 
-		 * WebElement wbCanvas =
-		 * driver.findElement(By.cssSelector(".signature-draw .canvas-wrapper"))
-		 * ;
-		 * 
-		 * System.out.println("x:" + wbCanvas.getLocation());
-		 * 
-		 * Actions actionBuilder=new Actions(driver); Action
-		 * drawOnCanvas=actionBuilder .moveToElement(wbCanvas,97,331)
-		 * //.click(wbCanvas) .clickAndHold(wbCanvas) .moveByOffset(10, 20)
-		 * .click(wbCanvas) .moveByOffset(100,350) //.moveByOffset(-140,-140)
-		 * //.doubleClick(wbCanvas) .build(); drawOnCanvas.perform();
-		 * 
-		 * //driver.findElement(By.
-		 * xpath("//button[contains(text(), 'Adopt and Sign')]")).click();
-		 * 
-		 * 
-		 */
 
 		int formFlag = 0;
 		int checkboxFlag = 0;
@@ -217,7 +147,9 @@ public class PersonalPage extends TestBase {
 			if (autoSuggFlag > 0) {
 				pageType = "autoSugg";
 				System.out.println("This is a page filled with " + pageType);
-				checkPage(CheckNextElement(byautoSuggF), byautoSuggF, pageType);
+				//checkPage(CheckNextElement(byautoSuggF), byautoSuggF, pageType);
+				checkPage(CheckNextElement(autoSuggFlag, byAutoSuggL), CheckNextElement(autoSuggFlag, byautoSuggF),
+						byAutoSuggL, byautoSuggF, pageType);
 			}
 
 			if (i == 0) {
@@ -227,7 +159,9 @@ public class PersonalPage extends TestBase {
 			if (datePickerFlag > 0) {
 				pageType = "datepicker";
 				System.out.println("This is a page filled with " + pageType);
-				checkPage(CheckNextElement(byDatepickerF), byDatepickerF, pageType);
+				//checkPage(CheckNextElement(byDatepickerF), byDatepickerF, pageType);
+				checkPage(CheckNextElement(datePickerFlag, byDatepickerL), CheckNextElement(datePickerFlag, byDatepickerF),
+						byDatepickerL, byDatepickerF, pageType);
 			}
 
 			if (i == 0) {
@@ -260,9 +194,9 @@ public class PersonalPage extends TestBase {
 			if (buttonFlag > 0) {
 				pageType = "button";
 				System.out.println("This is a page filled with " + pageType);
-				//checkPage(CheckNextElement(byButtonF), byButtonF, pageType);
-				checkPage(CheckNextElement(buttonFlag, byButtonL), CheckNextElement(buttonFlag, byButtonF), byButtonL, byButtonF,
-						pageType);
+				// checkPage(CheckNextElement(byButtonF), byButtonF, pageType);
+				checkPage(CheckNextElement(buttonFlag, byButtonL), CheckNextElement(buttonFlag, byButtonF), byButtonL,
+						byButtonF, pageType);
 			}
 
 			if (i == 0) {
@@ -272,9 +206,10 @@ public class PersonalPage extends TestBase {
 			if (dropDownFlag > 0) {
 				pageType = "dropdown";
 				System.out.println("This is a page filled with " + pageType);
-				//checkPage(CheckNextElement(byDropdownF), byDropdownF, pageType);
-				checkPage(CheckNextElement(dropDownFlag, byDropdownL), CheckNextElement(dropDownFlag, byDropdownF), byDropdownL, byDropdownF,
-						pageType);
+				// checkPage(CheckNextElement(byDropdownF), byDropdownF,
+				// pageType);
+				checkPage(CheckNextElement(dropDownFlag, byDropdownL), CheckNextElement(dropDownFlag, byDropdownF),
+						byDropdownL, byDropdownF, pageType);
 			}
 
 			i++;
@@ -417,7 +352,7 @@ public class PersonalPage extends TestBase {
 		// String returnText =element.getAttribute("type").toString();
 
 		String returnText = elementL.getText().toString();
-		System.out.println("returnText: "+ returnText);
+		System.out.println("returnText: " + returnText);
 
 		int len = returnText.length();
 
@@ -426,14 +361,16 @@ public class PersonalPage extends TestBase {
 
 		// String value = Testutil.getFromXls("Questions", "Question",
 		// returnText);
-		
 
 		String value = Testutil.getFromHashMap(inputData, returnText);
 		System.out.println("value:" + value);
+		
+		boolean nullValue = Testutil.isNullOrEmpty(value);
+		
 
-		if (value == "" || value == "_") {
+		if (value == "" || nullValue) {
 
-			if (returnText.isEmpty())
+			//if (returnText.isEmpty())
 				returnText = pageType;
 
 			// t.next().click();
@@ -456,6 +393,11 @@ public class PersonalPage extends TestBase {
 
 			if (FieldValue == "No")
 				elementF = noButton;
+			
+			int len1 = FieldValue.length();
+			
+			if (FieldValue.contains("."))
+				FieldValue = FieldValue.substring(0,len1-2);
 
 		}
 
@@ -471,7 +413,7 @@ public class PersonalPage extends TestBase {
 
 		// String returnText =element.getAttribute("type").toString();
 		String returnText = elementF.getText().toString();
-		System.out.println("returnText: "+ returnText);
+		System.out.println("returnText: " + returnText);
 
 		int len = returnText.length();
 
@@ -487,7 +429,7 @@ public class PersonalPage extends TestBase {
 		String value = Testutil.getFromHashMap(inputData, returnText);
 		System.out.println("value:" + value);
 
-		if (value == "") {
+		if (value == "" || value.contentEquals("_")) {
 
 			if (returnText.isEmpty())
 				returnText = pageType;
@@ -510,6 +452,11 @@ public class PersonalPage extends TestBase {
 			FieldValue = inputValues[1];
 
 			// if(FieldValue == "Yes")
+			
+			int len1 = FieldValue.length();
+			
+			if (FieldValue.contains("."))
+				FieldValue = FieldValue.substring(0,len1-2);
 
 		}
 
@@ -569,6 +516,7 @@ public class PersonalPage extends TestBase {
 			System.out.println("This is a Dropdown WebElement " + returnText);
 			break;
 		case "autoSugg":
+		case "AutoSugg":
 			FieldType = "AutoSugg";
 			System.out.println("This is a Dropdown WebElement " + returnText);
 			break;
@@ -587,42 +535,67 @@ public class PersonalPage extends TestBase {
 	}
 
 	public void FillData(WebElement elementF, String FieldType, String FieldValue) {
-
+		
+		boolean nullValue = Testutil.isNullOrEmpty(FieldValue);
 		switch (FieldType) {
 		case "Text":
-			elementF.sendKeys(FieldValue);
+			if(nullValue)
+				elementF.sendKeys("ab");
+			else
+				elementF.sendKeys(FieldValue);
 			break;
 
 		case "First Name":
 			// elementF.sendKeys("12345");
-			elementF.sendKeys(FieldValue);
+			if(nullValue)
+				elementF.sendKeys("12345");
+			else
+				elementF.sendKeys(FieldValue);
 			break;
 		case "Phone":
-			if (EnterInputData(elementF, "9999999999")) {
+			if (EnterInputData
+					(elementF, "9999999999")) {
 				System.out.println("typed text");
 				// elementF.sendKeys("text");
-				elementF.sendKeys(FieldValue);
+				if(nullValue)
+					elementF.sendKeys("ab");
+				else
+					elementF.sendKeys(FieldValue);
 			}
 
 			break;
 		case "Number":
 			// elementF.sendKeys("12345");
-			elementF.sendKeys(FieldValue);
+			if(nullValue)
+				elementF.sendKeys("12345");
+			else
+				elementF.sendKeys(FieldValue);
+			
 			break;
 		case "SSN":
 			// elementF.sendKeys("222222222");
-			elementF.sendKeys(FieldValue);
+			if(nullValue)
+				elementF.sendKeys("222222222");
+			else
+				elementF.sendKeys(FieldValue);
 			break;
 		case "DL":
 			// elementF.sendKeys("753475837");
-			elementF.sendKeys(FieldValue);
+			if(nullValue)
+				elementF.sendKeys("753475837");
+			else
+				elementF.sendKeys(FieldValue);			
 			break;
 
 		case "Dropdown":
 		case "DropDown":
 			// dropdown.click();
 			// stateValue.sendKeys("Alabama (AL)");
-			stateValue.sendKeys(FieldValue);
+			if(nullValue)
+				selectItem.click();
+			else
+				stateValue.sendKeys(FieldValue);
+			
 			selectItem.click();
 			// .Select-placeholder
 			//
@@ -640,8 +613,12 @@ public class PersonalPage extends TestBase {
 		case "MultiSelection":
 			break;
 		case "AutoSugg":
-			autoSugg.click();
-			elementF.sendKeys("ab");
+			autoSugg.click();			
+			if(nullValue)
+				elementF.sendKeys("ab");
+			else
+				elementF.sendKeys(FieldValue);
+			
 			try {
 				Thread.sleep(Testutil.waitTime);
 			} catch (InterruptedException e) {
@@ -656,14 +633,20 @@ public class PersonalPage extends TestBase {
 			break;
 		case "DatePicker":
 			// DOB.sendKeys("03/12/1979");
-			DOB.sendKeys(FieldValue);
+			if(nullValue)
+				DOB.sendKeys("03/12/1979");
+			else
+				DOB.sendKeys(FieldValue);
 			dateSelect.click();
 			break;
 
 		default:
 			if (EnterInputData(elementF, "text")) {
 				// elementF.sendKeys("999");
-				elementF.sendKeys(FieldValue);
+				if(nullValue)
+					elementF.sendKeys("999");
+				else
+					elementF.sendKeys(FieldValue);
 				System.out.println("typed number");
 			}
 
@@ -734,6 +717,80 @@ public class PersonalPage extends TestBase {
 
 		}
 
+	}
+
+	public void SignUP(){
+		// String value =
+
+				// driver.findElement(By.xpath("//div[starts-with(@class,'Add')]//following-sibling::*//button[contains(text(),
+				// 'ADD PRIMARY BENEFICIARY')]")).click();
+
+				
+				 
+				 
+				 driver.findElement(By.
+				 xpath("//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]"));
+				 
+				 //driver.findElement(By.xpath(""));
+				 
+				 driver.findElement(By.cssSelector("div > button")).click();
+				 //LoadingNextPage();
+				 
+				 driver.findElement(By.
+				 xpath("//label[contains(text(), 'I agree to use electronic records and signatures.')]"
+				 )).click();
+				 
+				 
+				 System.out.println("clicked continue");
+				 
+				 driver.findElement(By.xpath("//button[@track='continue-button']")).
+				 click();
+				 
+				 System.out.println("clicked finish/start");
+				 
+				 driver.findElement(By.xpath("//button[@track='top-finish-button']")).
+				 click();
+				 
+				 System.out.println("clicked sign arrow");
+				 
+				 CheckElementExists(".signature-tab-content .tab-image-arrow", true);
+				 
+				 driver.findElement(By.
+				 cssSelector(".signature-tab-content .tab-image-arrow")).click();
+				 
+				 System.out.println("clicked draw");
+				 
+				 driver.findElement(By.xpath("//button[contains(text(), 'Draw')]")).
+				 click();
+				 
+				 //driver.findElement(By.xpath("//button[contains(text(), 'Adopt and Sign')]")).click();
+				 
+				 
+				 //click esign //button[contains(text(), 'ESIGN AND SUBMIT')]
+				 
+				 
+				 
+				 WebElement wbCanvas =
+				 driver.findElement(By.cssSelector(".signature-draw .canvas-wrapper"));
+				 
+				 
+				 System.out.println("x:" + wbCanvas.getLocation());
+				 
+				 Actions actionBuilder=new Actions(driver); 
+				 Action drawOnCanvas = actionBuilder.moveToElement(wbCanvas,97,331)				 	 
+					 .clickAndHold(wbCanvas) 
+					 .moveByOffset(10, 20)
+					 //.click(wbCanvas) 
+					 .moveByOffset(100,350) 
+					 .release()
+					 //.doubleClick(wbCanvas) 
+					 .build(); 
+				drawOnCanvas.perform();
+				 
+				 //driver.findElement(By.xpath("//button[contains(text(), 'Adopt and Sign')]")).click();
+				 
+				 
+				 
 	}
 
 }

@@ -26,7 +26,7 @@ import com.lco.qa.base.TestBase;
 public class Testutil extends TestBase {
 
 	public static long pageLoadTimeout = 180;
-	public static long implicitlyWait = 20;
+	public static long implicitlyWait = 5;
 	public static long waitTime = 5000;
 
 	// public static String TESTDATA_SHEET_PATH =
@@ -185,6 +185,14 @@ public class Testutil extends TestBase {
 	
 	
 	}
+	
+	public static boolean isNullOrEmpty(String str) {
+        if(str != null && !str.isEmpty())
+            return false;
+        
+        
+        return true;
+    }
 
 
 }

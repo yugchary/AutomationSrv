@@ -66,6 +66,12 @@ public class DemoTest extends TestBase {
 
 	@Test(enabled = false)
 	public void Test1() {
+		
+		extentTest = extent.startTest("Test1");
+		
+		String number = "10.0";
+		int result = Integer.parseInt(number);			
+		System.out.println(result);
 
 		String input = "123456789"; // input string
 		String lastFourDigits = ""; // substring containing last 4 characters
@@ -132,14 +138,31 @@ public class DemoTest extends TestBase {
 	public void Test3() {
 
 		extentTest = extent.startTest("Test3");
+		
+		String number = "10.0";
+		int len = number.length();
+		
+		if (number.contains("."))
+			number = number.substring(0,len-2);
+		
+		//int result = Integer.parseInt(number);			
+		System.out.println(number);
 
 		Test4();
 		
-		String value = Testutil.getFromHashMap(inputData, "First Name");
+		String value = Testutil.getFromHashMap(inputData, "Please enter the medical condition(s) that prevents you from working?");
+		
+		//value.is
+		
+		//value == "" || value.contentEquals("_") || isNullOrEmpty(value
+		
+		if ( value == "") {
+			
+			System.out.println(value);
+		}else{}
 		
 		String inputValues[] = value.split("_");
-		
-		//System.out.println(Testutil.getFromHashMap(inputData, "First Name"));
+				//System.out.println(Testutil.getFromHashMap(inputData, "First Name"));
 		
 		System.out.println(inputValues[0] +"and"+ inputValues[1]);
 		/*for (Entry data : inputData.entrySet()) {
@@ -149,6 +172,12 @@ public class DemoTest extends TestBase {
 
 		}*/
 	}
+	
+	public static boolean isNullOrEmpty(String str) {
+        if(str != null && !str.isEmpty())
+            return false;
+        return true;
+    }
 
 	@Test(enabled = false)
 	public void Test() throws ParseException {

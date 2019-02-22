@@ -128,10 +128,11 @@
                   <a name="loginTest">
                   </a> <!-- loginTest -->
                   <span class="method-name">loginTest</span>
-                  <div class="stack-trace">java.lang.ArrayIndexOutOfBoundsException: 0
-	at com.lco.qa.pages.PersonalPage.FillPage(PersonalPage.java:452)
-	at com.lco.qa.pages.PersonalPage.checkPage(PersonalPage.java:388)
-	at com.lco.qa.pages.PersonalPage.FillTextFields(PersonalPage.java:251)
+                  <div class="stack-trace">java.lang.NullPointerException
+	at com.lco.qa.pages.PersonalPage.FillData(PersonalPage.java:616)
+	at com.lco.qa.pages.PersonalPage.FillPage(PersonalPage.java:404)
+	at com.lco.qa.pages.PersonalPage.checkPage(PersonalPage.java:323)
+	at com.lco.qa.pages.PersonalPage.FillTextFields(PersonalPage.java:151)
 	at com.lco.qa.pages.PersonalPage.SampleTest(PersonalPage.java:97)
 	at com.lco.qa.testcases.PersonalPageTest.loginTest(PersonalPageTest.java:56)
 	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -168,7 +169,7 @@
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">/tmp/testng-eclipse--2058138143/testng-customsuite.xml</span>
+            <span class="header-content">/tmp/testng-eclipse-455829955/testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -221,12 +222,12 @@ data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'loginTest')
 data.setCell(0, 2, 'com.lco.qa.testcases.PersonalPageTest')
-data.setCell(0, 3, 101673);
+data.setCell(0, 3, 11632);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 1 minutes</span>
+              <span class="suite-total-time">Total running time: 11 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -268,11 +269,11 @@ return data;
                 <img src="failed.png">
                 </img>
                 <span class="method-name">loginTest</span>
-                <span class="method-start">12449 ms</span>
+                <span class="method-start">5430 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">tearDown([TestResult name=loginTest status=FAILURE method=PersonalPageTest.loginTest()[pri:0, instance:com.lc...)</span>
-                <span class="method-start">114132 ms</span>
+                <span class="method-start">17065 ms</span>
               </div> <!-- configuration-method after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
