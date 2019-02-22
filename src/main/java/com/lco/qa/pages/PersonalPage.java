@@ -136,7 +136,7 @@ public class PersonalPage extends TestBase {
 		int i = 0;
 		int counter = 0;
 		String pageType = "def";
-		boolean flag = false;
+		boolean flag = false, breakFlag = true;
 
 		do {
 
@@ -148,7 +148,7 @@ public class PersonalPage extends TestBase {
 				pageType = "autoSugg";
 				System.out.println("This is a page filled with " + pageType);
 				//checkPage(CheckNextElement(byautoSuggF), byautoSuggF, pageType);
-				checkPage(CheckNextElement(autoSuggFlag, byAutoSuggL), CheckNextElement(autoSuggFlag, byautoSuggF),
+				breakFlag = checkPage(CheckNextElement(autoSuggFlag, byAutoSuggL), CheckNextElement(autoSuggFlag, byautoSuggF),
 						byAutoSuggL, byautoSuggF, pageType);
 			}
 
@@ -160,7 +160,7 @@ public class PersonalPage extends TestBase {
 				pageType = "datepicker";
 				System.out.println("This is a page filled with " + pageType);
 				//checkPage(CheckNextElement(byDatepickerF), byDatepickerF, pageType);
-				checkPage(CheckNextElement(datePickerFlag, byDatepickerL), CheckNextElement(datePickerFlag, byDatepickerF),
+				breakFlag = checkPage(CheckNextElement(datePickerFlag, byDatepickerL), CheckNextElement(datePickerFlag, byDatepickerF),
 						byDatepickerL, byDatepickerF, pageType);
 			}
 
@@ -171,7 +171,7 @@ public class PersonalPage extends TestBase {
 			if (checkboxFlag > 0) {
 				pageType = "checkbox";
 				System.out.println("This is a page filled with " + pageType);
-				checkPage(CheckNextElement(checkboxFlag, byCheckboxL), CheckNextElement(checkboxFlag, byCheckboxF),
+				breakFlag = checkPage(CheckNextElement(checkboxFlag, byCheckboxL), CheckNextElement(checkboxFlag, byCheckboxF),
 						byCheckboxL, byCheckboxF, pageType);
 			}
 
@@ -182,7 +182,7 @@ public class PersonalPage extends TestBase {
 			if (formFlag > 0) {
 				pageType = "form";
 				System.out.println("This is a page filled with " + pageType);
-				checkPage(CheckNextElement(formFlag, byFormL), CheckNextElement(formFlag, byFormF), byFormL, byFormF,
+				breakFlag = checkPage(CheckNextElement(formFlag, byFormL), CheckNextElement(formFlag, byFormF), byFormL, byFormF,
 						pageType);
 			}
 
@@ -195,7 +195,7 @@ public class PersonalPage extends TestBase {
 				pageType = "button";
 				System.out.println("This is a page filled with " + pageType);
 				// checkPage(CheckNextElement(byButtonF), byButtonF, pageType);
-				checkPage(CheckNextElement(buttonFlag, byButtonL), CheckNextElement(buttonFlag, byButtonF), byButtonL,
+				breakFlag = checkPage(CheckNextElement(buttonFlag, byButtonL), CheckNextElement(buttonFlag, byButtonF), byButtonL,
 						byButtonF, pageType);
 			}
 
@@ -208,7 +208,7 @@ public class PersonalPage extends TestBase {
 				System.out.println("This is a page filled with " + pageType);
 				// checkPage(CheckNextElement(byDropdownF), byDropdownF,
 				// pageType);
-				checkPage(CheckNextElement(dropDownFlag, byDropdownL), CheckNextElement(dropDownFlag, byDropdownF),
+				breakFlag = checkPage(CheckNextElement(dropDownFlag, byDropdownL), CheckNextElement(dropDownFlag, byDropdownF),
 						byDropdownL, byDropdownF, pageType);
 			}
 
@@ -250,6 +250,9 @@ public class PersonalPage extends TestBase {
 				counter++;
 				flag = true;
 			}
+			
+			if(!breakFlag) break;
+			
 
 		} while (formFlag > 0 || checkboxFlag > 0 || buttonFlag > 0 || dropDownFlag > 0 || autoSuggFlag > 0
 				|| datePickerFlag > 0 || flag == true);
@@ -309,24 +312,27 @@ public class PersonalPage extends TestBase {
 
 	}
 
-	public void checkPage(Iterator<WebElement> l, Iterator<WebElement> f, By byL, By byF, String pageType) {
+	public boolean checkPage(Iterator<WebElement> l, Iterator<WebElement> f, By byL, By byF, String pageType) {
 
 		int i = 0;
+		boolean flag = true;
 
 		while (l.hasNext() && f.hasNext()) {
 			i++;
 
 			if (pageType == "checkbox" && i == 1)
-				FillPage(l, f, i, pageType);
+				flag = FillPage(l, f, i, pageType);
 
 			if (pageType != "checkbox")
-				FillPage(l, f, i, pageType);
+				flag = FillPage(l, f, i, pageType);
 			else {
 				f.next();
 				l.next();
 			}
+			
 
 		}
+		return flag;
 
 	}
 
@@ -343,9 +349,9 @@ public class PersonalPage extends TestBase {
 
 	}
 
-	public void FillPage(Iterator<WebElement> l, Iterator<WebElement> f, int i, String pageType) {
+	public boolean FillPage(Iterator<WebElement> l, Iterator<WebElement> f, int i, String pageType) {
 
-		String FieldType, FieldValue = null;
+		String FieldType, FieldValue = null, breakPoint = null;
 		WebElement elementL = l.next();
 		WebElement elementF = f.next();
 
@@ -386,10 +392,21 @@ public class PersonalPage extends TestBase {
 
 			// System.out.println(Testutil.getFromHashMap(inputData, "First
 			// Name"));
+			
+			if (inputValues.length>2){
+				breakPoint = inputValues[2];
+				System.out.println(inputValues[0] + "and" + inputValues[1] + "and" +  inputValues[2]);
+			}
 
 			System.out.println(inputValues[0] + "and" + inputValues[1]);
 			FieldType = inputValues[0];
 			FieldValue = inputValues[1];
+			
+			
+			nullValue = Testutil.isNullOrEmpty(breakPoint);
+			
+			if(nullValue)
+				return false;
 
 			if (FieldValue == "No")
 				elementF = noButton;
@@ -402,6 +419,8 @@ public class PersonalPage extends TestBase {
 		}
 
 		FillData(elementF, FieldType, FieldValue);
+		
+		return true;
 
 	}
 
