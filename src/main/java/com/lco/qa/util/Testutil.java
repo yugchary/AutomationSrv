@@ -26,8 +26,9 @@ import com.lco.qa.base.TestBase;
 public class Testutil extends TestBase {
 
 	public static long pageLoadTimeout = 180;
-	public static long implicitlyWait = 10;
+	public static long implicitlyWait = 5;
 	public static long waitTime = 5000;
+	static final int MAX_CHAR = 256; 
 
 	// public static String TESTDATA_SHEET_PATH =
 	// "C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\testdata\\LCO_TestData.xlsx";
@@ -193,6 +194,49 @@ public class Testutil extends TestBase {
         
         return true;
     }
+	
+	
+	public static boolean getOccuringChar(String str, char c) 
+    { 
+        // Create an array of size 256 i.e. ASCII_SIZE 
+        int count[] = new int[MAX_CHAR];  
+        boolean flag = false;
+  
+        int len = str.length(); 
+  
+        // Initialize count array index 
+        for (int i = 0; i < len; i++) 
+            count[str.charAt(i)]++; 
+  
+        // Create an array of given String size 
+        char ch[] = new char[str.length()]; 
+        for (int i = 0; i < len; i++) { 
+            ch[i] = str.charAt(i); 
+            int find = 0; 
+            for (int j = 0; j <= i; j++) { 
+  
+                // If any matches found 
+                if (str.charAt(i) == ch[j])  
+                    find++;                 
+            } 
+  
+            if (find == 1)  
+                System.out.println("Number of Occurrence of " + 
+                 str.charAt(i) + " is:" + count[str.charAt(i)]);    
+            
+            if (find == 1 && str.charAt(i) == c && count[str.charAt(i)] == len){
+            	flag = true;
+            	break;
+            }
+            else 
+            	flag = false;
+				
+            	
+        }
+        return flag;        
+        
+    } 
+	
 
 
 }

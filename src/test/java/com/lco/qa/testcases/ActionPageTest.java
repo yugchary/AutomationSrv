@@ -76,7 +76,7 @@ public class ActionPageTest extends TestBase {
 		productSelectionPage.FinalizeProductSelection();	
 		System.out.println("selected quote");
 		actionPage.selectAction("Continue to application", Testutil.email_ID);
-		personalPage.FillTextFields();
+		personalPage.ProcessFields();
 		
 		log.info("****************************** Ending continueToApplication test cases execution *****************************************");
 

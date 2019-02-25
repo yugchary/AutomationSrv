@@ -8,10 +8,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 
 import org.apache.commons.collections4.iterators.EntrySetMapIterator;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -139,6 +143,33 @@ public class DemoTest extends TestBase {
 
 		extentTest = extent.startTest("Test3");
 		
+		
+		
+		//List<WebElement> childs = rootWebElement.findElements(By.xpath(".//*"));
+		
+		
+		By elementsCount = By.cssSelector(".questions-container.c-center.row> div");
+		
+		List<WebElement> listWebElementLabel = driver.findElements(elementsCount);
+		
+		HashMap<String, Integer> ele = new HashMap<String, Integer>();
+
+		System.out.println("found webelements: " + listWebElementLabel.size());
+		
+		Iterator<WebElement> l;
+		
+		l = listWebElementLabel.iterator();
+		
+		//
+		
+		int i =0;
+		String fieldType = null, className = null;
+		By byElements = null;
+
+		while(l.hasNext()){
+			
+		}
+		
 		String number = "10.0";
 		int len = number.length();
 		
@@ -150,8 +181,19 @@ public class DemoTest extends TestBase {
 
 		Test4();
 		
-		String value = Testutil.getFromHashMap(inputData, "Please enter the medical condition(s) that prevents you from working?");
+		//String value = Testutil.getFromHashMap(inputData, "Please enter the medical condition(s) that prevents you from working?");
 		
+		String value = Testutil.getFromHashMap(inputData, "State");
+		
+		
+		boolean flag1 = Testutil.isNullOrEmpty(value);
+		boolean flag = false;
+		
+		if(!flag1) 
+			flag = Testutil.getOccuringChar(value, '_');
+
+		
+		//boolean flag = Testutil.getOccuringChar(value, '_');
 		//value.is
 		
 		//value == "" || value.contentEquals("_") || isNullOrEmpty(value
