@@ -26,7 +26,7 @@ import com.lco.qa.base.TestBase;
 public class Testutil extends TestBase {
 
 	public static long pageLoadTimeout = 180;
-	public static long implicitlyWait = 5;
+	public static long implicitlyWait = 10;
 	public static long waitTime = 5000;
 	static final int MAX_CHAR = 256; 
 
