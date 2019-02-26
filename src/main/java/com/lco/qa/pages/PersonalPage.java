@@ -93,7 +93,7 @@ public class PersonalPage extends TestBase {
 
 		String url = "https://vantislifeinsurancestg.sureify.com/questions?user=bmtwR3Y3VnZadE5NLy83SkkxbG1vQT09&text_accepted=No&vdtca&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&ipAddress=192.168.1.110&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1550364678937&q_id=d3B1RlpsUUpMNkdYY2Y0MStFQ1Nydz09&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&auth_code=Lq5nLFCGGzXq6dOb1ZkTO7vx1Wc4lM";
 
-		url = "https://vantislifeinsurancestg.sureify.com/questions?user=YTRJa0ZlZVUzSTl6T2t6WkxlTmNkdz09&text_accepted=No&vdtca&transaction_id=2b971290-3962-11e9-b8d0-ad84a2225973_1551142941241&ipAddress=192.168.1.108&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1551142967111&q_id=N2JtcVZPTDhrcXg4dkU4emJDU25VUT09&transaction_id=2b971290-3962-11e9-b8d0-ad84a2225973_1551142941241&auth_code=d2LWg2lnsrNFDnCQnwohGpSXZxsx8w";
+		url = "https://demo.docusign.net/Signing/?insession=1&ti=c4489861e1f044b7be158d87bfe53dce";
 		driver.navigate().to(url);
 
 		// FindElements();
@@ -333,10 +333,52 @@ public class PersonalPage extends TestBase {
 			}
 
 			i++;
-			System.out.println("All submited in page " + i + ", going to next page. Clicking on Next button");
+			
+			boolean singlebutton = false;
+			
+			
+			
+			if (formFlag == 0 && checkboxFlag == 0 && buttonFlag == 1 && dropDownFlag == 0 && autoSuggFlag == 0
+					&& datePickerFlag == 0) singlebutton = true;
+			
+			
+			List<WebElement> YesButton = driver.findElements(By.xpath("//button[contains(text(),'Yes')]"));
+			List<WebElement> NoButton = driver.findElements(By.xpath("//button[contains(text(),'No')]"));
+			
+			if((YesButton.size() + NoButton.size())  == 4 && singlebutton)
+				singlebutton = false;
+			
+			/*if(ele.size()==1){
+				if(ele.get("buttonFlag")!= null){
+					if(ele.get("buttonFlag")==1)
+						singlebutton = true;
+				}
+				
+				
+			}*/
+				
+				/*boolean questionType = false;
+				String returnText = driver.findElement(byButtonL).getText().toString();
+				if (returnText.contains("In the past ten years, have you been diagnosed with or treated by a licensed member of the medical profession for any of the following?"))
+					questionType = true;
+				
+				if(CheckWebElements(byButtonL) == 2 && singlebutton)
+					singlebutton = false;
+					
+				if(CheckWebElements(byButtonL) == 2 && questionType)
+					singlebutton = true;*/
+				
+			
+			
+			if(singlebutton)
+			{
+				System.out.println("only button with single page " + i + ", auto load");
+			}else{
+				System.out.println("All submited in page " + i + ", going to next page. Clicking on Next button");
 
-			driver.findElement(By.xpath("//button[@class='c-button-default circular  action btn btn-default']"))
-					.click();
+				driver.findElement(By.xpath("//button[@class='c-button-default circular  action btn btn-default']"))
+						.click();
+			}
 
 			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
 
@@ -507,9 +549,6 @@ public class PersonalPage extends TestBase {
 
 			if (className.contains("c-custom-select"))
 				fieldType = "dropDownFlag";
-
-			if (className.contains("btn"))
-				fieldType = "buttonFlag";
 
 			if (className.contains("auto"))
 				fieldType = "autoSuggFlag";
@@ -714,20 +753,22 @@ public class PersonalPage extends TestBase {
 			if (!nullValue)
 				return false;
 			
+			if(FieldType.contains("Button")){
 			
-			try {
+				try {
+					
+					if (FieldValue.contains("No"))
+						elementF = driver.findElement(By.xpath("//div[contains(text(),'"+ returnText + "')]//following-sibling::*//div//button[contains(text(),'No')]"));
+					else
+						elementF = driver.findElement(By.xpath("//div[contains(text(),'"+ returnText + "')]//following-sibling::*//div//button[contains(text(),'Yes')]"));
+					
+					
+					
+				} catch (NoSuchElementException e) {
+					System.out.println("multiple buttons in a page not found");
+				}
 				
-				if (FieldValue.contains("No"))
-					elementF = driver.findElement(By.xpath("//div[contains(text(),'"+ returnText + "')]//following-sibling::*//div//button[contains(text(),'No')]"));
-				else
-					elementF = driver.findElement(By.xpath("//div[contains(text(),'"+ returnText + "')]//following-sibling::*//div//button[contains(text(),'Yes')]"));
-				
-				
-				
-			} catch (NoSuchElementException e) {
-				System.out.println("multiple buttons in a page not found");
 			}
-
 			
 			//div[contains(text(),'Is the Proposed Insured currently confined to a hospital, nursing home, psychiatric facility or currently receiving home health care/assisted living care?')]//following-sibling::*//div//button[contains(text(),'No')]
 
@@ -880,14 +921,14 @@ public class PersonalPage extends TestBase {
 		switch (FieldType) {
 		case "Text":
 		case "text":			
-			if (EnterInputData(elementF, "text")) {
+			
 				// elementF.sendKeys("999");
 				if (nullValue)
 					elementF.sendKeys("99");
 				else
 					elementF.sendKeys(FieldValue);
 				System.out.println("typed number");
-			}
+			
 			break;
 
 		case "First Name":
@@ -1144,12 +1185,13 @@ public class PersonalPage extends TestBase {
 		driver.findElement(By.cssSelector("div > button")).click();
 		ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
 		// LoadingNextPage();
+		
+		System.out.println("clicked continue");
+		driver.findElement(By.xpath("//button[@track='continue-button']")).click();
 
 		driver.findElement(By.xpath("//label[contains(text(), 'I agree to use electronic records and signatures.')]")).click();
 
-		System.out.println("clicked continue");
-
-		driver.findElement(By.xpath("//button[@track='continue-button']")).click();
+		
 
 		System.out.println("clicked finish/start");
 

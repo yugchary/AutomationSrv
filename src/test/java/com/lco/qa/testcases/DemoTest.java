@@ -71,6 +71,8 @@ public class DemoTest extends TestBase {
 	@Test(enabled = false)
 	public void Test1() {
 		
+		
+		
 		extentTest = extent.startTest("Test1");
 		
 		String number = "10.0";
@@ -143,6 +145,12 @@ public class DemoTest extends TestBase {
 
 		extentTest = extent.startTest("Test3");
 		
+		int x = 1;
+		int y =1;
+		
+		if(x!=y) System.out.println("not equal");
+		else
+			System.out.println("equal");
 		
 		
 		//List<WebElement> childs = rootWebElement.findElements(By.xpath(".//*"));
