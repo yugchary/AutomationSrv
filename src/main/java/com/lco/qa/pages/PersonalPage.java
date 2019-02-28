@@ -9,6 +9,7 @@ import org.apache.poi.util.SystemOutLogger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByCssSelector;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -70,9 +71,10 @@ public class PersonalPage extends TestBase {
 	@FindBy(css = ".single-select-btn-container .c-button-default")
 	WebElement yesButton;
 
-	//@FindBy(xpath = "//button[@class='c-button-default circular single-select-btn  btn btn-default' and button[contains(text(),'No']")
+	// @FindBy(xpath = "//button[@class='c-button-default circular
+	// single-select-btn btn btn-default' and button[contains(text(),'No']")
 	@FindBy(xpath = "//button[contains(text(),'No')]")
-	
+
 	WebElement noButton;
 
 	HashMap<String, String> inputData = new HashMap<String, String>();
@@ -93,7 +95,8 @@ public class PersonalPage extends TestBase {
 
 		String url = "https://vantislifeinsurancestg.sureify.com/questions?user=bmtwR3Y3VnZadE5NLy83SkkxbG1vQT09&text_accepted=No&vdtca&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&ipAddress=192.168.1.110&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1550364678937&q_id=d3B1RlpsUUpMNkdYY2Y0MStFQ1Nydz09&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&auth_code=Lq5nLFCGGzXq6dOb1ZkTO7vx1Wc4lM";
 
-		url = "https://demo.docusign.net/Signing/?insession=1&ti=c4489861e1f044b7be158d87bfe53dce";
+		url = "https://vantislifeinsurancestg.sureify.com/questions?user=YW5RSXFNWFJmV3kzd082QmNmVjNYdz09&text_accepted=No&vdtca&transaction_id=8718ecc0-3ab5-11e9-b8d0-ad84a2225973_1551288694156&ipAddress=192.168.1.109&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1551288710810&q_id=RGtJVzYzNjVzdjg2ak1HOU45cSs4Zz09&transaction_id=8718ecc0-3ab5-11e9-b8d0-ad84a2225973_1551288694156&auth_code=GCH6e6x8JkG2WUDAXYcxKDElr5Elp1";
+
 		driver.navigate().to(url);
 
 		// FindElements();
@@ -106,7 +109,6 @@ public class PersonalPage extends TestBase {
 	}
 
 	public void ProcessFields() {
-
 		inputData = ProductUtil.GetInputData("Questions");
 
 		int formFlag = 0;
@@ -131,7 +133,7 @@ public class PersonalPage extends TestBase {
 		By byDatepickerL = null;
 		By byDatepickerF = null;
 		String fieldFlag = null;
-		boolean doneFlag = true;
+		boolean doneFlag = false;
 
 		byFormL = By.cssSelector(".form-group");
 		byFormF = By.cssSelector(".form-group .field .form-control");
@@ -208,7 +210,7 @@ public class PersonalPage extends TestBase {
 		}
 
 		String pageType = "def";
-		boolean flag = false, breakFlag = true;
+		boolean flag = false, breakFlag = true, errorFlag = false, beneficiaryFlag = true;
 
 		do {
 
@@ -218,10 +220,10 @@ public class PersonalPage extends TestBase {
 				break;
 			}
 
-			/*if (i > 0) {
-				System.out.println("checking for autoSugg fields");
-				autoSuggFlag = CheckWebElements(byautoSuggF);
-			}*/
+			/*
+			 * if (i > 0) { System.out.println("checking for autoSugg fields");
+			 * autoSuggFlag = CheckWebElements(byautoSuggF); }
+			 */
 
 			if (autoSuggFlag > 0) {
 				pageType = "autoSugg";
@@ -237,10 +239,11 @@ public class PersonalPage extends TestBase {
 				}
 			}
 
-			/*if (i > 0) {
-				System.out.println("checking for datepicker fields");
-				datePickerFlag = CheckWebElements(byDatepickerF);
-			}*/
+			/*
+			 * if (i > 0) {
+			 * System.out.println("checking for datepicker fields");
+			 * datePickerFlag = CheckWebElements(byDatepickerF); }
+			 */
 
 			if (datePickerFlag > 0) {
 				pageType = "datepicker";
@@ -255,10 +258,10 @@ public class PersonalPage extends TestBase {
 				}
 			}
 
-			/*if (i > 0) {
-				System.out.println("checking for checkbox fields");
-				checkboxFlag = CheckWebElements(byCheckboxL);
-			}*/
+			/*
+			 * if (i > 0) { System.out.println("checking for checkbox fields");
+			 * checkboxFlag = CheckWebElements(byCheckboxL); }
+			 */
 			if (checkboxFlag > 0) {
 				pageType = "checkbox";
 				System.out.println("This is a page filled with " + pageType);
@@ -270,10 +273,10 @@ public class PersonalPage extends TestBase {
 				}
 			}
 
-			/*if (i > 0) {
-				System.out.println("checking for form fields");
-				formFlag = CheckWebElements(byFormL);
-			}*/
+			/*
+			 * if (i > 0) { System.out.println("checking for form fields");
+			 * formFlag = CheckWebElements(byFormL); }
+			 */
 			if (formFlag > 0) {
 				pageType = "form";
 				System.out.println("This is a page filled with " + pageType);
@@ -285,11 +288,11 @@ public class PersonalPage extends TestBase {
 				}
 			}
 
-			/*if (i > 0) {
-				pageType = "button";
-				System.out.println("checking for button fields");
-				buttonFlag = CheckWebElements(byButtonF, pageType);
-			}*/
+			/*
+			 * if (i > 0) { pageType = "button";
+			 * System.out.println("checking for button fields"); buttonFlag =
+			 * CheckWebElements(byButtonF, pageType); }
+			 */
 			if (buttonFlag > 0) {
 				pageType = "button";
 				System.out.println("This is a page filled with " + pageType);
@@ -302,10 +305,10 @@ public class PersonalPage extends TestBase {
 				}
 			}
 
-			/*if (i > 0) {
-				System.out.println("checking for dropdown fields");
-				dropDownFlag = CheckWebElements(byDropdownF);
-			}*/
+			/*
+			 * if (i > 0) { System.out.println("checking for dropdown fields");
+			 * dropDownFlag = CheckWebElements(byDropdownF); }
+			 */
 			if (dropDownFlag > 0) {
 				pageType = "dropdown";
 				System.out.println("This is a page filled with " + pageType);
@@ -318,62 +321,80 @@ public class PersonalPage extends TestBase {
 					break;
 				}
 			}
-			
-			
-			try {
-				driver.findElement(By.xpath("//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]"));
-				doneFlag = SignUP();
-				System.out.println("completed");
-				
 
-				
-				
-			} catch (NoSuchElementException e) {
-				System.out.println("issue with sign-up");
+			boolean singlebutton = false;
+
+			if (formFlag == 0 && checkboxFlag == 0 && buttonFlag == 0 && dropDownFlag == 0 && autoSuggFlag == 0
+					&& datePickerFlag == 0) {
+
+				try {
+					//driver.findElement(By.xpath("//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]"));
+					doneFlag = SignUP();
+					//errorFlag = true;
+					System.out.println("completed");
+					singlebutton = true;
+
+				} catch (NoSuchElementException e) {
+					System.out.println(e.getStackTrace());
+					System.out.println("issue with sign-up/beneficiary not reached");
+					errorFlag = true;
+					singlebutton = true;
+				} catch (Exception e) {
+					System.out.println(e.getStackTrace());
+					System.out.println("other exception");
+				}
 			}
 
 			i++;
 			
-			boolean singlebutton = false;
-			
-			
-			
+			boolean singlebuttonFlag = false;
+
 			if (formFlag == 0 && checkboxFlag == 0 && buttonFlag == 1 && dropDownFlag == 0 && autoSuggFlag == 0
-					&& datePickerFlag == 0) singlebutton = true;
+					&& datePickerFlag == 0){
+				singlebutton = true;
+				singlebuttonFlag = true;
+			}
 			
-			
-			List<WebElement> YesButton = driver.findElements(By.xpath("//button[contains(text(),'Yes')]"));
-			List<WebElement> NoButton = driver.findElements(By.xpath("//button[contains(text(),'No')]"));
-			
-			if((YesButton.size() + NoButton.size())  == 4 && singlebutton)
+			boolean doubleButton = false;
+
+			if (Testutil.doubleButtosFlag && singlebuttonFlag){
 				singlebutton = false;
-			
-			/*if(ele.size()==1){
-				if(ele.get("buttonFlag")!= null){
-					if(ele.get("buttonFlag")==1)
-						singlebutton = true;
-				}
+				doubleButton = true;
 				
-				
-			}*/
-				
-				/*boolean questionType = false;
-				String returnText = driver.findElement(byButtonL).getText().toString();
-				if (returnText.contains("In the past ten years, have you been diagnosed with or treated by a licensed member of the medical profession for any of the following?"))
-					questionType = true;
-				
-				if(CheckWebElements(byButtonL) == 2 && singlebutton)
-					singlebutton = false;
-					
-				if(CheckWebElements(byButtonL) == 2 && questionType)
-					singlebutton = true;*/
-				
+			}
 			
 			
-			if(singlebutton)
-			{
+			boolean completeFlag = false;
+			
+			if(doubleButton && !Testutil.doubleButtosFlag ) completeFlag = true;
+			/*if (!Testutil.doubleButtosFlag && !singlebutton)
+				singlebutton = true;*/	
+			
+			/*
+			 * if(ele.size()==1){ if(ele.get("buttonFlag")!= null){
+			 * if(ele.get("buttonFlag")==1) singlebutton = true; }
+			 * 
+			 * 
+			 * }
+			 */
+
+			/*
+			 * boolean questionType = false; String returnText =
+			 * driver.findElement(byButtonL).getText().toString(); if
+			 * (returnText.
+			 * contains("In the past ten years, have you been diagnosed with or treated by a licensed member of the medical profession for any of the following?"
+			 * )) questionType = true;
+			 * 
+			 * if(CheckWebElements(byButtonL) == 2 && singlebutton) singlebutton
+			 * = false;
+			 * 
+			 * if(CheckWebElements(byButtonL) == 2 && questionType) singlebutton
+			 * = true;
+			 */
+
+			if (singlebutton || completeFlag) {
 				System.out.println("only button with single page " + i + ", auto load");
-			}else{
+			} else {
 				System.out.println("All submited in page " + i + ", going to next page. Clicking on Next button");
 
 				driver.findElement(By.xpath("//button[@class='c-button-default circular  action btn btn-default']"))
@@ -414,8 +435,9 @@ public class PersonalPage extends TestBase {
 					dropDownFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
 				case "checkboxFlag": // byCheckboxL =
-					By.cssSelector(".custom-checkbox-container"); 																	
-					//byCheckboxF = By.cssSelector(".custom-checkbox-container .custom-checkbox-checkmark");
+					By.cssSelector(".custom-checkbox-container");
+					// byCheckboxF = By.cssSelector(".custom-checkbox-container
+					// .custom-checkbox-checkmark");
 					checkboxFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
 				case "datePickerFlag": // byDatepickerL =
@@ -434,37 +456,53 @@ public class PersonalPage extends TestBase {
 
 			}
 
-			/*System.out.println("checking for autoSugg fields");
-			autoSuggFlag = CheckWebElements(byautoSuggF);
-
-			System.out.println("checking for datepicker fields");
-			datePickerFlag = CheckWebElements(byDatepickerF);
-
-			System.out.println("checking for button fields");
-			buttonFlag = CheckWebElements(byButtonF, "button");
-
-			System.out.println("checking for dropdown fields");
-			dropDownFlag = CheckWebElements(byDropdownF);
-
-			System.out.println("checking for form fields");
-			formFlag = CheckWebElements(byFormL);
-
-			System.out.println("checking for checkbox fields");
-			checkboxFlag = CheckWebElements(byCheckboxL);*/
+			/*
+			 * System.out.println("checking for autoSugg fields"); autoSuggFlag
+			 * = CheckWebElements(byautoSuggF);
+			 * 
+			 * System.out.println("checking for datepicker fields");
+			 * datePickerFlag = CheckWebElements(byDatepickerF);
+			 * 
+			 * System.out.println("checking for button fields"); buttonFlag =
+			 * CheckWebElements(byButtonF, "button");
+			 * 
+			 * System.out.println("checking for dropdown fields"); dropDownFlag
+			 * = CheckWebElements(byDropdownF);
+			 * 
+			 * System.out.println("checking for form fields"); formFlag =
+			 * CheckWebElements(byFormL);
+			 * 
+			 * System.out.println("checking for checkbox fields"); checkboxFlag
+			 * = CheckWebElements(byCheckboxL);
+			 */
 
 			if (formFlag == 0 && checkboxFlag == 0 && buttonFlag == 0 && dropDownFlag == 0 && autoSuggFlag == 0
-					&& datePickerFlag == 0 && counter == 1) {
+					&& datePickerFlag == 0) {
 				counter++;
-				flag = true;
+				if (counter == 2)
+					flag = true;
 			}
 
-			if (!breakFlag)
+			if (!breakFlag){
+				System.out.println("break point stopped the execution");
 				break;
+			}
+				
+			
+			if(flag || doneFlag){
+				System.out.println("execution completed");
+				break;
+			}
+			
+			if(errorFlag){
+				System.out.println("execution completed with error");
+				break;
+			}
 
 		} while (formFlag > 0 || checkboxFlag > 0 || buttonFlag > 0 || dropDownFlag > 0 || autoSuggFlag > 0
-				|| datePickerFlag > 0 || flag == true || doneFlag);
+				|| datePickerFlag > 0 || beneficiaryFlag);
 
-		//
+		//while (formFlag > 0 || checkboxFlag > 0 || buttonFlag > 0 || dropDownFlag > 0 || autoSuggFlag > 0 	|| datePickerFlag > 0 || flag  || doneFlag || errorFlag);
 		// return new PersonalPage();
 
 	}
@@ -681,8 +719,7 @@ public class PersonalPage extends TestBase {
 		String FieldType, FieldValue = null, breakPoint = null;
 		WebElement elementL = l.next();
 		WebElement elementF = f.next();
-		
-		
+
 		boolean flag = false;
 
 		// String returnText =element.getAttribute("type").toString();
@@ -711,27 +748,20 @@ public class PersonalPage extends TestBase {
 		}
 
 		if (value == "" || nullValue || flag) {
-			
-			/*if (pageType == "button")
-				returnText = "button";
-			
-			if (pageType == "checkbox")
-				returnText = "checkbox";
 
-			if (returnText.isEmpty())
-				FieldType = pageType;				
-			else
-				FieldType = IdentifyWebElementType(elementL, returnText);*/
-			
-			FieldType = pageType;	
-			
+			/*
+			 * if (pageType == "button") returnText = "button";
+			 * 
+			 * if (pageType == "checkbox") returnText = "checkbox";
+			 * 
+			 * if (returnText.isEmpty()) FieldType = pageType; else FieldType =
+			 * IdentifyWebElementType(elementL, returnText);
+			 */
+
+			FieldType = pageType;
 
 			// t.next().click();
 			System.out.println("i value: " + i + returnText);
-
-			
-
-			
 
 		} else {
 			String inputValues[] = value.split("_");
@@ -752,25 +782,44 @@ public class PersonalPage extends TestBase {
 
 			if (!nullValue)
 				return false;
+
+			// List<WebElement> YesButton =
+			// driver.findElements(By.xpath("//button[contains(text(),'Yes')]"));
+			// List<WebElement> NoButton =
+			// driver.findElements(By.xpath("//button[contains(text(),'No')]"));
+
+			// String doubleButtos = "Is the Proposed Insured currently confined
+			// to a hospital, nursing home, psychiatric facility or currently
+			// receiving home health care/assisted living care?";
 			
-			if(FieldType.contains("Button")){
-			
+			int count=0;
+
+			if (returnText.contains(Testutil.doubleButtos)) {
+
+				count++;
+				Testutil.doubleButtosFlag = true;
+
 				try {
-					
+
 					if (FieldValue.contains("No"))
-						elementF = driver.findElement(By.xpath("//div[contains(text(),'"+ returnText + "')]//following-sibling::*//div//button[contains(text(),'No')]"));
+						elementF = driver.findElement(By.xpath("//div[contains(text(),'" + returnText
+								+ "')]//following-sibling::*//div//button[contains(text(),'No')]"));
 					else
-						elementF = driver.findElement(By.xpath("//div[contains(text(),'"+ returnText + "')]//following-sibling::*//div//button[contains(text(),'Yes')]"));
-					
-					
-					
+						elementF = driver.findElement(By.xpath("//div[contains(text(),'" + returnText
+								+ "')]//following-sibling::*//div//button[contains(text(),'Yes')]"));
+
 				} catch (NoSuchElementException e) {
 					System.out.println("multiple buttons in a page not found");
 				}
 				
+				if (count==2) Testutil.doubleButtosFlag = false;
+
 			}
-			
-			//div[contains(text(),'Is the Proposed Insured currently confined to a hospital, nursing home, psychiatric facility or currently receiving home health care/assisted living care?')]//following-sibling::*//div//button[contains(text(),'No')]
+
+			// div[contains(text(),'Is the Proposed Insured currently confined
+			// to a hospital, nursing home, psychiatric facility or currently
+			// receiving home health care/assisted living
+			// care?')]//following-sibling::*//div//button[contains(text(),'No')]
 
 			int len1 = FieldValue.length();
 
@@ -920,15 +969,15 @@ public class PersonalPage extends TestBase {
 		// String iFieldType = FieldType.compareToIgnoreCase(str);
 		switch (FieldType) {
 		case "Text":
-		case "text":			
-			
-				// elementF.sendKeys("999");
-				if (nullValue)
-					elementF.sendKeys("99");
-				else
-					elementF.sendKeys(FieldValue);
-				System.out.println("typed number");
-			
+		case "text":
+
+			// elementF.sendKeys("999");
+			if (nullValue)
+				elementF.sendKeys("99");
+			else
+				elementF.sendKeys(FieldValue);
+			System.out.println("typed number");
+
 			break;
 
 		case "First Name":
@@ -977,17 +1026,26 @@ public class PersonalPage extends TestBase {
 		case "dropdown":
 			dropdown.click();
 			// stateValue.sendKeys("Alabama (AL)");
-			try {
-				Thread.sleep(Testutil.waitTime);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Testutil.staticWait();
 
 			if (nullValue) {
 
-				By byXpath = By.xpath("//div[@role='combobox']");
-				selectOptionWithIndex(byXpath, "div", 2);
+				// By byXpath = By.xpath("//div[@role='combobox']");
+
+				Actions act = new Actions(driver);// driver variable is chrome
+													// web driver ref
+
+				WebElement selectInput = driver.findElement(By.className("Select-input"));// Thread.sleep(5000);
+
+				act.click(selectInput).build().perform();// Thread.sleep(5000);
+
+				// list of all option
+				List<WebElement> selectValues = driver.findElements(By.className("Select-option"));// Thread.sleep(5000);
+
+				// first option:
+				WebElement firstWebElement = selectValues.get(0);// Thread.sleep(5000);
+
+				act.click(firstWebElement).build().perform();// Thread.sleep(5000);
 
 			} else {
 
@@ -1004,32 +1062,31 @@ public class PersonalPage extends TestBase {
 		case "Button":
 		case "button":
 			System.out.println("Button clicked");
-			
+
 			List<WebElement> listWebElementLabel = driver.findElements(By.xpath("//button[contains(text(),'No')]"));
 
 			System.out.println("found webelements: " + listWebElementLabel.size());
-			
-			if(listWebElementLabel.size() >1){				
+
+			if (listWebElementLabel.size() > 1) {
 				if (nullValue) {
 					noButton.click();
-				}else{
-				if(FieldValue.contains("Yes"))
-					elementF.click();
-				else
-					elementF.click();
+				} else {
+					if (FieldValue.contains("Yes"))
+						elementF.click();
+					else
+						elementF.click();
 				}
-			}
-			else{
+			} else {
 				if (nullValue) {
 					noButton.click();
-				}else{
-				if(FieldValue.contains("Yes"))
-					yesButton.click();
-				else
-					noButton.click();
+				} else {
+					if (FieldValue.contains("Yes"))
+						yesButton.click();
+					else
+						noButton.click();
 				}
 			}
-			//elementF.click();
+			// elementF.click();
 			break;
 		case "MultiSelection":
 			break;
@@ -1041,12 +1098,7 @@ public class PersonalPage extends TestBase {
 			else
 				elementF.sendKeys(FieldValue);
 
-			try {
-				Thread.sleep(Testutil.waitTime);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			Testutil.staticWait();
 			By byXpath = By.xpath("//ul[@class='dropdown-menu']");
 			// selectAutoSugg.click();
 			// driver.findElement(By.xpath("//ul[@class='dropdown-menu']//li[1]//a//div")).click();
@@ -1112,14 +1164,17 @@ public class PersonalPage extends TestBase {
 			List<WebElement> optionsToSelect = autoOptions.findElements(By.tagName(tagName));
 			// List<WebElement> optionsToSelect =
 			// autoOptions.findElements(By.tagName("li"));
+			System.out.println("size: " + optionsToSelect.size());
 			if (indexToSelect <= optionsToSelect.size()) {
 				System.out.println("Trying to select based on index: " + indexToSelect);
 				optionsToSelect.get(indexToSelect).click();
 			}
 		} catch (NoSuchElementException e) {
 			System.out.println(e.getStackTrace());
+			System.out.println("element not found");
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
+			System.out.println("other exception");
 		}
 	}
 
@@ -1150,87 +1205,183 @@ public class PersonalPage extends TestBase {
 	public boolean SignUP() {
 		// String value =
 
-		// driver.findElement(By.xpath("//div[starts-with(@class,'Add')]//following-sibling::*//button[contains(text(),
-		// 'ADD PRIMARY BENEFICIARY')]")).click();
+		// driver.findElement(By.xpath(""));
+
 
 		driver.findElement(By.xpath("//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]")).click();
 		ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
-		
+
 		driver.findElement(By.xpath("//label[contains(text(),'Full Name')]//following-sibling::*//input")).sendKeys("test");
-		
+
 		dropdown.click();
-		try {
-			Thread.sleep(Testutil.waitTime);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		driver.findElement(By.xpath("//div[contains(text(),'Relationship to Proposed Insured')]//following-sibling::*//div[@class='Select-multi-value-wrapper']//input")).sendKeys("Brother");	
+		Testutil.staticWait();
+
+		driver.findElement(By.xpath("//div[contains(text(),'Relationship to Proposed Insured')]//following-sibling::*//div[@class='Select-multi-value-wrapper']//input")).sendKeys("Brother");
 		selectItem.click();
-		
-		
-		
+
 		driver.findElement(By.xpath("//label[contains(text(),'Share percentage')]//following-sibling::*//input")).sendKeys("100");
-		
+
 		DOB.sendKeys("03/12/1979");
 		dateSelect.click();
-		
+
 		driver.findElement(By.xpath("//button[contains(text(),'Next')]")).click();
-		
 		ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
 
-		// driver.findElement(By.xpath(""));
-
+		System.out.println("clicked esign and submit");
 		driver.findElement(By.cssSelector("div > button")).click();
 		ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
-		// LoadingNextPage();
-		
+
 		System.out.println("clicked continue");
 		driver.findElement(By.xpath("//button[@track='continue-button']")).click();
 
-		driver.findElement(By.xpath("//label[contains(text(), 'I agree to use electronic records and signatures.')]")).click();
+		System.out.println("clicked finish/start");
+		driver.findElement(By.xpath("//button[@track='top-finish-button']")).click();
+		
+		Testutil.staticWait();
+
+		// driver.findElement(By.xpath("//label[contains(text(), 'I agree to use
+		// electronic records and signatures.')]")).click();
+
+		boolean arrowFlag = true;
+		List<WebElement> arrows = driver.findElements(By.cssSelector(".signature-tab-content .tab-image-arrow"));
+
+		System.out.println("arrows webelements found: " + arrows.size());
+
+		Iterator<WebElement> webele = arrows.iterator();
+
+		// webele.next();
+
+		WebElement arrowEle = null;
+
+		while(webele.hasNext()) {
+			arrowEle = webele.next();
+
+			while (arrowFlag) {
+				
+				try{
+					System.out.println("trying to click sign arrow");
+					if (arrowEle.isDisplayed()) {
+						arrowEle.click();
+						System.out.println("clicked sign arrow");
+						arrowFlag = false;
+						
+						
+						Testutil.staticWait();
+						
+					} else {
+						Testutil.staticWait();
+						arrowFlag = true;
+					}
+				}catch (StaleElementReferenceException e) {
+					System.out.println(e.getStackTrace());
+					System.out.println("element not found");
+					arrowFlag = true;
+				} catch (Exception e) {
+					System.out.println(e.getStackTrace());
+					System.out.println("other exception");
+					arrowFlag = true;
+				}
+				
+			}
+			arrowFlag = true;
+
+		}
+		
+		
 
 		
 
-		System.out.println("clicked finish/start");
+		/*
+		 * if (driver.findElement(By.
+		 * cssSelector(".signature-tab-content .tab-image-arrow")).isDisplayed()
+		 * ){ driver.findElement(By.
+		 * cssSelector(".signature-tab-content .tab-image-arrow")).click();
+		 * System.out.println("clicked sign arrow"); }
+		 */
+
+		
+		
+
+		
+		
+		/*
+		arrowFlag = true;
+
+		
+
+		while (webele.hasNext()) {
+			arrowEle = webele.next();
+			while (arrowFlag) {
+				System.out.println("trying to click sign arrow");
+				if (arrowEle.isDisplayed()) {
+					arrowEle.click();
+					System.out.println("clicked sign arrow");
+					arrowFlag = false;
+				} else {
+					try {
+						Thread.sleep(Testutil.waitTime);
+
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					arrowFlag = true;
+				}
+			}
+
+		}*/
+		
+		Testutil.staticWait();
+
+		System.out.println("clicked finish");
 
 		driver.findElement(By.xpath("//button[@track='top-finish-button']")).click();
 
-		System.out.println("clicked sign arrow");
+		return true;
 
-		CheckElementExists(".signature-tab-content .tab-image-arrow", true);
-
-		driver.findElement(By.cssSelector(".signature-tab-content .tab-image-arrow")).click();
-
-		System.out.println("clicked draw");
-
-		driver.findElement(By.xpath("//button[contains(text(), 'Draw')]")).click();
-
-		// driver.findElement(By.xpath("//button[contains(text(), 'Adopt and
-		// Sign')]")).click();
-
-		// click esign //button[contains(text(), 'ESIGN AND SUBMIT')]
-
-		WebElement wbCanvas = driver.findElement(By.cssSelector(".signature-draw .canvas-wrapper"));
-
-		System.out.println("x:" + wbCanvas.getLocation());
-
-		Actions actionBuilder = new Actions(driver);
-		Action drawOnCanvas = actionBuilder.moveToElement(wbCanvas, 97, 331)
-				.clickAndHold(wbCanvas)
-				.moveByOffset(10, 20)
-				// .click(wbCanvas)
-				.moveByOffset(100, 350)
-				.release()
-				// .doubleClick(wbCanvas)
-				.build();
-		drawOnCanvas.perform();
-
-		// driver.findElement(By.xpath("//button[contains(text(), 'Adopt and Sign')]")).click();
+	}
+	
+	public void drawCanvas(){
 		
-		return false;
+		// CheckElementExists(".signature-tab-content .tab-image-arrow", true);
 
+				System.out.println("clicked draw");
+				driver.findElement(By.xpath("//button[contains(text(), 'Draw')]")).click();
+
+				// driver.findElement(By.xpath("//button[contains(text(), 'Adopt and
+				// Sign')]")).click();
+
+				// click esign //button[contains(text(), 'ESIGN AND SUBMIT')]
+
+				WebElement wbCanvas = driver.findElement(By.cssSelector(".signature-draw .canvas-wrapper"));
+
+				System.out.println("x:" + wbCanvas.getLocation());
+
+				System.out.println("Going to draw");
+
+				/*Actions actionBuilder = new Actions(driver);
+				Action drawOnCanvas = actionBuilder.moveToElement(wbCanvas, 97, 331).clickAndHold(wbCanvas).moveByOffset(10, 20)
+						// .click(wbCanvas)
+						.moveByOffset(200, 320).release()
+						// .doubleClick(wbCanvas)
+						.build();
+				drawOnCanvas.perform();*/
+				
+				Actions actionBuilder = new Actions(driver);
+				Action drawOnCanvas = actionBuilder.moveToElement(wbCanvas, 20, 20)
+						.clickAndHold(wbCanvas)
+						.moveByOffset(80, 80)
+						//.click(wbCanvas)
+						// .click(wbCanvas)
+						.moveByOffset(50, 20)
+						.release(wbCanvas)
+						//.doubleClick(wbCanvas)
+						.build();
+				drawOnCanvas.perform();
+
+				System.out.println("clicked Adopt and Sign");
+
+				driver.findElement(By.xpath("//button[contains(text(), 'Adopt and Sign')]")).click();
 	}
 
 	public HashMap<String, Integer> childElements() {
@@ -1295,4 +1446,6 @@ public class PersonalPage extends TestBase {
 		return ele;
 	}
 
+	
+	
 }

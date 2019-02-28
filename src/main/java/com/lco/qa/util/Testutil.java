@@ -27,13 +27,16 @@ public class Testutil extends TestBase {
 
 	public static long pageLoadTimeout = 180;
 	public static long implicitlyWait = 10;
-	public static long waitTime = 5000;
-	static final int MAX_CHAR = 256; 
+	public static long waitTime = 2000;
+	static final int MAX_CHAR = 256;
 
 	// public static String TESTDATA_SHEET_PATH =
 	// "C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\testdata\\LCO_TestData.xlsx";
 	public static String TESTDATA_SHEET_PATH = "/home/yugandher/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/LCO_TestData.xlsx";
 	public static String email_ID = "yugandher@sureify.com";
+
+	public static boolean doubleButtosFlag = false;
+	public static String doubleButtos = "Is the Proposed Insured currently confined to a hospital, nursing home, psychiatric facility or currently receiving home health care/assisted living care?";
 
 	static Workbook book;
 	static Sheet sheet;
@@ -108,7 +111,7 @@ public class Testutil extends TestBase {
 
 				tabArray[ci][cj] = xl.getCellData(SheetName, j - 1, i);
 
-				//System.out.println(tabArray[ci][cj]);
+				// System.out.println(tabArray[ci][cj]);
 
 			}
 
@@ -170,73 +173,73 @@ public class Testutil extends TestBase {
 		return destination;
 	}
 
-	public static String getFromXls(String sheetName, String colName, String cellValue){
-		
+	public static String getFromXls(String sheetName, String colName, String cellValue) {
+
 		Xlsutil xl = new Xlsutil(TESTDATA_SHEET_PATH);
 		int rowNum = xl.getCellRowNum(sheetName, colName, cellValue);
 		int colNum = 3;
-		
+
 		return xl.getCellData(sheetName, colNum, rowNum);
 	}
-	
-	public static String getFromHashMap(HashMap<String, String> inputData, String key){
-		
-		return inputData.get(key);		
-	
-	
-	
-	}
-	
-	public static boolean isNullOrEmpty(String str) {
-        if(str != null && !str.isEmpty())
-            return false;
-        
-        
-        return true;
-    }
-	
-	
-	public static boolean getOccuringChar(String str, char c) 
-    { 
-        // Create an array of size 256 i.e. ASCII_SIZE 
-        int count[] = new int[MAX_CHAR];  
-        boolean flag = false;
-  
-        int len = str.length(); 
-  
-        // Initialize count array index 
-        for (int i = 0; i < len; i++) 
-            count[str.charAt(i)]++; 
-  
-        // Create an array of given String size 
-        char ch[] = new char[str.length()]; 
-        for (int i = 0; i < len; i++) { 
-            ch[i] = str.charAt(i); 
-            int find = 0; 
-            for (int j = 0; j <= i; j++) { 
-  
-                // If any matches found 
-                if (str.charAt(i) == ch[j])  
-                    find++;                 
-            } 
-  
-            if (find == 1)  
-                System.out.println("Number of Occurrence of " + 
-                 str.charAt(i) + " is:" + count[str.charAt(i)]);    
-            
-            if (find == 1 && str.charAt(i) == c && count[str.charAt(i)] == len){
-            	flag = true;
-            	break;
-            }
-            else 
-            	flag = false;
-				
-            	
-        }
-        return flag;        
-        
-    } 
-	
 
+	public static String getFromHashMap(HashMap<String, String> inputData, String key) {
+
+		return inputData.get(key);
+
+	}
+
+	public static boolean isNullOrEmpty(String str) {
+		if (str != null && !str.isEmpty())
+			return false;
+
+		return true;
+	}
+
+	public static boolean getOccuringChar(String str, char c) {
+		// Create an array of size 256 i.e. ASCII_SIZE
+		int count[] = new int[MAX_CHAR];
+		boolean flag = false;
+
+		int len = str.length();
+
+		// Initialize count array index
+		for (int i = 0; i < len; i++)
+			count[str.charAt(i)]++;
+
+		// Create an array of given String size
+		char ch[] = new char[str.length()];
+		for (int i = 0; i < len; i++) {
+			ch[i] = str.charAt(i);
+			int find = 0;
+			for (int j = 0; j <= i; j++) {
+
+				// If any matches found
+				if (str.charAt(i) == ch[j])
+					find++;
+			}
+
+			if (find == 1)
+				System.out.println("Number of Occurrence of " + str.charAt(i) + " is:" + count[str.charAt(i)]);
+
+			if (find == 1 && str.charAt(i) == c && count[str.charAt(i)] == len) {
+				flag = true;
+				break;
+			} else
+				flag = false;
+
+		}
+		return flag;
+
+	}
+
+	public static void staticWait() {
+		try {
+			Thread.sleep(Testutil.waitTime);
+
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }
