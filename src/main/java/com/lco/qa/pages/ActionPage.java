@@ -29,9 +29,7 @@ public class ActionPage extends TestBase{
 		@FindBy(xpath="//button[contains(text(), 'SUBMIT')]")
 		WebElement submitButton;
 		
-		
-		
-		
+			
 		
 	//Initialize the Page objects
 	public ActionPage(){

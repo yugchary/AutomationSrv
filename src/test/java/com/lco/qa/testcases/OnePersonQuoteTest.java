@@ -86,7 +86,7 @@ public class OnePersonQuoteTest extends TestBase {
 	public void onePersonQuoteTest1() throws ParseException {
 		
 		
-		Xlsutil xl = new Xlsutil(Testutil.TESTDATA_SHEET_PATH);
+		Xlsutil xl = new Xlsutil(Testutil.TESTDATA_SHEET_PATH, "Quote1");
 		String FirstName,DateOfBirth;
 		int rowCount, colCount;
 		rowCount = xl.getRowCount("Quote1");

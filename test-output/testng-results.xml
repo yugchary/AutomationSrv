@@ -2,16 +2,16 @@
 <testng-results skipped="0" failed="0" ignored="1" total="2" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="1583906" started-at="2019-02-28T16:07:12Z" finished-at="2019-02-28T16:33:36Z">
+  <suite name="Default suite" duration-ms="716708" started-at="2019-03-05T11:09:59Z" finished-at="2019-03-05T11:21:56Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="1583906" started-at="2019-02-28T16:07:12Z" finished-at="2019-02-28T16:33:36Z">
+    <test name="Default test" duration-ms="716708" started-at="2019-03-05T11:09:59Z" finished-at="2019-03-05T11:21:56Z">
       <class name="com.lco.qa.testcases.ActionPageTest">
-        <test-method status="PASS" signature="setup()[pri:0, instance:com.lco.qa.testcases.ActionPageTest@10aa41f2]" name="setup" is-config="true" duration-ms="12674" started-at="2019-02-28T16:07:12Z" finished-at="2019-02-28T16:07:25Z">
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.lco.qa.testcases.ActionPageTest@10aa41f2]" name="setup" is-config="true" duration-ms="7539" started-at="2019-03-05T11:09:59Z" finished-at="2019-03-05T11:10:07Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method status="PASS" signature="continueToApplication(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.lco.qa.testcases.ActionPageTest@10aa41f2]" name="continueToApplication" duration-ms="1571098" started-at="2019-02-28T16:07:25Z" data-provider="getData" finished-at="2019-02-28T16:33:36Z">
+        <test-method status="PASS" signature="continueToApplication(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.lco.qa.testcases.ActionPageTest@10aa41f2]" name="continueToApplication" duration-ms="708949" started-at="2019-03-05T11:10:07Z" data-provider="getData" finished-at="2019-03-05T11:21:56Z">
           <params>
             <param index="0">
               <value>
@@ -52,7 +52,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- continueToApplication -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.lco.qa.testcases.ActionPageTest@10aa41f2]" name="tearDown" is-config="true" duration-ms="5" started-at="2019-02-28T16:33:36Z" finished-at="2019-02-28T16:33:36Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.lco.qa.testcases.ActionPageTest@10aa41f2]" name="tearDown" is-config="true" duration-ms="4" started-at="2019-03-05T11:21:56Z" finished-at="2019-03-05T11:21:56Z">
           <params>
             <param index="0">
               <value>

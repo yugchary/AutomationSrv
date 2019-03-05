@@ -95,7 +95,7 @@ public class PersonalPage extends TestBase {
 
 		String url = "https://vantislifeinsurancestg.sureify.com/questions?user=bmtwR3Y3VnZadE5NLy83SkkxbG1vQT09&text_accepted=No&vdtca&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&ipAddress=192.168.1.110&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1550364678937&q_id=d3B1RlpsUUpMNkdYY2Y0MStFQ1Nydz09&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&auth_code=Lq5nLFCGGzXq6dOb1ZkTO7vx1Wc4lM";
 
-		url = "https://vantislifeinsurancestg.sureify.com/questions?user=YW5RSXFNWFJmV3kzd082QmNmVjNYdz09&text_accepted=No&vdtca&transaction_id=8718ecc0-3ab5-11e9-b8d0-ad84a2225973_1551288694156&ipAddress=192.168.1.109&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1551288710810&q_id=RGtJVzYzNjVzdjg2ak1HOU45cSs4Zz09&transaction_id=8718ecc0-3ab5-11e9-b8d0-ad84a2225973_1551288694156&auth_code=GCH6e6x8JkG2WUDAXYcxKDElr5Elp1";
+		url = "https://vantislifeinsurancestg.sureify.com/questions?user=emRibk1nZlhadEdxb2gxOE1oTTZOdz09&text_accepted=No&vdtca&transaction_id=52031180-3ee0-11e9-92c6-4b74a0c36c31&ipAddress=192.168.1.109&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1551746893813&q_id=ZzBad0t5Y0REZDJhanRuMXB3djVoQT09&auth_code=aVRS8b5qBO1OdngqkCzXFOAOnyz8Oe";
 
 		driver.navigate().to(url);
 
@@ -109,7 +109,9 @@ public class PersonalPage extends TestBase {
 	}
 
 	public void ProcessFields() {
-		inputData = ProductUtil.GetInputData("Questions");
+		
+		String sheetName = "Questions";
+		inputData = ProductUtil.GetInputData(sheetName);
 
 		int formFlag = 0;
 		int checkboxFlag = 0;
@@ -231,7 +233,7 @@ public class PersonalPage extends TestBase {
 				// checkPage(CheckNextElement(byautoSuggF),
 				// byautoSuggF,pageType);
 				breakFlag = checkPage(CheckNextElement(autoSuggFlag, byAutoSuggL),
-						CheckNextElement(autoSuggFlag, byautoSuggF), byAutoSuggL, byautoSuggF, pageType);
+						CheckNextElement(autoSuggFlag, byautoSuggF), byAutoSuggL, byautoSuggF, pageType, sheetName);
 
 				if (!breakFlag) {
 					System.out.println("Break point");
@@ -251,7 +253,7 @@ public class PersonalPage extends TestBase {
 				// checkPage(CheckNextElement(byDatepickerF),
 				// byDatepickerF,pageType);
 				breakFlag = checkPage(CheckNextElement(datePickerFlag, byDatepickerL),
-						CheckNextElement(datePickerFlag, byDatepickerF), byDatepickerL, byDatepickerF, pageType);
+						CheckNextElement(datePickerFlag, byDatepickerF), byDatepickerL, byDatepickerF, pageType, sheetName);
 				if (!breakFlag) {
 					System.out.println("Break point");
 					break;
@@ -266,7 +268,7 @@ public class PersonalPage extends TestBase {
 				pageType = "checkbox";
 				System.out.println("This is a page filled with " + pageType);
 				breakFlag = checkPage(CheckNextElement(checkboxFlag, byCheckboxL),
-						CheckNextElement(checkboxFlag, byCheckboxF), byCheckboxL, byCheckboxF, pageType);
+						CheckNextElement(checkboxFlag, byCheckboxF), byCheckboxL, byCheckboxF, pageType, sheetName);
 				if (!breakFlag) {
 					System.out.println("Break point");
 					break;
@@ -281,7 +283,7 @@ public class PersonalPage extends TestBase {
 				pageType = "form";
 				System.out.println("This is a page filled with " + pageType);
 				breakFlag = checkPage(CheckNextElement(formFlag, byFormL), CheckNextElement(formFlag, byFormF), byFormL,
-						byFormF, pageType);
+						byFormF, pageType, sheetName);
 				if (!breakFlag) {
 					System.out.println("Break point");
 					break;
@@ -298,7 +300,7 @@ public class PersonalPage extends TestBase {
 				System.out.println("This is a page filled with " + pageType);
 				// checkPage(CheckNextElement(byButtonF), byButtonF, pageType);
 				breakFlag = checkPage(CheckNextElement(buttonFlag, byButtonL), CheckNextElement(buttonFlag, byButtonF),
-						byButtonL, byButtonF, pageType);
+						byButtonL, byButtonF, pageType, sheetName);
 				if (!breakFlag) {
 					System.out.println("Break point");
 					break;
@@ -315,7 +317,7 @@ public class PersonalPage extends TestBase {
 				// checkPage(CheckNextElement(byDropdownF), byDropdownF,
 				// pageType);
 				breakFlag = checkPage(CheckNextElement(dropDownFlag, byDropdownL),
-						CheckNextElement(dropDownFlag, byDropdownF), byDropdownL, byDropdownF, pageType);
+						CheckNextElement(dropDownFlag, byDropdownF), byDropdownL, byDropdownF, pageType, sheetName);
 				if (!breakFlag) {
 					System.out.println("Break point");
 					break;
@@ -678,7 +680,7 @@ public class PersonalPage extends TestBase {
 
 	}
 
-	public boolean checkPage(Iterator<WebElement> l, Iterator<WebElement> f, By byL, By byF, String pageType) {
+	public boolean checkPage(Iterator<WebElement> l, Iterator<WebElement> f, By byL, By byF, String pageType, String sheetName) {
 
 		int i = 0;
 		boolean flag = true;
@@ -687,10 +689,10 @@ public class PersonalPage extends TestBase {
 			i++;
 
 			if (pageType == "checkbox" && i == 1)
-				flag = FillPage(l, f, i, pageType);
+				flag = FillPage(l, f, i, pageType, sheetName);
 
 			if (pageType != "checkbox")
-				flag = FillPage(l, f, i, pageType);
+				flag = FillPage(l, f, i, pageType, sheetName);
 			else {
 				f.next();
 				l.next();
@@ -714,7 +716,7 @@ public class PersonalPage extends TestBase {
 
 	}
 
-	public boolean FillPage(Iterator<WebElement> l, Iterator<WebElement> f, int i, String pageType) {
+	public boolean FillPage(Iterator<WebElement> l, Iterator<WebElement> f, int i, String pageType, String sheetName) {
 
 		String FieldType, FieldValue = null, breakPoint = null;
 		WebElement elementL = l.next();
@@ -734,6 +736,10 @@ public class PersonalPage extends TestBase {
 
 		// String value = Testutil.getFromXls("Questions", "Question",
 		// returnText);
+		
+		String lines[] = returnText.split("\\r?\\n");
+		
+		if(lines.length>0) returnText = lines[0];
 
 		String value = Testutil.getFromHashMap(inputData, returnText);
 		System.out.println("value:" + value);
@@ -780,8 +786,14 @@ public class PersonalPage extends TestBase {
 
 			nullValue = Testutil.isNullOrEmpty(breakPoint);
 
-			if (!nullValue)
+			if (!nullValue){
+				
+				String curr_URL = driver.getCurrentUrl();
+				int row_num = xls.getCellRowNum(sheetName, "BreakPoint", breakPoint);
+				xls.setCellData(sheetName, "URL", row_num, curr_URL);
 				return false;
+				
+			}
 
 			// List<WebElement> YesButton =
 			// driver.findElements(By.xpath("//button[contains(text(),'Yes')]"));

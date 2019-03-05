@@ -26,7 +26,7 @@ public class TestBase {
 	public static WebEventListener eventListener;
 	public static Logger log = Logger.getLogger("TestAutomationLogger");
 	public static ExtentReports extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/LIC_TestExecutoinReport_Extent.html", true);
-	public static Xlsutil xls = new Xlsutil(Testutil.TESTDATA_SHEET_PATH);	
+	public static Xlsutil xls = new Xlsutil(Testutil.TESTDATA_SHEET_PATH, "Quote1");	
 
 	
 	public TestBase(){

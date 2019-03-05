@@ -29,13 +29,16 @@ public class Xlsutil {
 	private XSSFRow row = null;
 	private XSSFCell cell = null;
 
-	public Xlsutil(String path) {
+	public Xlsutil(String path, String sheetName) {
 
 		this.path = path;
 		try {
 			fis = new FileInputStream(path);
 			workbook = new XSSFWorkbook(fis);
-			sheet = workbook.getSheetAt(0);
+			//sheet = workbook.getSheetAt(0);
+			sheet = workbook.getSheet(sheetName);
+			
+			
 			fis.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

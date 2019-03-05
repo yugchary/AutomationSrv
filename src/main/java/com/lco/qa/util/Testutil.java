@@ -76,7 +76,7 @@ public class Testutil extends TestBase {
 	public static Object[][] getTableArray(String FilePath, String SheetName) throws Exception {
 
 		String[][] tabArray = null;
-		Xlsutil xl = new Xlsutil(TESTDATA_SHEET_PATH);
+		Xlsutil xl = new Xlsutil(TESTDATA_SHEET_PATH, SheetName);
 
 		int startRow = 2;
 
@@ -175,7 +175,7 @@ public class Testutil extends TestBase {
 
 	public static String getFromXls(String sheetName, String colName, String cellValue) {
 
-		Xlsutil xl = new Xlsutil(TESTDATA_SHEET_PATH);
+		Xlsutil xl = new Xlsutil(TESTDATA_SHEET_PATH, sheetName);
 		int rowNum = xl.getCellRowNum(sheetName, colName, cellValue);
 		int colNum = 3;
 
