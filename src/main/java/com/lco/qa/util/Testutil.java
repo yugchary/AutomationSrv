@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -17,9 +18,12 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.lco.qa.base.TestBase;
 
@@ -73,7 +77,7 @@ public class Testutil extends TestBase {
 
 	}
 
-	public static Object[][] getTableArray(String FilePath, String SheetName) throws Exception {
+	public static Object[][] getTableArray(String FilePath, String SheetName, int rowsCount, int colsCount) throws Exception {
 
 		String[][] tabArray = null;
 		Xlsutil xl = new Xlsutil(TESTDATA_SHEET_PATH, SheetName);
@@ -86,13 +90,17 @@ public class Testutil extends TestBase {
 
 		// int totalRows = sheet.getLastRowNum();
 
-		int totalRows = xl.getRowCount(SheetName);
+		//int totalRows = xl.getRowCount(SheetName);
+		
+		int totalRows = rowsCount;
 
 		// you can write a function as well to get Column count
 
 		// int totalCols = 3;
 
-		int totalCols = xl.getColumnCount(SheetName);
+		//int totalCols = xl.getColumnCount(SheetName);
+		
+		int totalCols = colsCount;
 
 		// int totalCols = sheet.getCol
 
@@ -240,6 +248,23 @@ public class Testutil extends TestBase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public static void selectFromDropdown(){
+		Actions act = new Actions(driver);// driver variable is chrome
+		// web driver ref
+
+		WebElement selectInput = driver.findElement(By.className("Select-input"));// Thread.sleep(5000);
+		
+		act.click(selectInput).build().perform();// Thread.sleep(5000);
+		
+		// list of all option
+		List<WebElement> selectValues = driver.findElements(By.className("Select-option"));// Thread.sleep(5000);
+		
+		// first option:
+		WebElement firstWebElement = selectValues.get(0);// Thread.sleep(5000);
+		
+		act.click(firstWebElement).build().perform();// Thread.sleep(5000);
 	}
 
 }

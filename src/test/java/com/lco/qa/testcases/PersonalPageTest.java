@@ -37,6 +37,7 @@ public class PersonalPageTest extends TestBase {
 
 	@BeforeMethod
 	public void setup() {
+		url = prop.getProperty("url");
 		initialization();
 		personalPage = new PersonalPage();
 	}

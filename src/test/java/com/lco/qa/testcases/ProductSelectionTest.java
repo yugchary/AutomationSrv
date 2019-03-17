@@ -37,6 +37,7 @@ public class ProductSelectionTest extends TestBase {
 
 	@BeforeMethod
 	public void setup() {
+		url = prop.getProperty("url");
 		initialization();
 		productSelectionPage = new ProductSelectionPage();
 		onePersonGatherInfoPage = new OnePersonGatherInfoPage();
@@ -45,7 +46,7 @@ public class ProductSelectionTest extends TestBase {
 	
 	@DataProvider
 	Object[][] getData() throws Exception {
-		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Quote1");
+		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Quote1", 2, 7);
 	}
 
 	@Test(enabled = false)

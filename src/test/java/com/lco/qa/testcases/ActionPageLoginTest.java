@@ -26,23 +26,25 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
-public class ActionPageTest extends TestBase {
+public class ActionPageLoginTest extends TestBase {
 
 	ProductSelectionPage productSelectionPage;
 	OnePersonGatherInfoPage onePersonGatherInfoPage;
 	ActionPage actionPage;
 	ExtentTest extentTest;	
 	PersonalPage personalPage;
+	
 	//HashMap<String, String> inputData = new HashMap<String, String>();
 
 	
 
-	public ActionPageTest() {
+	public ActionPageLoginTest() {
 		super();
 	}
 
 	@BeforeMethod
 	public void setup() {
+		url = prop.getProperty("url");
 		initialization();
 		productSelectionPage = new ProductSelectionPage();
 		onePersonGatherInfoPage = new OnePersonGatherInfoPage();
@@ -53,7 +55,7 @@ public class ActionPageTest extends TestBase {
 	
 	@DataProvider
 	Object[][] getData() throws Exception {
-		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Quote1");
+		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Quote1", 2, 7);
 	}
 
 	@Test(enabled = false)
@@ -76,7 +78,11 @@ public class ActionPageTest extends TestBase {
 		productSelectionPage.FinalizeProductSelection();	
 		System.out.println("selected quote");
 		actionPage.selectAction("Continue to application", Testutil.email_ID);
-		personalPage.ProcessFields();
+		
+		String count = prop.getProperty("iterator");
+		
+		int itrCount = Integer.parseInt(count);
+		personalPage.ProcessFields("self", itrCount, "DTC");
 		
 		log.info("****************************** Ending continueToApplication test cases execution *****************************************");
 

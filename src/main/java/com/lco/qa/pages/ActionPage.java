@@ -29,6 +29,11 @@ public class ActionPage extends TestBase{
 		@FindBy(xpath="//button[contains(text(), 'SUBMIT')]")
 		WebElement submitButton;
 		
+		
+		
+		@FindBy(xpath="//div[@class='agent-next-step-container']//*//label")
+		WebElement completetheApp;
+		
 			
 		
 	//Initialize the Page objects
@@ -60,6 +65,12 @@ public class ActionPage extends TestBase{
 			//driver.findElement(By.cssSelector(".next-action-img-container .hidden-xs")).click();
 			continueToApp.click();
 			break;
+			
+		case "Complete the application":
+
+				completetheApp.click();
+				break;	
+			
 			
 		default:
 			//elementF.sendKeys("default");

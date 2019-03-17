@@ -47,13 +47,14 @@ public class DemoTest extends TestBase {
 
 	@BeforeMethod
 	public void setup() {
+		url = prop.getProperty("url");
 		// initialization();
 		// demoPage = new DemoPage();
 	}
 
 	@DataProvider
 	Object[][] getData() throws Exception {
-		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, "Questions");
+		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, "Questions", 2, 7);
 	}
 
 	@Test(enabled = false)
@@ -108,7 +109,7 @@ public class DemoTest extends TestBase {
 
 		Object[][] x = null;
 		try {
-			x = Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, "Questions");
+			x = Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, "Questions", 2, 7);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

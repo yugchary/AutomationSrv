@@ -34,13 +34,13 @@ public class ProductUtil extends TestBase{
 	}
 	
 	
-	public static HashMap<String, String> GetInputData(String SheetName) {
+	public static HashMap<String, String> GetInputData(String SheetName, int rowsCount, int colsCount) {
 
 		HashMap<String, String> inputData = new HashMap<String, String>();
 		
 		Object[][] x = null;
 		try {
-			x = Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, SheetName);
+			x = Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, SheetName, rowsCount, colsCount);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

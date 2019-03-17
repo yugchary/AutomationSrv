@@ -26,7 +26,8 @@ public class TestBase {
 	public static WebEventListener eventListener;
 	public static Logger log = Logger.getLogger("TestAutomationLogger");
 	public static ExtentReports extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/LIC_TestExecutoinReport_Extent.html", true);
-	public static Xlsutil xls = new Xlsutil(Testutil.TESTDATA_SHEET_PATH, "Quote1");	
+	public static Xlsutil xls = new Xlsutil(Testutil.TESTDATA_SHEET_PATH, "Quote1");
+	public static String url = null;
 
 	
 	public TestBase(){
@@ -88,9 +89,9 @@ public class TestBase {
 		driver.manage().timeouts().pageLoadTimeout(Testutil.pageLoadTimeout, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(Testutil.implicitlyWait, TimeUnit.SECONDS);
 		
-		driver.get(prop.getProperty("url"));
+		//driver.get(prop.getProperty("url"));
 		
-
+		driver.get(url);
 		
 		
 	}

@@ -2,68 +2,31 @@
 <testng-results skipped="0" failed="0" ignored="1" total="2" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="716708" started-at="2019-03-05T11:09:59Z" finished-at="2019-03-05T11:21:56Z">
+  <suite name="Default suite" duration-ms="1211096" started-at="2019-03-17T01:44:21Z" finished-at="2019-03-17T02:04:32Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="716708" started-at="2019-03-05T11:09:59Z" finished-at="2019-03-05T11:21:56Z">
-      <class name="com.lco.qa.testcases.ActionPageTest">
-        <test-method status="PASS" signature="setup()[pri:0, instance:com.lco.qa.testcases.ActionPageTest@10aa41f2]" name="setup" is-config="true" duration-ms="7539" started-at="2019-03-05T11:09:59Z" finished-at="2019-03-05T11:10:07Z">
+    <test name="Default test" duration-ms="1211096" started-at="2019-03-17T01:44:21Z" finished-at="2019-03-17T02:04:32Z">
+      <class name="com.lco.qa.testcases.PersonalPageTest">
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@5c90e579]" name="setup" is-config="true" duration-ms="20661" started-at="2019-03-17T01:44:21Z" finished-at="2019-03-17T01:44:42Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method status="PASS" signature="continueToApplication(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.lco.qa.testcases.ActionPageTest@10aa41f2]" name="continueToApplication" duration-ms="708949" started-at="2019-03-05T11:10:07Z" data-provider="getData" finished-at="2019-03-05T11:21:56Z">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[Ajay]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA[05.01.1987]]>
-              </value>
-            </param>
-            <param index="2">
-              <value>
-                <![CDATA[Male]]>
-              </value>
-            </param>
-            <param index="3">
-              <value>
-                <![CDATA[Alaska]]>
-              </value>
-            </param>
-            <param index="4">
-              <value>
-                <![CDATA[Yes]]>
-              </value>
-            </param>
-            <param index="5">
-              <value>
-                <![CDATA[Fair]]>
-              </value>
-            </param>
-            <param index="6">
-              <value>
-                <![CDATA[AK]]>
-              </value>
-            </param>
-          </params>
+        <test-method status="PASS" signature="loginTest()[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@5c90e579]" name="loginTest" duration-ms="1190310" started-at="2019-03-17T01:44:42Z" finished-at="2019-03-17T02:04:32Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- continueToApplication -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.lco.qa.testcases.ActionPageTest@10aa41f2]" name="tearDown" is-config="true" duration-ms="4" started-at="2019-03-05T11:21:56Z" finished-at="2019-03-05T11:21:56Z">
+        </test-method> <!-- loginTest -->
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@5c90e579]" name="tearDown" is-config="true" duration-ms="80" started-at="2019-03-17T02:04:32Z" finished-at="2019-03-17T02:04:32Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=continueToApplication status=SUCCESS method=ActionPageTest.continueToApplication(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:com.lco.qa.testcases.ActionPageTest@10aa41f2] output={null}]]]>
+                <![CDATA[[TestResult name=loginTest status=SUCCESS method=PersonalPageTest.loginTest()[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@5c90e579] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
-      </class> <!-- com.lco.qa.testcases.ActionPageTest -->
+      </class> <!-- com.lco.qa.testcases.PersonalPageTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>

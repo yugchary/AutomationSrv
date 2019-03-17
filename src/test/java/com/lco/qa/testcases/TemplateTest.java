@@ -37,6 +37,7 @@ public class TemplateTest extends TestBase {
 
 	@BeforeMethod
 	public void setup() {
+		url = prop.getProperty("url");
 		initialization();
 		templatePage = new TemplatePage();
 	}
