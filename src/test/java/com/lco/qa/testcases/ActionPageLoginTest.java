@@ -103,7 +103,7 @@ public class ActionPageLoginTest extends TestBase {
 		actionPage.selectAction(requestType, Testutil.email_ID);
 		String count = prop.getProperty("iterator");		
 		int itrCount = Integer.parseInt(count);
-		personalPage.ProcessFields("self", itrCount, distribution, signType, paymentMethod.toLowerCase());
+		personalPage.ProcessFields(distribution.toLowerCase(), itrCount, distribution, signType, paymentMethod.toLowerCase());
 		
 		
 		log.info("****************************** Ending agentQuote test cases execution *****************************************");

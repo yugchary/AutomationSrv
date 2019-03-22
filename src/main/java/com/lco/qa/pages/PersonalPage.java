@@ -101,7 +101,7 @@ public class PersonalPage extends TestBase {
 
 		String url = "https://vantislifeinsurancestg.sureify.com/questions?user=bmtwR3Y3VnZadE5NLy83SkkxbG1vQT09&text_accepted=No&vdtca&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&ipAddress=192.168.1.110&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1550364678937&q_id=d3B1RlpsUUpMNkdYY2Y0MStFQ1Nydz09&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&auth_code=Lq5nLFCGGzXq6dOb1ZkTO7vx1Wc4lM";
 
-		url = "https://vantislifeinsurancestg.sureify.com/questions?user=RnFQaTU2VUFaWEFHOXlmaXRmRXgxQT09&text_accepted=No&vdtca&transaction_id=557aa200-4c47-11e9-8717-dbaf46be3d08_1553220487200&ipAddress=192.168.1.113&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1553220503266&q_id=eW4wT1hyMTA0WkF1WU1aaUVHSUNZUT09&transaction_id=557aa200-4c47-11e9-8717-dbaf46be3d08_1553220487200&auth_code=ovG7vWKKKlTiT26Hl3841hRidEg7QC";
+		url = "https://vantislifeinsurancestg.sureify.com/questions?user=UkZpdWVBekxtWkNEV1R2T21kSzJzZz09&us_id=RHVRcVdIaEtiMWNySFpUL2hpRWQ4QT09&agent_number=888001233&transaction_id=b6ed5cc0-4ced-11e9-9b30-cf2c1e075347_1553291947148&ipAddress=192.168.1.113&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1553291964467&q_id=L0FxOVdoSHdkWThTbE1QVi9IZ3B6dz09";
 
 		driver.navigate().to(url);
 
@@ -118,8 +118,12 @@ public class PersonalPage extends TestBase {
 		
 		int itrCount = Integer.parseInt(count);
 		//ProcessFields("self", itrCount, "DTC");
-		//ProcessFields("agent", itrCount, "agent", "In Person E Signature", "cc");
-		ProcessFields("self", itrCount, "DTC", "In Person E Signature", "cc");
+		ProcessFields("agent", itrCount, "Agent", "In Person E Signature", "cc");
+		//ProcessFields("customer", itrCount, "Customer", "In Person E Signature", "cc");
+		
+		payment("cc");
+		
+		signDoc();
 
 		return new PersonalPage();
 
@@ -336,6 +340,8 @@ public class PersonalPage extends TestBase {
 					doneFlag = addBeneficiaries(clientType, signType);
 					
 					payment(paymentType);
+					
+					signDoc();
 					//errorFlag = true;
 					System.out.println("completed");
 					singlebutton = true;
@@ -656,6 +662,17 @@ public class PersonalPage extends TestBase {
 		// String returnText =element.getAttribute("type").toString();
 
 		String returnText = elementL.getText().toString();
+		
+		
+		List<WebElement> labels = driver.findElements(By.cssSelector(".c-subheader-text.fs18.col-sm-12"));
+		
+		List<WebElement> buttons = driver.findElements(By.cssSelector("button[class='c-button-default circular single-select-btn  btn btn-default']"));
+		
+		
+		if(buttons.size()<=2){		
+			if (labels.size()==2) returnText = driver.findElement(By.xpath("//div[@class='questions-content-container']//child::*//following-sibling::*//div")).getText().toString();
+		}
+
 		System.out.println("returnText: " + returnText);
 
 		int len = returnText.length();
@@ -669,7 +686,9 @@ public class PersonalPage extends TestBase {
 		String lines[] = returnText.split("\\r?\\n");
 		
 		if(lines.length>0) returnText = lines[0];
-
+		
+		
+		
 		String value = Testutil.getFromHashMap(inputData, returnText);
 		System.out.println("value:" + value);
 
@@ -1132,7 +1151,7 @@ public class PersonalPage extends TestBase {
 		// String value =
 
 		// driver.findElement(By.xpath(""));
-		boolean arrowFlag = true;
+		
 
 
 		driver.findElement(By.xpath("//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]")).click();
@@ -1162,108 +1181,8 @@ public class PersonalPage extends TestBase {
 		
 		signUp(clientType, signType);
 		
-
+		signDoc();
 		
-		System.out.println("clicked continue");
-		driver.findElement(By.xpath("//button[@track='continue-button']")).click();
-
-		System.out.println("clicked finish/start");
-		driver.findElement(By.xpath("//button[@track='top-finish-button']")).click();
-		
-		Testutil.staticWait();
-
-		// driver.findElement(By.xpath("//label[contains(text(), 'I agree to use
-		// electronic records and signatures.')]")).click();
-
-		
-		List<WebElement> arrows = driver.findElements(By.cssSelector(".signature-tab-content .tab-image-arrow"));
-
-		System.out.println("arrows webelements found: " + arrows.size());
-
-		Iterator<WebElement> webele = arrows.iterator();
-
-		// webele.next();
-
-		WebElement arrowEle = null;
-
-		while(webele.hasNext()) {
-			arrowEle = webele.next();
-
-			while (arrowFlag) {
-				
-				try{
-					System.out.println("trying to click sign arrow");
-					if (arrowEle.isDisplayed()) {
-						arrowEle.click();
-						System.out.println("clicked sign arrow");
-						arrowFlag = false;
-						
-						
-						Testutil.staticWait();
-						
-					} else {
-						Testutil.staticWait();
-						arrowFlag = true;
-					}
-				}catch (StaleElementReferenceException e) {
-					System.out.println(e.getStackTrace());
-					System.out.println("element not found");
-					arrowFlag = true;
-				} catch (Exception e) {
-					System.out.println(e.getStackTrace());
-					System.out.println("other exception");
-					arrowFlag = true;
-				}
-				
-			}
-			arrowFlag = true;
-
-		}
-		
-			
-
-		/*
-		 * if (driver.findElement(By.
-		 * cssSelector(".signature-tab-content .tab-image-arrow")).isDisplayed()
-		 * ){ driver.findElement(By.
-		 * cssSelector(".signature-tab-content .tab-image-arrow")).click();
-		 * System.out.println("clicked sign arrow"); }
-		 */	
-
-		
-		
-		/*
-		arrowFlag = true;
-
-		
-
-		while (webele.hasNext()) {
-			arrowEle = webele.next();
-			while (arrowFlag) {
-				System.out.println("trying to click sign arrow");
-				if (arrowEle.isDisplayed()) {
-					arrowEle.click();
-					System.out.println("clicked sign arrow");
-					arrowFlag = false;
-				} else {
-					try {
-						Thread.sleep(Testutil.waitTime);
-
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					arrowFlag = true;
-				}
-			}
-
-		}*/
-		
-		Testutil.staticWait();
-
-		System.out.println("clicked finish");
-
-		driver.findElement(By.xpath("//button[@track='top-finish-button']")).click();
 		
 		
 
@@ -1382,7 +1301,7 @@ public class PersonalPage extends TestBase {
 
 		switch (clientType) {
 
-		case "self":
+		case "customer":
 			System.out.println("clicked esign and submit");
 			driver.findElement(By.cssSelector("div > button")).click();
 			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
@@ -1425,24 +1344,21 @@ public class PersonalPage extends TestBase {
 		switch (payType) {
 
 		case "cc":
+			Testutil.staticWait();
 			System.out.println("clicked START COVERAGE");
-			//driver.findElement(By.xpath("//button[contains(text(), 'START COVERAGE')]")).click();	
+				
 			ProductUtil.clickButton("START COVERAGE");
 			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
 			
 			ProductUtil.selectDropdown("Will you pay", "credit card");
-			//paymentType.sendKeys("credit card");
-			selectItem.click();
 			
-			//driver.findElement(By.xpath("//button[contains(text(),'Next')]")).click();
-					
 			
 			ProductUtil.clickButton("Next");
 			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
 			
 			
 			ProductUtil.selectDropdown("Withdrawl Date", "5th of the month");
-			selectItem.click();
+			
 			
 			ProductUtil.inputText("Credit Card", "yug");
 			
@@ -1450,6 +1366,8 @@ public class PersonalPage extends TestBase {
 			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
 			
 			ProductUtil.inputCCDetails("Credit Card", "2223000048400011");
+			ProductUtil.inputCCDetails("Expiration Date(MMYY)", "0121");
+			ProductUtil.inputCCDetails("CVV2", "123");
 			
 			ProductUtil.clickButton(By.xpath("//input[@name='process']"));
 			
@@ -1459,7 +1377,7 @@ public class PersonalPage extends TestBase {
 			returnFlag = true;
 			break;
 		
-		case "agent":
+		case "eft":
 			//ProcessFields("agent", 1, "agent", e-sign, cc);
 			ProcessFields("agent", 1, "agent", "In Person E Signature", "cc");
 			
@@ -1472,4 +1390,119 @@ public class PersonalPage extends TestBase {
 		return returnFlag;
 		
 	}
+
+    public boolean signDoc(){
+    	
+    	boolean arrowFlag = true;
+    	boolean returnFlag = false;
+    	
+    	Testutil.staticWait();
+    	
+    	System.out.println("clicked continue");
+		driver.findElement(By.xpath("//button[@track='continue-button']")).click();
+
+		System.out.println("clicked finish/start");
+		driver.findElement(By.xpath("//button[@track='top-finish-button']")).click();
+		
+		Testutil.staticWait();
+
+		// driver.findElement(By.xpath("//label[contains(text(), 'I agree to use
+		// electronic records and signatures.')]")).click();
+
+		
+		List<WebElement> arrows = driver.findElements(By.cssSelector(".signature-tab-content .tab-image-arrow"));
+
+		System.out.println("arrows webelements found: " + arrows.size());
+
+		Iterator<WebElement> webele = arrows.iterator();
+
+		// webele.next();
+
+		WebElement arrowEle = null;
+
+		while(webele.hasNext()) {
+			arrowEle = webele.next();
+
+			while (arrowFlag) {
+				
+				try{
+					System.out.println("trying to click sign arrow");
+					if (arrowEle.isDisplayed()) {
+						arrowEle.click();
+						System.out.println("clicked sign arrow");
+						arrowFlag = false;
+						
+						
+						Testutil.staticWait();
+						
+					} else {
+						Testutil.staticWait();
+						arrowFlag = true;
+					}
+				}catch (StaleElementReferenceException e) {
+					System.out.println(e.getStackTrace());
+					System.out.println("element not found");
+					arrowFlag = true;
+				} catch (Exception e) {
+					System.out.println(e.getStackTrace());
+					System.out.println("other exception");
+					arrowFlag = true;
+				}
+				
+			}
+			arrowFlag = true;
+
+		}
+		
+			
+
+		/*
+		 * if (driver.findElement(By.
+		 * cssSelector(".signature-tab-content .tab-image-arrow")).isDisplayed()
+		 * ){ driver.findElement(By.
+		 * cssSelector(".signature-tab-content .tab-image-arrow")).click();
+		 * System.out.println("clicked sign arrow"); }
+		 */	
+
+		
+		
+		/*
+		arrowFlag = true;
+
+		
+
+		while (webele.hasNext()) {
+			arrowEle = webele.next();
+			while (arrowFlag) {
+				System.out.println("trying to click sign arrow");
+				if (arrowEle.isDisplayed()) {
+					arrowEle.click();
+					System.out.println("clicked sign arrow");
+					arrowFlag = false;
+				} else {
+					try {
+						Thread.sleep(Testutil.waitTime);
+
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					arrowFlag = true;
+				}
+			}
+
+		}*/
+		
+		Testutil.staticWait();
+
+		System.out.println("clicked finish");
+
+		driver.findElement(By.xpath("//button[@track='top-finish-button']")).click();
+		
+		returnFlag = true;
+		
+		return returnFlag;
+		
+		
+    }
 }
