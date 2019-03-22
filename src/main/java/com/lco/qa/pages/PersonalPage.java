@@ -58,6 +58,12 @@ public class PersonalPage extends TestBase {
 	@FindBy(xpath = "//div[contains(text(),'State')]//following-sibling::*//div[@class='Select-multi-value-wrapper']//input")
 	WebElement stateValue;
 
+	@FindBy(xpath = "//div[contains(text(),'Customer Signature Type')]//following-sibling::*//div[@class='Select-multi-value-wrapper']//input")
+	WebElement signatureType;
+	
+	@FindBy(xpath = "//div[starts-with(text(),'Will')]//following-sibling::*//div[@class='Select-multi-value-wrapper']//input")
+	WebElement paymentType;
+	
 	@FindBy(css = ".Select-option.is-focused")
 	WebElement selectItem1;
 
@@ -95,7 +101,7 @@ public class PersonalPage extends TestBase {
 
 		String url = "https://vantislifeinsurancestg.sureify.com/questions?user=bmtwR3Y3VnZadE5NLy83SkkxbG1vQT09&text_accepted=No&vdtca&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&ipAddress=192.168.1.110&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1550364678937&q_id=d3B1RlpsUUpMNkdYY2Y0MStFQ1Nydz09&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&auth_code=Lq5nLFCGGzXq6dOb1ZkTO7vx1Wc4lM";
 
-		url = "https://vantislifeinsurancestg.sureify.com/questions?user=UjNyeE9MV3JkeFJlVG1tei9NTlAxUT09&us_id=RHVRcVdIaEtiMWNySFpUL2hpRWQ4QT09&agent_number=888001233&transaction_id=0f52fb20-4854-11e9-b452-092e7ef541be_1552786148306&ipAddress=192.168.1.121&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1552786164671&q_id=SGRvU2tpSWU4U0hSVGtQSWpBVFhYZz09";
+		url = "https://vantislifeinsurancestg.sureify.com/questions?user=RnFQaTU2VUFaWEFHOXlmaXRmRXgxQT09&text_accepted=No&vdtca&transaction_id=557aa200-4c47-11e9-8717-dbaf46be3d08_1553220487200&ipAddress=192.168.1.113&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1553220503266&q_id=eW4wT1hyMTA0WkF1WU1aaUVHSUNZUT09&transaction_id=557aa200-4c47-11e9-8717-dbaf46be3d08_1553220487200&auth_code=ovG7vWKKKlTiT26Hl3841hRidEg7QC";
 
 		driver.navigate().to(url);
 
@@ -103,18 +109,23 @@ public class PersonalPage extends TestBase {
 
 		// for(int i=0;i<5; i++)
 		
+		//Testutil.selectFromDropdown("Alaska");
+		
+		//Testutil.selectFromDropdown(1);
+		
 				
 		String count = prop.getProperty("iterator");
 		
 		int itrCount = Integer.parseInt(count);
 		//ProcessFields("self", itrCount, "DTC");
-		ProcessFields("agent", itrCount, "agent");
+		//ProcessFields("agent", itrCount, "agent", "In Person E Signature", "cc");
+		ProcessFields("self", itrCount, "DTC", "In Person E Signature", "cc");
 
 		return new PersonalPage();
 
 	}
 
-	public void ProcessFields(String clientType, int iteratorCount, String sheetName) {
+	public void ProcessFields(String clientType, int iteratorCount, String sheetName, String signType, String paymentType) {
 		
 		//String sheetName = "DTC";
 		inputData = ProductUtil.GetInputData(sheetName, 129, 5);
@@ -154,9 +165,9 @@ public class PersonalPage extends TestBase {
 		byAutoSuggL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); // auto
 		byautoSuggF = By.xpath("//input[@autocomplete='off']");
 
-		byDropdownF = By.cssSelector(".Select-placeholder");
 		byDropdownL = By.cssSelector(".c-subheader-text.fs18"); // select
-
+		byDropdownF = By.cssSelector(".Select-placeholder");
+		
 		byCheckboxL = By.cssSelector(".custom-checkbox-container");
 		byCheckboxF = By.cssSelector(".custom-checkbox-container .custom-checkbox-checkmark");
 
@@ -321,8 +332,10 @@ public class PersonalPage extends TestBase {
 					&& datePickerFlag == 0) {
 
 				try {
-					//driver.findElement(By.xpath("//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]"));
-					doneFlag = addBeneficiaries(clientType);
+					
+					doneFlag = addBeneficiaries(clientType, signType);
+					
+					payment(paymentType);
 					//errorFlag = true;
 					System.out.println("completed");
 					singlebutton = true;
@@ -1115,7 +1128,7 @@ public class PersonalPage extends TestBase {
 
 	}
 
-	public boolean addBeneficiaries(String clientType) {
+	public boolean addBeneficiaries(String clientType, String signType) {
 		// String value =
 
 		// driver.findElement(By.xpath(""));
@@ -1147,7 +1160,7 @@ public class PersonalPage extends TestBase {
 			return false;
 		}*/
 		
-		signUp(clientType);
+		signUp(clientType, signType);
 		
 
 		
@@ -1251,6 +1264,8 @@ public class PersonalPage extends TestBase {
 		System.out.println("clicked finish");
 
 		driver.findElement(By.xpath("//button[@track='top-finish-button']")).click();
+		
+		
 
 		return true;
 
@@ -1361,7 +1376,7 @@ public class PersonalPage extends TestBase {
 		return ele;
 	}
 
-	public boolean signUp(String clientType){
+	public boolean signUp(String clientType, String signType){
 		
 		boolean returnFlag = false;
 
@@ -1375,9 +1390,13 @@ public class PersonalPage extends TestBase {
 			break;
 		
 		case "agent":
-			ProcessFields("agent", 1, "agent");
+			//ProcessFields("agent", 1, "agent", e-sign, cc);
+			ProcessFields("agent", 1, "agent", "In Person E Signature", "cc");
 			
-			Testutil.selectFromDropdown();
+			signatureType.sendKeys(signType);
+			selectItem.click();
+			
+			//Testutil.selectFromDropdown(0);
 			driver.findElement(By.xpath("//button[@class='c-button-default circular  action btn btn-default']")).click();
 			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
 			
@@ -1399,5 +1418,58 @@ public class PersonalPage extends TestBase {
 		
 	}
 	
-	
+	public boolean payment(String payType){
+		
+		boolean returnFlag = false;
+		
+		switch (payType) {
+
+		case "cc":
+			System.out.println("clicked START COVERAGE");
+			//driver.findElement(By.xpath("//button[contains(text(), 'START COVERAGE')]")).click();	
+			ProductUtil.clickButton("START COVERAGE");
+			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+			
+			ProductUtil.selectDropdown("Will you pay", "credit card");
+			//paymentType.sendKeys("credit card");
+			selectItem.click();
+			
+			//driver.findElement(By.xpath("//button[contains(text(),'Next')]")).click();
+					
+			
+			ProductUtil.clickButton("Next");
+			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+			
+			
+			ProductUtil.selectDropdown("Withdrawl Date", "5th of the month");
+			selectItem.click();
+			
+			ProductUtil.inputText("Credit Card", "yug");
+			
+			ProductUtil.clickButton("Next");
+			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+			
+			ProductUtil.inputCCDetails("Credit Card", "2223000048400011");
+			
+			ProductUtil.clickButton(By.xpath("//input[@name='process']"));
+			
+			
+			
+			//ProductUtil.clickButton(By.cssSelector("div > button"));
+			returnFlag = true;
+			break;
+		
+		case "agent":
+			//ProcessFields("agent", 1, "agent", e-sign, cc);
+			ProcessFields("agent", 1, "agent", "In Person E Signature", "cc");
+			
+			signatureType.sendKeys("");
+		default:
+			break;
+			
+		}
+		
+		return returnFlag;
+		
+	}
 }

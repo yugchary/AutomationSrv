@@ -2,24 +2,24 @@
 <testng-results skipped="0" failed="0" ignored="1" total="2" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="1211096" started-at="2019-03-17T01:44:21Z" finished-at="2019-03-17T02:04:32Z">
+  <suite name="Default suite" duration-ms="791085" started-at="2019-03-22T02:18:38Z" finished-at="2019-03-22T02:31:49Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="1211096" started-at="2019-03-17T01:44:21Z" finished-at="2019-03-17T02:04:32Z">
+    <test name="Default test" duration-ms="791085" started-at="2019-03-22T02:18:38Z" finished-at="2019-03-22T02:31:49Z">
       <class name="com.lco.qa.testcases.PersonalPageTest">
-        <test-method status="PASS" signature="setup()[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@5c90e579]" name="setup" is-config="true" duration-ms="20661" started-at="2019-03-17T01:44:21Z" finished-at="2019-03-17T01:44:42Z">
+        <test-method status="PASS" signature="setup()[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@291b4bf5]" name="setup" is-config="true" duration-ms="6968" started-at="2019-03-22T02:18:38Z" finished-at="2019-03-22T02:18:45Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method status="PASS" signature="loginTest()[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@5c90e579]" name="loginTest" duration-ms="1190310" started-at="2019-03-17T01:44:42Z" finished-at="2019-03-17T02:04:32Z">
+        <test-method status="PASS" signature="loginTest()[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@291b4bf5]" name="loginTest" duration-ms="784097" started-at="2019-03-22T02:18:45Z" finished-at="2019-03-22T02:31:49Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginTest -->
-        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@5c90e579]" name="tearDown" is-config="true" duration-ms="80" started-at="2019-03-17T02:04:32Z" finished-at="2019-03-17T02:04:32Z">
+        <test-method status="PASS" signature="tearDown(org.testng.ITestResult)[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@291b4bf5]" name="tearDown" is-config="true" duration-ms="4" started-at="2019-03-22T02:31:49Z" finished-at="2019-03-22T02:31:49Z">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=loginTest status=SUCCESS method=PersonalPageTest.loginTest()[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@5c90e579] output={null}]]]>
+                <![CDATA[[TestResult name=loginTest status=SUCCESS method=PersonalPageTest.loginTest()[pri:0, instance:com.lco.qa.testcases.PersonalPageTest@291b4bf5] output={null}]]]>
               </value>
             </param>
           </params>

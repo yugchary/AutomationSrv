@@ -46,7 +46,7 @@ public class ProductSelectionTest extends TestBase {
 	
 	@DataProvider
 	Object[][] getData() throws Exception {
-		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Quote1", 2, 7);
+		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Quote1", 2, 7, 2, 1);
 	}
 
 	@Test(enabled = false)
@@ -65,7 +65,7 @@ public class ProductSelectionTest extends TestBase {
 		log.info("****************************** Starting validateOnePersonQuoteInfo test cases execution *****************************************");
 		extentTest = extent.startTest("validateOnePersonQuoteInfo");
 		DateOfBirth = DateOfBirth.replace(".", "/");
-		productSelectionPage = onePersonGatherInfoPage.Quote11(FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate, stateCode);
+		productSelectionPage = onePersonGatherInfoPage.Quote(FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
 		productSelectionPage = productSelectionPage.GetPersonInfo(FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate, stateCode);
 		log.info("****************************** Ending validateOnePersonQuoteInfo test cases execution *****************************************");
 	}
@@ -75,7 +75,7 @@ public class ProductSelectionTest extends TestBase {
 		log.info("****************************** Starting selectProduct test cases execution *****************************************");
 		extentTest = extent.startTest("selectProduct");
 		DateOfBirth = DateOfBirth.replace(".", "/");
-		productSelectionPage = onePersonGatherInfoPage.Quote11(FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate, stateCode);
+		productSelectionPage = onePersonGatherInfoPage.Quote(FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
 		
 		productSelectionPage = productSelectionPage.ProductSelection();
 		log.info("****************************** Ending selectProduct test cases execution *****************************************");

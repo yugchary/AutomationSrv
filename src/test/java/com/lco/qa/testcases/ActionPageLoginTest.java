@@ -55,7 +55,7 @@ public class ActionPageLoginTest extends TestBase {
 	
 	@DataProvider
 	Object[][] getData() throws Exception {
-		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Quote1", 2, 7);
+		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Quote", 3, 12, 3, 1);
 	}
 
 	@Test(enabled = false)
@@ -67,12 +67,12 @@ public class ActionPageLoginTest extends TestBase {
 		log.info("****************************** Ending actionPageTitleTest test cases execution *****************************************");
 	}
 
-	@Test(dataProvider = "getData", enabled = true)
+	@Test(dataProvider = "getData", enabled = false)
 	public void continueToApplication(String FirstName, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate, String stateCode) {
 		log.info("****************************** Starting continueToApplication test cases execution *****************************************");
 		extentTest = extent.startTest("actionPageTitleTest");
 		DateOfBirth = DateOfBirth.replace(".", "/");
-		onePersonGatherInfoPage.Quote11(FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate, stateCode);
+		onePersonGatherInfoPage.Quote(FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
 		productSelectionPage.ProductSelection();
 		System.out.println("product selected");
 		productSelectionPage.FinalizeProductSelection();	
@@ -82,14 +82,32 @@ public class ActionPageLoginTest extends TestBase {
 		String count = prop.getProperty("iterator");
 		
 		int itrCount = Integer.parseInt(count);
-		personalPage.ProcessFields("self", itrCount, "DTC");
+		personalPage.ProcessFields("self", itrCount, "DTC", "e-sign", "cc");
 		
 		log.info("****************************** Ending continueToApplication test cases execution *****************************************");
 
 		
 	}
 	
-	
+	@Test(dataProvider = "getData", enabled = true)
+	public void selfQuote(String Num, String FirstName, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate, String distribution, String product, String requestType, String signType, String paymentMethod) {
+		log.info("****************************** Starting selfQuote test cases execution *****************************************");
+		extentTest = extent.startTest("selfQuote");
+		
+		DateOfBirth = DateOfBirth.replace(".", "/");
+		onePersonGatherInfoPage.Quote(FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
+		productSelectionPage.ProductSelection();
+		System.out.println("product selected");
+		productSelectionPage.FinalizeProductSelection();	
+		System.out.println("selected quote");
+		actionPage.selectAction(requestType, Testutil.email_ID);
+		String count = prop.getProperty("iterator");		
+		int itrCount = Integer.parseInt(count);
+		personalPage.ProcessFields("self", itrCount, distribution, signType, paymentMethod.toLowerCase());
+		
+		
+		log.info("****************************** Ending agentQuote test cases execution *****************************************");
+	}
 	
 
 	

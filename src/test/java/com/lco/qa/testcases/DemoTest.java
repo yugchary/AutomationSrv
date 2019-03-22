@@ -54,7 +54,7 @@ public class DemoTest extends TestBase {
 
 	@DataProvider
 	Object[][] getData() throws Exception {
-		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, "Questions", 2, 7);
+		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, "Questions", 2, 7, 2, 1);
 	}
 
 	@Test(enabled = false)
@@ -109,7 +109,7 @@ public class DemoTest extends TestBase {
 
 		Object[][] x = null;
 		try {
-			x = Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, "Questions", 2, 7);
+			x = Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, "Questions", 2, 7, 2, 1);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

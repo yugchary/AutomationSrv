@@ -36,7 +36,8 @@ public class Testutil extends TestBase {
 
 	// public static String TESTDATA_SHEET_PATH =
 	// "C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\testdata\\LCO_TestData.xlsx";
-	public static String TESTDATA_SHEET_PATH = "/home/yugandher/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/LCO_TestData.xlsx";
+	//public static String TESTDATA_SHEET_PATH = "/home/yugandher/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/LCO_TestData.xlsx";
+	public static String TESTDATA_SHEET_PATH = "/home/yugandher/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/Input_Data.xlsx";
 	public static String email_ID = "yugandher@sureify.com";
 
 	public static boolean doubleButtosFlag = false;
@@ -77,14 +78,14 @@ public class Testutil extends TestBase {
 
 	}
 
-	public static Object[][] getTableArray(String FilePath, String SheetName, int rowsCount, int colsCount) throws Exception {
+	public static Object[][] getTableArray(String FilePath, String SheetName, int rowsCount, int colsCount, int startRow, int startCol) throws Exception {
 
 		String[][] tabArray = null;
 		Xlsutil xl = new Xlsutil(TESTDATA_SHEET_PATH, SheetName);
 
-		int startRow = 2;
+		//int startRow = 2;
 
-		int startCol = 1;
+		//int startCol = 1;
 
 		int ci, cj;
 
@@ -250,7 +251,7 @@ public class Testutil extends TestBase {
 		}
 	}
 	
-	public static void selectFromDropdown(){
+	public static void selectFromDropdown(int item){
 		Actions act = new Actions(driver);// driver variable is chrome
 		// web driver ref
 
@@ -261,8 +262,14 @@ public class Testutil extends TestBase {
 		// list of all option
 		List<WebElement> selectValues = driver.findElements(By.className("Select-option"));// Thread.sleep(5000);
 		
+		staticWait();
+		
+		int index = selectValues.indexOf(item);
+		
 		// first option:
-		WebElement firstWebElement = selectValues.get(0);// Thread.sleep(5000);
+		WebElement firstWebElement = selectValues.get(index);// Thread.sleep(5000);
+		
+		
 		
 		act.click(firstWebElement).build().perform();// Thread.sleep(5000);
 	}

@@ -93,7 +93,7 @@ public class OnePersonGatherInfoPage extends TestBase {
 	}
 	
 	
-	public ProductSelectionPage Quote11(String FirstName, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate, String stateCode) {
+	public ProductSelectionPage Quote(String FirstName, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate) {
 		
 		
 		//onePImg.click();

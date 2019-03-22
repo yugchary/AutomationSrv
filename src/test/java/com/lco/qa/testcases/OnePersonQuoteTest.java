@@ -49,7 +49,7 @@ public class OnePersonQuoteTest extends TestBase {
 	
 	@DataProvider
 	Object[][] getData() throws Exception {
-		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Quote1", 2, 7);
+		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Quote1", 2, 7, 2, 1);
 	}
 	
 
@@ -70,7 +70,7 @@ public class OnePersonQuoteTest extends TestBase {
 		log.info("****************************** Starting onePersonQuoteTest test cases execution *****************************************");
 		extentTest = extent.startTest("onePersonQuoteTest");
 		DateOfBirth = DateOfBirth.replace(".", "/");
-		onePerson.Quote11(FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate, stateCode);
+		onePerson.Quote(FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
 		log.info("****************************** Ending onePersonQuoteTest test cases execution *****************************************");
 	}
 
