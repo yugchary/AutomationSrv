@@ -101,7 +101,7 @@ public class PersonalPage extends TestBase {
 
 		String url = "https://vantislifeinsurancestg.sureify.com/questions?user=bmtwR3Y3VnZadE5NLy83SkkxbG1vQT09&text_accepted=No&vdtca&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&ipAddress=192.168.1.110&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1550364678937&q_id=d3B1RlpsUUpMNkdYY2Y0MStFQ1Nydz09&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&auth_code=Lq5nLFCGGzXq6dOb1ZkTO7vx1Wc4lM";
 
-		url = "https://vantislifeinsurancestg.sureify.com/questions?user=UkZpdWVBekxtWkNEV1R2T21kSzJzZz09&us_id=RHVRcVdIaEtiMWNySFpUL2hpRWQ4QT09&agent_number=888001233&transaction_id=b6ed5cc0-4ced-11e9-9b30-cf2c1e075347_1553291947148&ipAddress=192.168.1.113&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1553291964467&q_id=L0FxOVdoSHdkWThTbE1QVi9IZ3B6dz09";
+		url = "https://vantislifeinsurancestg.sureify.com/questions?user=Y3ptN09rQUpFdmNBL2tkYVpIdzlRZz09&us_id=RHVRcVdIaEtiMWNySFpUL2hpRWQ4QT09&agent_number=888001233&transaction_id=6c99f750-4cfc-11e9-a8c3-1df2398fb6dc_1553298264901&ipAddress=192.168.1.113&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1553298283160&q_id=ajVCc1VKQUt0M2FVa0tHd0FrTTM2dz09";
 
 		driver.navigate().to(url);
 
@@ -337,11 +337,9 @@ public class PersonalPage extends TestBase {
 
 				try {
 					
-					doneFlag = addBeneficiaries(clientType, signType);
+					doneFlag = addBeneficiaries(clientType, signType, "cc");
 					
-					payment(paymentType);
 					
-					signDoc();
 					//errorFlag = true;
 					System.out.println("completed");
 					singlebutton = true;
@@ -1147,41 +1145,36 @@ public class PersonalPage extends TestBase {
 
 	}
 
-	public boolean addBeneficiaries(String clientType, String signType) {
-		// String value =
-
-		// driver.findElement(By.xpath(""));
+	public boolean addBeneficiaries(String clientType, String signType, String paymentType) {
+		
 		
 
 
-		driver.findElement(By.xpath("//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]")).click();
-		ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+		//driver.findElement(By.xpath("//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]")).click();
+		//ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
 
-		driver.findElement(By.xpath("//label[contains(text(),'Full Name')]//following-sibling::*//input")).sendKeys("test");
+		//driver.findElement(By.xpath("//label[contains(text(),'Full Name')]//following-sibling::*//input")).sendKeys("test");
 
-		dropdown.click();
-		Testutil.staticWait();
+		//dropdown.click();
+		//Testutil.staticWait();
 
-		driver.findElement(By.xpath("//div[contains(text(),'Relationship to Proposed Insured')]//following-sibling::*//div[@class='Select-multi-value-wrapper']//input")).sendKeys("Brother");
-		selectItem.click();
+		//driver.findElement(By.xpath("//div[contains(text(),'Relationship to Proposed Insured')]//following-sibling::*//div[@class='Select-multi-value-wrapper']//input")).sendKeys("Brother");
+		//selectItem.click();
 
-		driver.findElement(By.xpath("//label[contains(text(),'Share percentage')]//following-sibling::*//input")).sendKeys("100");
+		//driver.findElement(By.xpath("//label[contains(text(),'Share percentage')]//following-sibling::*//input")).sendKeys("100");
 
-		DOB.sendKeys("03/12/1979");
+		/*DOB.sendKeys("03/12/1979");
 		dateSelect.click();
 
 		driver.findElement(By.xpath("//button[contains(text(),'Next')]")).click();
-		ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+		ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);*/
 		
 		
-		/*if (!signUp(clientType)) {
-			//arrowFlag = false;
-			return false;
-		}*/
 		
-		signUp(clientType, signType);
 		
-		signDoc();
+		signUp(clientType, signType, paymentType);
+		
+		
 		
 		
 		
@@ -1295,7 +1288,7 @@ public class PersonalPage extends TestBase {
 		return ele;
 	}
 
-	public boolean signUp(String clientType, String signType){
+	public boolean signUp(String clientType, String signType, String paymentType){
 		
 		boolean returnFlag = false;
 
@@ -1305,6 +1298,13 @@ public class PersonalPage extends TestBase {
 			System.out.println("clicked esign and submit");
 			driver.findElement(By.cssSelector("div > button")).click();
 			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+			
+			signDoc();
+			
+			payment(paymentType);
+			
+			signDoc();
+			
 			returnFlag = true;
 			break;
 		
@@ -1321,7 +1321,25 @@ public class PersonalPage extends TestBase {
 			
 			System.out.println("clicked esign and submit");
 			driver.findElement(By.cssSelector("div > button")).click();
-			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);			
+			
+			
+			signDoc();			
+			ProductUtil.clickButton("Continue to Customer Signature");
+			signDoc();
+			
+			ProductUtil.clickButton("Make payment");
+			Testutil.staticWait();			
+			
+			
+			payment(paymentType);
+			
+			ProductUtil.clickButton("Continue to Customer Signature");
+			signDoc();
+			
+			driver.findElement(By.xpath("//a[contains(text(),'Sign TIA')]")).click();
+			signDoc();
+			
 			returnFlag = false;
 			break;
 			
@@ -1341,14 +1359,16 @@ public class PersonalPage extends TestBase {
 		
 		boolean returnFlag = false;
 		
+		Testutil.staticWait();
+		System.out.println("clicked START COVERAGE");
+			
+		ProductUtil.clickButton("START COVERAGE");
+		ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+		
 		switch (payType) {
 
 		case "cc":
-			Testutil.staticWait();
-			System.out.println("clicked START COVERAGE");
-				
-			ProductUtil.clickButton("START COVERAGE");
-			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+			
 			
 			ProductUtil.selectDropdown("Will you pay", "credit card");
 			
@@ -1378,10 +1398,24 @@ public class PersonalPage extends TestBase {
 			break;
 		
 		case "eft":
-			//ProcessFields("agent", 1, "agent", e-sign, cc);
-			ProcessFields("agent", 1, "agent", "In Person E Signature", "cc");
+			ProductUtil.selectDropdown("Will you pay", "electronic fund transfer");
 			
-			signatureType.sendKeys("");
+			ProductUtil.clickButton("Next");
+			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+			
+			
+			ProductUtil.inputCCDetails("Account Holder Name:", "Yug");
+			ProductUtil.inputCCDetails("Bank Name:", "HDFC");
+			ProductUtil.clickButton("Savings");
+			ProductUtil.inputCCDetails("Transit Routing Number", "111");
+			ProductUtil.inputCCDetails("Bank Account Number", "1234");
+			ProductUtil.selectDropdown("Withdrawl Date", "5th of the month");
+			
+			ProductUtil.clickButton("Next");
+			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+			
+			
+			
 		default:
 			break;
 			
@@ -1498,6 +1532,8 @@ public class PersonalPage extends TestBase {
 		System.out.println("clicked finish");
 
 		driver.findElement(By.xpath("//button[@track='top-finish-button']")).click();
+		
+		Testutil.staticWait();
 		
 		returnFlag = true;
 		
