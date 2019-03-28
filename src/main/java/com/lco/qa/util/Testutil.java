@@ -24,6 +24,9 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.lco.qa.base.TestBase;
 
@@ -32,7 +35,8 @@ public class Testutil extends TestBase {
 	public static long pageLoadTimeout = 180;
 	public static long implicitlyWait = 10;
 	public static long waitTime = 2000;
-	static final int MAX_CHAR = 256;
+	static final int MAX_CHAR = 256;	
+	//public static WebDriverWait wait = new WebDriverWait(driver, 15*Testutil.waitTime);
 
 	// public static String TESTDATA_SHEET_PATH =
 	// "C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\testdata\\LCO_TestData.xlsx";
@@ -251,6 +255,29 @@ public class Testutil extends TestBase {
 		}
 	}
 	
+	public static void staticLongWait(By by) {
+		try {
+			
+			TestBase.wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+			Assert.assertNotNull(driver.findElement(by));
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void staticLongWait() {
+		try {
+			
+			Thread.sleep(15*Testutil.waitTime);
+
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public static void selectFromDropdown(int item){
 		Actions act = new Actions(driver);// driver variable is chrome
 		// web driver ref
@@ -272,6 +299,104 @@ public class Testutil extends TestBase {
 		
 		
 		act.click(firstWebElement).build().perform();// Thread.sleep(5000);
+	}
+	
+	public static void loginGmail(){
+		url = prop.getProperty("gmail_url");
+		initialization();
+		WebElement email_phone = driver.findElement(By.xpath("//input[@id='identifierId']"));
+		String gmail_uid = prop.getProperty("gmail_uid");
+		String gmail_pwd = prop.getProperty("gmail_pwd");
+		email_phone.sendKeys(gmail_uid);
+		driver.findElement(By.id("identifierNext")).click();
+		WebElement password = driver.findElement(By.xpath("//input[@name='password']"));
+		//WebDriverWait wait = new WebDriverWait(driver, 10*Testutil.waitTime);
+		TestBase.wait.until(ExpectedConditions.elementToBeClickable(password));
+		password.sendKeys(gmail_pwd);
+		driver.findElement(By.id("passwordNext")).click();
+		
+		// some optional actions for reaching gmail inbox
+		driver.findElement(By.xpath("//a[@aria-label='Google apps']")).click();
+		driver.findElement(By.xpath("//span[contains(text(),'Gmail')]")).click();
+		
+		
+	}
+	
+	public static void openVeryFirstEmail(){
+		List<WebElement> a = driver.findElements(By.xpath("//*[@class='yW']/span"));
+        System.out.println(a.size());
+        a.get(0).click();
+        /*for (int i = 0; i < a.size(); i++) {
+            System.out.println(a.get(i).getText());
+            if (a.get(i).getText().equals(from)) //to click on a specific mail.
+                {                                           
+                a.get(i).click();
+            }
+        }*/
+	}
+	
+	public static void gmail(){
+   	   url = prop.getProperty("gmail_url");
+	   initialization();
+	   String gmail_uid = prop.getProperty("gmail_uid");
+	   String gmail_pwd = prop.getProperty("gmail_pwd");
+	   
+	   
+	   WebDriverWait wait = new WebDriverWait(driver, 10*Testutil.waitTime);
+
+	   WebElement userElement = wait.until(ExpectedConditions.elementToBeClickable(By.id("identifierId")));                                                           
+	   userElement.click();                                                                                                                                           
+	   userElement.clear();                                                                                                                                           
+	   userElement.sendKeys(gmail_uid);                                                                                                      
+
+	   WebElement identifierNext = wait.until(ExpectedConditions.elementToBeClickable(By.id("identifierNext")));                                                      
+	   identifierNext.click();                                                                                                                                        
+
+	   WebElement passwordElement = wait.until(ExpectedConditions.elementToBeClickable(By.name("password")));                                                         
+	   passwordElement.click();                                                                                                                                       
+	   passwordElement.clear();                                                                                                                                       
+	   passwordElement.sendKeys(gmail_pwd);                                                                                                  
+
+	   WebElement passwordNext = wait.until(ExpectedConditions.elementToBeClickable(By.id("passwordNext")));                                                          
+	   passwordNext.click();                                                                                                                                          
+
+	   WebElement composeElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@role='button' and (.)='Compose']")));                            
+	   composeElement.click();                                                                                                                                        
+
+	   WebElement maximizeEmailElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td//img[2]")));                                               
+	   maximizeEmailElement.click();                                                                                                                                  
+
+	   WebElement sendToElement = wait.until(ExpectedConditions.elementToBeClickable(By.name("to")));                                                                 
+	   sendToElement.click();                                                                                                                                         
+	   sendToElement.clear();                                                                                                                                         
+	   //sendToElement.sendKeys(String.format("%s@gmail.com", properties.getProperty("username")));                                                                     
+
+	   WebElement subjectElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@name = 'subjectbox']")));                                        
+	   subjectElement.click();                                                                                                                                        
+	   subjectElement.clear();                                                                                                                                        
+	   //subjectElement.sendKeys(properties.getProperty("email.subject"));                                                                                              
+
+	   WebElement emailBodyElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@role = 'textbox']")));                                         
+	   emailBodyElement.click();                                                                                                                                      
+	   emailBodyElement.clear();                                                                                                                                      
+	   //emailBodyElement.sendKeys(properties.getProperty("email.body"));                                                                                               
+
+	   WebElement sendMailElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='Send']")));                                            
+	   sendMailElement.click();                                                                                                                                       
+
+	   wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Message sent')]")));                                                   
+	   List<WebElement> inboxEmails = wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(By.xpath("//*[@class='zA zE']"))));                   
+
+	   for(WebElement email : inboxEmails){                                                                                                                           
+	       if(email.isDisplayed() && email.getText().contains("email.subject")){                                                                                                                                   
+	           email.click();                                                                                                                                         
+
+	           WebElement label = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@title,'with label Inbox')]")));                    
+	           WebElement subject = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[contains(text(),'Subject of this message')]")));          
+	           WebElement body = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Single line body of this message')]")));   
+
+	       }                                                                                                                                                          
+	   }       
 	}
 
 }

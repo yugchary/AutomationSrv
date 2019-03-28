@@ -17,6 +17,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.lco.qa.base.TestBase;
 import com.lco.qa.util.ProductUtil;
@@ -25,6 +27,9 @@ import com.lco.qa.util.Xlsutil;
 
 public class PersonalPage extends TestBase {
 
+	
+	AgentWebHomePage agentWebHomePage;
+	
 	// Page Factory - OR
 	@FindBy(xpath = "")
 	WebElement xyz;
@@ -101,8 +106,12 @@ public class PersonalPage extends TestBase {
 
 		String url = "https://vantislifeinsurancestg.sureify.com/questions?user=bmtwR3Y3VnZadE5NLy83SkkxbG1vQT09&text_accepted=No&vdtca&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&ipAddress=192.168.1.110&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1550364678937&q_id=d3B1RlpsUUpMNkdYY2Y0MStFQ1Nydz09&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&auth_code=Lq5nLFCGGzXq6dOb1ZkTO7vx1Wc4lM";
 
-		url = "https://vantislifeinsurancestg.sureify.com/questions?user=Y3ptN09rQUpFdmNBL2tkYVpIdzlRZz09&us_id=RHVRcVdIaEtiMWNySFpUL2hpRWQ4QT09&agent_number=888001233&transaction_id=6c99f750-4cfc-11e9-a8c3-1df2398fb6dc_1553298264901&ipAddress=192.168.1.113&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1553298283160&q_id=ajVCc1VKQUt0M2FVa0tHd0FrTTM2dz09";
+		url = "https://vantislifeinsurancestg.sureify.com/questions?user=TFV2aEwvdkFFbUs5WGg4WmFnVjI4QT09&us_id=RHVRcVdIaEtiMWNySFpUL2hpRWQ4QT09&agent_number=888001233&transaction_id=55e34760-4dd2-11e9-a8c3-1df2398fb6dc_1553390139096&ipAddress=192.168.1.113&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1553390156370&q_id=VkEyK2pocHl6WlI1U3pjaE9aZXBLQT09";
 
+		url = "https://vantislifeinsurancestg.sureify.com/payment_success?url_code=12933143021553767445&envelop_id=0ab4d5e3-5d26-4ec1-8d9b-d629d7c3e72b&event=signing_complete";
+		
+		
+		
 		driver.navigate().to(url);
 
 		// FindElements();
@@ -118,12 +127,14 @@ public class PersonalPage extends TestBase {
 		
 		int itrCount = Integer.parseInt(count);
 		//ProcessFields("self", itrCount, "DTC");
-		ProcessFields("agent", itrCount, "Agent", "In Person E Signature", "cc");
+		//ProcessFields("agent", itrCount, "Agent", "Email E Signature", "eft");
 		//ProcessFields("customer", itrCount, "Customer", "In Person E Signature", "cc");
 		
-		payment("cc");
+		//payment("cc");
 		
-		signDoc();
+		//signUp("agent","Email E Signature", "eft");
+		
+		flowType("Email E Signature","eft");
 
 		return new PersonalPage();
 
@@ -133,6 +144,7 @@ public class PersonalPage extends TestBase {
 		
 		//String sheetName = "DTC";
 		inputData = ProductUtil.GetInputData(sheetName, 129, 5);
+		agentWebHomePage = new AgentWebHomePage();
 
 		int formFlag = 0;
 		int checkboxFlag = 0;
@@ -1150,24 +1162,24 @@ public class PersonalPage extends TestBase {
 		
 
 
-		//driver.findElement(By.xpath("//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]")).click();
-		//ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+		driver.findElement(By.xpath("//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]")).click();
+		ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
 
-		//driver.findElement(By.xpath("//label[contains(text(),'Full Name')]//following-sibling::*//input")).sendKeys("test");
+		driver.findElement(By.xpath("//label[contains(text(),'Full Name')]//following-sibling::*//input")).sendKeys("test");
 
-		//dropdown.click();
-		//Testutil.staticWait();
+		dropdown.click();
+		Testutil.staticWait();
 
-		//driver.findElement(By.xpath("//div[contains(text(),'Relationship to Proposed Insured')]//following-sibling::*//div[@class='Select-multi-value-wrapper']//input")).sendKeys("Brother");
-		//selectItem.click();
+		driver.findElement(By.xpath("//div[contains(text(),'Relationship to Proposed Insured')]//following-sibling::*//div[@class='Select-multi-value-wrapper']//input")).sendKeys("Brother");
+		selectItem.click();
 
-		//driver.findElement(By.xpath("//label[contains(text(),'Share percentage')]//following-sibling::*//input")).sendKeys("100");
+		driver.findElement(By.xpath("//label[contains(text(),'Share percentage')]//following-sibling::*//input")).sendKeys("100");
 
-		/*DOB.sendKeys("03/12/1979");
+		DOB.sendKeys("03/12/1979");
 		dateSelect.click();
 
 		driver.findElement(By.xpath("//button[contains(text(),'Next')]")).click();
-		ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);*/
+		ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
 		
 		
 		
@@ -1309,38 +1321,25 @@ public class PersonalPage extends TestBase {
 			break;
 		
 		case "agent":
-			//ProcessFields("agent", 1, "agent", e-sign, cc);
-			ProcessFields("agent", 1, "agent", "In Person E Signature", "cc");
+			
+			/*ProcessFields("agent", 1, "agent", "In Person E Signature", "cc");
 			
 			signatureType.sendKeys(signType);
 			selectItem.click();
 			
-			//Testutil.selectFromDropdown(0);
-			driver.findElement(By.xpath("//button[@class='c-button-default circular  action btn btn-default']")).click();
-			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
-			
-			System.out.println("clicked esign and submit");
-			driver.findElement(By.cssSelector("div > button")).click();
-			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);			
 			
 			
-			signDoc();			
-			ProductUtil.clickButton("Continue to Customer Signature");
+			agentWebHomePage.agentPanel();*/
+			
 			signDoc();
+			Testutil.staticLongWait();			
 			
-			ProductUtil.clickButton("Make payment");
-			Testutil.staticWait();			
+			flowType(signType, paymentType);
 			
 			
-			payment(paymentType);
 			
-			ProductUtil.clickButton("Continue to Customer Signature");
-			signDoc();
 			
-			driver.findElement(By.xpath("//a[contains(text(),'Sign TIA')]")).click();
-			signDoc();
-			
-			returnFlag = false;
+			returnFlag = true;
 			break;
 			
 		default:
@@ -1389,11 +1388,10 @@ public class PersonalPage extends TestBase {
 			ProductUtil.inputCCDetails("Expiration Date(MMYY)", "0121");
 			ProductUtil.inputCCDetails("CVV2", "123");
 			
-			ProductUtil.clickButton(By.xpath("//input[@name='process']"));
+			ProductUtil.clickButton(By.xpath("//input[@name='process']"));		
 			
 			
 			
-			//ProductUtil.clickButton(By.cssSelector("div > button"));
 			returnFlag = true;
 			break;
 		
@@ -1430,7 +1428,8 @@ public class PersonalPage extends TestBase {
     	boolean arrowFlag = true;
     	boolean returnFlag = false;
     	
-    	Testutil.staticWait();
+    	Testutil.staticLongWait(By.xpath("//button[@track='continue-button']"));  		
+    	
     	
     	System.out.println("clicked continue");
 		driver.findElement(By.xpath("//button[@track='continue-button']")).click();
@@ -1438,13 +1437,16 @@ public class PersonalPage extends TestBase {
 		System.out.println("clicked finish/start");
 		driver.findElement(By.xpath("//button[@track='top-finish-button']")).click();
 		
-		Testutil.staticWait();
+		//Testutil.staticLongWait();
 
 		// driver.findElement(By.xpath("//label[contains(text(), 'I agree to use
 		// electronic records and signatures.')]")).click();
 
 		
 		List<WebElement> arrows = driver.findElements(By.cssSelector(".signature-tab-content .tab-image-arrow"));
+		
+		
+		Testutil.staticLongWait(By.cssSelector(".signature-tab-content .tab-image-arrow")); 
 
 		System.out.println("arrows webelements found: " + arrows.size());
 
@@ -1470,7 +1472,8 @@ public class PersonalPage extends TestBase {
 						Testutil.staticWait();
 						
 					} else {
-						Testutil.staticWait();
+						System.out.println("sign arrow not displayed");
+						Testutil.staticLongWait();
 						arrowFlag = true;
 					}
 				}catch (StaleElementReferenceException e) {
@@ -1527,13 +1530,13 @@ public class PersonalPage extends TestBase {
 
 		}*/
 		
-		Testutil.staticWait();
+		Testutil.staticLongWait();
 
 		System.out.println("clicked finish");
 
 		driver.findElement(By.xpath("//button[@track='top-finish-button']")).click();
 		
-		Testutil.staticWait();
+		Testutil.staticLongWait();
 		
 		returnFlag = true;
 		
@@ -1541,4 +1544,107 @@ public class PersonalPage extends TestBase {
 		
 		
     }
+
+    public void flowType(String signType, String paymentType){
+    	
+    	boolean returnFlag = false;
+
+		switch (signType) {
+
+		case "In Person E Signature":				
+			
+			
+			ProductUtil.clickButton("Continue to Customer Signature");
+			Testutil.staticLongWait();
+			signDoc();
+			Testutil.staticLongWait();
+			//ProductUtil.clickButton("Make payment");
+			driver.findElement(By.xpath("//a[contains(text(),'Make payment')]")).click();
+			Testutil.staticLongWait();
+			
+			payment(paymentType);
+			Testutil.staticLongWait();
+			ProductUtil.clickButton("Continue to Customer Signature");
+			Testutil.staticLongWait();
+			signDoc();
+			Testutil.staticLongWait();
+			
+			driver.findElement(By.xpath("//a[contains(text(),'Sign TIA')]")).click();
+			Testutil.staticLongWait();
+			signDoc();
+			Testutil.staticLongWait();
+			returnFlag = true;
+			break;
+		
+		case "Email E Signature":
+			
+			Testutil.loginGmail();
+			Testutil.openVeryFirstEmail();
+			Testutil.staticLongWait();
+			
+			
+			System.out.println("clicking on the inbox img ... ");
+			
+			driver.findElement(By.xpath("//img[@class='ajT']")).click();
+			
+			System.out.println("clicking on the Review and sign ... ");
+			
+			driver.findElement(By.xpath("//a[contains(text(),'REVIEW AND SIGN')]")).click();
+			Testutil.staticLongWait();
+			String winHandleBefore = driver.getWindowHandle();
+			
+			for(String winHandle : driver.getWindowHandles()){
+			    driver.switchTo().window(winHandle);
+			}
+			
+			System.out.println("switching the handle");
+			
+			signDoc();
+			
+			String msg = "Thank you! Your application has been submitted, we will be in touch with you shortly.";
+			
+			msg = "The application now passed to Agent to proceed further. You will receive an email shortly."; 
+			
+			//msg = "Thanks for contacting us. We will reach you in sometime.";
+			
+			
+			System.out.println("searching for the msg to be displayed");
+			
+			ProductUtil.msgExist(By.xpath("//*[contains(text(), 'The application now passed to Agent to proceed further. You will receive an email shortly.')]"), msg);
+			//ProductUtil.msgExist(By.xpath("//*[contains(text(), 'Thank you! Your application has been submitted, we will be in touch with you shortly.')]"), msg);
+			
+			//ProductUtil.msgExist(By.xpath("//*[contains(text(), 'Thanks for contacting us. We will reach you in sometime.')]"), msg);
+			
+			System.out.println("closing sign window ... ");
+			driver.close();
+
+		  	// Switch back to original browser (first window)
+		  	driver.switchTo().window(winHandleBefore);
+		  	
+		  	System.out.println("closing email window ... ");
+		  		
+		  	driver.close();
+		  	
+		  	System.out.println("clicking refresh ... ");
+		  	
+		  	agentWebHomePage.refresh();
+		  	
+		  	System.out.println("before completeFlow ... ");
+		  	
+		  	agentWebHomePage.completeFlow(paymentType);
+		  	
+		  	returnFlag = true;
+			break;
+		  	
+		  	
+			
+			
+			
+		default:
+			break;
+			
+		}
+    	
+    }
+
 }

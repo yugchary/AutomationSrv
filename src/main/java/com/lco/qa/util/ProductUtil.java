@@ -1,11 +1,18 @@
 package com.lco.qa.util;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.By.ByCssSelector;
 import org.openqa.selenium.By.ByXPath;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import com.lco.qa.base.TestBase;
 
@@ -120,9 +127,206 @@ public class ProductUtil extends TestBase{
 		
 	}
 	
-	
-	
-	
+	public static void msgExist(By by, String msg){
+		
+		TestBase.wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+		Assert.assertNotNull(driver.findElement(by));
+		String yourButtonName=driver.findElement(by).getAttribute("innerText");
+	    Assert.assertTrue(yourButtonName.equalsIgnoreCase(msg));
+		
+	}
+
+	public static boolean payment(String payType){
+		
+		boolean returnFlag = false;
+		
+		Testutil.staticWait();
+		System.out.println("clicked START COVERAGE");
+			
+		ProductUtil.clickButton("START COVERAGE");
+		ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+		
+		switch (payType) {
+
+		case "cc":
+			
+			
+			ProductUtil.selectDropdown("Will you pay", "credit card");
+			
+			
+			ProductUtil.clickButton("Next");
+			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+			
+			
+			ProductUtil.selectDropdown("Withdrawl Date", "5th of the month");
+			
+			
+			ProductUtil.inputText("Credit Card", "yug");
+			
+			ProductUtil.clickButton("Next");
+			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+			
+			ProductUtil.inputCCDetails("Credit Card", "2223000048400011");
+			ProductUtil.inputCCDetails("Expiration Date(MMYY)", "0121");
+			ProductUtil.inputCCDetails("CVV2", "123");
+			
+			ProductUtil.clickButton(By.xpath("//input[@name='process']"));		
+			
+			
+			
+			returnFlag = true;
+			break;
+		
+		case "eft":
+			ProductUtil.selectDropdown("Will you pay", "electronic fund transfer");
+			
+			ProductUtil.clickButton("Next");
+			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+			
+			
+			ProductUtil.inputCCDetails("Account Holder Name:", "Yug");
+			ProductUtil.inputCCDetails("Bank Name:", "HDFC");
+			ProductUtil.clickButton("Savings");
+			ProductUtil.inputCCDetails("Transit Routing Number", "111");
+			ProductUtil.inputCCDetails("Bank Account Number", "1234");
+			ProductUtil.selectDropdown("Withdrawl Date", "5th of the month");
+			
+			ProductUtil.clickButton("Next");
+			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+			
+			
+			
+		default:
+			break;
+			
+		}
+		
+		return returnFlag;
+		
+	}
+
+	public static boolean signDoc(){
+    	
+    	boolean arrowFlag = true;
+    	boolean returnFlag = false;
+    	
+    	Testutil.staticLongWait(By.xpath("//button[@track='continue-button']"));  		
+    	
+    	
+    	System.out.println("clicked continue");
+		driver.findElement(By.xpath("//button[@track='continue-button']")).click();
+
+		System.out.println("clicked finish/start");
+		driver.findElement(By.xpath("//button[@track='top-finish-button']")).click();
+		
+		//Testutil.staticLongWait();
+
+		// driver.findElement(By.xpath("//label[contains(text(), 'I agree to use
+		// electronic records and signatures.')]")).click();
+
+		
+		List<WebElement> arrows = driver.findElements(By.cssSelector(".signature-tab-content .tab-image-arrow"));
+		
+		
+		Testutil.staticLongWait(By.cssSelector(".signature-tab-content .tab-image-arrow")); 
+
+		System.out.println("arrows webelements found: " + arrows.size());
+
+		Iterator<WebElement> webele = arrows.iterator();
+
+		// webele.next();
+
+		WebElement arrowEle = null;
+
+		while(webele.hasNext()) {
+			arrowEle = webele.next();
+
+			while (arrowFlag) {
+				
+				try{
+					System.out.println("trying to click sign arrow");
+					if (arrowEle.isDisplayed()) {
+						arrowEle.click();
+						System.out.println("clicked sign arrow");
+						arrowFlag = false;
+						
+						
+						Testutil.staticWait();
+						
+					} else {
+						System.out.println("sign arrow not displayed");
+						Testutil.staticLongWait();
+						arrowFlag = true;
+					}
+				}catch (StaleElementReferenceException e) {
+					System.out.println(e.getStackTrace());
+					System.out.println("element not found");
+					arrowFlag = true;
+				} catch (Exception e) {
+					System.out.println(e.getStackTrace());
+					System.out.println("other exception");
+					arrowFlag = true;
+				}
+				
+			}
+			arrowFlag = true;
+
+		}
+		
+			
+
+		/*
+		 * if (driver.findElement(By.
+		 * cssSelector(".signature-tab-content .tab-image-arrow")).isDisplayed()
+		 * ){ driver.findElement(By.
+		 * cssSelector(".signature-tab-content .tab-image-arrow")).click();
+		 * System.out.println("clicked sign arrow"); }
+		 */	
+
+		
+		
+		/*
+		arrowFlag = true;
+
+		
+
+		while (webele.hasNext()) {
+			arrowEle = webele.next();
+			while (arrowFlag) {
+				System.out.println("trying to click sign arrow");
+				if (arrowEle.isDisplayed()) {
+					arrowEle.click();
+					System.out.println("clicked sign arrow");
+					arrowFlag = false;
+				} else {
+					try {
+						Thread.sleep(Testutil.waitTime);
+
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					arrowFlag = true;
+				}
+			}
+
+		}*/
+		
+		Testutil.staticLongWait();
+
+		System.out.println("clicked finish");
+
+		driver.findElement(By.xpath("//button[@track='top-finish-button']")).click();
+		
+		Testutil.staticLongWait();
+		
+		returnFlag = true;
+		
+		return returnFlag;
+		
+		
+    }
+
 	
 
 }

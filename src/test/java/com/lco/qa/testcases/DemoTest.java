@@ -16,6 +16,8 @@ import java.util.Map.Entry;
 import org.apache.commons.collections4.iterators.EntrySetMapIterator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -27,7 +29,11 @@ import org.testng.annotations.Test;
 //import com.crm.qa.pages.HomePage;
 
 import com.lco.qa.base.TestBase;
+import com.lco.qa.pages.AgentWebHomePage;
+import com.lco.qa.pages.AgentWebLoginPage;
 import com.lco.qa.pages.DemoPage;
+import com.lco.qa.pages.PersonalPage;
+import com.lco.qa.util.ProductUtil;
 import com.lco.qa.util.Testutil;
 import com.lco.qa.util.Xlsutil;
 import com.relevantcodes.extentreports.ExtentReports;
@@ -38,6 +44,10 @@ public class DemoTest extends TestBase {
 
 	DemoPage demoPage;
 	ExtentTest extentTest;
+	PersonalPage personalPage;
+	AgentWebLoginPage agentWebPage;
+	AgentWebHomePage agentWebHomePage;
+	
 
 	HashMap<String, String> inputData = new HashMap<String, String>();
 
@@ -145,6 +155,72 @@ public class DemoTest extends TestBase {
 	public void Test3() {
 
 		extentTest = extent.startTest("Test3");
+		
+		
+		url = prop.getProperty("agent_url");
+		initialization();
+		agentWebPage = new AgentWebLoginPage();
+		agentWebHomePage = new AgentWebHomePage();
+	  	
+		
+	  	agentWebHomePage = agentWebPage.agentWebLogin(prop.getProperty("username"), prop.getProperty("password"));
+		
+		String winHandleBefore1 = driver.getWindowHandle();
+		
+		
+	
+		Testutil.loginGmail();
+		Testutil.openVeryFirstEmail();
+		driver.findElement(By.xpath("//a[contains(text(),'REVIEW AND SIGN')]")).click();
+		String winHandleBefore = driver.getWindowHandle();
+		
+		for(String winHandle : driver.getWindowHandles()){
+		    driver.switchTo().window(winHandle);
+		}
+		
+		System.out.println("switching the handle");
+		
+		WebDriverWait wait = new WebDriverWait(driver, 10*Testutil.waitTime);
+		
+		String label = "Thank you! Your application has been submitted, we will be in touch with you shortly";
+		
+		By by = new By.ByXPath("//*[contains(text(), 'Thank you! Your application has been submitted, we will be in touch with you shortly.')]");
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+		
+		
+		Assert.assertNotNull(driver.findElement(by));
+	    String yourButtonName=driver.findElement(by).getAttribute("innerText");
+	    Assert.assertTrue(yourButtonName.equalsIgnoreCase("Thank you! Your application has been submitted, we will be in touch with you shortly."));
+	    
+	    
+	    driver.close();
+
+	  		// Switch back to original browser (first window)
+	  	driver.switchTo().window(winHandleBefore);
+	  		
+	  	driver.close();
+	  	
+	  	agentWebHomePage.newAgentQuote();
+	  	
+	  	//driver.switchTo().window(winHandleBefore1);
+	  	
+	  	
+		
+		
+		personalPage = new PersonalPage();
+		
+		personalPage.signDoc();
+
+		// Perform the actions on new window
+
+		// Close the new window, if that window no more required
+		//driver.close();
+
+		// Switch back to original browser (first window)
+		//driver.switchTo().window(winHandleBefore);
+		
+		driver.close();
 		
 		int x = 1;
 		int y =1;

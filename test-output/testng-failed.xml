@@ -3,13 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.lco.qa.testcases.AgentWebHomeTest">
+      <class name="com.lco.qa.testcases.PersonalPageTest">
         <methods>
           <include name="tearDown"/>
+          <include name="loginTest"/>
           <include name="setup"/>
-          <include name="agentQuote" invocation-numbers="1"/>
         </methods>
-      </class> <!-- com.lco.qa.testcases.AgentWebHomeTest -->
+      </class> <!-- com.lco.qa.testcases.PersonalPageTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

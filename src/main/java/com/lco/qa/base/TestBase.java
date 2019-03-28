@@ -12,6 +12,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.*;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.lco.qa.util.Testutil;
 import com.lco.qa.util.WebEventListener;
@@ -28,7 +29,7 @@ public class TestBase {
 	public static ExtentReports extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/LIC_TestExecutoinReport_Extent.html", true);
 	public static Xlsutil xls = new Xlsutil(Testutil.TESTDATA_SHEET_PATH, "Quote1");
 	public static String url = null;
-
+	public static WebDriverWait wait;
 	
 	public TestBase(){
 		
@@ -92,6 +93,8 @@ public class TestBase {
 		//driver.get(prop.getProperty("url"));
 		
 		driver.get(url);
+		
+		wait = new WebDriverWait(driver, 20*(Testutil.waitTime/1000));
 		
 		
 	}
