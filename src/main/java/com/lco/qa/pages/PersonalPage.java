@@ -21,6 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.lco.qa.base.TestBase;
+import com.lco.qa.testcases.AgentWebHomeTest;
 import com.lco.qa.util.ProductUtil;
 import com.lco.qa.util.Testutil;
 import com.lco.qa.util.Xlsutil;
@@ -29,6 +30,7 @@ public class PersonalPage extends TestBase {
 
 	
 	AgentWebHomePage agentWebHomePage;
+	AgentWebLoginPage agentWebPage;
 	
 	// Page Factory - OR
 	@FindBy(xpath = "")
@@ -108,11 +110,14 @@ public class PersonalPage extends TestBase {
 
 		url = "https://vantislifeinsurancestg.sureify.com/questions?user=TFV2aEwvdkFFbUs5WGg4WmFnVjI4QT09&us_id=RHVRcVdIaEtiMWNySFpUL2hpRWQ4QT09&agent_number=888001233&transaction_id=55e34760-4dd2-11e9-a8c3-1df2398fb6dc_1553390139096&ipAddress=192.168.1.113&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1553390156370&q_id=VkEyK2pocHl6WlI1U3pjaE9aZXBLQT09";
 
-		url = "https://vantislifeinsurancestg.sureify.com/payment_success?url_code=12933143021553767445&envelop_id=0ab4d5e3-5d26-4ec1-8d9b-d629d7c3e72b&event=signing_complete";
+		url = "https://demo.docusign.net/Signing/?insession=1&ti=d901d7b23d724d5eb5d5234f98e42af5";
+		
+		
 		
 		
 		
 		driver.navigate().to(url);
+		
 
 		// FindElements();
 
@@ -126,15 +131,28 @@ public class PersonalPage extends TestBase {
 		String count = prop.getProperty("iterator");
 		
 		int itrCount = Integer.parseInt(count);
+		AgentWebHomeTest agentWebHomeTest;
+		agentWebHomePage = new AgentWebHomePage();
+		agentWebPage = new AgentWebLoginPage();
+		
+		agentWebHomeTest = new AgentWebHomeTest();
+		
 		//ProcessFields("self", itrCount, "DTC");
 		//ProcessFields("agent", itrCount, "Agent", "Email E Signature", "eft");
 		//ProcessFields("customer", itrCount, "Customer", "In Person E Signature", "cc");
 		
 		//payment("cc");
 		
-		//signUp("agent","Email E Signature", "eft");
 		
-		flowType("Email E Signature","eft");
+		//agentWebPage.agentWebLogin(prop.getProperty("username"), prop.getProperty("password"));
+		//url = driver.getCurrentUrl(); 
+		
+		//signUp("agent","Email E Signature", "eft");
+		driver.close();
+		//flowType("Email E Signature","eft");
+		//agentWebHomeTest.validateQuotationsnEApplications();
+		
+		makePayment("eft");
 
 		return new PersonalPage();
 
@@ -169,6 +187,9 @@ public class PersonalPage extends TestBase {
 		By byDatepickerF = null;
 		String fieldFlag = null;
 		boolean doneFlag = false;
+		boolean agentFlag = false;
+		boolean flowFlag = false;
+		
 
 		byFormL = By.cssSelector(".form-group");
 		byFormF = By.cssSelector(".form-group .field .form-control");
@@ -348,10 +369,8 @@ public class PersonalPage extends TestBase {
 					&& datePickerFlag == 0) {
 
 				try {
-					
-					doneFlag = addBeneficiaries(clientType, signType, "cc");
-					
-					
+					flowFlag = true;
+					doneFlag = addBeneficiaries(clientType, signType, "cc");					
 					//errorFlag = true;
 					System.out.println("completed");
 					singlebutton = true;
@@ -390,17 +409,32 @@ public class PersonalPage extends TestBase {
 			
 			if(doubleButton && !Testutil.doubleButtosFlag ) completeFlag = true;
 			
-
-			if (singlebutton || completeFlag) {
+			if(clientType.equalsIgnoreCase("agent") && doneFlag) agentFlag = true;	
+			
+			if(flag || agentFlag){
+				System.out.println("execution completed for agent type");
+				break;
+			}
+			
+			if(!doneFlag && flowFlag){
+				System.out.println("something went wrong");
+				break;
+			}
+			
+			
+			if (singlebutton || completeFlag || agentFlag) {
 				System.out.println("only button with single page " + i + ", auto load");
 			} else {
 				System.out.println("All submited in page " + i + ", going to next page. Clicking on Next button");
 
 				driver.findElement(By.xpath("//button[@class='c-button-default circular  action btn btn-default']"))
 						.click();
-			}
-
-			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+				
+			}	
+			
+			
+			
+			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);			
 
 			formFlag = 0;
 			checkboxFlag = 0;
@@ -467,11 +501,13 @@ public class PersonalPage extends TestBase {
 				break;
 			}
 				
-			
 			if(flag || doneFlag){
 				System.out.println("execution completed");
 				break;
 			}
+			
+			
+			
 			
 			if(errorFlag){
 				System.out.println("execution completed with error");
@@ -1184,14 +1220,14 @@ public class PersonalPage extends TestBase {
 		
 		
 		
-		signUp(clientType, signType, paymentType);
+		return clientTypeFlow(clientType, signType, paymentType);
 		
 		
 		
 		
 		
 
-		return true;
+		//return true;
 
 	}
 	
@@ -1300,7 +1336,7 @@ public class PersonalPage extends TestBase {
 		return ele;
 	}
 
-	public boolean signUp(String clientType, String signType, String paymentType){
+	public boolean clientTypeFlow(String clientType, String signType, String paymentType){
 		
 		boolean returnFlag = false;
 
@@ -1313,28 +1349,40 @@ public class PersonalPage extends TestBase {
 			
 			signDoc();
 			
-			payment(paymentType);
+			Testutil.staticLongWait();
+			
+			paymentTypeFlow(paymentType);
+			
+			Testutil.staticLongWait();
 			
 			signDoc();
 			
-			returnFlag = true;
+			Testutil.staticLongWait();
+			
+			returnFlag= signTypeFlow(signType, paymentType);
+			
+			
 			break;
 		
 		case "agent":
 			
-			/*ProcessFields("agent", 1, "agent", "In Person E Signature", "cc");
+			ProcessFields("agent", 1, "agent", signType, paymentType);
 			
 			signatureType.sendKeys(signType);
 			selectItem.click();
 			
 			
 			
-			agentWebHomePage.agentPanel();*/
+			agentWebHomePage.agentPanel();
 			
 			signDoc();
+			
 			Testutil.staticLongWait();			
 			
-			flowType(signType, paymentType);
+			//agentWebHomePage.flowType(signType, paymentType, "");
+			
+			signTypeFlow(signType, paymentType);
+			driver.quit();
 			
 			
 			
@@ -1354,7 +1402,7 @@ public class PersonalPage extends TestBase {
 		
 	}
 	
-	public boolean payment(String payType){
+	public boolean paymentTypeFlow(String payType){
 		
 		boolean returnFlag = false;
 		
@@ -1366,8 +1414,7 @@ public class PersonalPage extends TestBase {
 		
 		switch (payType) {
 
-		case "cc":
-			
+		case "cc":			
 			
 			ProductUtil.selectDropdown("Will you pay", "credit card");
 			
@@ -1396,6 +1443,9 @@ public class PersonalPage extends TestBase {
 			break;
 		
 		case "eft":
+			
+			
+			
 			ProductUtil.selectDropdown("Will you pay", "electronic fund transfer");
 			
 			ProductUtil.clickButton("Next");
@@ -1425,7 +1475,7 @@ public class PersonalPage extends TestBase {
 
     public boolean signDoc(){
     	
-    	boolean arrowFlag = true;
+    	
     	boolean returnFlag = false;
     	
     	Testutil.staticLongWait(By.xpath("//button[@track='continue-button']"));  		
@@ -1443,94 +1493,17 @@ public class PersonalPage extends TestBase {
 		// electronic records and signatures.')]")).click();
 
 		
-		List<WebElement> arrows = driver.findElements(By.cssSelector(".signature-tab-content .tab-image-arrow"));
-		
-		
-		Testutil.staticLongWait(By.cssSelector(".signature-tab-content .tab-image-arrow")); 
-
-		System.out.println("arrows webelements found: " + arrows.size());
-
-		Iterator<WebElement> webele = arrows.iterator();
-
-		// webele.next();
-
-		WebElement arrowEle = null;
-
-		while(webele.hasNext()) {
-			arrowEle = webele.next();
-
-			while (arrowFlag) {
+		//List<WebElement> arrows = driver.findElements(By.cssSelector(".signature-tab-content .tab-image-arrow"));
+		System.out.println("clickArrow 1st time");
 				
-				try{
-					System.out.println("trying to click sign arrow");
-					if (arrowEle.isDisplayed()) {
-						arrowEle.click();
-						System.out.println("clicked sign arrow");
-						arrowFlag = false;
-						
-						
-						Testutil.staticWait();
-						
-					} else {
-						System.out.println("sign arrow not displayed");
-						Testutil.staticLongWait();
-						arrowFlag = true;
-					}
-				}catch (StaleElementReferenceException e) {
-					System.out.println(e.getStackTrace());
-					System.out.println("element not found");
-					arrowFlag = true;
-				} catch (Exception e) {
-					System.out.println(e.getStackTrace());
-					System.out.println("other exception");
-					arrowFlag = true;
-				}
-				
-			}
-			arrowFlag = true;
-
-		}
-		
+		clickArrow();
+		System.out.println("clickArrow 2nd time");
+		clickArrow();
 			
 
-		/*
-		 * if (driver.findElement(By.
-		 * cssSelector(".signature-tab-content .tab-image-arrow")).isDisplayed()
-		 * ){ driver.findElement(By.
-		 * cssSelector(".signature-tab-content .tab-image-arrow")).click();
-		 * System.out.println("clicked sign arrow"); }
-		 */	
-
 		
 		
-		/*
-		arrowFlag = true;
-
-		
-
-		while (webele.hasNext()) {
-			arrowEle = webele.next();
-			while (arrowFlag) {
-				System.out.println("trying to click sign arrow");
-				if (arrowEle.isDisplayed()) {
-					arrowEle.click();
-					System.out.println("clicked sign arrow");
-					arrowFlag = false;
-				} else {
-					try {
-						Thread.sleep(Testutil.waitTime);
-
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					arrowFlag = true;
-				}
-			}
-
-		}*/
-		
-		Testutil.staticLongWait();
+		//Testutil.staticLongWait();
 
 		System.out.println("clicked finish");
 
@@ -1545,7 +1518,7 @@ public class PersonalPage extends TestBase {
 		
     }
 
-    public void flowType(String signType, String paymentType){
+    public boolean signTypeFlow(String signType, String paymentType){
     	
     	boolean returnFlag = false;
 
@@ -1553,6 +1526,13 @@ public class PersonalPage extends TestBase {
 
 		case "In Person E Signature":				
 			
+			
+			String msg="Thank you! Your application has been submitted, we will be in touch with you shortly.";
+			
+			if(ProductUtil.msgExist(By.xpath("//*[contains(text(), '"+ msg +"')]"), msg)) {
+				returnFlag = false;
+				break;
+			}
 			
 			ProductUtil.clickButton("Continue to Customer Signature");
 			Testutil.staticLongWait();
@@ -1562,7 +1542,7 @@ public class PersonalPage extends TestBase {
 			driver.findElement(By.xpath("//a[contains(text(),'Make payment')]")).click();
 			Testutil.staticLongWait();
 			
-			payment(paymentType);
+			paymentTypeFlow(paymentType);
 			Testutil.staticLongWait();
 			ProductUtil.clickButton("Continue to Customer Signature");
 			Testutil.staticLongWait();
@@ -1578,60 +1558,15 @@ public class PersonalPage extends TestBase {
 		
 		case "Email E Signature":
 			
-			Testutil.loginGmail();
-			Testutil.openVeryFirstEmail();
-			Testutil.staticLongWait();
-			
-			
-			System.out.println("clicking on the inbox img ... ");
-			
-			driver.findElement(By.xpath("//img[@class='ajT']")).click();
-			
-			System.out.println("clicking on the Review and sign ... ");
-			
-			driver.findElement(By.xpath("//a[contains(text(),'REVIEW AND SIGN')]")).click();
-			Testutil.staticLongWait();
-			String winHandleBefore = driver.getWindowHandle();
-			
-			for(String winHandle : driver.getWindowHandles()){
-			    driver.switchTo().window(winHandle);
-			}
-			
-			System.out.println("switching the handle");
-			
-			signDoc();
-			
-			String msg = "Thank you! Your application has been submitted, we will be in touch with you shortly.";
-			
-			msg = "The application now passed to Agent to proceed further. You will receive an email shortly."; 
-			
-			//msg = "Thanks for contacting us. We will reach you in sometime.";
-			
-			
-			System.out.println("searching for the msg to be displayed");
-			
-			ProductUtil.msgExist(By.xpath("//*[contains(text(), 'The application now passed to Agent to proceed further. You will receive an email shortly.')]"), msg);
-			//ProductUtil.msgExist(By.xpath("//*[contains(text(), 'Thank you! Your application has been submitted, we will be in touch with you shortly.')]"), msg);
-			
-			//ProductUtil.msgExist(By.xpath("//*[contains(text(), 'Thanks for contacting us. We will reach you in sometime.')]"), msg);
-			
-			System.out.println("closing sign window ... ");
-			driver.close();
-
-		  	// Switch back to original browser (first window)
-		  	driver.switchTo().window(winHandleBefore);
+			EmailSign("REVIEW AND SIGN", "The application now passed to Agent to proceed further. You will receive an email shortly.");
 		  	
-		  	System.out.println("closing email window ... ");
-		  		
-		  	driver.close();
+		  	/*System.out.println("clicking refresh ... ");
 		  	
-		  	System.out.println("clicking refresh ... ");
-		  	
-		  	agentWebHomePage.refresh();
+		  	agentWebHomePage.refresh("");
 		  	
 		  	System.out.println("before completeFlow ... ");
 		  	
-		  	agentWebHomePage.completeFlow(paymentType);
+		  	agentWebHomePage.completeFlow(paymentType);*/
 		  	
 		  	returnFlag = true;
 			break;
@@ -1644,7 +1579,184 @@ public class PersonalPage extends TestBase {
 			break;
 			
 		}
+		return returnFlag;
+    	
+    }
+
+    public boolean makePayment(String paymentType) {
+    	
+    	AgentWebHomeTest agentWebHomeTest;
+    	agentWebHomeTest = new AgentWebHomeTest();
+    	boolean returnFlag = false;
+    	agentWebHomeTest.validateQuotationsnEApplications();
+
+		driver.findElement(By.xpath("//a[contains(text(),'Make payment')]")).click();
+		Testutil.staticLongWait();
+
+		paymentTypeFlow(paymentType);
+		Testutil.staticLongWait();
+		driver.quit();
+		EmailSign("SIGN PAYMENT FORM", "Thank you! Your application has been submitted, we will be in touch with you shortly.");
+		agentWebHomeTest.validateQuotationsnEApplications();
+		/*ProductUtil.clickButton("Continue to Customer Signature");
+		Testutil.staticLongWait();
+		signDoc();
+		Testutil.staticLongWait();*/
+
+		driver.findElement(By.xpath("//a[contains(text(),'Sign TIA')]")).click();
+		Testutil.staticLongWait();
+		signDoc();
+		Testutil.staticLongWait();
+
+		returnFlag = true;
+		
+		return returnFlag;
+	}
+            
+    public boolean signTIA(String paymentType) {
+    	
+    	AgentWebHomeTest agentWebHomeTest;
+    	agentWebHomeTest = new AgentWebHomeTest();
+    	boolean returnFlag = false;
+
+		driver.quit();
+		driver.findElement(By.xpath("//a[contains(text(),'Sign TIA')]")).click();
+		Testutil.staticLongWait();
+		signDoc();
+		Testutil.staticLongWait();
+
+		returnFlag = true;
+		
+		return returnFlag;
+	}
+        
+    
+    public boolean EmailSign(String signType, String msg) {
+    	
+    	boolean returnFlag = false;
+    	
+    	Testutil.loginGmail();
+    	Testutil.staticWait();
+		Testutil.openVeryFirstEmail();
+		
+		
+		
+		System.out.println("clicking on the inbox img ... ");
+		
+		Testutil.WaitnClick(By.xpath("//img[@class='ajT']"));
+		
+		//driver.findElement(By.xpath("//img[@class='ajT']")).click();
+		
+		System.out.println("clicking on the Review and sign ... ");
+		
+		//driver.findElement(By.xpath("//a[contains(text(),'REVIEW AND SIGN')]")).click();
+		
+		Testutil.findElements(By.xpath("//a[contains(text(),'"+ signType +"')]"));
+		Testutil.staticLongWait();
+		String winHandleBefore = driver.getWindowHandle();
+		
+		for(String winHandle : driver.getWindowHandles()){
+		    driver.switchTo().window(winHandle);
+		}
+		
+		System.out.println("switching the handle");
+		
+		signDoc();
+		
+		Testutil.staticLongWait();
+		
+		//msg = "Thank you! Your application has been submitted, we will be in touch with you shortly.";
+		
+		//msg = "The application now passed to Agent to proceed further. You will receive an email shortly."; 
+		
+		//msg = "Thanks for contacting us. We will reach you in sometime.";
+		
+		
+		System.out.println("searching for the msg to be displayed");
+		
+		ProductUtil.msgExist(By.xpath("//*[contains(text(), '"+ msg +"')]"), msg);
+		//ProductUtil.msgExist(By.xpath("//*[contains(text(), 'Thank you! Your application has been submitted, we will be in touch with you shortly.')]"), msg);
+		
+		//ProductUtil.msgExist(By.xpath("//*[contains(text(), 'Thanks for contacting us. We will reach you in sometime.')]"), msg);
+		
+		System.out.println("closing sign window ... ");
+		driver.close();
+
+	  	// Switch back to original browser (first window)
+	  	driver.switchTo().window(winHandleBefore);
+	  	
+	  	System.out.println("closing email window ... ");
+	  		
+	  	driver.close();
+	  	
+	  	returnFlag = true;
+		
+		return returnFlag;
+	  	
+    	
+    }
+
+    public void clickArrow(){
+    	
+    	
+    	boolean arrowFlag = true;
+    	List<WebElement> arrows = driver.findElements(By.xpath("//button[@class='tab-button']//div//div//following-sibling::*//following-sibling::*//following-sibling::*"));
+		
+		
+		
+		
+		Testutil.staticLongWait(By.cssSelector(".signature-tab-content .tab-image-arrow")); 
+
+		System.out.println("arrows webelements found: " + arrows.size());
+
+		Iterator<WebElement> webele = arrows.iterator();
+
+		// webele.next();
+
+		WebElement arrowEle = null;
+		
+		int i=0;
+
+		while(webele.hasNext()) {
+			arrowEle = webele.next();
+	
+			while (arrowFlag && webele.hasNext()) {
+				
+				try{
+					System.out.println("trying to click sign arrow");
+					if (arrowEle.isDisplayed()) {
+						arrowEle.click();
+						System.out.println("clicked sign arrow");
+						arrowFlag = false;
+						
+						
+						Testutil.staticWait();
+						i++;
+						
+					} else {
+						System.out.println("sign arrow not displayed");
+						Testutil.staticWait();
+						arrowFlag = true;
+						arrowEle = webele.next();
+					}
+				}catch (StaleElementReferenceException e) {
+					System.out.println(e.getStackTrace());
+					System.out.println("element not found");
+					arrowFlag = true;
+				} catch (Exception e) {
+					System.out.println(e.getStackTrace());
+					System.out.println("other exception");
+					arrowFlag = true;
+				}
+				
+			}
+			arrowFlag = true;
+		}
+
     	
     }
 
 }
+
+
+

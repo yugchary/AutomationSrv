@@ -127,12 +127,19 @@ public class ProductUtil extends TestBase{
 		
 	}
 	
-	public static void msgExist(By by, String msg){
-		
+	public static boolean msgExist(By by, String msg){
+		boolean returnFlag = false;
 		TestBase.wait.until(ExpectedConditions.visibilityOfElementLocated(by));
 		Assert.assertNotNull(driver.findElement(by));
 		String yourButtonName=driver.findElement(by).getAttribute("innerText");
-	    Assert.assertTrue(yourButtonName.equalsIgnoreCase(msg));
+		if(yourButtonName.equalsIgnoreCase(msg)) { 
+			System.out.println("msg exists");
+			returnFlag = true;
+		}else
+			returnFlag = false;
+		
+		return returnFlag;
+	    //Assert.assertTrue(yourButtonName.equalsIgnoreCase(msg));
 		
 	}
 

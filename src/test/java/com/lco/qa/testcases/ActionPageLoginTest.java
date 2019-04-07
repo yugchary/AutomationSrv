@@ -106,7 +106,7 @@ public class ActionPageLoginTest extends TestBase {
 		personalPage.ProcessFields(distribution.toLowerCase(), itrCount, distribution, signType, paymentMethod.toLowerCase());
 		
 		
-		log.info("****************************** Ending agentQuote test cases execution *****************************************");
+		log.info("****************************** Ending selfQuote test cases execution *****************************************");
 	}
 	
 

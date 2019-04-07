@@ -97,34 +97,49 @@ public class OnePersonGatherInfoPage extends TestBase {
 		
 		
 		//onePImg.click();
+		try{
+			
+			first_applicant_name_0.sendKeys(FirstName);
+			driver.findElement(By.xpath("//label[contains(text(), '" + Gender + "')]")).click();
+			//fradioBtn.click();
+			
+			DOB.sendKeys(DateOfBirth);
+			String[] array = DateOfBirth.split("/", -1);
+			
+			String day = array[1];
+			day= day.replaceFirst("^0", "");
+			
+			driver.findElement(By.xpath("//div[@class='react-datepicker__week']//div[@aria-label='day-" + day + "']")).click();
+			//dateSelect.click();
+			
+					
+			stateValue.sendKeys(State);
+			selectItem.click();	
+			
+			
+			
+			rateHealth.sendKeys(healthRate);
+			selectItem.click();	
+			
+			//tobUseY.click();
+			driver.findElement(By.xpath("//label[contains(text(), '" + tobaccoUse + "')]")).click();
+			nextBtn.click();
+			
+			//Testutil.updateResult(sheetName, colName, rowNum, cellValue);
+			return new ProductSelectionPage();
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+			System.out.println("other exception, Quote failed");
+			return null; 
+			
+		}
 		
-		first_applicant_name_0.sendKeys(FirstName);
-		driver.findElement(By.xpath("//label[contains(text(), '" + Gender + "')]")).click();
-		//fradioBtn.click();
-		
-		DOB.sendKeys(DateOfBirth);
-		String[] array = DateOfBirth.split("/", -1);
-		
-		String day = array[1];
-		day= day.replaceFirst("^0", "");
-		
-		driver.findElement(By.xpath("//div[@class='react-datepicker__week']//div[@aria-label='day-" + day + "']")).click();
-		//dateSelect.click();
-		
-				
-		stateValue.sendKeys(State);
-		selectItem.click();	
 		
 		
 		
-		rateHealth.sendKeys(healthRate);
-		selectItem.click();	
-		
-		//tobUseY.click();
-		driver.findElement(By.xpath("//label[contains(text(), '" + tobaccoUse + "')]")).click();
-		nextBtn.click();
-		
-		return new ProductSelectionPage();
 		
 	}
 	

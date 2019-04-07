@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -20,6 +21,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,10 +31,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.lco.qa.base.TestBase;
+import com.lco.qa.pages.AgentWebLoginPage;
 
 public class Testutil extends TestBase {
 
-	public static long pageLoadTimeout = 180;
+	public static long pageLoadTimeout = 240;
 	public static long implicitlyWait = 10;
 	public static long waitTime = 2000;
 	static final int MAX_CHAR = 256;	
@@ -267,6 +270,21 @@ public class Testutil extends TestBase {
 		}
 	}
 	
+	
+	public static void WaitnClick(By by) {
+		try {
+			
+			TestBase.wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+			Assert.assertNotNull(driver.findElement(by));
+			driver.findElement(by).click();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 	public static void staticLongWait() {
 		try {
 			
@@ -302,6 +320,7 @@ public class Testutil extends TestBase {
 	}
 	
 	public static void loginGmail(){
+		
 		url = prop.getProperty("gmail_url");
 		initialization();
 		WebElement email_phone = driver.findElement(By.xpath("//input[@id='identifierId']"));
@@ -335,68 +354,77 @@ public class Testutil extends TestBase {
         }*/
 	}
 	
-	public static void gmail(){
-   	   url = prop.getProperty("gmail_url");
-	   initialization();
-	   String gmail_uid = prop.getProperty("gmail_uid");
-	   String gmail_pwd = prop.getProperty("gmail_pwd");
-	   
-	   
-	   WebDriverWait wait = new WebDriverWait(driver, 10*Testutil.waitTime);
+	public static void findElements(By by){
+		
+	
+		List<WebElement> arrows = driver.findElements(by);
+				
+		boolean arrowFlag = true;
+		boolean returnFlag = false;
+		Testutil.staticLongWait(by); 
 
-	   WebElement userElement = wait.until(ExpectedConditions.elementToBeClickable(By.id("identifierId")));                                                           
-	   userElement.click();                                                                                                                                           
-	   userElement.clear();                                                                                                                                           
-	   userElement.sendKeys(gmail_uid);                                                                                                      
+		System.out.println("arrows webelements found: " + arrows.size());
 
-	   WebElement identifierNext = wait.until(ExpectedConditions.elementToBeClickable(By.id("identifierNext")));                                                      
-	   identifierNext.click();                                                                                                                                        
+		Iterator<WebElement> webele = arrows.iterator();
 
-	   WebElement passwordElement = wait.until(ExpectedConditions.elementToBeClickable(By.name("password")));                                                         
-	   passwordElement.click();                                                                                                                                       
-	   passwordElement.clear();                                                                                                                                       
-	   passwordElement.sendKeys(gmail_pwd);                                                                                                  
+		// webele.next();
 
-	   WebElement passwordNext = wait.until(ExpectedConditions.elementToBeClickable(By.id("passwordNext")));                                                          
-	   passwordNext.click();                                                                                                                                          
+		WebElement arrowEle = null;
 
-	   WebElement composeElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@role='button' and (.)='Compose']")));                            
-	   composeElement.click();                                                                                                                                        
+		while(webele.hasNext()) {
+			arrowEle = webele.next();
 
-	   WebElement maximizeEmailElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//td//img[2]")));                                               
-	   maximizeEmailElement.click();                                                                                                                                  
+			while (arrowFlag) {
+				
+				try{
+					System.out.println("trying to click the element");
+					if (arrowEle.isDisplayed()) {
+						arrowEle.click();
+						System.out.println("clicked the element");
+						arrowFlag = false;
+						
+						
+						Testutil.staticWait();
+						
+					} else {
+						System.out.println("the element is not displayed");
+						Testutil.staticLongWait();
+						arrowFlag = true;
+					}
+				}catch (StaleElementReferenceException e) {
+					System.out.println(e.getStackTrace());
+					System.out.println("element not found");
+					arrowFlag = true;
+				} catch (Exception e) {
+					System.out.println(e.getStackTrace());
+					System.out.println("other exception");
+					arrowFlag = true;
+				}
+				
+			}
+			arrowFlag = true;
 
-	   WebElement sendToElement = wait.until(ExpectedConditions.elementToBeClickable(By.name("to")));                                                                 
-	   sendToElement.click();                                                                                                                                         
-	   sendToElement.clear();                                                                                                                                         
-	   //sendToElement.sendKeys(String.format("%s@gmail.com", properties.getProperty("username")));                                                                     
-
-	   WebElement subjectElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@name = 'subjectbox']")));                                        
-	   subjectElement.click();                                                                                                                                        
-	   subjectElement.clear();                                                                                                                                        
-	   //subjectElement.sendKeys(properties.getProperty("email.subject"));                                                                                              
-
-	   WebElement emailBodyElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@role = 'textbox']")));                                         
-	   emailBodyElement.click();                                                                                                                                      
-	   emailBodyElement.clear();                                                                                                                                      
-	   //emailBodyElement.sendKeys(properties.getProperty("email.body"));                                                                                               
-
-	   WebElement sendMailElement = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[text()='Send']")));                                            
-	   sendMailElement.click();                                                                                                                                       
-
-	   wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Message sent')]")));                                                   
-	   List<WebElement> inboxEmails = wait.until(ExpectedConditions.visibilityOfAllElements(driver.findElements(By.xpath("//*[@class='zA zE']"))));                   
-
-	   for(WebElement email : inboxEmails){                                                                                                                           
-	       if(email.isDisplayed() && email.getText().contains("email.subject")){                                                                                                                                   
-	           email.click();                                                                                                                                         
-
-	           WebElement label = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(@title,'with label Inbox')]")));                    
-	           WebElement subject = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[contains(text(),'Subject of this message')]")));          
-	           WebElement body = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Single line body of this message')]")));   
-
-	       }                                                                                                                                                          
-	   }       
+		}
+		
+	}
+	
+	public static void loginAgentPanel(){
+	
+	
+		AgentWebLoginPage agentWebPage;
+		agentWebPage = new AgentWebLoginPage();
+		url = prop.getProperty("agent_url");
+		initialization();
+		agentWebPage.agentWebLogin(prop.getProperty("username"), prop.getProperty("password"));		
+		driver.findElement(By.xpath("//img[@alt='Quotations/E-Applications']")).click();
+		
+	
 	}
 
+	public static void updateResult(String sheetName, String colName, int rowNum, String cellValue){
+		
+		Xlsutil xl = new Xlsutil(TESTDATA_SHEET_PATH, sheetName);		
+		xl.setCellData(sheetName, colName, rowNum, cellValue);
+		
+	}
 }

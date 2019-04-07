@@ -157,21 +157,22 @@ public class DemoTest extends TestBase {
 		extentTest = extent.startTest("Test3");
 		
 		
-		url = prop.getProperty("agent_url");
-		initialization();
-		agentWebPage = new AgentWebLoginPage();
-		agentWebHomePage = new AgentWebHomePage();
-	  	
 		
-	  	agentWebHomePage = agentWebPage.agentWebLogin(prop.getProperty("username"), prop.getProperty("password"));
-		
-		String winHandleBefore1 = driver.getWindowHandle();
-		
+		String str1 = null;
+		String str2 = "hello";              
+
+		// Success.
+		Assert.assertNotNull(str2);
+
+		// Fail.
+		Assert.assertNotNull(str1);
 		
 	
 		Testutil.loginGmail();
 		Testutil.openVeryFirstEmail();
-		driver.findElement(By.xpath("//a[contains(text(),'REVIEW AND SIGN')]")).click();
+		
+		Testutil.findElements(By.xpath("//a[contains(text(),'REVIEW AND SIGN')]"));
+		//driver.findElement(By.xpath("//a[contains(text(),'REVIEW AND SIGN')]")).click();
 		String winHandleBefore = driver.getWindowHandle();
 		
 		for(String winHandle : driver.getWindowHandles()){
@@ -204,6 +205,19 @@ public class DemoTest extends TestBase {
 	  	agentWebHomePage.newAgentQuote();
 	  	
 	  	//driver.switchTo().window(winHandleBefore1);
+	  	
+	  	
+	  	
+	  	
+	  	url = prop.getProperty("agent_url");
+		initialization();
+		agentWebPage = new AgentWebLoginPage();
+		agentWebHomePage = new AgentWebHomePage();
+	  	
+		
+	  	agentWebHomePage = agentWebPage.agentWebLogin(prop.getProperty("username"), prop.getProperty("password"));
+		
+		String winHandleBefore1 = driver.getWindowHandle();
 	  	
 	  	
 		

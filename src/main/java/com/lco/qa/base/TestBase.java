@@ -94,7 +94,7 @@ public class TestBase {
 		
 		driver.get(url);
 		
-		wait = new WebDriverWait(driver, 20*(Testutil.waitTime/1000));
+		wait = new WebDriverWait(driver, 60*(Testutil.waitTime/1000));
 		
 		
 	}
