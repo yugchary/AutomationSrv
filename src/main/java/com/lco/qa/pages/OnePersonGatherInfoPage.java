@@ -93,8 +93,10 @@ public class OnePersonGatherInfoPage extends TestBase {
 	}
 	
 	
-	public ProductSelectionPage Quote(String FirstName, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate) {
+	public ProductSelectionPage Quote(int rowNum, String FirstName, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate) {
 		
+		String currentURL ="";
+		currentURL = driver.getCurrentUrl();
 		
 		//onePImg.click();
 		try{
@@ -125,7 +127,9 @@ public class OnePersonGatherInfoPage extends TestBase {
 			driver.findElement(By.xpath("//label[contains(text(), '" + tobaccoUse + "')]")).click();
 			nextBtn.click();
 			
-			//Testutil.updateResult(sheetName, colName, rowNum, cellValue);
+			
+			
+			Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
 			return new ProductSelectionPage();
 			
 			
@@ -133,9 +137,14 @@ public class OnePersonGatherInfoPage extends TestBase {
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 			System.out.println("other exception, Quote failed");
+			
+			Testutil.updateResult(Testutil.resultSheet, "Quote", rowNum, "Fail");
+			Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
 			return null; 
 			
 		}
+		
+		
 		
 		
 		

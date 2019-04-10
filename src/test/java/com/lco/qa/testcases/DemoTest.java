@@ -152,11 +152,29 @@ public class DemoTest extends TestBase {
 	}
 
 	@Test(enabled = true)
-	public void Test3() {
+	public DemoPage Test3() {
 
 		extentTest = extent.startTest("Test3");
+		int rowNum=2;
+		
+		String currentURL ="";
+		currentURL = driver.getCurrentUrl(); 
 		
 		
+		
+		try{
+			
+			
+			
+			Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);	
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+			System.out.println("other exception, Quote failed");
+			Testutil.updateResult(Testutil.resultSheet, "Quote", rowNum, "Fail");
+			Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
+			return null; 
+			
+		}
 		
 		String str1 = null;
 		String str2 = "hello";              
@@ -224,7 +242,7 @@ public class DemoTest extends TestBase {
 		
 		personalPage = new PersonalPage();
 		
-		personalPage.signDoc();
+		personalPage.signDoc(2, "Application PDF");
 
 		// Perform the actions on new window
 
@@ -312,6 +330,8 @@ public class DemoTest extends TestBase {
 			System.out.println(line);
 
 		}*/
+		
+		return demoPage;
 	}
 	
 	public static boolean isNullOrEmpty(String str) {

@@ -105,33 +105,46 @@ public class ProductSelectionPage extends TestBase {
 		
 		
 		//driver.findElement(By.cssSelector(".c-center.mt50.row .quote-this-product-container")).e
-
-		List<WebElement> list = driver.findElements(By.cssSelector(".c-center.mt50.row .quote-this-product-container"));
-
-		System.out.println(list.size());
-
-		Iterator<WebElement> t = list.iterator();
-
-		int i = 0;
 		
-		if (list.size()>0) {
-			while (t.hasNext()) {
-				i++;
-				t.next().click();
+		try{
+			
+			List<WebElement> list = driver.findElements(By.cssSelector(".c-center.mt50.row .quote-this-product-container"));
 
+			System.out.println(list.size());
+
+			Iterator<WebElement> t = list.iterator();
+
+			int i = 0;
+			
+			if (list.size()>0) {
+				while (t.hasNext()) {
+					i++;
+					t.next().click();
+
+				}
+				nextBtn.click();
+			}else {
+				String returnText = driver.findElement(By.cssSelector(".c-center .inner-no-product-container")).getAttribute("innerHTML").toString();
+				if (returnText.contains("No products available"))
+	            	System.out.println("No products available - message is displayed");
+	        	else
+	        		System.out.println("No products available - message is NOT displayed");
 			}
-			nextBtn.click();
-		}else {
-			String returnText = driver.findElement(By.cssSelector(".c-center .inner-no-product-container")).getAttribute("innerHTML").toString();
-			if (returnText.contains("No products available"))
-            	System.out.println("No products available - message is displayed");
-        	else
-        		System.out.println("No products available - message is NOT displayed");
+			
+			
+			
+			return new ProductSelectionPage();
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+			System.out.println("other exception, Quote failed");
+			return null; 
+			
 		}
+
 		
-		
-		
-		return new ProductSelectionPage();
 
 	}
 
@@ -169,30 +182,39 @@ public class ProductSelectionPage extends TestBase {
 		}
 	}
 
-	public void FinalizeProductSelection() {
+	public ProductSelectionPage FinalizeProductSelection() {
 
+		try{
+			WaitForAzaxComponentToLoad(By.cssSelector(".plan-sider-info-text.row .plan-cost-amount"));
 		
-
-		WaitForAzaxComponentToLoad(By.cssSelector(".plan-sider-info-text.row .plan-cost-amount"));
-
-		List<WebElement> list = driver
-				.findElements(By.cssSelector(".c-center.col-sm-12 .select-this-product-container.row"));
-
-		System.out.println(list.size());
-
-		Iterator<WebElement> t = list.iterator();
-
-		int i1 = 0;
-		while (t.hasNext()) {
-			i1++;
-			t.next().click();
-			System.out.println("clicked: " + i1);
+			List<WebElement> list = driver
+					.findElements(By.cssSelector(".c-center.col-sm-12 .select-this-product-container.row"));
+		
+			System.out.println(list.size());
+		
+			Iterator<WebElement> t = list.iterator();
+		
+			int i1 = 0;
+			while (t.hasNext()) {
+				i1++;
+				t.next().click();
+				System.out.println("clicked: " + i1);
+			}
+		
+			WaitForAzaxComponentToLoad(By.cssSelector(".plan-total-text"));
+		
+			nextFinalBtn.click();
+			return new ProductSelectionPage();
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+			System.out.println("other exception, Quote failed");
+			
+			return null; 
+			
 		}
-
-		WaitForAzaxComponentToLoad(By.cssSelector(".plan-total-text"));
-
-		nextFinalBtn.click();
-		// return new ProductSelectionPage();
 
 	}
 

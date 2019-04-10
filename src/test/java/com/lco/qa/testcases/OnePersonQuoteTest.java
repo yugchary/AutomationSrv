@@ -70,7 +70,7 @@ public class OnePersonQuoteTest extends TestBase {
 		log.info("****************************** Starting onePersonQuoteTest test cases execution *****************************************");
 		extentTest = extent.startTest("onePersonQuoteTest");
 		DateOfBirth = DateOfBirth.replace(".", "/");
-		onePerson.Quote(FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
+		onePerson.Quote(2, FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
 		log.info("****************************** Ending onePersonQuoteTest test cases execution *****************************************");
 	}
 

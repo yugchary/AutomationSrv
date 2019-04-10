@@ -127,19 +127,37 @@ public class ProductUtil extends TestBase{
 		
 	}
 	
-	public static boolean msgExist(By by, String msg){
+	public static boolean msgExist(int rowNum, By by, String msg){
 		boolean returnFlag = false;
-		TestBase.wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-		Assert.assertNotNull(driver.findElement(by));
-		String yourButtonName=driver.findElement(by).getAttribute("innerText");
-		if(yourButtonName.equalsIgnoreCase(msg)) { 
-			System.out.println("msg exists");
-			returnFlag = true;
-		}else
-			returnFlag = false;
+		String currentURL ="";
+		currentURL = driver.getCurrentUrl(); 
 		
-		return returnFlag;
-	    //Assert.assertTrue(yourButtonName.equalsIgnoreCase(msg));
+		
+		
+		try{
+			TestBase.wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+			Assert.assertNotNull(driver.findElement(by));
+			String yourButtonName=driver.findElement(by).getAttribute("innerText");
+			if(yourButtonName.equalsIgnoreCase(msg)) { 
+				System.out.println("msg exists");
+				returnFlag = true;
+			}else{
+				System.out.println("msg NOT exists");
+				returnFlag = false;
+			}
+			
+			
+		    //Assert.assertTrue(yourButtonName.equalsIgnoreCase(msg));
+			Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);	
+			return returnFlag;
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+			System.out.println("other exception, msgExist failed");
+			//Testutil.updateResult(Testutil.resultSheet, "Quote", rowNum, "Fail");
+			Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
+			return false; 
+			
+		}
 		
 	}
 

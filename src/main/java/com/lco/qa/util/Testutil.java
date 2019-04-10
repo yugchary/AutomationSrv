@@ -46,6 +46,8 @@ public class Testutil extends TestBase {
 	//public static String TESTDATA_SHEET_PATH = "/home/yugandher/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/LCO_TestData.xlsx";
 	public static String TESTDATA_SHEET_PATH = "/home/yugandher/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/Input_Data.xlsx";
 	public static String email_ID = "yugandher@sureify.com";
+	
+	public static String resultSheet = "Result";
 
 	public static boolean doubleButtosFlag = false;
 	public static String doubleButtos = "Is the Proposed Insured currently confined to a hospital, nursing home, psychiatric facility or currently receiving home health care/assisted living care?";
@@ -117,7 +119,7 @@ public class Testutil extends TestBase {
 
 		ci = 0;
 
-		for (int i = startRow; i <= totalRows; i++, ci++) {
+		for (int i = startRow; i <=totalRows; i++, ci++) {
 
 			cj = 0;
 
@@ -127,7 +129,7 @@ public class Testutil extends TestBase {
 
 				tabArray[ci][cj] = xl.getCellData(SheetName, j - 1, i);
 
-				// System.out.println(tabArray[ci][cj]);
+				//System.out.println(tabArray[ci][cj]);
 
 			}
 

@@ -112,7 +112,7 @@ public class PersonalPage extends TestBase {
 
 		url = "https://demo.docusign.net/Signing/?insession=1&ti=d901d7b23d724d5eb5d5234f98e42af5";
 		
-		
+		int rowNum=2;
 		
 		
 		
@@ -148,377 +148,400 @@ public class PersonalPage extends TestBase {
 		//url = driver.getCurrentUrl(); 
 		
 		//signUp("agent","Email E Signature", "eft");
-		driver.close();
+		
+		//signTypeFlow(rowNum,"Email E Signature", "eft");
+		//driver.close();
 		//flowType("Email E Signature","eft");
 		//agentWebHomeTest.validateQuotationsnEApplications();
 		
-		makePayment("eft");
+		makePayment(rowNum, "eft");
 
 		return new PersonalPage();
 
 	}
 
-	public void ProcessFields(String clientType, int iteratorCount, String sheetName, String signType, String paymentType) {
+	public void ProcessFields(int rowNum, String clientType, int iteratorCount, String sheetName, String signType, String paymentType) {
 		
 		//String sheetName = "DTC";
-		inputData = ProductUtil.GetInputData(sheetName, 129, 5);
-		agentWebHomePage = new AgentWebHomePage();
-
-		int formFlag = 0;
-		int checkboxFlag = 0;
-		int buttonFlag = 0;
-		int dropDownFlag = 0;
-		int autoSuggFlag = 0;
-		int datePickerFlag = 0;
-		int i = 0;
-		int counter = 0;
-		By byFormL = null;
-		By byFormF = null;
-		By byButtonL = null;
-		By byButtonF = null;
-		By byNoButtonF = null;
-		By byAutoSuggL = null;
-		By byautoSuggF = null;
-		By byDropdownF = null;
-		By byDropdownL = null;
-		By byCheckboxL = null;
-		By byCheckboxF = null;
-		By byDatepickerL = null;
-		By byDatepickerF = null;
-		String fieldFlag = null;
-		boolean doneFlag = false;
-		boolean agentFlag = false;
-		boolean flowFlag = false;
 		
-
-		byFormL = By.cssSelector(".form-group");
-		byFormF = By.cssSelector(".form-group .field .form-control");
-
-		byButtonL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); // class
-																		// btn
-		byButtonF = By.cssSelector(".single-select-btn-container .c-button-default");
-		byNoButtonF = By.cssSelector("button[class='c-button-default circular single-select-btn  btn btn-default']");
-
-		byAutoSuggL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); // auto
-		byautoSuggF = By.xpath("//input[@autocomplete='off']");
-
-		byDropdownL = By.cssSelector(".c-subheader-text.fs18"); // select
-		byDropdownF = By.cssSelector(".Select-placeholder");
+		String currentURL ="";
+		currentURL = driver.getCurrentUrl(); 
 		
-		byCheckboxL = By.cssSelector(".custom-checkbox-container");
-		byCheckboxF = By.cssSelector(".custom-checkbox-container .custom-checkbox-checkmark");
-
-		byDatepickerL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
-		byDatepickerF = By.cssSelector(".react-datepicker-wrapper");
-
-		HashMap<String, Integer> ele = FindElements();
-
-		for (Entry eleType : ele.entrySet()) {
-
-			String line = eleType.getKey() + " " + eleType.getValue();
-			System.out.println("Fields: " + line);
-
-			fieldFlag = eleType.getKey().toString();
-
-			switch (fieldFlag) {
-
-			case "formFlag":
-				byFormL = By.cssSelector(".form-group");
-				byFormF = By.cssSelector(".form-group .field .form-control");
-				formFlag = Integer.parseInt(eleType.getValue().toString());
-				break;
-			case "buttonFlag":
-				byButtonL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); // class
-																				// btn
-				byButtonF = By.cssSelector(".single-select-btn-container .c-button-default");
-				byNoButtonF = By
-						.cssSelector("button[class='c-button-default circular single-select-btn  btn btn-default']");
-				buttonFlag = Integer.parseInt(eleType.getValue().toString());
-				break;
-			case "autoSuggFlag":
-				byAutoSuggL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); // auto
-				byautoSuggF = By.xpath("//input[@autocomplete='off']");
-				autoSuggFlag = Integer.parseInt(eleType.getValue().toString());
-				break;
-			case "dropDownFlag":
-				byDropdownF = By.cssSelector(".Select-placeholder");
-				byDropdownL = By.cssSelector(".c-subheader-text.fs18"); // select
-				dropDownFlag = Integer.parseInt(eleType.getValue().toString());
-				break;
-			case "checkboxFlag":
-				byCheckboxL = By.cssSelector(".custom-checkbox-container");
-				byCheckboxF = By.cssSelector(".custom-checkbox-container .custom-checkbox-checkmark");
-				checkboxFlag = Integer.parseInt(eleType.getValue().toString());
-				break;
-			case "datePickerFlag":
-				byDatepickerL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
-				byDatepickerF = By.cssSelector(".react-datepicker-wrapper");
-				datePickerFlag = Integer.parseInt(eleType.getValue().toString());
-				break;
-
-			default:
-				break;
-
-			}
-
-			System.out.println(line);
-
-		}
-
-		String pageType = "def";
-		boolean flag = false, breakFlag = true, errorFlag = false, beneficiaryFlag = true;
-
-		do {
-
+		
+		
+		try{
+			inputData = ProductUtil.GetInputData(sheetName, 129, 5);
+			agentWebHomePage = new AgentWebHomePage();
+	
+			int formFlag = 0;
+			int checkboxFlag = 0;
+			int buttonFlag = 0;
+			int dropDownFlag = 0;
+			int autoSuggFlag = 0;
+			int datePickerFlag = 0;
+			int i = 0;
+			int counter = 0;
+			By byFormL = null;
+			By byFormF = null;
+			By byButtonL = null;
+			By byButtonF = null;
+			By byNoButtonF = null;
+			By byAutoSuggL = null;
+			By byautoSuggF = null;
+			By byDropdownF = null;
+			By byDropdownL = null;
+			By byCheckboxL = null;
+			By byCheckboxF = null;
+			By byDatepickerL = null;
+			By byDatepickerF = null;
+			String fieldFlag = null;
+			boolean doneFlag = false;
+			boolean agentFlag = false;
+			boolean flowFlag = false;
+			//String currentURL ="";
 			
-			if (i == iteratorCount) {
-				System.out.println("Iterator Limit");
-				break;
-			}
+	
+			byFormL = By.cssSelector(".form-group");
+			byFormF = By.cssSelector(".form-group .field .form-control");
+	
+			byButtonL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); // class
+																			// btn
+			byButtonF = By.cssSelector(".single-select-btn-container .c-button-default");
+			byNoButtonF = By.cssSelector("button[class='c-button-default circular single-select-btn  btn btn-default']");
+	
+			byAutoSuggL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); // auto
+			byautoSuggF = By.xpath("//input[@autocomplete='off']");
+	
+			byDropdownL = By.cssSelector(".c-subheader-text.fs18"); // select
+			byDropdownF = By.cssSelector(".Select-placeholder");
 			
-			/*formFlag = 0;
-			checkboxFlag = 0;
-			buttonFlag = 0;
-			dropDownFlag = 0;
-			autoSuggFlag = 0;
-			datePickerFlag = 0;*/
-			
-
-			if (autoSuggFlag > 0) {
-				pageType = "autoSugg";
-				System.out.println("This is a page filled with " + pageType);
-				// checkPage(CheckNextElement(byautoSuggF),
-				// byautoSuggF,pageType);
-				breakFlag = checkPage(CheckNextElement(autoSuggFlag, byAutoSuggL),
-						CheckNextElement(autoSuggFlag, byautoSuggF), byAutoSuggL, byautoSuggF, pageType, sheetName);
-
-				if (!breakFlag) {
-					System.out.println("Break point");
-					break;
-				}
-			}
-
-			
-
-			if (datePickerFlag > 0) {
-				pageType = "datepicker";
-				System.out.println("This is a page filled with " + pageType);
-				// checkPage(CheckNextElement(byDatepickerF),
-				// byDatepickerF,pageType);
-				breakFlag = checkPage(CheckNextElement(datePickerFlag, byDatepickerL),
-						CheckNextElement(datePickerFlag, byDatepickerF), byDatepickerL, byDatepickerF, pageType, sheetName);
-				if (!breakFlag) {
-					System.out.println("Break point");
-					break;
-				}
-			}
-
-			
-			if (checkboxFlag > 0) {
-				pageType = "checkbox";
-				System.out.println("This is a page filled with " + pageType);
-				breakFlag = checkPage(CheckNextElement(checkboxFlag, byCheckboxL),
-						CheckNextElement(checkboxFlag, byCheckboxF), byCheckboxL, byCheckboxF, pageType, sheetName);
-				if (!breakFlag) {
-					System.out.println("Break point");
-					break;
-				}
-			}
-
-			
-			if (formFlag > 0) {
-				pageType = "form";
-				System.out.println("This is a page filled with " + pageType);
-				breakFlag = checkPage(CheckNextElement(formFlag, byFormL), CheckNextElement(formFlag, byFormF), byFormL,
-						byFormF, pageType, sheetName);
-				if (!breakFlag) {
-					System.out.println("Break point");
-					break;
-				}
-			}
-
-			
-			if (buttonFlag > 0) {
-				pageType = "button";
-				System.out.println("This is a page filled with " + pageType);
-				// checkPage(CheckNextElement(byButtonF), byButtonF, pageType);
-				breakFlag = checkPage(CheckNextElement(buttonFlag, byButtonL), CheckNextElement(buttonFlag, byButtonF),
-						byButtonL, byButtonF, pageType, sheetName);
-				if (!breakFlag) {
-					System.out.println("Break point");
-					break;
-				}
-			}
-
-			
-			if (dropDownFlag > 0) {
-				pageType = "dropdown";
-				System.out.println("This is a page filled with " + pageType);
-				
-				breakFlag = checkPage(CheckNextElement(dropDownFlag, byDropdownL),
-						CheckNextElement(dropDownFlag, byDropdownF), byDropdownL, byDropdownF, pageType, sheetName);
-				if (!breakFlag) {
-					System.out.println("Break point");
-					break;
-				}
-			}
-
-			boolean singlebutton = false;
-
-			if (formFlag == 0 && checkboxFlag == 0 && buttonFlag == 0 && dropDownFlag == 0 && autoSuggFlag == 0
-					&& datePickerFlag == 0) {
-
-				try {
-					flowFlag = true;
-					doneFlag = addBeneficiaries(clientType, signType, "cc");					
-					//errorFlag = true;
-					System.out.println("completed");
-					singlebutton = true;
-
-				} catch (NoSuchElementException e) {
-					System.out.println(e.getStackTrace());
-					System.out.println("issue with sign-up/beneficiary not reached");
-					errorFlag = true;
-					singlebutton = true;
-				} catch (Exception e) {
-					System.out.println(e.getStackTrace());
-					System.out.println("other exception");
-				}
-			}
-
-			i++;
-			
-			boolean singlebuttonFlag = false;
-
-			if (formFlag == 0 && checkboxFlag == 0 && buttonFlag == 1 && dropDownFlag == 0 && autoSuggFlag == 0
-					&& datePickerFlag == 0){
-				singlebutton = true;
-				singlebuttonFlag = true;
-			}
-			
-			boolean doubleButton = false;
-
-			if (Testutil.doubleButtosFlag && singlebuttonFlag){
-				singlebutton = false;
-				doubleButton = true;
-				
-			}
-			
-			
-			boolean completeFlag = false;
-			
-			if(doubleButton && !Testutil.doubleButtosFlag ) completeFlag = true;
-			
-			if(clientType.equalsIgnoreCase("agent") && doneFlag) agentFlag = true;	
-			
-			if(flag || agentFlag){
-				System.out.println("execution completed for agent type");
-				break;
-			}
-			
-			if(!doneFlag && flowFlag){
-				System.out.println("something went wrong");
-				break;
-			}
-			
-			
-			if (singlebutton || completeFlag || agentFlag) {
-				System.out.println("only button with single page " + i + ", auto load");
-			} else {
-				System.out.println("All submited in page " + i + ", going to next page. Clicking on Next button");
-
-				driver.findElement(By.xpath("//button[@class='c-button-default circular  action btn btn-default']"))
-						.click();
-				
-			}	
-			
-			
-			
-			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);			
-
-			formFlag = 0;
-			checkboxFlag = 0;
-			buttonFlag = 0;
-			dropDownFlag = 0;
-			autoSuggFlag = 0;
-			datePickerFlag = 0;
-
-			ele = null;
-
-			ele = FindElements();
-
+			byCheckboxL = By.cssSelector(".custom-checkbox-container");
+			byCheckboxF = By.cssSelector(".custom-checkbox-container .custom-checkbox-checkmark");
+	
+			byDatepickerL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
+			byDatepickerF = By.cssSelector(".react-datepicker-wrapper");
+	
+			HashMap<String, Integer> ele = FindElements();
+	
 			for (Entry eleType : ele.entrySet()) {
-
+	
 				String line = eleType.getKey() + " " + eleType.getValue();
 				System.out.println("Fields: " + line);
+	
 				fieldFlag = eleType.getKey().toString();
-
+	
 				switch (fieldFlag) {
-
+	
 				case "formFlag":
+					byFormL = By.cssSelector(".form-group");
+					byFormF = By.cssSelector(".form-group .field .form-control");
 					formFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
 				case "buttonFlag":
+					byButtonL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); // class
+																					// btn
+					byButtonF = By.cssSelector(".single-select-btn-container .c-button-default");
+					byNoButtonF = By
+							.cssSelector("button[class='c-button-default circular single-select-btn  btn btn-default']");
 					buttonFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
 				case "autoSuggFlag":
+					byAutoSuggL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); // auto
+					byautoSuggF = By.xpath("//input[@autocomplete='off']");
 					autoSuggFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
 				case "dropDownFlag":
+					byDropdownF = By.cssSelector(".Select-placeholder");
+					byDropdownL = By.cssSelector(".c-subheader-text.fs18"); // select
 					dropDownFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
-				case "checkboxFlag": // byCheckboxL =
-					By.cssSelector(".custom-checkbox-container");
-					
+				case "checkboxFlag":
+					byCheckboxL = By.cssSelector(".custom-checkbox-container");
+					byCheckboxF = By.cssSelector(".custom-checkbox-container .custom-checkbox-checkmark");
 					checkboxFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
-				case "datePickerFlag": // byDatepickerL =
-					By.cssSelector(".c-subheader-text.fs18.col-sm-12");
-					
+				case "datePickerFlag":
+					byDatepickerL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
+					byDatepickerF = By.cssSelector(".react-datepicker-wrapper");
 					datePickerFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
-
+	
 				default:
 					break;
-
+	
 				}
-
+	
 				System.out.println(line);
-
+	
 			}
-
-			
-
-			if (formFlag == 0 && checkboxFlag == 0 && buttonFlag == 0 && dropDownFlag == 0 && autoSuggFlag == 0
-					&& datePickerFlag == 0) {
-				counter++;
-				if (counter == 2)
-					flag = true;
-			}
-
-			if (!breakFlag){
-				System.out.println("break point stopped the execution");
-				break;
-			}
+	
+			String pageType = "def";
+			boolean flag = false, breakFlag = true, errorFlag = false, beneficiaryFlag = true;
+	
+			do {
+	
 				
-			if(flag || doneFlag){
-				System.out.println("execution completed");
-				break;
-			}
+				currentURL = driver.getCurrentUrl();
+				//Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
+				if (i == iteratorCount) {
+					System.out.println("Iterator Limit");
+					break;
+				}
+				
+				/*formFlag = 0;
+				checkboxFlag = 0;
+				buttonFlag = 0;
+				dropDownFlag = 0;
+				autoSuggFlag = 0;
+				datePickerFlag = 0;*/
+				
+	
+				if (autoSuggFlag > 0) {
+					pageType = "autoSugg";
+					System.out.println("This is a page filled with " + pageType);
+					// checkPage(CheckNextElement(byautoSuggF),
+					// byautoSuggF,pageType);
+					breakFlag = checkPage(CheckNextElement(autoSuggFlag, byAutoSuggL),
+							CheckNextElement(autoSuggFlag, byautoSuggF), byAutoSuggL, byautoSuggF, pageType, sheetName);
+	
+					if (!breakFlag) {
+						System.out.println("Break point");
+						break;
+					}
+				}
+	
+				
+	
+				if (datePickerFlag > 0) {
+					pageType = "datepicker";
+					System.out.println("This is a page filled with " + pageType);
+					// checkPage(CheckNextElement(byDatepickerF),
+					// byDatepickerF,pageType);
+					breakFlag = checkPage(CheckNextElement(datePickerFlag, byDatepickerL),
+							CheckNextElement(datePickerFlag, byDatepickerF), byDatepickerL, byDatepickerF, pageType, sheetName);
+					if (!breakFlag) {
+						System.out.println("Break point");
+						break;
+					}
+				}
+	
+				
+				if (checkboxFlag > 0) {
+					pageType = "checkbox";
+					System.out.println("This is a page filled with " + pageType);
+					breakFlag = checkPage(CheckNextElement(checkboxFlag, byCheckboxL),
+							CheckNextElement(checkboxFlag, byCheckboxF), byCheckboxL, byCheckboxF, pageType, sheetName);
+					if (!breakFlag) {
+						System.out.println("Break point");
+						break;
+					}
+				}
+	
+				
+				if (formFlag > 0) {
+					pageType = "form";
+					System.out.println("This is a page filled with " + pageType);
+					breakFlag = checkPage(CheckNextElement(formFlag, byFormL), CheckNextElement(formFlag, byFormF), byFormL,
+							byFormF, pageType, sheetName);
+					if (!breakFlag) {
+						System.out.println("Break point");
+						break;
+					}
+				}
+	
+				
+				if (buttonFlag > 0) {
+					pageType = "button";
+					System.out.println("This is a page filled with " + pageType);
+					// checkPage(CheckNextElement(byButtonF), byButtonF, pageType);
+					breakFlag = checkPage(CheckNextElement(buttonFlag, byButtonL), CheckNextElement(buttonFlag, byButtonF),
+							byButtonL, byButtonF, pageType, sheetName);
+					if (!breakFlag) {
+						System.out.println("Break point");
+						break;
+					}
+				}
+	
+				
+				if (dropDownFlag > 0) {
+					pageType = "dropdown";
+					System.out.println("This is a page filled with " + pageType);
+					
+					breakFlag = checkPage(CheckNextElement(dropDownFlag, byDropdownL),
+							CheckNextElement(dropDownFlag, byDropdownF), byDropdownL, byDropdownF, pageType, sheetName);
+					if (!breakFlag) {
+						System.out.println("Break point");
+						break;
+					}
+				}
+	
+				boolean singlebutton = false;
+	
+				if (formFlag == 0 && checkboxFlag == 0 && buttonFlag == 0 && dropDownFlag == 0 && autoSuggFlag == 0
+						&& datePickerFlag == 0) {
+	
+					try {
+						flowFlag = true;
+						doneFlag = addBeneficiaries(rowNum, clientType, signType, "cc");					
+						//errorFlag = true;
+						System.out.println("completed");
+						singlebutton = true;
+	
+					} catch (NoSuchElementException e) {
+						System.out.println(e.getStackTrace());
+						System.out.println("issue with sign-up/beneficiary not reached");
+						errorFlag = true;
+						singlebutton = true;
+						Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Fail");
+						Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
+					} catch (Exception e) {
+						System.out.println(e.getStackTrace());
+						System.out.println("other exception in addBeneficiaries");
+					}
+				}
+	
+				i++;
+				
+				boolean singlebuttonFlag = false;
+	
+				if (formFlag == 0 && checkboxFlag == 0 && buttonFlag == 1 && dropDownFlag == 0 && autoSuggFlag == 0
+						&& datePickerFlag == 0){
+					singlebutton = true;
+					singlebuttonFlag = true;
+				}
+				
+				boolean doubleButton = false;
+	
+				if (Testutil.doubleButtosFlag && singlebuttonFlag){
+					singlebutton = false;
+					doubleButton = true;
+					
+				}
+				
+				
+				boolean completeFlag = false;
+				
+				if(doubleButton && !Testutil.doubleButtosFlag ) completeFlag = true;
+				
+				if(clientType.equalsIgnoreCase("agent") && doneFlag) agentFlag = true;	
+				
+				if(flag || agentFlag){
+					System.out.println("execution completed for agent type");
+					Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Pass");
+					break;
+				}
+				
+				if(!doneFlag && flowFlag){
+					System.out.println("something went wrong");
+					Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Fail");
+					break;
+				}
+				
+				
+				if (singlebutton || completeFlag || agentFlag) {
+					System.out.println("only button with single page " + i + ", auto load");
+				} else {
+					System.out.println("All submited in page " + i + ", going to next page. Clicking on Next button");
+	
+					driver.findElement(By.xpath("//button[@class='c-button-default circular  action btn btn-default']"))
+							.click();
+					
+				}	
+				
+				
+				
+				ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);			
+	
+				formFlag = 0;
+				checkboxFlag = 0;
+				buttonFlag = 0;
+				dropDownFlag = 0;
+				autoSuggFlag = 0;
+				datePickerFlag = 0;
+	
+				ele = null;
+	
+				ele = FindElements();
+	
+				for (Entry eleType : ele.entrySet()) {
+	
+					String line = eleType.getKey() + " " + eleType.getValue();
+					System.out.println("Fields: " + line);
+					fieldFlag = eleType.getKey().toString();
+	
+					switch (fieldFlag) {
+	
+					case "formFlag":
+						formFlag = Integer.parseInt(eleType.getValue().toString());
+						break;
+					case "buttonFlag":
+						buttonFlag = Integer.parseInt(eleType.getValue().toString());
+						break;
+					case "autoSuggFlag":
+						autoSuggFlag = Integer.parseInt(eleType.getValue().toString());
+						break;
+					case "dropDownFlag":
+						dropDownFlag = Integer.parseInt(eleType.getValue().toString());
+						break;
+					case "checkboxFlag": // byCheckboxL =
+						By.cssSelector(".custom-checkbox-container");
+						
+						checkboxFlag = Integer.parseInt(eleType.getValue().toString());
+						break;
+					case "datePickerFlag": // byDatepickerL =
+						By.cssSelector(".c-subheader-text.fs18.col-sm-12");
+						
+						datePickerFlag = Integer.parseInt(eleType.getValue().toString());
+						break;
+	
+					default:
+						break;
+	
+					}
+	
+					System.out.println(line);
+	
+				}
+	
+				
+	
+				if (formFlag == 0 && checkboxFlag == 0 && buttonFlag == 0 && dropDownFlag == 0 && autoSuggFlag == 0
+						&& datePickerFlag == 0) {
+					counter++;
+					if (counter == 2)
+						flag = true;
+				}
+	
+				if (!breakFlag){
+					System.out.println("break point stopped the execution");
+					Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Break");
+					break;
+				}
+					
+				if(flag || doneFlag){
+					System.out.println("execution completed");
+					Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Pass");
+					break;
+				}			
+				
+				if(errorFlag){
+					System.out.println("execution completed with error");
+					Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Fail");
+					break;
+				}
+	
+			} while (formFlag > 0 || checkboxFlag > 0 || buttonFlag > 0 || dropDownFlag > 0 || autoSuggFlag > 0
+					|| datePickerFlag > 0 || beneficiaryFlag);
+	
+			//while (formFlag > 0 || checkboxFlag > 0 || buttonFlag > 0 || dropDownFlag > 0 || autoSuggFlag > 0 	|| datePickerFlag > 0 || flag  || doneFlag || errorFlag);
+			// return new PersonalPage();
 			
-			
-			
-			
-			if(errorFlag){
-				System.out.println("execution completed with error");
-				break;
-			}
-
-		} while (formFlag > 0 || checkboxFlag > 0 || buttonFlag > 0 || dropDownFlag > 0 || autoSuggFlag > 0
-				|| datePickerFlag > 0 || beneficiaryFlag);
-
-		//while (formFlag > 0 || checkboxFlag > 0 || buttonFlag > 0 || dropDownFlag > 0 || autoSuggFlag > 0 	|| datePickerFlag > 0 || flag  || doneFlag || errorFlag);
-		// return new PersonalPage();
+			//Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);	
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+			System.out.println("other exception, Test failed/by passed");
+						
+		}
 
 	}
 
@@ -1193,7 +1216,7 @@ public class PersonalPage extends TestBase {
 
 	}
 
-	public boolean addBeneficiaries(String clientType, String signType, String paymentType) {
+	public boolean addBeneficiaries(int rowNum, String clientType, String signType, String paymentType) {
 		
 		
 
@@ -1220,7 +1243,7 @@ public class PersonalPage extends TestBase {
 		
 		
 		
-		return clientTypeFlow(clientType, signType, paymentType);
+		return clientTypeFlow(rowNum, clientType, signType, paymentType);
 		
 		
 		
@@ -1336,7 +1359,7 @@ public class PersonalPage extends TestBase {
 		return ele;
 	}
 
-	public boolean clientTypeFlow(String clientType, String signType, String paymentType){
+	public boolean clientTypeFlow(int rowNum, String clientType, String signType, String paymentType){
 		
 		boolean returnFlag = false;
 
@@ -1347,26 +1370,36 @@ public class PersonalPage extends TestBase {
 			driver.findElement(By.cssSelector("div > button")).click();
 			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
 			
-			signDoc();
+			signDoc(rowNum, "Customer Application PDF");
+			
+			Testutil.updateResult(Testutil.resultSheet, "Customer Application PDF", rowNum, "Pass");
+			
+			String msg="Thank you! Your application has been submitted, we will be in touch with you shortly.";
+			
+			if(ProductUtil.msgExist(rowNum, By.xpath("//*[contains(text(), '"+ msg +"')]"), msg)) {
+				returnFlag = false;
+				break;
+			}
 			
 			Testutil.staticLongWait();
 			
-			paymentTypeFlow(paymentType);
+			paymentTypeFlow(rowNum, paymentType);
 			
 			Testutil.staticLongWait();
 			
-			signDoc();
+			signDoc(rowNum, "Customer Payment form signature");
+			Testutil.updateResult(Testutil.resultSheet, "Customer Payment form signature", rowNum, "Pass");
 			
 			Testutil.staticLongWait();
 			
-			returnFlag= signTypeFlow(signType, paymentType);
+			returnFlag= signTypeFlow(rowNum, signType, paymentType);
 			
 			
 			break;
 		
 		case "agent":
 			
-			ProcessFields("agent", 1, "agent", signType, paymentType);
+			ProcessFields(rowNum, "agent", 1, "agent", signType, paymentType);
 			
 			signatureType.sendKeys(signType);
 			selectItem.click();
@@ -1375,13 +1408,15 @@ public class PersonalPage extends TestBase {
 			
 			agentWebHomePage.agentPanel();
 			
-			signDoc();
+			signDoc(rowNum, "Agent Application PDF");
+			
+			Testutil.updateResult(Testutil.resultSheet, "Agent Application PDF", rowNum, "Pass");
 			
 			Testutil.staticLongWait();			
 			
 			//agentWebHomePage.flowType(signType, paymentType, "");
 			
-			signTypeFlow(signType, paymentType);
+			signTypeFlow(rowNum, signType, paymentType);
 			driver.quit();
 			
 			
@@ -1402,123 +1437,155 @@ public class PersonalPage extends TestBase {
 		
 	}
 	
-	public boolean paymentTypeFlow(String payType){
+	public boolean paymentTypeFlow(int rowNum, String payType){
 		
 		boolean returnFlag = false;
 		
-		Testutil.staticWait();
-		System.out.println("clicked START COVERAGE");
-			
-		ProductUtil.clickButton("START COVERAGE");
-		ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+		String currentURL ="";
+		currentURL = driver.getCurrentUrl();
 		
-		switch (payType) {
-
-		case "cc":			
-			
-			ProductUtil.selectDropdown("Will you pay", "credit card");
-			
-			
-			ProductUtil.clickButton("Next");
-			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
-			
-			
-			ProductUtil.selectDropdown("Withdrawl Date", "5th of the month");
-			
-			
-			ProductUtil.inputText("Credit Card", "yug");
-			
-			ProductUtil.clickButton("Next");
-			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
-			
-			ProductUtil.inputCCDetails("Credit Card", "2223000048400011");
-			ProductUtil.inputCCDetails("Expiration Date(MMYY)", "0121");
-			ProductUtil.inputCCDetails("CVV2", "123");
-			
-			ProductUtil.clickButton(By.xpath("//input[@name='process']"));		
-			
-			
-			
-			returnFlag = true;
-			break;
+		try{
 		
-		case "eft":
-			
-			
-			
-			ProductUtil.selectDropdown("Will you pay", "electronic fund transfer");
-			
-			ProductUtil.clickButton("Next");
+			Testutil.staticWait();
+			System.out.println("clicked START COVERAGE");
+				
+			ProductUtil.clickButton("START COVERAGE");
 			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
 			
+			switch (payType) {
+	
+			case "cc":			
+				
+				ProductUtil.selectDropdown("Will you pay", "credit card");
+				
+				
+				ProductUtil.clickButton("Next");
+				ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+				
+				
+				ProductUtil.selectDropdown("Withdrawl Date", "5th of the month");
+				
+				
+				ProductUtil.inputText("Credit Card", "yug");
+				
+				ProductUtil.clickButton("Next");
+				ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+				
+				ProductUtil.inputCCDetails("Credit Card", "2223000048400011");
+				ProductUtil.inputCCDetails("Expiration Date(MMYY)", "0121");
+				ProductUtil.inputCCDetails("CVV2", "123");
+				
+				ProductUtil.clickButton(By.xpath("//input[@name='process']"));		
+				
+				
+				
+				returnFlag = true;
+				break;
 			
-			ProductUtil.inputCCDetails("Account Holder Name:", "Yug");
-			ProductUtil.inputCCDetails("Bank Name:", "HDFC");
-			ProductUtil.clickButton("Savings");
-			ProductUtil.inputCCDetails("Transit Routing Number", "111");
-			ProductUtil.inputCCDetails("Bank Account Number", "1234");
-			ProductUtil.selectDropdown("Withdrawl Date", "5th of the month");
+			case "eft":
+				
+				
+				
+				ProductUtil.selectDropdown("Will you pay", "electronic fund transfer");
+				
+				ProductUtil.clickButton("Next");
+				ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+				
+				
+				ProductUtil.inputCCDetails("Account Holder Name:", "Yug");
+				ProductUtil.inputCCDetails("Bank Name:", "HDFC");
+				ProductUtil.clickButton("Savings");
+				ProductUtil.inputCCDetails("Transit Routing Number", "111");
+				ProductUtil.inputCCDetails("Bank Account Number", "1234");
+				ProductUtil.selectDropdown("Withdrawl Date", "5th of the month");
+				
+				ProductUtil.clickButton("Next");
+				ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+				
+				
+				
+			default:
+				break;
+				
+			}
+			//Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);	
+			return returnFlag;
 			
-			ProductUtil.clickButton("Next");
-			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
-			
-			
-			
-		default:
-			break;
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+			System.out.println("other exception, Payment Gateway failed");
+			Testutil.updateResult(Testutil.resultSheet, "Payment Gateway", rowNum, "Fail");
+			Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
+			return false; 
 			
 		}
 		
-		return returnFlag;
-		
 	}
 
-    public boolean signDoc(){
+    public boolean signDoc(int rowNum, String docType){
     	
+    	String currentURL ="";
+		currentURL = driver.getCurrentUrl();
     	
-    	boolean returnFlag = false;
-    	
-    	Testutil.staticLongWait(By.xpath("//button[@track='continue-button']"));  		
-    	
-    	
-    	System.out.println("clicked continue");
-		driver.findElement(By.xpath("//button[@track='continue-button']")).click();
-
-		System.out.println("clicked finish/start");
-		driver.findElement(By.xpath("//button[@track='top-finish-button']")).click();
-		
-		//Testutil.staticLongWait();
-
-		// driver.findElement(By.xpath("//label[contains(text(), 'I agree to use
-		// electronic records and signatures.')]")).click();
-
-		
-		//List<WebElement> arrows = driver.findElements(By.cssSelector(".signature-tab-content .tab-image-arrow"));
-		System.out.println("clickArrow 1st time");
-				
-		clickArrow();
-		System.out.println("clickArrow 2nd time");
-		clickArrow();
+    	try{
 			
+    		boolean returnFlag = false;
+        	
+        	Testutil.staticLongWait(By.xpath("//button[@track='continue-button']"));  		
+        	
+        	
+        	System.out.println("clicked continue");
+    		driver.findElement(By.xpath("//button[@track='continue-button']")).click();
 
-		
-		
-		//Testutil.staticLongWait();
+    		System.out.println("clicked finish/start");
+    		driver.findElement(By.xpath("//button[@track='top-finish-button']")).click();
+    		
+    		//Testutil.staticLongWait();
 
-		System.out.println("clicked finish");
+    		// driver.findElement(By.xpath("//label[contains(text(), 'I agree to use
+    		// electronic records and signatures.')]")).click();
 
-		driver.findElement(By.xpath("//button[@track='top-finish-button']")).click();
-		
-		Testutil.staticLongWait();
-		
-		returnFlag = true;
-		
-		return returnFlag;
+    		
+    		//List<WebElement> arrows = driver.findElements(By.cssSelector(".signature-tab-content .tab-image-arrow"));
+    		System.out.println("clickArrow 1st time");
+    				
+    		clickArrow();
+    		System.out.println("clickArrow 2nd time");
+    		clickArrow();
+    			
+
+    		
+    		
+    		//Testutil.staticLongWait();
+
+    		System.out.println("clicked finish");
+
+    		driver.findElement(By.xpath("//button[@track='top-finish-button']")).click();
+    		
+    		Testutil.staticLongWait();
+    		
+    		returnFlag = true;
+    		//Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
+    		
+    		return returnFlag;
+			
+			
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+			System.out.println("other exception, pdf sign failed" + docType);
+			Testutil.updateResult(Testutil.resultSheet, docType, rowNum, "Fail");
+			Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
+			return false; 
+			
+		}
+    	
+    	
+    	
 		
 		
     }
 
-    public boolean signTypeFlow(String signType, String paymentType){
+    public boolean signTypeFlow(int rowNum, String signType, String paymentType){
     	
     	boolean returnFlag = false;
 
@@ -1529,38 +1596,40 @@ public class PersonalPage extends TestBase {
 			
 			String msg="Thank you! Your application has been submitted, we will be in touch with you shortly.";
 			
-			if(ProductUtil.msgExist(By.xpath("//*[contains(text(), '"+ msg +"')]"), msg)) {
+			if(ProductUtil.msgExist(rowNum, By.xpath("//*[contains(text(), '"+ msg +"')]"), msg)) {
 				returnFlag = false;
 				break;
 			}
 			
 			ProductUtil.clickButton("Continue to Customer Signature");
 			Testutil.staticLongWait();
-			signDoc();
+			signDoc(rowNum, "Application PDF");
 			Testutil.staticLongWait();
 			//ProductUtil.clickButton("Make payment");
 			driver.findElement(By.xpath("//a[contains(text(),'Make payment')]")).click();
 			Testutil.staticLongWait();
 			
-			paymentTypeFlow(paymentType);
+			paymentTypeFlow(rowNum, paymentType);
 			Testutil.staticLongWait();
 			ProductUtil.clickButton("Continue to Customer Signature");
 			Testutil.staticLongWait();
-			signDoc();
+			signDoc(rowNum, "Application PDF");
 			Testutil.staticLongWait();
 			
 			driver.findElement(By.xpath("//a[contains(text(),'Sign TIA')]")).click();
 			Testutil.staticLongWait();
-			signDoc();
+			signDoc(rowNum, "Application PDF");
 			Testutil.staticLongWait();
 			returnFlag = true;
 			break;
 		
 		case "Email E Signature":
 			
-			EmailSign("REVIEW AND SIGN", "The application now passed to Agent to proceed further. You will receive an email shortly.");
+			returnFlag = EmailSign(rowNum, "REVIEW AND SIGN", "The application now passed to Agent to proceed further. You will receive an email shortly.", "CustomerApplication PDF");
 		  	
-		  	/*System.out.println("clicking refresh ... ");
+			Testutil.updateResult(Testutil.resultSheet, "CustomerApplication PDF", rowNum, "Pass");
+		  	
+			/*System.out.println("clicking refresh ... ");
 		  	
 		  	agentWebHomePage.refresh("");
 		  	
@@ -1568,7 +1637,7 @@ public class PersonalPage extends TestBase {
 		  	
 		  	agentWebHomePage.completeFlow(paymentType);*/
 		  	
-		  	returnFlag = true;
+		  	//returnFlag = true;
 			break;
 		  	
 		  	
@@ -1583,37 +1652,52 @@ public class PersonalPage extends TestBase {
     	
     }
 
-    public boolean makePayment(String paymentType) {
+    public boolean makePayment(int rowNum, String paymentType) {
     	
-    	AgentWebHomeTest agentWebHomeTest;
+    	String currentURL ="";
+		currentURL = driver.getCurrentUrl(); 
+		AgentWebHomeTest agentWebHomeTest;
     	agentWebHomeTest = new AgentWebHomeTest();
     	boolean returnFlag = false;
-    	agentWebHomeTest.validateQuotationsnEApplications();
-
-		driver.findElement(By.xpath("//a[contains(text(),'Make payment')]")).click();
-		Testutil.staticLongWait();
-
-		paymentTypeFlow(paymentType);
-		Testutil.staticLongWait();
-		driver.quit();
-		EmailSign("SIGN PAYMENT FORM", "Thank you! Your application has been submitted, we will be in touch with you shortly.");
-		agentWebHomeTest.validateQuotationsnEApplications();
-		/*ProductUtil.clickButton("Continue to Customer Signature");
-		Testutil.staticLongWait();
-		signDoc();
-		Testutil.staticLongWait();*/
-
-		driver.findElement(By.xpath("//a[contains(text(),'Sign TIA')]")).click();
-		Testutil.staticLongWait();
-		signDoc();
-		Testutil.staticLongWait();
-
-		returnFlag = true;
 		
-		return returnFlag;
+		try{
+    	
+	    	
+	    	agentWebHomeTest.validateQuotationsnEApplications();
+	
+			driver.findElement(By.xpath("//a[contains(text(),'Make payment')]")).click();
+			Testutil.staticLongWait();
+	
+			paymentTypeFlow(rowNum, paymentType);
+			Testutil.staticLongWait();
+			driver.quit();
+			EmailSign(rowNum, "SIGN PAYMENT FORM", "Thank you! Your application has been submitted, we will be in touch with you shortly.", "Customer Payment form signature");
+			agentWebHomeTest.validateQuotationsnEApplications();
+			/*ProductUtil.clickButton("Continue to Customer Signature");
+			Testutil.staticLongWait();
+			signDoc();
+			Testutil.staticLongWait();*/
+	
+			driver.findElement(By.xpath("//a[contains(text(),'Sign TIA')]")).click();
+			Testutil.staticLongWait();
+			signDoc(rowNum, "Agent Payment form signature");
+			Testutil.staticLongWait();
+	
+			returnFlag = true;
+			//Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);	
+			return returnFlag;
+		
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+			System.out.println("other exception, Payment Questions failed");
+			Testutil.updateResult(Testutil.resultSheet, "Payment Questions", rowNum, "Fail");
+			Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
+			return false; 
+			
+		}
 	}
             
-    public boolean signTIA(String paymentType) {
+    public boolean signTIA(int rowNum, String paymentType) {
     	
     	AgentWebHomeTest agentWebHomeTest;
     	agentWebHomeTest = new AgentWebHomeTest();
@@ -1622,7 +1706,7 @@ public class PersonalPage extends TestBase {
 		driver.quit();
 		driver.findElement(By.xpath("//a[contains(text(),'Sign TIA')]")).click();
 		Testutil.staticLongWait();
-		signDoc();
+		signDoc(rowNum, "Application PDF");
 		Testutil.staticLongWait();
 
 		returnFlag = true;
@@ -1631,67 +1715,84 @@ public class PersonalPage extends TestBase {
 	}
         
     
-    public boolean EmailSign(String signType, String msg) {
+    public boolean EmailSign(int rowNum, String signType, String msg, String resultMsg) {
     	
     	boolean returnFlag = false;
     	
-    	Testutil.loginGmail();
-    	Testutil.staticWait();
-		Testutil.openVeryFirstEmail();
+    	String currentURL ="";
+		currentURL = driver.getCurrentUrl(); 
 		
 		
 		
-		System.out.println("clicking on the inbox img ... ");
-		
-		Testutil.WaitnClick(By.xpath("//img[@class='ajT']"));
-		
-		//driver.findElement(By.xpath("//img[@class='ajT']")).click();
-		
-		System.out.println("clicking on the Review and sign ... ");
-		
-		//driver.findElement(By.xpath("//a[contains(text(),'REVIEW AND SIGN')]")).click();
-		
-		Testutil.findElements(By.xpath("//a[contains(text(),'"+ signType +"')]"));
-		Testutil.staticLongWait();
-		String winHandleBefore = driver.getWindowHandle();
-		
-		for(String winHandle : driver.getWindowHandles()){
-		    driver.switchTo().window(winHandle);
+		try{
+    	
+	    	Testutil.loginGmail();
+	    	Testutil.staticWait();
+			Testutil.openVeryFirstEmail();
+			
+			
+			
+			System.out.println("clicking on the inbox img ... ");
+			
+			Testutil.WaitnClick(By.xpath("//img[@class='ajT']"));
+			
+			//driver.findElement(By.xpath("//img[@class='ajT']")).click();
+			
+			System.out.println("clicking on the Review and sign ... ");
+			
+			//driver.findElement(By.xpath("//a[contains(text(),'REVIEW AND SIGN')]")).click();
+			
+			Testutil.findElements(By.xpath("//a[contains(text(),'"+ signType +"')]"));
+			Testutil.staticLongWait();
+			String winHandleBefore = driver.getWindowHandle();
+			
+			for(String winHandle : driver.getWindowHandles()){
+			    driver.switchTo().window(winHandle);
+			}
+			
+			System.out.println("switching the handle");
+			
+			signDoc(rowNum, resultMsg);
+			
+			Testutil.staticLongWait();
+			
+			//msg = "Thank you! Your application has been submitted, we will be in touch with you shortly.";
+			
+			//msg = "The application now passed to Agent to proceed further. You will receive an email shortly."; 
+			
+			//msg = "Thanks for contacting us. We will reach you in sometime.";
+			
+			
+			System.out.println("searching for the msg to be displayed");
+			
+			ProductUtil.msgExist(rowNum, By.xpath("//*[contains(text(), '"+ msg +"')]"), msg);
+			//ProductUtil.msgExist(By.xpath("//*[contains(text(), 'Thank you! Your application has been submitted, we will be in touch with you shortly.')]"), msg);
+			
+			//ProductUtil.msgExist(By.xpath("//*[contains(text(), 'Thanks for contacting us. We will reach you in sometime.')]"), msg);
+			
+			System.out.println("closing sign window ... ");
+			driver.close();
+	
+		  	// Switch back to original browser (first window)
+		  	driver.switchTo().window(winHandleBefore);
+		  	
+		  	System.out.println("closing email window ... ");
+		  		
+		  	driver.close();
+		  	
+		  	returnFlag = true;
+			
+			
+			//Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);	
+			return returnFlag;
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+			System.out.println("other exception, "+resultMsg+" failed");
+			Testutil.updateResult(Testutil.resultSheet, resultMsg, rowNum, "Fail");
+			Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
+			return false; 
+			
 		}
-		
-		System.out.println("switching the handle");
-		
-		signDoc();
-		
-		Testutil.staticLongWait();
-		
-		//msg = "Thank you! Your application has been submitted, we will be in touch with you shortly.";
-		
-		//msg = "The application now passed to Agent to proceed further. You will receive an email shortly."; 
-		
-		//msg = "Thanks for contacting us. We will reach you in sometime.";
-		
-		
-		System.out.println("searching for the msg to be displayed");
-		
-		ProductUtil.msgExist(By.xpath("//*[contains(text(), '"+ msg +"')]"), msg);
-		//ProductUtil.msgExist(By.xpath("//*[contains(text(), 'Thank you! Your application has been submitted, we will be in touch with you shortly.')]"), msg);
-		
-		//ProductUtil.msgExist(By.xpath("//*[contains(text(), 'Thanks for contacting us. We will reach you in sometime.')]"), msg);
-		
-		System.out.println("closing sign window ... ");
-		driver.close();
-
-	  	// Switch back to original browser (first window)
-	  	driver.switchTo().window(winHandleBefore);
-	  	
-	  	System.out.println("closing email window ... ");
-	  		
-	  	driver.close();
-	  	
-	  	returnFlag = true;
-		
-		return returnFlag;
 	  	
     	
     }
@@ -1745,7 +1846,7 @@ public class PersonalPage extends TestBase {
 					arrowFlag = true;
 				} catch (Exception e) {
 					System.out.println(e.getStackTrace());
-					System.out.println("other exception");
+					System.out.println("other exception in clickArrow");
 					arrowFlag = true;
 				}
 				
