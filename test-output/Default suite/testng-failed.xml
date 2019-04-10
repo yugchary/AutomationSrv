@@ -7,7 +7,7 @@
         <methods>
           <include name="tearDown"/>
           <include name="setup"/>
-          <include name="agentQuote" invocation-numbers="0 1"/>
+          <include name="agentQuote" invocation-numbers="0"/>
         </methods>
       </class> <!-- com.lco.qa.testcases.AgentWebHomeTest -->
     </classes>
