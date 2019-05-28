@@ -45,7 +45,7 @@ public class OnePersonGatherInfoPage extends TestBase {
 	WebElement dateSelect;
 	
 	
-	@FindBy(xpath="//div[contains(text(),'State')]//following-sibling::*//div[@class='Select-multi-value-wrapper']//input")	
+	@FindBy(xpath="//*[contains(text(),'State')]//following-sibling::*//*[@class='Select-multi-value-wrapper']//input")	
 	//@FindBy(xpath="//input[@aria-activedescendant='react-select-2--value']")
 	WebElement stateValue;
 	
@@ -55,7 +55,7 @@ public class OnePersonGatherInfoPage extends TestBase {
 		//#react-select-2--option-0
 	WebElement selectItem;
 	
-	@FindBy(xpath="//div[contains(text(),'How would you rate your overall health?')]//following-sibling::*//div[@class='Select-multi-value-wrapper']//input")	
+	@FindBy(xpath="//*[contains(text(),'How would you rate your overall health?')]//following-sibling::*//*[@class='Select-multi-value-wrapper']//input")	
 	//@FindBy(xpath="//input[@aria-activedescendant='react-select-2--value']")
 	WebElement rateHealth;
 	

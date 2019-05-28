@@ -86,7 +86,7 @@ public class ProductUtil extends TestBase{
 	
 	public static void selectDropdown(String elementName, String item){
 		
-		driver.findElement(By.xpath("//div[starts-with(text(),'"+ elementName +"')]//following-sibling::*//div[@class='Select-multi-value-wrapper']//input")).sendKeys(item);
+		driver.findElement(By.xpath("//div[starts-with(text(),'"+ elementName +"')]//following-sibling::*//span[@class='Select-multi-value-wrapper']//input")).sendKeys(item);
 		driver.findElement(By.cssSelector(".Select-option")).click();
 
 		

@@ -1,8 +1,8 @@
 package com.lco.qa.testcases;
 
 import java.io.IOException;
-import java.util.HashMap;
 
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -16,48 +16,45 @@ import org.testng.annotations.Test;
 //import com.crm.qa.pages.HomePage;
 
 import com.lco.qa.base.TestBase;
-import com.lco.qa.pages.PersonalPage;
-import com.lco.qa.pages.ProcessPage;
+import com.lco.qa.pages.AgentWebLoginPage;
 import com.lco.qa.pages.TemplatePage;
 import com.lco.qa.util.Testutil;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
-public class PersonalPageTest extends TestBase {
+public class AgentWebLoginTest extends TestBase {
 
-	//PersonalPage personalPage;
-	ProcessPage processPage;
+	AgentWebLoginPage agentWebPage;
 	ExtentTest extentTest;
-	
 
 	
 
-	public PersonalPageTest() {
+	public AgentWebLoginTest() {
 		super();
 	}
+	
+	
 
 	@BeforeMethod
 	public void setup() {
-		url = prop.getProperty("url");
+		url = prop.getProperty("agent_url");
 		initialization();
-		//personalPage = new PersonalPage();
-		processPage = new ProcessPage();
+		agentWebPage = new AgentWebLoginPage();
 	}
 
 	@Test(enabled = false)
-	public void personalPageTitleTest() {
-		log.info("****************************** Starting personalPageTitleTest test cases execution *****************************************");
+	public void loginPageTitleTest() {
+		log.info("****************************** Starting loginPageTitleTest test cases execution *****************************************");
 		extentTest = extent.startTest("loginPageTitleTest");
-		String title = processPage.validateLoginPageTitle();
+		String title = agentWebPage.validateLoginPageTitle();
 		Assert.assertEquals(title, "LifeCo Insurance Company");
-		log.info("****************************** Ending personalPageTitleTest test cases execution *****************************************");
+		log.info("****************************** Ending loginPageTitleTest test cases execution *****************************************");
 	}
 
 	@Test
 	public void loginTest() {
-		extentTest = extent.startTest("loginPageTitleTest");
-		processPage = processPage.SampleTest(prop.getProperty("username"), prop.getProperty("password"));
+		//agentWebPage = agentWebPage.agentWebLogin(prop.getProperty("username"), prop.getProperty("password"));
 	}
 
 	

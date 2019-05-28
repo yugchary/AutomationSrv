@@ -58,8 +58,8 @@ public class DemoTest extends TestBase {
 	@BeforeMethod
 	public void setup() {
 		url = prop.getProperty("url");
-		// initialization();
-		// demoPage = new DemoPage();
+		initialization();
+		demoPage = new DemoPage();
 	}
 
 	@DataProvider
@@ -67,14 +67,18 @@ public class DemoTest extends TestBase {
 		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, "Questions", 2, 7, 2, 1);
 	}
 
-	@Test(enabled = false)
+	@Test(enabled = true)
 	public void loginPageTitleTest() {
 
 		log.info(
 				"****************************** Starting loginPageTitleTest test cases execution *****************************************");
 		extentTest = extent.startTest("loginPageTitleTest");
-		String title = demoPage.validateLoginPageTitle();
-		Assert.assertEquals(title, "OrangeHRM");
+		
+		driver.findElement(By.id("email")).sendKeys("girish@sureify.com");
+		driver.findElement(By.id("password")).sendKeys("Sureify@123");
+		driver.findElement(By.id("btn_login")).click();
+		//String title = demoPage.validateLoginPageTitle();
+		//Assert.assertEquals(title, "OrangeHRM");
 		log.info(
 				"****************************** Ending loginPageTitleTest test cases execution *****************************************");
 	}
@@ -151,7 +155,7 @@ public class DemoTest extends TestBase {
 		}
 	}
 
-	@Test(enabled = true)
+	@Test(enabled = false)
 	public DemoPage Test3() {
 
 		extentTest = extent.startTest("Test3");
@@ -443,7 +447,7 @@ public class DemoTest extends TestBase {
 
 		extent.endTest(extentTest); // ending test and ends the current test and
 									// prepare to create html report
-		driver.quit();
+		//driver.quit();
 	}
 
 }

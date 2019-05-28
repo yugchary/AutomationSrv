@@ -17,6 +17,7 @@ import com.lco.qa.base.TestBase;
 import com.lco.qa.pages.ActionPage;
 import com.lco.qa.pages.OnePersonGatherInfoPage;
 import com.lco.qa.pages.PersonalPage;
+import com.lco.qa.pages.ProcessPage;
 import com.lco.qa.pages.ProductSelectionPage;
 import com.lco.qa.pages.TemplatePage;
 import com.lco.qa.util.Testutil;
@@ -30,7 +31,8 @@ public class ActionPageLoginTest extends TestBase {
 	OnePersonGatherInfoPage onePersonGatherInfoPage;
 	ActionPage actionPage;
 	ExtentTest extentTest;
-	PersonalPage personalPage;
+	//PersonalPage personalPage;
+	ProcessPage processPage;
 	int rowNum = 2;
 
 	// HashMap<String, String> inputData = new HashMap<String, String>();
@@ -45,7 +47,8 @@ public class ActionPageLoginTest extends TestBase {
 		initialization();
 		productSelectionPage = new ProductSelectionPage();
 		onePersonGatherInfoPage = new OnePersonGatherInfoPage();
-		personalPage = new PersonalPage();
+		//personalPage = new PersonalPage();
+		processPage = new ProcessPage();
 		actionPage = new ActionPage();
 
 	}
@@ -83,7 +86,7 @@ public class ActionPageLoginTest extends TestBase {
 		String count = prop.getProperty("iterator");
 
 		int itrCount = Integer.parseInt(count);
-		personalPage.ProcessFields(2, "self", itrCount, "DTC", "e-sign", "cc");
+		processPage.ProcessFields(2, "self", itrCount, "DTC", "e-sign", "cc");
 
 		log.info(
 				"****************************** Ending continueToApplication test cases execution *****************************************");
@@ -134,7 +137,7 @@ public class ActionPageLoginTest extends TestBase {
 
 		String count = prop.getProperty("iterator");
 		int itrCount = Integer.parseInt(count);
-		personalPage.ProcessFields(rowNum, distribution.toLowerCase(), itrCount, distribution, signType,
+		processPage.ProcessFields(rowNum, distribution.toLowerCase(), itrCount, distribution, signType,
 				paymentMethod.toLowerCase());
 
 		log.info(
