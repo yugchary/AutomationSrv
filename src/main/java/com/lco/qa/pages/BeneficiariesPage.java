@@ -98,6 +98,11 @@ public class BeneficiariesPage extends TestBase {
 	// Initialize the Page objects
 	public BeneficiariesPage() {
 		PageFactory.initElements(driver, this);
+		signaturePage = new SignaturePage();
+		paymentPage = new PaymentPage();
+		processPage = new ProcessPage();
+		agentWebHomePage = new AgentWebHomePage();
+		
 
 	}
 
@@ -206,6 +211,10 @@ public class BeneficiariesPage extends TestBase {
 	public boolean clientTypeFlow(int rowNum, String clientType, String signType, String paymentType){
 		
 		boolean returnFlag = false;
+		processPage = new ProcessPage(); 
+		agentWebHomePage = new AgentWebHomePage();
+		signaturePage = new SignaturePage();
+		paymentPage = new PaymentPage();
 
 		switch (clientType) {
 
@@ -246,8 +255,7 @@ public class BeneficiariesPage extends TestBase {
 			processPage.ProcessFields(rowNum, "agent", 1, "agent", signType, paymentType);
 			
 			signatureType.sendKeys(signType);
-			selectItem.click();
-			
+			selectItem.click();			
 			
 			
 			agentWebHomePage.agentPanel();

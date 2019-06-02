@@ -82,7 +82,8 @@ public class AgentWebHomePage extends TestBase {
 	
 	public AgentWebHomePage agentPanel() {
 
-		driver.findElement(By.xpath("//button[@class='c-button-default circular  action btn btn-default']")).click();
+		//driver.findElement(By.xpath("//button[@class='c-button-default circular  action btn btn-default']")).click();
+		driver.findElement(By.xpath("//button[contains(text(),'Next')]")).click();
 		ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
 
 		System.out.println("clicked esign and submit");

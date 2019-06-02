@@ -19,11 +19,13 @@ import com.lco.qa.base.TestBase;
 import com.lco.qa.pages.ActionPage;
 import com.lco.qa.pages.AgentWebHomePage;
 import com.lco.qa.pages.AgentWebLoginPage;
+import com.lco.qa.pages.BeneficiariesPage;
 import com.lco.qa.pages.OnePersonGatherInfoPage;
 import com.lco.qa.pages.PaymentPage;
 import com.lco.qa.pages.PersonalPage;
 import com.lco.qa.pages.ProcessPage;
 import com.lco.qa.pages.ProductSelectionPage;
+import com.lco.qa.pages.SignaturePage;
 import com.lco.qa.pages.TemplatePage;
 import com.lco.qa.util.Testutil;
 import com.relevantcodes.extentreports.ExtentReports;
@@ -36,10 +38,13 @@ public class AgentWebHomeTest extends TestBase {
 	AgentWebLoginPage agentWebPage;
 	ProductSelectionPage productSelectionPage;
 	OnePersonGatherInfoPage onePersonGatherInfoPage;
+	
 	ActionPage actionPage;
 	ExtentTest extentTest;	
 	//PersonalPage personalPage; 
 	ProcessPage processPage;
+	SignaturePage signaturePage;
+	BeneficiariesPage beneficiariesPage;
 	PaymentPage paymentPage;
 	int rowNum =2;
 	
@@ -60,8 +65,12 @@ public class AgentWebHomeTest extends TestBase {
 		productSelectionPage = new ProductSelectionPage();
 		onePersonGatherInfoPage = new OnePersonGatherInfoPage();
 		//personalPage = new PersonalPage();
+		
 		processPage = new ProcessPage();
+		beneficiariesPage = new BeneficiariesPage();
+		signaturePage = new SignaturePage();
 		paymentPage = new PaymentPage();
+		
 		actionPage = new ActionPage();
 		
 		

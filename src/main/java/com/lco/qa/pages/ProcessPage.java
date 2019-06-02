@@ -36,6 +36,8 @@ public class ProcessPage extends TestBase {
 	SignaturePage signaturePage;
 	BeneficiariesPage beneficiariesPage;
 	
+	
+	
 	// Page Factory - OR
 	@FindBy(xpath = "")
 	WebElement xyz;
@@ -99,6 +101,7 @@ public class ProcessPage extends TestBase {
 	// Initialize the Page objects
 	public ProcessPage() {
 		PageFactory.initElements(driver, this);
+		 
 
 	}
 
@@ -114,6 +117,8 @@ public class ProcessPage extends TestBase {
 
 		url = "https://vantislifeinsurancestg.sureify.com/questions?user=NTY0UEdKSmJVaUdkVzMxMTY0SXVlZz09&us_id=RHVRcVdIaEtiMWNySFpUL2hpRWQ4QT09&agent_number=888001234&ipAddress=192.168.43.249&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1558312848337&page_id=NEXT_STEPS_PAGE_ID&page_title=NEXT_STEPS_PAGE&q_id=eGc0OFZibmszRFdqN1cwWm5hKy9Sdz09&transaction_id=d6e62c50-7a97-11e9-ba19-3b6c8add9be1_1558312817557";
 
+		
+		
 		//url = "https://demo.docusign.net/Signing/?insession=1&ti=d901d7b23d724d5eb5d5234f98e42af5";
 		
 		//url = "https://vantislifeinsurancestg.sureify.com/questions?user=NTY0UEdKSmJVaUdkVzMxMTY0SXVlZz09&us_id=RHVRcVdIaEtiMWNySFpUL2hpRWQ4QT09&agent_number=888001234&ipAddress=192.168.43.249&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1558312848337&page_id=NEXT_STEPS_PAGE_ID&page_title=NEXT_STEPS_PAGE&q_id=eGc0OFZibmszRFdqN1cwWm5hKy9Sdz09&transaction_id=d6e62c50-7a97-11e9-ba19-3b6c8add9be1_1558312817557";
@@ -140,7 +145,9 @@ public class ProcessPage extends TestBase {
 		AgentWebHomeTest agentWebHomeTest;
 		agentWebHomePage = new AgentWebHomePage();
 		agentWebPage = new AgentWebLoginPage();
-		
+		beneficiariesPage = new BeneficiariesPage();
+		signaturePage = new SignaturePage();
+		paymentPage = new PaymentPage();
 		agentWebHomeTest = new AgentWebHomeTest();
 		
 		//ProcessFields("self", itrCount, "DTC");
@@ -174,13 +181,15 @@ public class ProcessPage extends TestBase {
 		//String sheetName = "DTC";
 		
 		String currentURL ="";
-		currentURL = driver.getCurrentUrl(); 
+		currentURL = driver.getCurrentUrl();
 		
+		beneficiariesPage = new BeneficiariesPage();
+	
 		
 		
 		try{
 			inputData = ProductUtil.GetInputData(sheetName, 129, 5);
-			agentWebHomePage = new AgentWebHomePage();
+			//agentWebHomePage = new AgentWebHomePage();
 	
 			int formFlag = 0;
 			int checkboxFlag = 0;
@@ -408,7 +417,7 @@ public class ProcessPage extends TestBase {
 	
 					try {
 						flowFlag = true;
-						doneFlag = beneficiariesPage.addBeneficiaries(rowNum, clientType, signType, "cc");					
+						doneFlag = beneficiariesPage.addBeneficiaries(rowNum, clientType, signType, paymentType);					
 						//errorFlag = true;
 						System.out.println("completed");
 						singlebutton = true;
@@ -767,7 +776,7 @@ public class ProcessPage extends TestBase {
 
 	public boolean FillPage(Iterator<WebElement> l, Iterator<WebElement> f, int i, String pageType, String sheetName) {
 
-		String FieldType, FieldValue = null, breakPoint = null;
+		String FieldType, FieldValue = null, breakPoint = null, temp = null;
 		//Iterator tempIt = f;
 		WebElement elementL = l.next();
 		//WebElement elementF = f.next();
@@ -788,7 +797,12 @@ public class ProcessPage extends TestBase {
 		
 		
 		if(buttons.size()<=2){		
-			if (labels.size()==2) returnText = driver.findElement(By.xpath("//div[@class='questions-content-container']//child::*//following-sibling::*//div")).getText().toString();
+			if (labels.size()==2) temp = driver.findElement(By.xpath("//div[@class='questions-content-container']//child::*//following-sibling::*//div")).getText().toString();
+			System.out.println("temp returnText: " + temp);
+			if(Testutil.isNullOrEmpty(temp))
+				System.out.println("returnText is null");
+			else
+				returnText = temp;
 		}
 
 		

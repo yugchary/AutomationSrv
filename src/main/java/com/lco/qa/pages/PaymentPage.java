@@ -34,6 +34,7 @@ public class PaymentPage extends TestBase {
 	ProcessPage processPage;
 	PaymentPage paymentPage;
 	SignaturePage signaturePage;
+	AgentWebHomeTest agentWebHomeTest;
 	// Page Factory - OR
 	@FindBy(xpath = "")
 	WebElement xyz;
@@ -97,6 +98,8 @@ public class PaymentPage extends TestBase {
 	// Initialize the Page objects
 	public PaymentPage() {
 		PageFactory.initElements(driver, this);
+		signaturePage = new SignaturePage();		
+		processPage = new ProcessPage();
 
 	}
 
@@ -164,84 +167,8 @@ public class PaymentPage extends TestBase {
 
 	}
 
-		
-	public boolean clientTypeFlow(int rowNum, String clientType, String signType, String paymentType){
-		
-		boolean returnFlag = false;
-
-		switch (clientType) {
-
-		case "customer":
-			System.out.println("clicked esign and submit");
-			driver.findElement(By.cssSelector("div > button")).click();
-			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
-			
-			signaturePage.signDoc(rowNum, "Customer Application PDF");
-			
-			Testutil.updateResult(Testutil.resultSheet, "Customer Application PDF", rowNum, "Pass");
-			
-			String msg="Thank you! Your application has been submitted, we will be in touch with you shortly.";
-			
-			if(ProductUtil.msgExist(rowNum, By.xpath("//*[contains(text(), '"+ msg +"')]"), msg)) {
-				returnFlag = false;
-				break;
-			}
-			
-			Testutil.staticLongWait();
-			
-			paymentTypeFlow(rowNum, paymentType);
-			
-			Testutil.staticLongWait();
-			
-			signaturePage.signDoc(rowNum, "Customer Payment form signature");
-			Testutil.updateResult(Testutil.resultSheet, "Customer Payment form signature", rowNum, "Pass");
-			
-			Testutil.staticLongWait();
-			
-			returnFlag= signaturePage.signTypeFlow(rowNum, signType, paymentType);
-			
-			
-			break;
-		
-		case "agent":
-			
-			processPage.ProcessFields(rowNum, "agent", 1, "agent", signType, paymentType);
-			
-			signatureType.sendKeys(signType);
-			selectItem.click();
-			
-			
-			
-			agentWebHomePage.agentPanel();
-			
-			signaturePage.signDoc(rowNum, "Agent Application PDF");
-			
-			Testutil.updateResult(Testutil.resultSheet, "Agent Application PDF", rowNum, "Pass");
-			
-			Testutil.staticLongWait();			
-			
-			//agentWebHomePage.flowType(signType, paymentType, "");
-			driver.quit();
-			signaturePage.signTypeFlow(rowNum, signType, paymentType);
-			
-			
-			
-			
-			
-			returnFlag = true;
-			break;
-			
-		default:
-			break;
-			
-		}
-		
-		return returnFlag;
-		
-		
-
-		
-	}
+	
+	
 	
 	public boolean paymentTypeFlow(int rowNum, String payType){
 		
@@ -331,10 +258,10 @@ public class PaymentPage extends TestBase {
     
     public boolean makePayment(int rowNum, String paymentType) {
     	
-    	String currentURL ="";
+    	String currentURL ="";		
 		
-		AgentWebHomeTest agentWebHomeTest;
     	agentWebHomeTest = new AgentWebHomeTest();
+    	signaturePage = new SignaturePage();	
     	boolean returnFlag = false;
 		
 		try{
