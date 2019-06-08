@@ -3,14 +3,19 @@ package com.lco.qa.base;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.*;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -37,7 +42,9 @@ public class TestBase {
 		try {
 			//FileInputStream ip = new FileInputStream("C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\FreeCRMTests\\src\\main\\java\\com\\crm\\qa\\config\\config.properties");
 			//FileInputStream ip = new FileInputStream("C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\config\\config.properties");
-			FileInputStream ip = new FileInputStream("/home/yugandher/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/config/config.properties");
+			FileInputStream ip = new FileInputStream("/home/yugander/Downloads/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/config/config.properties");
+			
+			//home/yugander/Downloads/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/Input_Data.xlsx
 			prop.load(ip);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -59,6 +66,18 @@ public class TestBase {
 			//System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver.exe");
 			System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver");
 			driver = new ChromeDriver();
+			
+			/*ChromeOptions options = new ChromeOptions();
+			//DesiredCapabilities dc = DesiredCapabilities.chrome();
+	        try {
+	        	//driver = new ChromeOptions(options);
+				driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+	        
+			
 		} else if (BrowserType.equalsIgnoreCase("IE")) {
 
 			//System.setProperty("webdriver.ie.driver","C:\\Yug\\From Old Laptop\\From LoanLap\\Yug\\Selenium\\IEDriverServer.exe");

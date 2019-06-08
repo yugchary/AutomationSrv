@@ -8,6 +8,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import com.lco.qa.base.TestBase;
 import com.lco.qa.util.ProductUtil;
@@ -15,6 +16,9 @@ import com.lco.qa.util.Testutil;
 
 public class AgentWebHomePage extends TestBase {
 
+	
+	AgentWebHomePage agentWebHomePage;
+	AgentWebLoginPage agentWebPage;
 	// Page Factory - OR
 	@FindBy(xpath = "")
 	WebElement xyz;
@@ -398,4 +402,36 @@ public class AgentWebHomePage extends TestBase {
 		return new AgentWebHomePage();
 	}
 
+	public AgentWebHomePage setUp() {
+		url = prop.getProperty("agent_url");
+		initialization();
+		/*
+		 * agentWebHomePage = new AgentWebHomePage(); agentWebPage = new
+		 * AgentWebLoginPage(); productSelectionPage = new ProductSelectionPage();
+		 * onePersonGatherInfoPage = new OnePersonGatherInfoPage(); //personalPage = new
+		 * PersonalPage();
+		 * 
+		 * processPage = new ProcessPage(); beneficiariesPage = new BeneficiariesPage();
+		 * signaturePage = new SignaturePage(); paymentPage = new PaymentPage();
+		 * 
+		 * actionPage = new ActionPage();
+		 */
+		return new AgentWebHomePage();
+	}
+	
+	public void validateQuotationsnEApplications() {
+		log.info("****************************** Starting loginPageTitleTest test cases execution *****************************************");
+		//extentTest = extent.startTest("loginPageTitleTest");
+        
+		agentWebPage = new AgentWebLoginPage();
+		agentWebHomePage = new AgentWebHomePage();
+				
+		setUp();
+		agentWebPage.agentWebLogin(prop.getProperty("username"), prop.getProperty("password"));
+		agentWebHomePage.QuotationsnEApplications();
+		String title = agentWebHomePage.validateLoginPageTitle();
+		Assert.assertEquals(title, "Vantis Life Insurance Company");
+		log.info("****************************** Ending loginPageTitleTest test cases execution *****************************************");
+	}
+	
 }

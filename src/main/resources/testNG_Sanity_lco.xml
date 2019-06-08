@@ -13,12 +13,13 @@
 			<!-- <class name="com.lco.qa.testcases.LoginPageTest" /> 
 			<class name="com.lco.qa.testcases.AfterTestExtent" />
 			<class name="com.lco.qa.testcases.BeforeTestExtent" /> 
-			
-			
-			-->
 			<class name="com.lco.qa.testcases.OnePersonQuoteTest" />
 			<class name="com.lco.qa.testcases.ProductSelectionTest" />
+			<class name="com.lco.qa.testcases.AgentWebHomeTest" />
 			
+			-->
+			
+			<class name="com.lco.qa.testcases.ActionPageLoginTest" />
 			
 			
 

@@ -21,10 +21,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.lco.qa.base.TestBase;
-import com.lco.qa.testcases.AgentWebHomeTest;
+//import com.lco.qa.testcases.AgentWebHomeTest;
 import com.lco.qa.util.ProductUtil;
 import com.lco.qa.util.Testutil;
-import com.lco.qa.util.Xlsutil;
 
 public class PersonalPage extends TestBase {
 
@@ -131,11 +130,11 @@ public class PersonalPage extends TestBase {
 		String count = prop.getProperty("iterator");
 		
 		int itrCount = Integer.parseInt(count);
-		AgentWebHomeTest agentWebHomeTest;
+		//AgentWebHomeTest agentWebHomeTest;
 		agentWebHomePage = new AgentWebHomePage();
 		agentWebPage = new AgentWebLoginPage();
 		
-		agentWebHomeTest = new AgentWebHomeTest();
+		//agentWebHomeTest = new AgentWebHomeTest();
 		
 		//ProcessFields("self", itrCount, "DTC");
 		//ProcessFields("agent", itrCount, "Agent", "Email E Signature", "eft");
@@ -1658,14 +1657,14 @@ public class PersonalPage extends TestBase {
     	
     	String currentURL ="";
 		
-		AgentWebHomeTest agentWebHomeTest;
-    	agentWebHomeTest = new AgentWebHomeTest();
+		//AgentWebHomeTest agentWebHomeTest;
+    	//agentWebHomeTest = new AgentWebHomeTest();
     	boolean returnFlag = false;
 		
 		try{
     	
 	    	
-	    	agentWebHomeTest.validateQuotationsnEApplications();
+	    	//agentWebHomeTest.validateQuotationsnEApplications();
 	
 			driver.findElement(By.xpath("//a[contains(text(),'Make payment')]")).click();
 			Testutil.staticLongWait();
@@ -1674,7 +1673,7 @@ public class PersonalPage extends TestBase {
 			Testutil.staticLongWait();
 			driver.quit();
 			EmailSign(rowNum, "SIGN PAYMENT FORM", "Thank you! Your application has been submitted, we will be in touch with you shortly.", "Customer Payment form signature");
-			agentWebHomeTest.validateQuotationsnEApplications();
+			//agentWebHomeTest.validateQuotationsnEApplications();
 			/*ProductUtil.clickButton("Continue to Customer Signature");
 			Testutil.staticLongWait();
 			signDoc();
@@ -1702,8 +1701,8 @@ public class PersonalPage extends TestBase {
             
     public boolean signTIA(int rowNum, String paymentType) {
     	
-    	AgentWebHomeTest agentWebHomeTest;
-    	agentWebHomeTest = new AgentWebHomeTest();
+    	//AgentWebHomeTest agentWebHomeTest;
+    	//agentWebHomeTest = new AgentWebHomeTest();
     	boolean returnFlag = false;
 
 		driver.quit();

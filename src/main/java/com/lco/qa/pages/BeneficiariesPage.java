@@ -1,30 +1,20 @@
 package com.lco.qa.pages;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
 
-import org.apache.poi.util.SystemOutLogger;
+
+import java.util.HashMap;
 import org.openqa.selenium.By;
-import org.openqa.selenium.By.ByCssSelector;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import com.lco.qa.base.TestBase;
-import com.lco.qa.testcases.AgentWebHomeTest;
+
+
+
+
 import com.lco.qa.util.ProductUtil;
 import com.lco.qa.util.Testutil;
-import com.lco.qa.util.Xlsutil;
 
 public class BeneficiariesPage extends TestBase {
 
@@ -34,6 +24,7 @@ public class BeneficiariesPage extends TestBase {
 	ProcessPage processPage;
 	PaymentPage paymentPage;
 	SignaturePage signaturePage;
+	//AgentWebLoginTest agentWebHomeTest;
 	
 	// Page Factory - OR
 	@FindBy(xpath = "")
@@ -102,6 +93,7 @@ public class BeneficiariesPage extends TestBase {
 		paymentPage = new PaymentPage();
 		processPage = new ProcessPage();
 		agentWebHomePage = new AgentWebHomePage();
+		//agentWebHomeTest = new AgentWebHomeTest();
 		
 
 	}
@@ -139,11 +131,11 @@ public class BeneficiariesPage extends TestBase {
 		String count = prop.getProperty("iterator");
 		
 		int itrCount = Integer.parseInt(count);
-		AgentWebHomeTest agentWebHomeTest;
+		
 		agentWebHomePage = new AgentWebHomePage();
 		agentWebPage = new AgentWebLoginPage();
 		
-		agentWebHomeTest = new AgentWebHomeTest();
+		//agentWebHomeTest = new AgentWebHomeTest();
 		
 		//ProcessFields("self", itrCount, "DTC");
 		//ProcessFields("agent", itrCount, "Agent", "Email E Signature", "eft");
@@ -266,7 +258,7 @@ public class BeneficiariesPage extends TestBase {
 			
 			Testutil.staticLongWait();			
 			
-			//agentWebHomePage.flowType(signType, paymentType, "");
+			agentWebHomePage.flowType(signType, paymentType, "");
 			driver.quit();
 			signaturePage.signTypeFlow(rowNum, signType, paymentType);
 			

@@ -21,7 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import com.lco.qa.base.TestBase;
-import com.lco.qa.testcases.AgentWebHomeTest;
+//import com.lco.qa.testcases.AgentWebHomeTest;
 import com.lco.qa.util.ProductUtil;
 import com.lco.qa.util.Testutil;
 import com.lco.qa.util.Xlsutil;
@@ -142,13 +142,13 @@ public class ProcessPage extends TestBase {
 		String count = prop.getProperty("iterator");
 		
 		int itrCount = Integer.parseInt(count);
-		AgentWebHomeTest agentWebHomeTest;
+		//AgentWebHomeTest agentWebHomeTest;
 		agentWebHomePage = new AgentWebHomePage();
 		agentWebPage = new AgentWebLoginPage();
 		beneficiariesPage = new BeneficiariesPage();
 		signaturePage = new SignaturePage();
 		paymentPage = new PaymentPage();
-		agentWebHomeTest = new AgentWebHomeTest();
+		//agentWebHomeTest = new AgentWebHomeTest();
 		
 		//ProcessFields("self", itrCount, "DTC");
 		//ProcessFields("agent", itrCount, "Agent", "Email E Signature", "eft");

@@ -141,7 +141,7 @@ public class AgentWebHomeTest extends TestBase {
 		int itrCount = Integer.parseInt(count);
 		String currentURL ="";
 		currentURL = driver.getCurrentUrl(); 
-		
+		boolean testFlag = true;
 		
 		
 		try{
@@ -153,12 +153,17 @@ public class AgentWebHomeTest extends TestBase {
 			System.out.println("other exception, ProcessFields failed");
 			
 			Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
+			testFlag = false;
 			
 			
 		}
 		Testutil.staticLongWait();
+		
+		if(testFlag){
 		paymentPage.makePayment(rowNum, paymentMethod);
 		Testutil.updateResult(Testutil.resultSheet, "Payment Gateway", rowNum, "Pass");
+		
+		}
 	
 		
 		

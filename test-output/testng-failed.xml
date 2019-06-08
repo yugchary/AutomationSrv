@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
-  <test thread-count="5" name="Default test(failed)">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [LifeCo Insurance Company Test Automation]">
+  <listeners>
+    <listener class-name="com.qa.ExtentReporterListener.ExtentReportNG"/>
+  </listeners>
+  <test thread-count="5" name="LifeCo Insurance Company Sanity Test(failed)">
     <classes>
       <class name="com.lco.qa.testcases.AgentWebHomeTest">
         <methods>
           <include name="tearDown"/>
           <include name="setup"/>
-          <include name="agentQuote" invocation-numbers="0"/>
+          <include name="agentQuote"/>
         </methods>
       </class> <!-- com.lco.qa.testcases.AgentWebHomeTest -->
     </classes>
-  </test> <!-- Default test(failed) -->
-</suite> <!-- Failed suite [Default suite] -->
+  </test> <!-- LifeCo Insurance Company Sanity Test(failed) -->
+</suite> <!-- Failed suite [LifeCo Insurance Company Test Automation] -->
