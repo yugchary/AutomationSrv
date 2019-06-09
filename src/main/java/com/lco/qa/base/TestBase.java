@@ -67,7 +67,7 @@ public class TestBase {
 			System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver");
 			driver = new ChromeDriver();
 			
-			/*ChromeOptions options = new ChromeOptions();
+			/*/ChromeOptions options = new ChromeOptions();
 			//DesiredCapabilities dc = DesiredCapabilities.chrome();
 	        try {
 	        	//driver = new ChromeOptions(options);

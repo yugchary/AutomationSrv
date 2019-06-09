@@ -22,7 +22,7 @@ public class PaymentPage extends TestBase {
 	ProcessPage processPage;
 	PaymentPage paymentPage;
 	SignaturePage signaturePage;
-	//AgentWebHomeTest agentWebHomeTest;
+	///AgentWebHomeTest agentWebHomeTest;
 	// Page Factory - OR
 	@FindBy(xpath = "")
 	WebElement xyz;

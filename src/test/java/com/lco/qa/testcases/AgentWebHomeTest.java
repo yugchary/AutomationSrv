@@ -41,7 +41,7 @@ public class AgentWebHomeTest extends TestBase {
 	
 	ActionPage actionPage;
 	ExtentTest extentTest;	
-	//PersonalPage personalPage; 
+	///PersonalPage personalPage; 
 	ProcessPage processPage;
 	SignaturePage signaturePage;
 	BeneficiariesPage beneficiariesPage;
