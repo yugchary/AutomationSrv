@@ -48,7 +48,7 @@ public class TemplateTest extends TestBase {
 		extentTest = extent.startTest("loginPageTitleTest");
 		String title = templatePage.validateLoginPageTitle();
 		Assert.assertEquals(title, "LifeCo Insurance Company");
-		log.info("****************************** Ending loginPageTitleTest test cases execution *****************************************");
+		log.info("****************************** Ending loginPageTitleTest test cases execution done *****************************************");
 	}
 
 	@Test
