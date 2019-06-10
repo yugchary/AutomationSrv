@@ -67,11 +67,12 @@ public class TestBase {
 			System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver");
 			driver = new ChromeDriver();
 			
-			/*/ChromeOptions options = new ChromeOptions();
+			/*ChromeOptions options = new ChromeOptions();
 			//DesiredCapabilities dc = DesiredCapabilities.chrome();
 	        try {
 	        	//driver = new ChromeOptions(options);
 				driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+				//driver = new RemoteWebDriver(new URL("http://172.18.0.4:5555/wd/hub"), options);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -92,8 +93,15 @@ public class TestBase {
 			
 			FirefoxOptions options = new FirefoxOptions();
 			
-			options.setCapability("marionette", true);
-			driver = new FirefoxDriver(options);
+			//options.setCapability("marionette", true);
+			//driver = new FirefoxDriver(options);
+			try {
+				//driver = new RemoteWebDriver(new URL("http://172.18.0.4:5555/wd/hub"), options);
+				driver = new RemoteWebDriver(new URL("http://localhost:32770/wd/hub"), options);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 		
