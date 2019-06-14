@@ -43,6 +43,7 @@ public class TestBase {
 			//FileInputStream ip = new FileInputStream("C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\FreeCRMTests\\src\\main\\java\\com\\crm\\qa\\config\\config.properties");
 			//FileInputStream ip = new FileInputStream("C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\config\\config.properties");
 			FileInputStream ip = new FileInputStream("/home/yugander/Downloads/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/config/config.properties");
+			//FileInputStream ip = new FileInputStream("/usr/share/tag/config/config.properties");
 			
 			//home/yugander/Downloads/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/Input_Data.xlsx
 			prop.load(ip);
@@ -60,23 +61,26 @@ public class TestBase {
 		
 		String BrowserType = prop.getProperty("browserType");
 		String BinariesLoc = prop.getProperty("binariesLocation");
+		String remoteWD_url = prop.getProperty("remoteWD_url");	
+		
 
 		if (BrowserType.equalsIgnoreCase("CHROME")) {
 			//System.setProperty("webdriver.chrome.driver","C:\\Yug\\From Old Laptop\\From LoanLap\\Yug\\Selenium\\chromedriver.exe");
 			//System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver.exe");
 			System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver");
-			driver = new ChromeDriver();
+			//driver = new ChromeDriver();
 			
-			/*ChromeOptions options = new ChromeOptions();
+			ChromeOptions options = new ChromeOptions();
 			//DesiredCapabilities dc = DesiredCapabilities.chrome();
 	        try {
 	        	//driver = new ChromeOptions(options);
-				driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
+				//driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
 				//driver = new RemoteWebDriver(new URL("http://172.18.0.4:5555/wd/hub"), options);
+	        	driver = new RemoteWebDriver(new URL(remoteWD_url), options);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}*/
+			}
 	        
 			
 		} else if (BrowserType.equalsIgnoreCase("IE")) {
@@ -97,7 +101,8 @@ public class TestBase {
 			//driver = new FirefoxDriver(options);
 			try {
 				//driver = new RemoteWebDriver(new URL("http://172.18.0.4:5555/wd/hub"), options);
-				driver = new RemoteWebDriver(new URL("http://localhost:32770/wd/hub"), options);
+				//driver = new RemoteWebDriver(new URL("http://localhost:32770/wd/hub"), options);
+				driver = new RemoteWebDriver(new URL(remoteWD_url), options);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

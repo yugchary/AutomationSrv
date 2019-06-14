@@ -3,7 +3,7 @@
 <suite name="LifeCo Insurance Company Test Automation" verbose="1">
 	<listeners>
 		<listener
-			class-name="com.qa.ExtentReporterListener.ExtentReportNG" />
+			class-name="com.qa.ExtentReporterListener.ExtentReportNG" /> 
 	</listeners>
 	<test name="LifeCo Insurance Company Sanity Test">
 

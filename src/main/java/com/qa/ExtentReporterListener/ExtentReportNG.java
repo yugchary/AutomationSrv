@@ -13,7 +13,7 @@ import org.testng.ISuiteResult;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.xml.XmlSuite;
-import com.lco.qa.base.TestBase;
+//import com.lco.qa.base.TestBase;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
@@ -31,8 +31,8 @@ public class ExtentReportNG implements IReporter {
 		extent.addSystemInfo("Host Name", "Yug Windows");
 		extent.addSystemInfo("User Name", "Yug Automation Labs");
 		extent.addSystemInfo("Environment", "QA");
-		extent.addSystemInfo("URL", TestBase.prop.getProperty("url"));
-		extent.addSystemInfo("Browser", TestBase.prop.getProperty("browserType"));	
+		//extent.addSystemInfo("URL", TestBase.prop.getProperty("url"));
+		//extent.addSystemInfo("Browser", TestBase.prop.getProperty("browserType"));	
 			
 
 		for (ISuite suite : suites) {
