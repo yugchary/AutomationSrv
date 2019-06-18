@@ -1,5 +1,7 @@
 package com.lco.qa.testcases;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -12,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
+import java.util.Properties;
 
 import org.apache.commons.collections4.iterators.EntrySetMapIterator;
 import org.openqa.selenium.By;
@@ -57,9 +60,9 @@ public class DemoTest extends TestBase {
 
 	@BeforeMethod
 	public void setup() {
-		url = prop.getProperty("url");
-		initialization();
-		demoPage = new DemoPage();
+		//url = prop.getProperty("url");
+		//initialization();
+		//demoPage = new DemoPage();
 	}
 
 	@DataProvider
@@ -73,6 +76,58 @@ public class DemoTest extends TestBase {
 		log.info(
 				"****************************** Starting loginPageTitleTest test cases execution *****************************************");
 		extentTest = extent.startTest("loginPageTitleTest");
+		
+		
+		// set up new properties object
+        // from file "myProperties.txt"
+        FileInputStream propFile=null;
+		try {
+			propFile = new FileInputStream( "/home/yugander/Downloads/Downloads/Automation/myProperties.txt");
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        Properties p =
+            new Properties(System.getProperties());
+        try {
+			p.load(propFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        // set the system properties
+        System.setProperties(p);
+        // display new properties
+        System.getProperties().list(System.out);
+		
+		
+		 // Printing Name of the system property 
+        System.out.println("user.dir: "+System.getProperty("user.dir")); 
+  
+        // Fetches the property set with 'home' key 
+        System.out.println("hostname: "+System.getProperty("hostname")); 
+        // Resulting in Null as no property is present 
+  
+        // Printing 'name of Operating System' 
+        System.out.println("os.name: "+System.getProperty("os.name")); 
+        
+        // Printing 'os.arch' property 
+        System.out.println("os.arch: "+System.getProperty("os.arch" )); 
+  
+        // Printing 'JAVA Runtime version' 
+        System.out.println("version: "+System.getProperty("java.runtime.version" )); 
+  
+        // Printing 'name' property 
+        System.out.println("seleniumHubHost: "+System.getProperty("seleniumHubHost" )); 
+        // Resulting in Null as no property is present 
+    
+		
+		
+		
+		       
+		
+		
 		
 		driver.findElement(By.id("email")).sendKeys("girish@sureify.com");
 		driver.findElement(By.id("password")).sendKeys("Sureify@123");
