@@ -68,24 +68,24 @@ public class TestBase {
 			//System.setProperty("webdriver.chrome.driver","C:\\Yug\\From Old Laptop\\From LoanLap\\Yug\\Selenium\\chromedriver.exe");
 			//System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver.exe");
 			//System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver");
-			//driver = new ChromeDriver();
+			driver = new ChromeDriver();
+			DesiredCapabilities dc = DesiredCapabilities.chrome();
 			
-			ChromeOptions options = new ChromeOptions();
-			//DesiredCapabilities dc = DesiredCapabilities.chrome();
-	        try {
-	        	//driver = new ChromeOptions(options);
-				//driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), options);
-				//driver = new RemoteWebDriver(new URL("http://172.18.0.4:5555/wd/hub"), options);
-	        	driver = new RemoteWebDriver(new URL(remoteWD_url), options);        	
-	        	
-	            
-	            //driver = new RemoteWebDriver(new URL("http://" + host + ":4444/wd/hub"), options);
-	        	
-	        	
-			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();				
-			}
+			/*
+			 * ChromeOptions options = new ChromeOptions();  try { //driver = new ChromeOptions(options);
+			 * //driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),
+			 * options); //driver = new RemoteWebDriver(new
+			 * URL("http://172.18.0.4:5555/wd/hub"), options); driver = new
+			 * RemoteWebDriver(new URL(remoteWD_url), options);
+			 * 
+			 * 
+			 * //driver = new RemoteWebDriver(new URL("http://" + host + ":4444/wd/hub"),
+			 * options);
+			 * 
+			 * 
+			 * } catch (MalformedURLException e) { // TODO Auto-generated catch block
+			 * e.printStackTrace(); }
+			 */
 	        
 			
 		} else if (BrowserType.equalsIgnoreCase("IE")) {
