@@ -18,7 +18,7 @@ import com.lco.qa.pages.ActionPage;
 import com.lco.qa.pages.AgentWebHomePage;
 import com.lco.qa.pages.AgentWebLoginPage;
 import com.lco.qa.pages.BeneficiariesPage;
-import com.lco.qa.pages.OnePersonGatherInfoPage;
+import com.lco.qa.pages.QuoteInformationPage;
 import com.lco.qa.pages.PaymentPage;
 import com.lco.qa.pages.PersonalPage;
 import com.lco.qa.pages.ProcessPage;
@@ -30,10 +30,10 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
-public class ActionPageLoginTest extends TestBase {
+public class CustomerQuoteTest extends TestBase {
 
 	ProductSelectionPage productSelectionPage;
-	OnePersonGatherInfoPage onePersonGatherInfoPage;
+	QuoteInformationPage onePersonGatherInfoPage;
 	ActionPage actionPage;
 	ExtentTest extentTest;
 	//PersonalPage personalPage;
@@ -45,7 +45,7 @@ public class ActionPageLoginTest extends TestBase {
 
 	// HashMap<String, String> inputData = new HashMap<String, String>();
 
-	public ActionPageLoginTest() {
+	public CustomerQuoteTest() {
 		super();
 	}
 
@@ -54,7 +54,7 @@ public class ActionPageLoginTest extends TestBase {
 		url = prop.getProperty("url");
 		initialization();
 		productSelectionPage = new ProductSelectionPage();
-		onePersonGatherInfoPage = new OnePersonGatherInfoPage();
+		onePersonGatherInfoPage = new QuoteInformationPage();
 		//personalPage = new PersonalPage();
 		processPage = new ProcessPage();
 		beneficiariesPage = new BeneficiariesPage();

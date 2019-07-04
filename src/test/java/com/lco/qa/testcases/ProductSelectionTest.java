@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 //import com.crm.qa.pages.HomePage;
 
 import com.lco.qa.base.TestBase;
-import com.lco.qa.pages.OnePersonGatherInfoPage;
+import com.lco.qa.pages.QuoteInformationPage;
 import com.lco.qa.pages.ProductSelectionPage;
 
 import com.lco.qa.util.Testutil;
@@ -26,7 +26,7 @@ import com.relevantcodes.extentreports.LogStatus;
 public class ProductSelectionTest extends TestBase {
 
 	ProductSelectionPage productSelectionPage;
-	OnePersonGatherInfoPage onePersonGatherInfoPage;
+	QuoteInformationPage onePersonGatherInfoPage;
 	ExtentTest extentTest;
 
 	//ExtentReports extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/ExtentReport.html", true);
@@ -40,7 +40,7 @@ public class ProductSelectionTest extends TestBase {
 		url = prop.getProperty("url");
 		initialization();
 		productSelectionPage = new ProductSelectionPage();
-		onePersonGatherInfoPage = new OnePersonGatherInfoPage();
+		onePersonGatherInfoPage = new QuoteInformationPage();
 		
 	}
 	

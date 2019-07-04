@@ -16,7 +16,7 @@ import com.lco.qa.base.TestBase;
 import com.lco.qa.util.Testutil;
 import com.lco.qa.util.Xlsutil;
 
-public class OnePersonGatherInfoPage extends TestBase {
+public class QuoteInformationPage extends TestBase {
 	
 	//Page Factory - OR
 	
@@ -79,7 +79,7 @@ public class OnePersonGatherInfoPage extends TestBase {
 	WebElement xyz;
 	
 	//Initialize the Page objects
-	public OnePersonGatherInfoPage(){
+	public QuoteInformationPage(){
 		PageFactory.initElements(driver, this);
 		
 	}

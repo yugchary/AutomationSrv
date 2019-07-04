@@ -25,27 +25,32 @@ import com.lco.qa.util.Xlsutil;
 import com.relevantcodes.extentreports.ExtentReports;
 
 public class TestBase {
-	
+
 	public static WebDriver driver;
 	public static Properties prop;
 	public static EventFiringWebDriver e_driver;
 	public static WebEventListener eventListener;
 	public static Logger log = Logger.getLogger("TestAutomationLogger");
-	public static ExtentReports extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/LIC_TestExecutoinReport_Extent.html", true);
+	public static ExtentReports extent = new ExtentReports(
+			System.getProperty("user.dir") + "/test-output/LIC_TestExecutoinReport_Extent.html", true);
 	public static Xlsutil xls = new Xlsutil(Testutil.TESTDATA_SHEET_PATH, "Quote1");
 	public static String url = null;
 	public static WebDriverWait wait;
-	
-	public TestBase(){
-		
+
+	public TestBase() {
+
 		prop = new Properties();
 		try {
-			//FileInputStream ip = new FileInputStream("C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\FreeCRMTests\\src\\main\\java\\com\\crm\\qa\\config\\config.properties");
-			//FileInputStream ip = new FileInputStream("C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\config\\config.properties");
-			FileInputStream ip = new FileInputStream("/home/yugander/Downloads/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/config/config.properties");
-			//FileInputStream ip = new FileInputStream("/usr/share/tag/config/config.properties");
-			
-			//home/yugander/Downloads/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/Input_Data.xlsx
+			// FileInputStream ip = new
+			// FileInputStream("C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\FreeCRMTests\\src\\main\\java\\com\\crm\\qa\\config\\config.properties");
+			// FileInputStream ip = new
+			// FileInputStream("C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\config\\config.properties");
+			FileInputStream ip = new FileInputStream(
+					"/home/yugander/Downloads/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/config/config.properties");
+			// FileInputStream ip = new
+			// FileInputStream("/usr/share/tag/config/config.properties");
+
+			// home/yugander/Downloads/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/Input_Data.xlsx
 			prop.load(ip);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -54,9 +59,9 @@ public class TestBase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public static void initialization() {
 		
 		String BrowserType = prop.getProperty("browserType");
@@ -67,25 +72,25 @@ public class TestBase {
 		if (BrowserType.equalsIgnoreCase("CHROME")) {
 			//System.setProperty("webdriver.chrome.driver","C:\\Yug\\From Old Laptop\\From LoanLap\\Yug\\Selenium\\chromedriver.exe");
 			//System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver.exe");
-			//System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver");
+			System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver");
 			driver = new ChromeDriver();
 			DesiredCapabilities dc = DesiredCapabilities.chrome();
 			
-			/*
-			 * ChromeOptions options = new ChromeOptions();  try { //driver = new ChromeOptions(options);
-			 * //driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),
-			 * options); //driver = new RemoteWebDriver(new
-			 * URL("http://172.18.0.4:5555/wd/hub"), options); driver = new
-			 * RemoteWebDriver(new URL(remoteWD_url), options);
-			 * 
-			 * 
-			 * //driver = new RemoteWebDriver(new URL("http://" + host + ":4444/wd/hub"),
-			 * options);
-			 * 
-			 * 
-			 * } catch (MalformedURLException e) { // TODO Auto-generated catch block
-			 * e.printStackTrace(); }
-			 */
+			
+			  ChromeOptions options = new ChromeOptions();  
+			  
+			  try { //driver = new ChromeOptions(options);
+			  //driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),options); 
+			  //driver = new RemoteWebDriver(newURL("http://172.18.0.4:5555/wd/hub"), options); 
+				  driver = new RemoteWebDriver(new URL(remoteWD_url), options);
+			  
+			  
+			  //driver = new RemoteWebDriver(new URL("http://" + host + ":4444/wd/hub"),options);
+			  
+			  
+			  } catch (MalformedURLException e) { // TODO Auto-generated catch block
+			  e.printStackTrace(); }
+			 
 	        
 			
 		} else if (BrowserType.equalsIgnoreCase("IE")) {
@@ -97,13 +102,14 @@ public class TestBase {
 
 			//System.setProperty("webdriver.gecko.driver","C:\\Yug\\From Old Laptop\\From LoanLap\\Yug\\Selenium\\geckodriver.exe");
 			//System.setProperty("webdriver.gecko.driver",BinariesLoc+"geckodriver.exe");
-			//System.setProperty("webdriver.gecko.driver",BinariesLoc+"geckodriver");
-			//driver = new FirefoxDriver();
+			System.setProperty("webdriver.gecko.driver",BinariesLoc+"geckodriver");
+			driver = new FirefoxDriver();
 			
 			FirefoxOptions options = new FirefoxOptions();
 			
 			//options.setCapability("marionette", true);
 			//driver = new FirefoxDriver(options);
+			
 			try {
 				//driver = new RemoteWebDriver(new URL("http://172.18.0.4:5555/wd/hub"), options);
 				//driver = new RemoteWebDriver(new URL("http://localhost:32770/wd/hub"), options);
@@ -136,6 +142,5 @@ public class TestBase {
 		
 		
 	}
-	
 
 }

@@ -20,7 +20,7 @@ import com.lco.qa.pages.ActionPage;
 import com.lco.qa.pages.AgentWebHomePage;
 import com.lco.qa.pages.AgentWebLoginPage;
 import com.lco.qa.pages.BeneficiariesPage;
-import com.lco.qa.pages.OnePersonGatherInfoPage;
+import com.lco.qa.pages.QuoteInformationPage;
 import com.lco.qa.pages.PaymentPage;
 import com.lco.qa.pages.PersonalPage;
 import com.lco.qa.pages.ProcessPage;
@@ -32,12 +32,12 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
-public class AgentWebHomeTest extends TestBase {
+public class AgentWebQuoteTest extends TestBase {
 
 	AgentWebHomePage agentWebHomePage;
 	AgentWebLoginPage agentWebPage;
 	ProductSelectionPage productSelectionPage;
-	OnePersonGatherInfoPage onePersonGatherInfoPage;
+	QuoteInformationPage onePersonGatherInfoPage;
 	
 	ActionPage actionPage;
 	ExtentTest extentTest;	
@@ -50,7 +50,7 @@ public class AgentWebHomeTest extends TestBase {
 	
 	
 
-	public AgentWebHomeTest() {
+	public AgentWebQuoteTest() {
 		super();
 	}
 	
@@ -63,7 +63,7 @@ public class AgentWebHomeTest extends TestBase {
 		agentWebHomePage = new AgentWebHomePage();
 		agentWebPage = new AgentWebLoginPage();
 		productSelectionPage = new ProductSelectionPage();
-		onePersonGatherInfoPage = new OnePersonGatherInfoPage();
+		onePersonGatherInfoPage = new QuoteInformationPage();
 		//personalPage = new PersonalPage();
 		
 		processPage = new ProcessPage();

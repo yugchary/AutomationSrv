@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 
 import com.lco.qa.base.TestBase;
 
-import com.lco.qa.pages.OnePersonGatherInfoPage;
+import com.lco.qa.pages.QuoteInformationPage;
 import com.lco.qa.pages.ProductSelectionPage;
 import com.lco.qa.util.Testutil;
 import com.lco.qa.util.Xlsutil;
@@ -28,7 +28,7 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class OnePersonQuoteTest extends TestBase {
 
-	OnePersonGatherInfoPage onePerson;
+	QuoteInformationPage onePerson;
 	ProductSelectionPage productSelectionPage;
 	ExtentTest extentTest;
 	
@@ -44,7 +44,7 @@ public class OnePersonQuoteTest extends TestBase {
 	public void setup() {
 		url = prop.getProperty("url");
 		initialization();
-		onePerson = new OnePersonGatherInfoPage();
+		onePerson = new QuoteInformationPage();
 	}
 	
 	@DataProvider

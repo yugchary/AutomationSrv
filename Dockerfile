@@ -8,6 +8,8 @@ RUN apt-get install -y jq
 
 RUN apt-get install -y iputils-ping
 
+RUN export JAVA_OPTS="-Xmx12g -Xms12g"
+
 WORKDIR /usr/share/tag
 
 # Add the project jar & copy dependencies
@@ -15,6 +17,8 @@ WORKDIR /usr/share/tag
 ADD  target/libs libs
 ADD  src/main/java/com/lco/qa/config config
 ADD  src/main/java/com/lco/qa/testdata testdata
+
+RUN chmod -R 777 /usr/share/tag/testdata
 ADD  selenium_libs selenium_libs
 
 ADD  target/selenium-LCO-docker.jar libs/selenium-LCO-docker.jar
@@ -43,4 +47,9 @@ ADD healthcheck.sh healthcheck.sh
 
 ENTRYPOINT sh healthcheck.sh
 
-ENTRYPOINT java -cp "libs/*" org.testng.TestNG testNG_Sanity_lco.xml
+#VOLUME ["/testdata"]
+
+
+#COPY /usr/share/tag/testdata /home/user/customer-module-result
+
+

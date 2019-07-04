@@ -1,23 +1,29 @@
-18/06/2019 10:59:03 TestAutomationLogger ****************************** Starting selfQuote test cases execution *****************************************
-18/06/2019 11:00:30 TestAutomationLogger Exception occured: org.openqa.selenium.ElementNotVisibleException: element not visible
+30/06/2019 06:12:41 TestAutomationLogger ****************************** Starting selfQuote test cases execution *****************************************
+30/06/2019 06:13:53 TestAutomationLogger Exception occured: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//button[@class='c-button-default circular hidden-xs btn btn-default']"}
   (Session info: chrome=75.0.3770.80)
-  (Driver info: chromedriver=2.41.578700 (2f1ed5f9343c13f73144538f15c00b370eda6706),platform=Linux 4.18.0-15-generic x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 0 milliseconds
-Build info: version: '3.13.0', revision: '2f0d292', time: '2018-06-25T15:24:21.231Z'
-System info: host: 'sureifyadmin-Inspiron-15-3567', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '4.18.0-15-generic', java.version: '1.8.0_212'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.41.578700 (2f1ed5f9343c13..., userDataDir: /tmp/.org.chromium.Chromium...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:44205}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 75.0.3770.80, webStorageEnabled: true}
-Session ID: bf5ad0814494bb51af92f5d8abd4f8a8
-18/06/2019 11:01:05 TestAutomationLogger Exception occured: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]"}
-  (Session info: chrome=75.0.3770.80)
-  (Driver info: chromedriver=2.41.578700 (2f1ed5f9343c13f73144538f15c00b370eda6706),platform=Linux 4.18.0-15-generic x86_64) (WARNING: The server did not provide any stacktrace information)
-Command duration or timeout: 0 milliseconds
 For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
 Build info: version: '3.13.0', revision: '2f0d292', time: '2018-06-25T15:24:21.231Z'
 System info: host: 'sureifyadmin-Inspiron-15-3567', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '4.18.0-15-generic', java.version: '1.8.0_212'
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Capabilities {acceptInsecureCerts: false, acceptSslCerts: false, applicationCacheEnabled: false, browserConnectionEnabled: false, browserName: chrome, chrome: {chromedriverVersion: 2.41.578700 (2f1ed5f9343c13..., userDataDir: /tmp/.org.chromium.Chromium...}, cssSelectorsEnabled: true, databaseEnabled: false, goog:chromeOptions: {debuggerAddress: localhost:44205}, handlesAlerts: true, hasTouchScreen: false, javascriptEnabled: true, locationContextEnabled: true, mobileEmulationEnabled: false, nativeEvents: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, rotatable: false, setWindowRect: true, takesHeapSnapshot: true, takesScreenshot: true, unexpectedAlertBehaviour: , unhandledPromptBehavior: , version: 75.0.3770.80, webStorageEnabled: true}
-Session ID: bf5ad0814494bb51af92f5d8abd4f8a8
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 75.0.3770.80, chrome: {chromedriverVersion: 75.0.3770.8 (681f24ea911fe7..., userDataDir: /tmp/.com.google.Chrome.qRt7Wz}, goog:chromeOptions: {debuggerAddress: localhost:43083}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webdriver.remote.sessionid: e41f64e6e907d0218104c581775...}
+Session ID: e41f64e6e907d0218104c581775cae34
+*** Element info: {Using=xpath, value=//button[@class='c-button-default circular hidden-xs btn btn-default']}
+30/06/2019 06:14:03 TestAutomationLogger Exception occured: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"css selector","selector":".next-action-img-container .hidden-xs"}
+  (Session info: chrome=75.0.3770.80)
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.13.0', revision: '2f0d292', time: '2018-06-25T15:24:21.231Z'
+System info: host: 'sureifyadmin-Inspiron-15-3567', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '4.18.0-15-generic', java.version: '1.8.0_212'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 75.0.3770.80, chrome: {chromedriverVersion: 75.0.3770.8 (681f24ea911fe7..., userDataDir: /tmp/.com.google.Chrome.qRt7Wz}, goog:chromeOptions: {debuggerAddress: localhost:43083}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webdriver.remote.sessionid: e41f64e6e907d0218104c581775...}
+Session ID: e41f64e6e907d0218104c581775cae34
+*** Element info: {Using=css selector, value=.next-action-img-container .hidden-xs}
+30/06/2019 06:14:31 TestAutomationLogger Exception occured: org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {"method":"xpath","selector":"//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]"}
+  (Session info: chrome=75.0.3770.80)
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.13.0', revision: '2f0d292', time: '2018-06-25T15:24:21.231Z'
+System info: host: 'sureifyadmin-Inspiron-15-3567', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '4.18.0-15-generic', java.version: '1.8.0_212'
+Driver info: org.openqa.selenium.remote.RemoteWebDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 75.0.3770.80, chrome: {chromedriverVersion: 75.0.3770.8 (681f24ea911fe7..., userDataDir: /tmp/.com.google.Chrome.qRt7Wz}, goog:chromeOptions: {debuggerAddress: localhost:43083}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: LINUX, platformName: LINUX, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webdriver.remote.sessionid: e41f64e6e907d0218104c581775...}
+Session ID: e41f64e6e907d0218104c581775cae34
 *** Element info: {Using=xpath, value=//button[contains(text(), 'ADD PRIMARY BENEFICIARY')]}
-18/06/2019 11:01:20 TestAutomationLogger ****************************** Ending selfQuote test cases execution *****************************************
-18/06/2019 11:01:49 TestAutomationLogger ****************************** Starting selfQuote test cases execution *****************************************
+30/06/2019 06:14:44 TestAutomationLogger ****************************** Ending selfQuote test cases execution *****************************************
