@@ -3,13 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.lco.qa.testcases.ActionPageLoginTest">
+      <class name="com.lco.qa.testcases.CustomerQuoteTest">
         <methods>
-          <include name="selfQuote"/>
+          <include name="selfQuote" invocation-numbers="1"/>
           <include name="tearDown"/>
           <include name="setup"/>
         </methods>
-      </class> <!-- com.lco.qa.testcases.ActionPageLoginTest -->
+      </class> <!-- com.lco.qa.testcases.CustomerQuoteTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

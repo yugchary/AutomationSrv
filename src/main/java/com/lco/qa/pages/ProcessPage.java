@@ -115,7 +115,7 @@ public class ProcessPage extends TestBase {
 
 		String url = "https://vantislifeinsurancestg.sureify.com/questions?user=bmtwR3Y3VnZadE5NLy83SkkxbG1vQT09&text_accepted=No&vdtca&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&ipAddress=192.168.1.110&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1550364678937&q_id=d3B1RlpsUUpMNkdYY2Y0MStFQ1Nydz09&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&auth_code=Lq5nLFCGGzXq6dOb1ZkTO7vx1Wc4lM";
 
-		url = "https://vantislifeinsurancestg.sureify.com/questions?user=NTY0UEdKSmJVaUdkVzMxMTY0SXVlZz09&us_id=RHVRcVdIaEtiMWNySFpUL2hpRWQ4QT09&agent_number=888001234&ipAddress=192.168.43.249&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1558312848337&page_id=NEXT_STEPS_PAGE_ID&page_title=NEXT_STEPS_PAGE&q_id=eGc0OFZibmszRFdqN1cwWm5hKy9Sdz09&transaction_id=d6e62c50-7a97-11e9-ba19-3b6c8add9be1_1558312817557";
+		url = "https://vantislifeinsurancestg.sureify.com/questions?user=enFLeWZXdEZYRlBlZTlCQ0p6dGRZdz09&q_id=RGpyNHF4RW1tTzlpTFQwUVExbnBSQT09&auth_code=imYWgc5iOX3qI4xD51rEeGuPcM1hML&transaction_id=1c3a9f40-a3db-11e9-85c4-1dd9bff47fa9_1562849707828";
 
 		
 		
@@ -200,8 +200,8 @@ public class ProcessPage extends TestBase {
 			int googleAutoCompleteFlag = 0;
 			int i = 0;
 			int counter = 0;
-			By byFormL = null;
-			By byFormF = null;
+			By byTextFieldL = null;
+			By byTextFieldF = null;
 			By byGoogleAutoCompleteL = null;
 			By byGoogleAutoCompleteF = null;
 			By byButtonL = null;
@@ -222,8 +222,8 @@ public class ProcessPage extends TestBase {
 			//String currentURL ="";
 			
 	
-			byFormL = By.cssSelector(".form-group");
-			byFormF = By.cssSelector(".form-group .field .form-control");
+			byTextFieldL = By.cssSelector(".form-group");
+			byTextFieldF = By.cssSelector(".form-group .field .form-control");
 			
 			
 			byGoogleAutoCompleteL = By.cssSelector(".form-group");
@@ -266,8 +266,8 @@ public class ProcessPage extends TestBase {
 					break;
 					
 				case "formFlag":
-					byFormL = By.cssSelector(".form-group");
-					byFormF = By.cssSelector(".form-group .field .form-control");
+					byTextFieldL = By.cssSelector(".form-group");
+					byTextFieldF = By.cssSelector(".form-group .field .form-control");
 					//byFormF = By.cssSelector(".form-group .field");
 					formFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
@@ -376,8 +376,8 @@ public class ProcessPage extends TestBase {
 				if (formFlag > 0) {
 					pageType = "form";
 					System.out.println("This is a page filled with " + pageType);
-					breakFlag = checkPage(CheckNextElement(formFlag, byFormL), CheckNextElement(formFlag, byFormF), byFormL,
-							byFormF, pageType, sheetName);
+					breakFlag = checkPage(CheckNextElement(formFlag, byTextFieldL), CheckNextElement(formFlag, byTextFieldF), byTextFieldL,
+							byTextFieldF, pageType, sheetName);
 					if (!breakFlag) {
 						System.out.println("Break point");
 						break;

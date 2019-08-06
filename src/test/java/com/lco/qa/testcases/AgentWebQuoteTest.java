@@ -37,7 +37,7 @@ public class AgentWebQuoteTest extends TestBase {
 	AgentWebHomePage agentWebHomePage;
 	AgentWebLoginPage agentWebPage;
 	ProductSelectionPage productSelectionPage;
-	QuoteInformationPage onePersonGatherInfoPage;
+	QuoteInformationPage quoteInformationPage;
 	
 	ActionPage actionPage;
 	ExtentTest extentTest;	
@@ -63,7 +63,7 @@ public class AgentWebQuoteTest extends TestBase {
 		agentWebHomePage = new AgentWebHomePage();
 		agentWebPage = new AgentWebLoginPage();
 		productSelectionPage = new ProductSelectionPage();
-		onePersonGatherInfoPage = new QuoteInformationPage();
+		quoteInformationPage = new QuoteInformationPage();
 		//personalPage = new PersonalPage();
 		
 		processPage = new ProcessPage();
@@ -113,7 +113,7 @@ public class AgentWebQuoteTest extends TestBase {
 		//agentWebHomePage.close();
 		
 		DateOfBirth = DateOfBirth.replace(".", "/");
-		productSelectionPage = onePersonGatherInfoPage.Quote(rowNum, FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
+		quoteInformationPage = quoteInformationPage.Quote(rowNum, FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
 		
 		Assert.assertNotNull(productSelectionPage);
 		

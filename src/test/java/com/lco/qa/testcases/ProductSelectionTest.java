@@ -26,7 +26,7 @@ import com.relevantcodes.extentreports.LogStatus;
 public class ProductSelectionTest extends TestBase {
 
 	ProductSelectionPage productSelectionPage;
-	QuoteInformationPage onePersonGatherInfoPage;
+	QuoteInformationPage quoteInformationPage;
 	ExtentTest extentTest;
 
 	//ExtentReports extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/ExtentReport.html", true);
@@ -40,7 +40,7 @@ public class ProductSelectionTest extends TestBase {
 		url = prop.getProperty("url");
 		initialization();
 		productSelectionPage = new ProductSelectionPage();
-		onePersonGatherInfoPage = new QuoteInformationPage();
+		quoteInformationPage = new QuoteInformationPage();
 		
 	}
 	
@@ -65,7 +65,7 @@ public class ProductSelectionTest extends TestBase {
 		log.info("****************************** Starting validateOnePersonQuoteInfo test cases execution *****************************************");
 		extentTest = extent.startTest("validateOnePersonQuoteInfo");
 		DateOfBirth = DateOfBirth.replace(".", "/");
-		productSelectionPage = onePersonGatherInfoPage.Quote(2, FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
+		quoteInformationPage = quoteInformationPage.Quote(2, FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
 		productSelectionPage = productSelectionPage.GetPersonInfo(FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate, stateCode);
 		log.info("****************************** Ending validateOnePersonQuoteInfo test cases execution *****************************************");
 	}
@@ -75,7 +75,7 @@ public class ProductSelectionTest extends TestBase {
 		log.info("****************************** Starting selectProduct test cases execution *****************************************");
 		extentTest = extent.startTest("selectProduct");
 		DateOfBirth = DateOfBirth.replace(".", "/");
-		productSelectionPage = onePersonGatherInfoPage.Quote(2, FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
+		quoteInformationPage = quoteInformationPage.Quote(2, FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
 		
 		productSelectionPage = productSelectionPage.ProductSelection();
 		log.info("****************************** Ending selectProduct test cases execution *****************************************");

@@ -93,7 +93,7 @@ public class QuoteInformationPage extends TestBase {
 	}
 	
 	
-	public ProductSelectionPage Quote(int rowNum, String FirstName, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate) {
+	public QuoteInformationPage Quote(int rowNum, String FirstName, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate) {
 		
 		String currentURL ="";
 		currentURL = driver.getCurrentUrl();
@@ -130,13 +130,13 @@ public class QuoteInformationPage extends TestBase {
 			
 			
 			Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
-			return new ProductSelectionPage();
+			return new QuoteInformationPage();
 			
 			
 			
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
-			System.out.println("other exception, Quote failed");
+			System.out.println("other exception, Quote failed, Not able to input Quote Information");
 			
 			Testutil.updateResult(Testutil.resultSheet, "Quote", rowNum, "Fail");
 			Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);

@@ -33,7 +33,7 @@ import com.relevantcodes.extentreports.LogStatus;
 public class CustomerQuoteTest extends TestBase {
 
 	ProductSelectionPage productSelectionPage;
-	QuoteInformationPage onePersonGatherInfoPage;
+	QuoteInformationPage quoteInformationPage;
 	ActionPage actionPage;
 	ExtentTest extentTest;
 	//PersonalPage personalPage;
@@ -54,7 +54,7 @@ public class CustomerQuoteTest extends TestBase {
 		url = prop.getProperty("url");
 		initialization();
 		productSelectionPage = new ProductSelectionPage();
-		onePersonGatherInfoPage = new QuoteInformationPage();
+		quoteInformationPage = new QuoteInformationPage();
 		//personalPage = new PersonalPage();
 		processPage = new ProcessPage();
 		beneficiariesPage = new BeneficiariesPage();
@@ -90,7 +90,7 @@ public class CustomerQuoteTest extends TestBase {
 				"****************************** Starting continueToApplication test cases execution *****************************************");
 		extentTest = extent.startTest("actionPageTitleTest");
 		DateOfBirth = DateOfBirth.replace(".", "/");
-		onePersonGatherInfoPage.Quote(2, FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
+		quoteInformationPage.Quote(2, FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
 		productSelectionPage.ProductSelection();
 		System.out.println("product selected");
 		productSelectionPage.FinalizeProductSelection();
@@ -127,30 +127,49 @@ public class CustomerQuoteTest extends TestBase {
 		 * actionPage.selectAction(requestType, Testutil.email_ID);
 		 */
 
-		productSelectionPage = onePersonGatherInfoPage.Quote(rowNum, FirstName, DateOfBirth, Gender, State, tobaccoUse,
+		quoteInformationPage = quoteInformationPage.Quote(rowNum, FirstName, DateOfBirth, Gender, State, tobaccoUse,
 				healthRate);
 
-		Assert.assertNotNull(productSelectionPage);
+		Assert.assertNotNull(quoteInformationPage);
+		
+		System.out.println("Quote info collected");
+		
+		//Assert.assertNull(productSelectionPage);
+		
+		//Assert.assertNotEquals(actual1, actual2);
+		
+		//Assert.assertNotEquals(quoteInformationPage, null);
 
-		productSelectionPage.ProductSelection();
+		productSelectionPage = productSelectionPage.ProductSelection();
 
 		Assert.assertNotNull(productSelectionPage);
+		
+		//Assert.assertNotEquals(productSelectionPage, null);
 
 		System.out.println("product selected");
 
-		productSelectionPage.FinalizeProductSelection();
-		System.out.println("selected quote");
+		productSelectionPage = productSelectionPage.FinalizeProductSelection();
+		
 
 		Assert.assertNotNull(productSelectionPage);
+		
+		System.out.println("Finalized Product Selection");
+		//Assert.assertNotEquals(productSelectionPage, null);
 
-		actionPage.selectAction(requestType, Testutil.email_ID);
+		actionPage = actionPage.selectAction(requestType, Testutil.email_ID);
 
 		Assert.assertNotNull(actionPage);
+		
+		System.out.println("Action taken");
+		
+		//Assert.assertNotEquals(actionPage, null);
 
 		Testutil.updateResult(Testutil.resultSheet, "Quote", rowNum, "Pass");
 
 		String count = prop.getProperty("iterator");
 		int itrCount = Integer.parseInt(count);
+		
+		
 		processPage.ProcessFields(rowNum, distribution.toLowerCase(), itrCount, distribution, signType,
 				paymentMethod.toLowerCase());
 

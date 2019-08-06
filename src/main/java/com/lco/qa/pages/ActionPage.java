@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.lco.qa.base.TestBase;
 import com.lco.qa.util.ProductUtil;
+import com.lco.qa.util.Testutil;
 
 public class ActionPage extends TestBase{
 	
@@ -17,7 +18,9 @@ public class ActionPage extends TestBase{
 		@FindBy(css=".test")
 		WebElement selectItem;
 		
-		@FindBy(css=".next-action-img-container .hidden-xs")
+		//@FindBy(css=".next-action-img-container .hidden-xs")
+		//@FindBy(css=".next-action-application-img-container:nth-child(1) .col-xs-7")
+		@FindBy(css=".next-action-application-img-container:nth-child(1) .hidden-xs")		
 		WebElement continueToApp;
 		
 		@FindBy(css=".hidden-xs.c-button-default")
@@ -65,7 +68,9 @@ public class ActionPage extends TestBase{
 				}*/
 				
 				//driver.findElement(By.cssSelector(".next-action-img-container .hidden-xs")).click();
-				continueToApp.click();
+				//continueToApp.click();
+				By elementsCount = By.cssSelector(".next-action-application-img-container:nth-child(1) .hidden-xs");
+				Testutil.WaitnClick(elementsCount);
 				break;
 				
 			case "Complete the application":
@@ -122,7 +127,7 @@ public class ActionPage extends TestBase{
 			
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
-			System.out.println("other exception, Quote failed");
+			System.out.println("other exception, Quote failed, Unable to select the any Action");
 			return null; 
 			
 		}

@@ -139,7 +139,7 @@ public class ProductSelectionPage extends TestBase {
 			
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
-			System.out.println("other exception, Quote failed");
+			System.out.println("other exception, Quote failed, Product Not Selected");
 			return null; 
 			
 		}
@@ -210,7 +210,7 @@ public class ProductSelectionPage extends TestBase {
 			
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
-			System.out.println("other exception, Quote failed");
+			System.out.println("other exception, Quote failed, Product Finalization failed");
 			
 			return null; 
 			
