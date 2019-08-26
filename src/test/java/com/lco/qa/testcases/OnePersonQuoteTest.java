@@ -43,7 +43,7 @@ public class OnePersonQuoteTest extends TestBase {
 	@BeforeMethod
 	public void setup() {
 		url = prop.getProperty("url");
-		initialization();
+		initialization("text");
 		onePerson = new QuoteInformationPage();
 	}
 	

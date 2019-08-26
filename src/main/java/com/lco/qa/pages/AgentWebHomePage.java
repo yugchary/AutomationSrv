@@ -19,6 +19,7 @@ public class AgentWebHomePage extends TestBase {
 	
 	AgentWebHomePage agentWebHomePage;
 	AgentWebLoginPage agentWebPage;
+	EmailPage emailPage;
 	// Page Factory - OR
 	@FindBy(xpath = "")
 	WebElement xyz;
@@ -47,6 +48,7 @@ public class AgentWebHomePage extends TestBase {
 	// Initialize the Page objects
 	public AgentWebHomePage() {
 		PageFactory.initElements(driver, this);
+		emailPage = new EmailPage();
 
 	}
 
@@ -54,6 +56,7 @@ public class AgentWebHomePage extends TestBase {
 
 	public String validateLoginPageTitle() {
 		return driver.getTitle();
+		
 	}
 
 	public AgentWebHomePage newAgentQuote() {
@@ -260,9 +263,10 @@ public class AgentWebHomePage extends TestBase {
 
 		case "Email E Signature":
 
-			Testutil.loginGmail();
-			Testutil.openVeryFirstEmail();
+			emailPage.loginGmail();
 			Testutil.staticLongWait();
+			emailPage.openVeryFirstEmail(2);
+			
 
 			System.out.println("clicking on the inbox img ... ");
 
@@ -404,7 +408,7 @@ public class AgentWebHomePage extends TestBase {
 
 	public AgentWebHomePage setUp() {
 		url = prop.getProperty("agent_url");
-		initialization();
+		initialization("text");
 		/*
 		 * agentWebHomePage = new AgentWebHomePage(); agentWebPage = new
 		 * AgentWebLoginPage(); productSelectionPage = new ProductSelectionPage();

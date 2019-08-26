@@ -32,8 +32,13 @@ import org.testng.Assert;
 
 import com.lco.qa.base.TestBase;
 import com.lco.qa.pages.AgentWebLoginPage;
+import com.lco.qa.pages.SignaturePage;
 
 public class Testutil extends TestBase {
+
+	public Testutil() {
+		super();
+	}
 
 	public static long pageLoadTimeout = 240;
 	public static long implicitlyWait = 10;
@@ -44,9 +49,10 @@ public class Testutil extends TestBase {
 	// public static String TESTDATA_SHEET_PATH =
 	// "C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\testdata\\LCO_TestData.xlsx";
 	//public static String TESTDATA_SHEET_PATH = "/home/yugandher/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/LCO_TestData.xlsx";
-	public static String TESTDATA_SHEET_PATH = "/home/yugander/Downloads/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/Input_Data.xlsx";
+	public static String TESTDATA_SHEET_PATH = "/home/yugander/Downloads/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/Input_Data1.xlsx";
 	//public static String TESTDATA_SHEET_PATH = "/usr/share/tag/testdata/Input_Data.xlsx";
 	public static String email_ID = "yugandher@sureify.com";
+	public static String phoneNumber = "9999999999";
 	
 	public static String resultSheet = "Result";
 
@@ -322,40 +328,7 @@ public class Testutil extends TestBase {
 		act.click(firstWebElement).build().perform();// Thread.sleep(5000);
 	}
 	
-	public static void loginGmail(){
 		
-		url = prop.getProperty("gmail_url");
-		initialization();
-		WebElement email_phone = driver.findElement(By.xpath("//input[@id='identifierId']"));
-		String gmail_uid = prop.getProperty("gmail_uid");
-		String gmail_pwd = prop.getProperty("gmail_pwd");
-		email_phone.sendKeys(gmail_uid);
-		driver.findElement(By.id("identifierNext")).click();
-		WebElement password = driver.findElement(By.xpath("//input[@name='password']"));
-		//WebDriverWait wait = new WebDriverWait(driver, 10*Testutil.waitTime);
-		TestBase.wait.until(ExpectedConditions.elementToBeClickable(password));
-		password.sendKeys(gmail_pwd);
-		driver.findElement(By.id("passwordNext")).click();
-		
-		// some optional actions for reaching gmail inbox
-		driver.findElement(By.xpath("//a[@aria-label='Google apps']")).click();
-		driver.findElement(By.xpath("//span[contains(text(),'Gmail')]")).click();
-		
-		
-	}
-	
-	public static void openVeryFirstEmail(){
-		List<WebElement> a = driver.findElements(By.xpath("//*[@class='yW']/span"));
-        System.out.println(a.size());
-        a.get(0).click();
-        /*for (int i = 0; i < a.size(); i++) {
-            System.out.println(a.get(i).getText());
-            if (a.get(i).getText().equals(from)) //to click on a specific mail.
-                {                                           
-                a.get(i).click();
-            }
-        }*/
-	}
 	
 	public static void findElements(By by){
 		
@@ -411,19 +384,21 @@ public class Testutil extends TestBase {
 		
 	}
 	
+	
 	public static void loginAgentPanel(){
 	
 	
 		AgentWebLoginPage agentWebPage;
 		agentWebPage = new AgentWebLoginPage();
 		url = prop.getProperty("agent_url");
-		initialization();
+		initialization("text");
 		agentWebPage.agentWebLogin(prop.getProperty("username"), prop.getProperty("password"));		
 		driver.findElement(By.xpath("//img[@alt='Quotations/E-Applications']")).click();
 		
 	
 	}
 
+	
 	public static void updateResult(String sheetName, String colName, int rowNum, String cellValue){
 		
 		Xlsutil xl = new Xlsutil(TESTDATA_SHEET_PATH, sheetName);		

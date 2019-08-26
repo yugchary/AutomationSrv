@@ -1,5 +1,7 @@
 package com.lco.qa.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,17 +25,26 @@ public class ActionPage extends TestBase{
 		@FindBy(css=".next-action-application-img-container:nth-child(1) .hidden-xs")		
 		WebElement continueToApp;
 		
+		@FindBy(css=".confirmation-email-desc")		
+		WebElement emailDesc;	
+		
+		@FindBy(css=".close > span:nth-child(1)")		
+		WebElement closeButton;			
+		
+		
 		@FindBy(css=".hidden-xs.c-button-default")
 		WebElement nextButton;
 		
 		@FindBy(name="email-1")
 		WebElement emailAddress;
 		
+		@FindBy(name="phone-number")
+		WebElement phoneNo;
+		
 		@FindBy(xpath="//button[contains(text(), 'SUBMIT')]")
 		WebElement submitButton;
 		
-		
-		
+				
 		@FindBy(xpath="//div[@class='agent-next-step-container']//*//label")
 		WebElement completetheApp;
 		
@@ -51,26 +62,38 @@ public class ActionPage extends TestBase{
 		return driver.getTitle();
 	}
 	
-	public ActionPage selectAction(String actionType, String email) {
+	public ActionPage selectAction(String actionType, String email, String phoneNumber) {
 		
 		
 		
 		try{
 			//driver.findElement(By.xpath(""));
 			//driver.findElement(By.cssSelector("")).click();
+			By actionTypeElement;
 			
 			switch (actionType) {
-			case "Continue to application":
-
-				/*if (FieldType(elementF, "text")) {
-					elementF.sendKeys("999");
-					System.out.println("typed number");
-				}*/
+			case "Continue to application":				
 				
 				//driver.findElement(By.cssSelector(".next-action-img-container .hidden-xs")).click();
 				//continueToApp.click();
-				By elementsCount = By.cssSelector(".next-action-application-img-container:nth-child(1) .hidden-xs");
-				Testutil.WaitnClick(elementsCount);
+				actionTypeElement = By.cssSelector(".next-action-application-img-container:nth-child(1) .hidden-xs");
+				Testutil.WaitnClick(actionTypeElement);
+				break;
+				
+			case "Email me quote":				
+				
+				//driver.findElement(By.cssSelector(".next-action-img-container .hidden-xs")).click();
+				//continueToApp.click();
+				actionTypeElement = By.cssSelector(".next-action-application-img-container:nth-child(2) .hidden-xs");
+				Testutil.WaitnClick(actionTypeElement);
+				break;	
+				
+			case "Connect me to a licensed agent":				
+				
+				//driver.findElement(By.cssSelector(".next-action-img-container .hidden-xs")).click();
+				//continueToApp.click();
+				actionTypeElement = By.cssSelector(".next-action-application-img-container:nth-child(3) .hidden-xs");
+				Testutil.WaitnClick(actionTypeElement);
 				break;
 				
 			case "Complete the application":
@@ -88,9 +111,11 @@ public class ActionPage extends TestBase{
 			nextButton.click();
 			emailAddress.sendKeys(email);
 			
+			phoneNo.sendKeys(phoneNumber);
 			
 			
-			String currenURL = driver.getCurrentUrl();
+			
+			//String currenURL = driver.getCurrentUrl();
 			//driver.navigate().to(currenURL);
 			
 			//driver.get("https://linkedin.com")
@@ -100,26 +125,63 @@ public class ActionPage extends TestBase{
 			
 			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
 
-			// Perform the click operation that opens new window
-
-			// Switch to new window opened
-			for(String winHandle : driver.getWindowHandles()){
-			    driver.switchTo().window(winHandle);
+			
+			switch (actionType) {
+				case "Email me quote":	
+				case "Connect me to a licensed agent":					
+					//By emailDesc = By.cssSelector(".confirmation-email-desc");
+					
+					//WebElement textMsg = driver.findElement(emailDesc);	
+					
+					String returnText = emailDesc.getText().toString();
+					
+					//String returnText = textMsg.getText().toString();
+					
+					System.out.println("before returnText: " + returnText);
+					
+					closeButton.click();
+					break;
+					
+					//driver.quit();
+					
+				default:
+					//elementF.sendKeys("default");
+					break;
+			
 			}
 			
-			System.out.println("switching the handle");
+			
+			
+			switch (actionType) {
+				case "Email me quote":	
+				case "Connect me to a licensed agent":					
+						
+					driver.close();
+					break;
+					
+				case "Continue to application":	
+					// Perform the click operation that opens new window
 
-			// Perform the actions on new window
+					// Switch to new window opened
+					for(String winHandle : driver.getWindowHandles()){
+					    driver.switchTo().window(winHandle);
+					}
+					
+					System.out.println("switching the handle");
 
-			// Close the new window, if that window no more required
-			//driver.close();
+					// Perform the actions on new window
 
-			// Switch back to original browser (first window)
-			driver.switchTo().window(winHandleBefore);
-			
-			
-			
-			
+					// Close the new window, if that window no more required
+					//driver.close();
+
+					// Switch back to original browser (first window)
+					driver.switchTo().window(winHandleBefore);
+					break;
+					
+				default:
+					//elementF.sendKeys("default");
+					break;
+			}
 			
 			return new ActionPage();
 			

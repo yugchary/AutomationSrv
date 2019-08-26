@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 
 import com.lco.qa.base.TestBase;
 import com.lco.qa.pages.QuoteInformationPage;
+import com.lco.qa.pages.SignaturePage;
 import com.lco.qa.pages.ProductSelectionPage;
 
 import com.lco.qa.util.Testutil;
@@ -27,6 +28,7 @@ public class ProductSelectionTest extends TestBase {
 
 	ProductSelectionPage productSelectionPage;
 	QuoteInformationPage quoteInformationPage;
+	SignaturePage signaturePage;
 	ExtentTest extentTest;
 
 	//ExtentReports extent = new ExtentReports(System.getProperty("user.dir")+"/test-output/ExtentReport.html", true);
@@ -38,9 +40,10 @@ public class ProductSelectionTest extends TestBase {
 	@BeforeMethod
 	public void setup() {
 		url = prop.getProperty("url");
-		initialization();
+		initialization("text");
 		productSelectionPage = new ProductSelectionPage();
 		quoteInformationPage = new QuoteInformationPage();
+		signaturePage = new SignaturePage();
 		
 	}
 	
@@ -75,9 +78,11 @@ public class ProductSelectionTest extends TestBase {
 		log.info("****************************** Starting selectProduct test cases execution *****************************************");
 		extentTest = extent.startTest("selectProduct");
 		DateOfBirth = DateOfBirth.replace(".", "/");
+		
+		
 		quoteInformationPage = quoteInformationPage.Quote(2, FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
 		
-		productSelectionPage = productSelectionPage.ProductSelection();
+		productSelectionPage = productSelectionPage.ProductSelection(2);
 		log.info("****************************** Ending selectProduct test cases execution *****************************************");
 	}
 	
@@ -86,8 +91,8 @@ public class ProductSelectionTest extends TestBase {
 		
 		log.info("****************************** Starting FinalizeProduct test cases execution *****************************************");
 		extentTest = extent.startTest("FinalizeProduct");
-		productSelectionPage.ProductSelection();
-		productSelectionPage.FinalizeProductSelection();
+		productSelectionPage.ProductSelection(2);
+		productSelectionPage.FinalizeProductSelection(2);
 		log.info("****************************** Ending FinalizeProduct test cases execution *****************************************");
 	}
 

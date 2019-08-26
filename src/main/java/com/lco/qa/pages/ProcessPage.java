@@ -117,7 +117,7 @@ public class ProcessPage extends TestBase {
 
 		url = "https://vantislifeinsurancestg.sureify.com/questions?user=enFLeWZXdEZYRlBlZTlCQ0p6dGRZdz09&q_id=RGpyNHF4RW1tTzlpTFQwUVExbnBSQT09&auth_code=imYWgc5iOX3qI4xD51rEeGuPcM1hML&transaction_id=1c3a9f40-a3db-11e9-85c4-1dd9bff47fa9_1562849707828";
 
-		
+		url = "https://mail.google.com/mail/u/0/#inbox";
 		
 		//url = "https://demo.docusign.net/Signing/?insession=1&ti=d901d7b23d724d5eb5d5234f98e42af5";
 		
@@ -149,6 +149,9 @@ public class ProcessPage extends TestBase {
 		signaturePage = new SignaturePage();
 		paymentPage = new PaymentPage();
 		//agentWebHomeTest = new AgentWebHomeTest();
+		
+		
+		//signaturePage.LaunchFromEmail(2, "CONTINUE APPLICATION", "Thank you! Your application has been submitted, we will be in touch with you shortly.", "Customer Payment form signature");
 		
 		//ProcessFields("self", itrCount, "DTC");
 		//ProcessFields("agent", itrCount, "Agent", "Email E Signature", "eft");

@@ -59,7 +59,7 @@ public class AgentWebQuoteTest extends TestBase {
 	@BeforeMethod
 	public void setup() {
 		url = prop.getProperty("agent_url");
-		initialization();
+		initialization(url);
 		agentWebHomePage = new AgentWebHomePage();
 		agentWebPage = new AgentWebLoginPage();
 		productSelectionPage = new ProductSelectionPage();
@@ -115,23 +115,23 @@ public class AgentWebQuoteTest extends TestBase {
 		DateOfBirth = DateOfBirth.replace(".", "/");
 		quoteInformationPage = quoteInformationPage.Quote(rowNum, FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
 		
-		Assert.assertNotNull(productSelectionPage);
+		Assert.assertNotNull(quoteInformationPage);
 		
 		
 		
 		
-		productSelectionPage.ProductSelection();
+		productSelectionPage = productSelectionPage.ProductSelection(2);
 		
 		Assert.assertNotNull(productSelectionPage);
 		
 		System.out.println("product selected");
 		
-		productSelectionPage.FinalizeProductSelection();	
+		productSelectionPage = productSelectionPage.FinalizeProductSelection(2);	
 		System.out.println("selected quote");
 		
 		Assert.assertNotNull(productSelectionPage);
 		
-		actionPage.selectAction(requestType, Testutil.email_ID);
+		actionPage = actionPage.selectAction(requestType, Testutil.email_ID, Testutil.phoneNumber);
 		
 		Assert.assertNotNull(actionPage);
 		

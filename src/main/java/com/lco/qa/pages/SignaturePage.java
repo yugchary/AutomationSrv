@@ -34,6 +34,7 @@ public class SignaturePage extends TestBase {
 	ProcessPage processPage;
 	PaymentPage paymentPage;
 	SignaturePage signaturePage;
+	EmailPage emailPage;
 	
 	// Page Factory - OR
 	@FindBy(xpath = "")
@@ -98,6 +99,8 @@ public class SignaturePage extends TestBase {
 	// Initialize the Page objects
 	public SignaturePage() {
 		PageFactory.initElements(driver, this);
+		emailPage = new EmailPage();
+		
 
 	}
 
@@ -370,9 +373,9 @@ public class SignaturePage extends TestBase {
 		
 		try{
     	
-	    	Testutil.loginGmail();
+			emailPage.loginGmail();
 	    	Testutil.staticWait();
-			Testutil.openVeryFirstEmail();
+	    	emailPage.openVeryFirstEmail(2);
 			
 			
 			
@@ -405,6 +408,8 @@ public class SignaturePage extends TestBase {
 			//msg = "The application now passed to Agent to proceed further. You will receive an email shortly."; 
 			
 			//msg = "Thanks for contacting us. We will reach you in sometime.";
+			
+			//msg = "Something went wrong, please try again later.";
 			
 			
 			System.out.println("searching for the msg to be displayed");
@@ -441,6 +446,7 @@ public class SignaturePage extends TestBase {
     	
     }
 
+        
     public void clickArrow(){
     	
     	

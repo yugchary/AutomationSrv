@@ -30,6 +30,8 @@ public class PersonalPage extends TestBase {
 	
 	AgentWebHomePage agentWebHomePage;
 	AgentWebLoginPage agentWebPage;
+	SignaturePage signaturePage;
+	EmailPage emailPage;
 	
 	// Page Factory - OR
 	@FindBy(xpath = "")
@@ -94,6 +96,7 @@ public class PersonalPage extends TestBase {
 	// Initialize the Page objects
 	public PersonalPage() {
 		PageFactory.initElements(driver, this);
+		emailPage = new EmailPage();
 
 	}
 
@@ -110,6 +113,8 @@ public class PersonalPage extends TestBase {
 		url = "https://vantislifeinsurancestg.sureify.com/questions?user=bDRkUUIzcmVZLzBUN2ltUDQ5MFBNUT09&text_accepted=No&vdtca&transaction_id=afddca30-6cb1-11e9-a36a-eb24c8a5a1e0_1556784602707&ipAddress=192.168.128.52&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1556784627115&q_id=MGNrVVh3azB3Z0d6dllBTXJDRXJoUT09&transaction_id=afddca30-6cb1-11e9-a36a-eb24c8a5a1e0_1556784602707&auth_code=JSKTMTD0OT9SH0yYCY6tq7214ockmC";
 
 		//url = "https://demo.docusign.net/Signing/?insession=1&ti=d901d7b23d724d5eb5d5234f98e42af5";
+		
+		url = "https://mail.google.com/mail/u/0/#inbox";
 		
 		int rowNum=2;
 		
@@ -133,8 +138,11 @@ public class PersonalPage extends TestBase {
 		//AgentWebHomeTest agentWebHomeTest;
 		agentWebHomePage = new AgentWebHomePage();
 		agentWebPage = new AgentWebLoginPage();
+		signaturePage = new SignaturePage();
 		
 		//agentWebHomeTest = new AgentWebHomeTest();
+		
+		//signaturePage.LaunchFromEmail(2, "CONTINUE APPLICATION", "Thank you! Your application has been submitted, we will be in touch with you shortly.", "Customer Payment form signature");
 		
 		//ProcessFields("self", itrCount, "DTC");
 		//ProcessFields("agent", itrCount, "Agent", "Email E Signature", "eft");
@@ -1728,9 +1736,9 @@ public class PersonalPage extends TestBase {
 		
 		try{
     	
-	    	Testutil.loginGmail();
+			emailPage.loginGmail();
 	    	Testutil.staticWait();
-			Testutil.openVeryFirstEmail();
+	    	emailPage.openVeryFirstEmail(2);
 			
 			
 			

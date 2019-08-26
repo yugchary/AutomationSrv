@@ -140,6 +140,7 @@ public class QuoteInformationPage extends TestBase {
 			
 			Testutil.updateResult(Testutil.resultSheet, "Quote", rowNum, "Fail");
 			Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
+			
 			return null; 
 			
 		}

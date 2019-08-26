@@ -101,7 +101,7 @@ public class ProductSelectionPage extends TestBase {
 
 	}
 
-	public ProductSelectionPage ProductSelection() {
+	public ProductSelectionPage ProductSelection(int rowNum) {
 		
 		
 		//driver.findElement(By.cssSelector(".c-center.mt50.row .quote-this-product-container")).e
@@ -140,6 +140,8 @@ public class ProductSelectionPage extends TestBase {
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 			System.out.println("other exception, Quote failed, Product Not Selected");
+			Testutil.updateResult(Testutil.resultSheet, "Quote", rowNum, "Fail");
+			Testutil.updateResult(Testutil.resultSheet, "Comments", rowNum, "other exception, Quote failed, Product Not Selected");
 			return null; 
 			
 		}
@@ -182,7 +184,7 @@ public class ProductSelectionPage extends TestBase {
 		}
 	}
 
-	public ProductSelectionPage FinalizeProductSelection() {
+	public ProductSelectionPage FinalizeProductSelection(int rowNum) {
 
 		try{
 			WaitForAzaxComponentToLoad(By.cssSelector(".plan-sider-info-text.row .plan-cost-amount"));
@@ -211,7 +213,8 @@ public class ProductSelectionPage extends TestBase {
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 			System.out.println("other exception, Quote failed, Product Finalization failed");
-			
+			Testutil.updateResult(Testutil.resultSheet, "Quote", rowNum, "Fail");
+			Testutil.updateResult(Testutil.resultSheet, "Comments", rowNum, "other exception, Quote failed, Product Finalization failed");
 			return null; 
 			
 		}

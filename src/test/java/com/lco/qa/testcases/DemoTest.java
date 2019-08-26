@@ -245,8 +245,8 @@ public class DemoTest extends TestBase {
 		Assert.assertNotNull(str1);
 		
 	
-		Testutil.loginGmail();
-		Testutil.openVeryFirstEmail();
+		//Testutil.loginGmail();
+		//Testutil.openVeryFirstEmail(2);
 		
 		Testutil.findElements(By.xpath("//a[contains(text(),'REVIEW AND SIGN')]"));
 		//driver.findElement(By.xpath("//a[contains(text(),'REVIEW AND SIGN')]")).click();
@@ -287,7 +287,7 @@ public class DemoTest extends TestBase {
 	  	
 	  	
 	  	url = prop.getProperty("agent_url");
-		initialization();
+		initialization("text");
 		agentWebPage = new AgentWebLoginPage();
 		agentWebHomePage = new AgentWebHomePage();
 	  	

@@ -39,7 +39,7 @@ public class AgentWebLoginTest extends TestBase {
 	@BeforeMethod
 	public void setup() {
 		url = prop.getProperty("agent_url");
-		initialization();
+		initialization("text");
 		agentWebPage = new AgentWebLoginPage();
 	}
 

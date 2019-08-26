@@ -18,6 +18,11 @@ import com.lco.qa.base.TestBase;
 
 public class ProductUtil extends TestBase{
 	
+	public ProductUtil() {
+		super();
+	}
+
+
 	public static void CheckElementDoNotExists(String css, boolean flag) {
 
 		//boolean present = true;

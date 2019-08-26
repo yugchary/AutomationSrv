@@ -62,7 +62,7 @@ public class TestBase {
 
 	}
 
-	public static void initialization() {
+	public static void initialization(String url) {
 		
 		String BrowserType = prop.getProperty("browserType");
 		String BinariesLoc = prop.getProperty("binariesLocation");

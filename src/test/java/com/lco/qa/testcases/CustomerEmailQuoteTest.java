@@ -30,7 +30,7 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
-public class CustomerQuoteTest extends TestBase {
+public class CustomerEmailQuoteTest extends TestBase {
 
 	ProductSelectionPage productSelectionPage;
 	QuoteInformationPage quoteInformationPage;
@@ -45,7 +45,7 @@ public class CustomerQuoteTest extends TestBase {
 
 	// HashMap<String, String> inputData = new HashMap<String, String>();
 
-	public CustomerQuoteTest() {
+	public CustomerEmailQuoteTest() {
 		super();
 	}
 
@@ -69,7 +69,7 @@ public class CustomerQuoteTest extends TestBase {
 
 	@DataProvider
 	Object[][] getData() throws Exception {
-		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, "Quote", 5, 12, 5, 1);
+		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, "Quote", 4, 12, 4, 1);
 	}
 
 	@Test(enabled = false)
@@ -169,6 +169,13 @@ public class CustomerQuoteTest extends TestBase {
 		String count = prop.getProperty("iterator");
 		int itrCount = Integer.parseInt(count);
 		
+		
+		//driver.close();
+		//signaturePage.LaunchFromEmail(rowNum, "CONTINUE APPLICATION", "Thank you! Your application has been submitted, we will be in touch with you shortly.", "Customer Payment form signature");
+		
+		Assert.assertNotNull(signaturePage);
+		
+		System.out.println("Started the Insurance Wizard");
 		
 		processPage.ProcessFields(rowNum, distribution.toLowerCase(), itrCount, distribution, signType,
 				paymentMethod.toLowerCase());
