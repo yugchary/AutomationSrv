@@ -18,6 +18,7 @@ import com.lco.qa.pages.ActionPage;
 import com.lco.qa.pages.AgentWebHomePage;
 import com.lco.qa.pages.AgentWebLoginPage;
 import com.lco.qa.pages.BeneficiariesPage;
+import com.lco.qa.pages.EmailPage;
 import com.lco.qa.pages.QuoteInformationPage;
 import com.lco.qa.pages.PaymentPage;
 import com.lco.qa.pages.PersonalPage;
@@ -41,6 +42,7 @@ public class CustomerEmailQuoteTest extends TestBase {
 	SignaturePage signaturePage;
 	BeneficiariesPage beneficiariesPage;
 	PaymentPage paymentPage;
+	EmailPage emailPage;
 	int rowNum = 2;
 
 	// HashMap<String, String> inputData = new HashMap<String, String>();
@@ -61,6 +63,7 @@ public class CustomerEmailQuoteTest extends TestBase {
 		signaturePage = new SignaturePage();
 		paymentPage = new PaymentPage();
 		actionPage = new ActionPage();
+		emailPage = new EmailPage();
 		
 	
 	
@@ -90,7 +93,7 @@ public class CustomerEmailQuoteTest extends TestBase {
 				"****************************** Starting continueToApplication test cases execution *****************************************");
 		extentTest = extent.startTest("actionPageTitleTest");
 		DateOfBirth = DateOfBirth.replace(".", "/");
-		quoteInformationPage.Quote(2, FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
+		quoteInformationPage.Quote(2, FirstName, "yug@sureify.com", DateOfBirth, Gender, State, tobaccoUse, healthRate);
 		productSelectionPage.ProductSelection(2);
 		System.out.println("product selected");
 		productSelectionPage.FinalizeProductSelection(2);
@@ -127,8 +130,8 @@ public class CustomerEmailQuoteTest extends TestBase {
 		 * actionPage.selectAction(requestType, Testutil.email_ID);
 		 */
 
-		quoteInformationPage = quoteInformationPage.Quote(rowNum, FirstName, DateOfBirth, Gender, State, tobaccoUse,
-				healthRate);
+		quoteInformationPage = quoteInformationPage.Quote(rowNum, FirstName, "yug@sureify.com", DateOfBirth, Gender, State,
+				tobaccoUse, healthRate);
 
 		Assert.assertNotNull(quoteInformationPage);
 		
@@ -171,11 +174,22 @@ public class CustomerEmailQuoteTest extends TestBase {
 		
 		
 		//driver.close();
-		//signaturePage.LaunchFromEmail(rowNum, "CONTINUE APPLICATION", "Thank you! Your application has been submitted, we will be in touch with you shortly.", "Customer Payment form signature");
+		emailPage.LaunchFromEmail(rowNum, "CONTINUE APPLICATION", "Launch From Email");
 		
-		Assert.assertNotNull(signaturePage);
+		Assert.assertNotNull(emailPage);
 		
 		System.out.println("Started the Insurance Wizard");
+		
+		String winHandleBefore = driver.getWindowHandle();
+
+		for (String winHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(winHandle);
+			
+		}
+
+		System.out.println("switching the handle");
+
+		//driver.switchTo().window(winHandleBefore);
 		
 		processPage.ProcessFields(rowNum, distribution.toLowerCase(), itrCount, distribution, signType,
 				paymentMethod.toLowerCase());

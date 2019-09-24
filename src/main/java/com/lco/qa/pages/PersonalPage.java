@@ -142,7 +142,7 @@ public class PersonalPage extends TestBase {
 		
 		//agentWebHomeTest = new AgentWebHomeTest();
 		
-		//signaturePage.LaunchFromEmail(2, "CONTINUE APPLICATION", "Thank you! Your application has been submitted, we will be in touch with you shortly.", "Customer Payment form signature");
+		emailPage.LaunchFromEmail(2, "CONTINUE APPLICATION", "Customer Payment form signature");
 		
 		//ProcessFields("self", itrCount, "DTC");
 		//ProcessFields("agent", itrCount, "Agent", "Email E Signature", "eft");
@@ -1736,7 +1736,7 @@ public class PersonalPage extends TestBase {
 		
 		try{
     	
-			emailPage.loginGmail();
+			emailPage.loginGmail(2);
 	    	Testutil.staticWait();
 	    	emailPage.openVeryFirstEmail(2);
 			

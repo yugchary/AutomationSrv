@@ -68,7 +68,7 @@ public class ProductSelectionTest extends TestBase {
 		log.info("****************************** Starting validateOnePersonQuoteInfo test cases execution *****************************************");
 		extentTest = extent.startTest("validateOnePersonQuoteInfo");
 		DateOfBirth = DateOfBirth.replace(".", "/");
-		quoteInformationPage = quoteInformationPage.Quote(2, FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
+		quoteInformationPage = quoteInformationPage.Quote(2, FirstName, "yug@sureify.com", DateOfBirth, Gender, State, tobaccoUse, healthRate);
 		productSelectionPage = productSelectionPage.GetPersonInfo(FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate, stateCode);
 		log.info("****************************** Ending validateOnePersonQuoteInfo test cases execution *****************************************");
 	}
@@ -80,7 +80,7 @@ public class ProductSelectionTest extends TestBase {
 		DateOfBirth = DateOfBirth.replace(".", "/");
 		
 		
-		quoteInformationPage = quoteInformationPage.Quote(2, FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
+		quoteInformationPage = quoteInformationPage.Quote(2, FirstName, "yug@sureify.com", DateOfBirth, Gender, State, tobaccoUse, healthRate);
 		
 		productSelectionPage = productSelectionPage.ProductSelection(2);
 		log.info("****************************** Ending selectProduct test cases execution *****************************************");

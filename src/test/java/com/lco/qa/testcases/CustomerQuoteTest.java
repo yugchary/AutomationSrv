@@ -90,7 +90,7 @@ public class CustomerQuoteTest extends TestBase {
 				"****************************** Starting continueToApplication test cases execution *****************************************");
 		extentTest = extent.startTest("actionPageTitleTest");
 		DateOfBirth = DateOfBirth.replace(".", "/");
-		quoteInformationPage.Quote(2, FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
+		quoteInformationPage.Quote(2, FirstName, "yug@sureify.com", DateOfBirth, Gender, State, tobaccoUse, healthRate);
 		productSelectionPage.ProductSelection(2);
 		System.out.println("product selected");
 		productSelectionPage.FinalizeProductSelection(2);
@@ -127,8 +127,8 @@ public class CustomerQuoteTest extends TestBase {
 		 * actionPage.selectAction(requestType, Testutil.email_ID);
 		 */
 
-		quoteInformationPage = quoteInformationPage.Quote(rowNum, FirstName, DateOfBirth, Gender, State, tobaccoUse,
-				healthRate);
+		quoteInformationPage = quoteInformationPage.Quote(rowNum, FirstName, "yug@sureify.com", DateOfBirth, Gender, State,
+				tobaccoUse, healthRate);
 
 		Assert.assertNotNull(quoteInformationPage);
 		

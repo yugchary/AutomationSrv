@@ -179,6 +179,17 @@ public class ProcessPage extends TestBase {
 
 	}
 
+	
+	/* 
+	 * This is one of the longest method in this entire project, and it is complex 
+	 * This method will first identify to see any Q n A question to answer, if not it would end the test
+	 *  
+	 *   
+	
+	
+	
+	
+	*/
 	public void ProcessFields(int rowNum, String clientType, int iteratorCount, String sheetName, String signType, String paymentType) {
 		
 		//String sheetName = "DTC";
@@ -194,6 +205,7 @@ public class ProcessPage extends TestBase {
 			inputData = ProductUtil.GetInputData(sheetName, 129, 5);
 			//agentWebHomePage = new AgentWebHomePage();
 	
+			//Each element is initialized with integer flag to check its existence on the wizard
 			int formFlag = 0;
 			int checkboxFlag = 0;
 			int buttonFlag = 0;
@@ -201,8 +213,11 @@ public class ProcessPage extends TestBase {
 			int autoSuggFlag = 0;
 			int datePickerFlag = 0;
 			int googleAutoCompleteFlag = 0;
-			int i = 0;
-			int counter = 0;
+			
+					
+			
+			
+			//There are around 8 different types of elements (variables prefixed with "by") in the entire wizard that runs through
 			By byTextFieldL = null;
 			By byTextFieldF = null;
 			By byGoogleAutoCompleteL = null;
@@ -218,40 +233,61 @@ public class ProcessPage extends TestBase {
 			By byCheckboxF = null;
 			By byDatepickerL = null;
 			By byDatepickerF = null;
-			String fieldFlag = null;
+			
+			
+			// wizard iterator
+			int i = 0;
+			
+			// to stop the wizard flow
+			int counter = 0;
+			
+			// checks the wizard flow and beneficiaries is completed
 			boolean doneFlag = false;
+			
 			boolean agentFlag = false;
+			
+			
 			boolean flowFlag = false;
+			
 			//String currentURL ="";
 			
-	
-			byTextFieldL = By.cssSelector(".form-group");
-			byTextFieldF = By.cssSelector(".form-group .field .form-control");
+			//Identification of all the elements in the entire wizard using cssSelector 
+			
+			/*
+			 * byTextFieldL = By.cssSelector(".form-group"); byTextFieldF =
+			 * By.cssSelector(".form-group .field .form-control");
+			 * 
+			 * 
+			 * byGoogleAutoCompleteL = By.cssSelector(".form-group"); byGoogleAutoCompleteF
+			 * = By.cssSelector(".form-group .field .google-autocomplete-input-container");
+			 * 
+			 * 
+			 * byButtonL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
+			 * 
+			 * byButtonF = By.cssSelector(".single-select-btn-container .c-button-default");
+			 * byNoButtonF = By.
+			 * cssSelector("button[class='c-button-default circular single-select-btn  btn btn-default']"
+			 * );
+			 * 
+			 * byAutoSuggL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); byautoSuggF
+			 * = By.xpath("//input[@autocomplete='off']");
+			 * 
+			 * byDropdownL = By.cssSelector(".c-subheader-text.fs18"); byDropdownF =
+			 * By.cssSelector(".Select-placeholder");
+			 * 
+			 * byCheckboxL = By.cssSelector(".custom-checkbox-container"); byCheckboxF =
+			 * By.cssSelector(".custom-checkbox-container .custom-checkbox-checkmark");
+			 * 
+			 * byDatepickerL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
+			 * byDatepickerF = By.cssSelector(".react-datepicker-wrapper");
+			 */	
 			
 			
-			byGoogleAutoCompleteL = By.cssSelector(".form-group");
-			byGoogleAutoCompleteF = By.cssSelector(".form-group .field .google-autocomplete-input-container");		
-			
-	
-			byButtonL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); // class
-																			// btn
-			byButtonF = By.cssSelector(".single-select-btn-container .c-button-default");
-			byNoButtonF = By.cssSelector("button[class='c-button-default circular single-select-btn  btn btn-default']");
-	
-			byAutoSuggL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); // auto
-			byautoSuggF = By.xpath("//input[@autocomplete='off']");
-	
-			byDropdownL = By.cssSelector(".c-subheader-text.fs18"); // select
-			byDropdownF = By.cssSelector(".Select-placeholder");
-			
-			byCheckboxL = By.cssSelector(".custom-checkbox-container");
-			byCheckboxF = By.cssSelector(".custom-checkbox-container .custom-checkbox-checkmark");
-	
-			byDatepickerL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
-			byDatepickerF = By.cssSelector(".react-datepicker-wrapper");
-	
+			// This method identifies the different elements on the current wizard page
 			HashMap<String, Integer> ele = FindElements();
-	
+			
+			String fieldFlag = null;
+			// Below code would parse the above return HashMap, and sets the flag of corresponding element
 			for (Entry eleType : ele.entrySet()) {
 	
 				String line = eleType.getKey() + " " + eleType.getValue();
@@ -263,34 +299,33 @@ public class ProcessPage extends TestBase {
 	
 				case "googleAutoCompleteFlag":
 					byGoogleAutoCompleteL = By.cssSelector(".form-group");
-					byGoogleAutoCompleteF = By.cssSelector(".form-group .field .google-autocomplete-input-container");
-					//byFormF = By.cssSelector(".form-group .field");
-					formFlag = Integer.parseInt(eleType.getValue().toString());
+					byGoogleAutoCompleteF = By.cssSelector(".form-group .field .google-autocomplete-input-container");					
+					googleAutoCompleteFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
 					
 				case "formFlag":
 					byTextFieldL = By.cssSelector(".form-group");
 					byTextFieldF = By.cssSelector(".form-group .field .form-control");
-					//byFormF = By.cssSelector(".form-group .field");
+					
 					formFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
 					
 				case "buttonFlag":
-					byButtonL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); // class
-																					// btn
+					byButtonL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); 
+																					
 					byButtonF = By.cssSelector(".single-select-btn-container .c-button-default");
 					byNoButtonF = By
 							.cssSelector("button[class='c-button-default circular single-select-btn  btn btn-default']");
 					buttonFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
 				case "autoSuggFlag":
-					byAutoSuggL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); // auto
+					byAutoSuggL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); 
 					byautoSuggF = By.xpath("//input[@autocomplete='off']");
 					autoSuggFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
 				case "dropDownFlag":
 					byDropdownF = By.cssSelector(".Select-placeholder");
-					byDropdownL = By.cssSelector(".c-subheader-text.fs18"); // select
+					byDropdownL = By.cssSelector(".c-subheader-text.fs18");
 					dropDownFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
 				case "checkboxFlag":
@@ -313,8 +348,14 @@ public class ProcessPage extends TestBase {
 	
 			}
 	
-			String pageType = "def";
-			boolean flag = false, breakFlag = true, errorFlag = false, beneficiaryFlag = true;
+			String pageType = "";
+			boolean flag = false, 
+					breakFlag = true, 
+					errorFlag = false, 
+					beneficiaryFlag = true;
+			
+			
+			//Based on the flag set to each element, the below code inputs the data in the Q n A fields
 	
 			do {
 	
@@ -324,14 +365,8 @@ public class ProcessPage extends TestBase {
 				if (i == iteratorCount) {
 					System.out.println("Iterator Limit");
 					break;
-				}
+				}	
 				
-				/*formFlag = 0;
-				checkboxFlag = 0;
-				buttonFlag = 0;
-				dropDownFlag = 0;
-				autoSuggFlag = 0;
-				datePickerFlag = 0;*/
 				
 	
 				if (autoSuggFlag > 0) {
@@ -339,8 +374,8 @@ public class ProcessPage extends TestBase {
 					System.out.println("This is a page filled with " + pageType);
 					// checkPage(CheckNextElement(byautoSuggF),
 					// byautoSuggF,pageType);
-					breakFlag = checkPage(CheckNextElement(autoSuggFlag, byAutoSuggL),
-							CheckNextElement(autoSuggFlag, byautoSuggF), byAutoSuggL, byautoSuggF, pageType, sheetName);
+					breakFlag = checkPage(checkElement(autoSuggFlag, byAutoSuggL),
+							checkElement(autoSuggFlag, byautoSuggF), byAutoSuggL, byautoSuggF, pageType, sheetName);
 	
 					if (!breakFlag) {
 						System.out.println("Break point");
@@ -355,8 +390,8 @@ public class ProcessPage extends TestBase {
 					System.out.println("This is a page filled with " + pageType);
 					// checkPage(CheckNextElement(byDatepickerF),
 					// byDatepickerF,pageType);
-					breakFlag = checkPage(CheckNextElement(datePickerFlag, byDatepickerL),
-							CheckNextElement(datePickerFlag, byDatepickerF), byDatepickerL, byDatepickerF, pageType, sheetName);
+					breakFlag = checkPage(checkElement(datePickerFlag, byDatepickerL),
+							checkElement(datePickerFlag, byDatepickerF), byDatepickerL, byDatepickerF, pageType, sheetName);
 					if (!breakFlag) {
 						System.out.println("Break point");
 						break;
@@ -367,8 +402,8 @@ public class ProcessPage extends TestBase {
 				if (checkboxFlag > 0) {
 					pageType = "checkbox";
 					System.out.println("This is a page filled with " + pageType);
-					breakFlag = checkPage(CheckNextElement(checkboxFlag, byCheckboxL),
-							CheckNextElement(checkboxFlag, byCheckboxF), byCheckboxL, byCheckboxF, pageType, sheetName);
+					breakFlag = checkPage(checkElement(checkboxFlag, byCheckboxL),
+							checkElement(checkboxFlag, byCheckboxF), byCheckboxL, byCheckboxF, pageType, sheetName);
 					if (!breakFlag) {
 						System.out.println("Break point");
 						break;
@@ -379,7 +414,7 @@ public class ProcessPage extends TestBase {
 				if (formFlag > 0) {
 					pageType = "form";
 					System.out.println("This is a page filled with " + pageType);
-					breakFlag = checkPage(CheckNextElement(formFlag, byTextFieldL), CheckNextElement(formFlag, byTextFieldF), byTextFieldL,
+					breakFlag = checkPage(checkElement(formFlag, byTextFieldL), checkElement(formFlag, byTextFieldF), byTextFieldL,
 							byTextFieldF, pageType, sheetName);
 					if (!breakFlag) {
 						System.out.println("Break point");
@@ -392,7 +427,7 @@ public class ProcessPage extends TestBase {
 					pageType = "button";
 					System.out.println("This is a page filled with " + pageType);
 					// checkPage(CheckNextElement(byButtonF), byButtonF, pageType);
-					breakFlag = checkPage(CheckNextElement(buttonFlag, byButtonL), CheckNextElement(buttonFlag, byButtonF),
+					breakFlag = checkPage(checkElement(buttonFlag, byButtonL), checkElement(buttonFlag, byButtonF),
 							byButtonL, byButtonF, pageType, sheetName);
 					if (!breakFlag) {
 						System.out.println("Break point");
@@ -405,8 +440,8 @@ public class ProcessPage extends TestBase {
 					pageType = "dropdown";
 					System.out.println("This is a page filled with " + pageType);
 					
-					breakFlag = checkPage(CheckNextElement(dropDownFlag, byDropdownL),
-							CheckNextElement(dropDownFlag, byDropdownF), byDropdownL, byDropdownF, pageType, sheetName);
+					breakFlag = checkPage(checkElement(dropDownFlag, byDropdownL),
+							checkElement(dropDownFlag, byDropdownF), byDropdownL, byDropdownF, pageType, sheetName);
 					if (!breakFlag) {
 						System.out.println("Break point");
 						break;
@@ -583,6 +618,7 @@ public class ProcessPage extends TestBase {
 
 	}
 
+	//Find the elements in the current wizard page and fills the HashMap with its count and element Type
 	public HashMap<String, Integer> FindElements() {
 
 		// By elementsCount = By.cssSelector(".questions-content-container >
@@ -675,6 +711,7 @@ public class ProcessPage extends TestBase {
 
 	}
 
+	//Find the child elements in the current wizard page and fills the HashMap with its count and element Type
 	public HashMap<String, Integer> childElements() {
 
 		String fieldType = null;
@@ -738,11 +775,11 @@ public class ProcessPage extends TestBase {
 	}
 		
 	
-
-	public Iterator<WebElement> CheckNextElement(int size, By byF) {
+	//Checks the elements in the current wizard page
+	public Iterator<WebElement> checkElement(int size, By byElement) {
 
 		if (size > 0) {
-			List<WebElement> listWebElementField = driver.findElements(byF);
+			List<WebElement> listWebElementField = driver.findElements(byElement);
 			System.out.println(listWebElementField.size());
 			return listWebElementField.iterator();
 		} else
@@ -752,6 +789,7 @@ public class ProcessPage extends TestBase {
 
 	
 
+	//Checks the current wizard page to fill the input 
 	public boolean checkPage(Iterator<WebElement> l, Iterator<WebElement> f, By byL, By byF, String pageType, String sheetName) {
 
 		int i = 0;
@@ -761,10 +799,10 @@ public class ProcessPage extends TestBase {
 			i++;
 
 			if (pageType == "checkbox" && i == 1)
-				flag = FillPage(l, f, i, pageType, sheetName);
+				flag = mapUIFieldtoInputData(l, f, i, pageType, sheetName);
 
 			if (pageType != "checkbox")
-				flag = FillPage(l, f, i, pageType, sheetName);
+				flag = mapUIFieldtoInputData(l, f, i, pageType, sheetName);
 			else {
 				f.next();
 				l.next();
@@ -776,8 +814,8 @@ public class ProcessPage extends TestBase {
 	}
 
 	
-
-	public boolean FillPage(Iterator<WebElement> l, Iterator<WebElement> f, int i, String pageType, String sheetName) {
+	//Gets the label from the UI and read the corresponding value from the Input sheet 
+	public boolean mapUIFieldtoInputData(Iterator<WebElement> l, Iterator<WebElement> f, int i, String pageType, String sheetName) {
 
 		String FieldType, FieldValue = null, breakPoint = null, temp = null;
 		//Iterator tempIt = f;
@@ -816,8 +854,11 @@ public class ProcessPage extends TestBase {
 
 		int len = returnText.length();
 
-		if (returnText.charAt(0) == '*' && len > 1)
-			returnText = returnText.substring(len - (len - 1));
+		/*if (returnText.charAt(0) == '*' && len > 1)
+			returnText = returnText.substring(len - (len - 1));*/
+		
+		if (returnText.charAt(len-1) == '*' && len > 1)
+			returnText = returnText.substring(0, (len - 1));
 
 		// String value = Testutil.getFromXls("Questions", "Question",
 		// returnText);
@@ -826,8 +867,11 @@ public class ProcessPage extends TestBase {
 		
 		if(lines.length>0) returnText = lines[0];
 		
+		returnText = returnText.trim();
 		
+		System.out.println("formated returnText: " + returnText);
 		
+		//gets the inputData for the corresponding Label
 		String value = Testutil.getFromHashMap(inputData, returnText);
 		System.out.println("value:" + value);
 
@@ -916,7 +960,7 @@ public class ProcessPage extends TestBase {
 		
 		if (returnText.contains("Home Address (")) {
 			
-			By byGoogleAutoCompleteF = By.cssSelector(".form-group .field .google-autocomplete-input-container");
+			//By byGoogleAutoCompleteF = By.cssSelector(".form-group .field .google-autocomplete-input-container");
 			
 			WebElement elementGoogleF = driver.findElement(By.xpath("//input[@autocomplete]"));
 			
@@ -936,7 +980,7 @@ public class ProcessPage extends TestBase {
 
 	}
 
-	
+	//for future use
 	public String IdentifyWebElementType(WebElement elementL, String returnText) {
 
 		String FieldType;

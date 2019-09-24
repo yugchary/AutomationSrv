@@ -19,7 +19,7 @@
 			
 			-->
 			
-			<class name="com.lco.qa.testcases.ActionPageLoginTest" />
+			<class name="com.lco.qa.testcases.CustomerQuoteTest" />
 			
 			
 

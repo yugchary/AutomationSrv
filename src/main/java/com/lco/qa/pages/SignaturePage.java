@@ -373,7 +373,7 @@ public class SignaturePage extends TestBase {
 		
 		try{
     	
-			emailPage.loginGmail();
+			emailPage.loginGmail(2);
 	    	Testutil.staticWait();
 	    	emailPage.openVeryFirstEmail(2);
 			

@@ -26,8 +26,8 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class PersonalPageTest extends TestBase {
 
-	//PersonalPage personalPage;
-	ProcessPage processPage;
+	PersonalPage personalPage;
+	//ProcessPage processPage;
 	ExtentTest extentTest;
 	
 
@@ -40,16 +40,16 @@ public class PersonalPageTest extends TestBase {
 	@BeforeMethod
 	public void setup() {
 		url = prop.getProperty("url");
-		initialization("text");
-		//personalPage = new PersonalPage();
-		processPage = new ProcessPage();
+		initialization(url);
+		personalPage = new PersonalPage();
+		//processPage = new ProcessPage();
 	}
 
 	@Test(enabled = false)
 	public void personalPageTitleTest() {
 		log.info("****************************** Starting personalPageTitleTest test cases execution *****************************************");
 		extentTest = extent.startTest("loginPageTitleTest");
-		String title = processPage.validateLoginPageTitle();
+		String title = personalPage.validateLoginPageTitle();
 		Assert.assertEquals(title, "LifeCo Insurance Company");
 		log.info("****************************** Ending personalPageTitleTest test cases execution *****************************************");
 	}
@@ -57,7 +57,7 @@ public class PersonalPageTest extends TestBase {
 	@Test
 	public void loginTest() {
 		extentTest = extent.startTest("loginPageTitleTest");
-		processPage = processPage.SampleTest(prop.getProperty("username"), prop.getProperty("password"));
+		personalPage = personalPage.SampleTest(prop.getProperty("username"), prop.getProperty("password"));
 	}
 
 	

@@ -263,7 +263,7 @@ public class AgentWebHomePage extends TestBase {
 
 		case "Email E Signature":
 
-			emailPage.loginGmail();
+			emailPage.loginGmail(2);
 			Testutil.staticLongWait();
 			emailPage.openVeryFirstEmail(2);
 			

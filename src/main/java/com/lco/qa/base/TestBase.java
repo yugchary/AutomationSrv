@@ -63,87 +63,89 @@ public class TestBase {
 	}
 
 	public static void initialization(String url) {
-		
+
 		String BrowserType = prop.getProperty("browserType");
 		String BinariesLoc = prop.getProperty("binariesLocation");
-		String remoteWD_url = prop.getProperty("remoteWD_url");	
-		String host = System.getProperty("HUB_HOST");
+		String remoteWD_url = prop.getProperty("remoteWD_url");
+		//String host = System.getProperty("HUB_HOST");
 
 		if (BrowserType.equalsIgnoreCase("CHROME")) {
-			//System.setProperty("webdriver.chrome.driver","C:\\Yug\\From Old Laptop\\From LoanLap\\Yug\\Selenium\\chromedriver.exe");
-			//System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver.exe");
-			System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver");
+			// System.setProperty("webdriver.chrome.driver","C:\\Yug\\From Old Laptop\\From
+			// LoanLap\\Yug\\Selenium\\chromedriver.exe");
+			// System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", BinariesLoc + "chromedriver");
 			driver = new ChromeDriver();
+
+			
+
 			/*
-			 * DesiredCapabilities dc = DesiredCapabilities.chrome();
-			 * 
-			 * 
 			 * ChromeOptions options = new ChromeOptions();
 			 * 
-			 * try { //driver = new ChromeOptions(options); //driver = new
-			 * RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),options); //driver =
-			 * new RemoteWebDriver(newURL("http://172.18.0.4:5555/wd/hub"), options); driver
-			 * = new RemoteWebDriver(new URL(remoteWD_url), options);
+			 * try { // driver = new ChromeOptions(options); // driver = new
+			 * RemoteWebDriver(new // URL("http://localhost:4444/wd/hub"),options); //
+			 * driver = new RemoteWebDriver(new //
+			 * URL("http://172.18.0.4:5555/wd/hub"),options); driver = new
+			 * RemoteWebDriver(new URL(remoteWD_url), options);
 			 * 
-			 * 
-			 * //driver = new RemoteWebDriver(new URL("http://" + host +
+			 * // driver = new RemoteWebDriver(new URL("http://" + host + //
 			 * ":4444/wd/hub"),options);
-			 * 
 			 * 
 			 * } catch (MalformedURLException e) { // TODO Auto-generated catch block
 			 * e.printStackTrace(); }
 			 */
-			 
-	        
 			
 		} else if (BrowserType.equalsIgnoreCase("IE")) {
 
-			//System.setProperty("webdriver.ie.driver","C:\\Yug\\From Old Laptop\\From LoanLap\\Yug\\Selenium\\IEDriverServer.exe");
-			//System.setProperty("webdriver.ie.driver",BinariesLoc+"IEDriverServer.exe");	
+			// System.setProperty("webdriver.ie.driver","C:\\Yug\\From Old Laptop\\From
+			// LoanLap\\Yug\\Selenium\\IEDriverServer.exe");
+			// System.setProperty("webdriver.ie.driver",BinariesLoc+"IEDriverServer.exe");
 			driver = new InternetExplorerDriver();
 		} else if (BrowserType.equalsIgnoreCase("FF")) {
 
-			//System.setProperty("webdriver.gecko.driver","C:\\Yug\\From Old Laptop\\From LoanLap\\Yug\\Selenium\\geckodriver.exe");
-			//System.setProperty("webdriver.gecko.driver",BinariesLoc+"geckodriver.exe");
-			System.setProperty("webdriver.gecko.driver",BinariesLoc+"geckodriver");
+			// System.setProperty("webdriver.gecko.driver","C:\\Yug\\From Old Laptop\\From
+			// LoanLap\\Yug\\Selenium\\geckodriver.exe");
+			// System.setProperty("webdriver.gecko.driver",BinariesLoc+"geckodriver.exe");
+			System.setProperty("webdriver.gecko.driver", BinariesLoc + "geckodriver");
 			driver = new FirefoxDriver();
-			
+
 			FirefoxOptions options = new FirefoxOptions();
-			
-			//options.setCapability("marionette", true);
-			//driver = new FirefoxDriver(options);
-			
+
+			// options.setCapability("marionette", true);
+			// driver = new FirefoxDriver(options);
+
 			try {
-				//driver = new RemoteWebDriver(new URL("http://172.18.0.4:5555/wd/hub"), options);
-				//driver = new RemoteWebDriver(new URL("http://localhost:32770/wd/hub"), options);
+				// driver = new RemoteWebDriver(new URL("http://172.18.0.4:5555/wd/hub"),
+				// options);
+				// driver = new RemoteWebDriver(new URL("http://localhost:32770/wd/hub"),
+				// options);
 				driver = new RemoteWebDriver(new URL(remoteWD_url), options);
-				//driver = new RemoteWebDriver(new URL("http://" + host + ":4444/wd/hub"), options);
+				// driver = new RemoteWebDriver(new URL("http://" + host + ":4444/wd/hub"),
+				// options);
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 		}
-		
+
 		e_driver = new EventFiringWebDriver(driver);
-		
+
 		eventListener = new WebEventListener();
-		
+
 		e_driver.register(eventListener);
 		driver = e_driver;
-		
+
 		driver.manage().deleteAllCookies();
-		//driver.manage().window().maximize();
+		// driver.manage().window().maximize();
 		driver.manage().timeouts().pageLoadTimeout(Testutil.pageLoadTimeout, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(Testutil.implicitlyWait, TimeUnit.SECONDS);
-		
-		//driver.get(prop.getProperty("url"));
-		
+
+		// driver.get(prop.getProperty("url"));
+
 		driver.get(url);
-		
-		wait = new WebDriverWait(driver, 60*(Testutil.waitTime/1000));
-		
-		
+
+		wait = new WebDriverWait(driver, 60 * (Testutil.waitTime / 1000));
+
 	}
 
 }

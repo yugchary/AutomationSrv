@@ -113,7 +113,7 @@ public class AgentWebQuoteTest extends TestBase {
 		//agentWebHomePage.close();
 		
 		DateOfBirth = DateOfBirth.replace(".", "/");
-		quoteInformationPage = quoteInformationPage.Quote(rowNum, FirstName, DateOfBirth, Gender, State, tobaccoUse, healthRate);
+		quoteInformationPage = quoteInformationPage.Quote(rowNum, FirstName, "yug@sureify.com", DateOfBirth, Gender, State, tobaccoUse, healthRate);
 		
 		Assert.assertNotNull(quoteInformationPage);
 		

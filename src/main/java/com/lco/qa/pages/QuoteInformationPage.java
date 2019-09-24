@@ -28,8 +28,11 @@ public class QuoteInformationPage extends TestBase {
 	//@FindBy(xpath="//img[@class='active-image']")
 	WebElement onePImg;	
 	
-	@FindBy(name="first-applicant-name-0")
+	@FindBy(name="first-applicant-name-0")	
 	WebElement first_applicant_name_0;
+	
+	@FindBy(name="email")
+	WebElement email;
 	
 	@FindBy(xpath="//label[contains(text(), 'Female')]")
 	WebElement fradioBtn;
@@ -93,7 +96,7 @@ public class QuoteInformationPage extends TestBase {
 	}
 	
 	
-	public QuoteInformationPage Quote(int rowNum, String FirstName, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate) {
+	public QuoteInformationPage Quote(int rowNum, String FirstName, String Email, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate) {
 		
 		String currentURL ="";
 		currentURL = driver.getCurrentUrl();
@@ -102,6 +105,8 @@ public class QuoteInformationPage extends TestBase {
 		try{
 			
 			first_applicant_name_0.sendKeys(FirstName);
+			
+			email.sendKeys(Email);
 			driver.findElement(By.xpath("//label[contains(text(), '" + Gender + "')]")).click();
 			//fradioBtn.click();
 			

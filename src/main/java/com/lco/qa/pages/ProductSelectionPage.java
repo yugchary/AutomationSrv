@@ -120,6 +120,7 @@ public class ProductSelectionPage extends TestBase {
 				while (t.hasNext()) {
 					i++;
 					t.next().click();
+					break;
 
 				}
 				nextBtn.click();
@@ -201,6 +202,7 @@ public class ProductSelectionPage extends TestBase {
 				i1++;
 				t.next().click();
 				System.out.println("clicked: " + i1);
+				break;
 			}
 		
 			WaitForAzaxComponentToLoad(By.cssSelector(".plan-total-text"));

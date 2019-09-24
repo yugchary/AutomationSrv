@@ -4,6 +4,7 @@
 # BROWSER
 # MODULE
 
+#HUB_HOST="localhost"
 HUB_HOST="selenium-hub"
 BROWSER="firefox"
 MODULE="testNG_Sanity_lco.xml"

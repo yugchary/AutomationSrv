@@ -50,7 +50,7 @@ public class Testutil extends TestBase {
 	// "C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\testdata\\LCO_TestData.xlsx";
 	//public static String TESTDATA_SHEET_PATH = "/home/yugandher/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/LCO_TestData.xlsx";
 	public static String TESTDATA_SHEET_PATH = "/home/yugander/Downloads/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/Input_Data1.xlsx";
-	//public static String TESTDATA_SHEET_PATH = "/usr/share/tag/testdata/Input_Data.xlsx";
+	//public static String TESTDATA_SHEET_PATH = "/usr/share/tag/testdata/Input_Data1.xlsx";
 	public static String email_ID = "yugandher@sureify.com";
 	public static String phoneNumber = "9999999999";
 	
@@ -336,7 +336,7 @@ public class Testutil extends TestBase {
 		List<WebElement> arrows = driver.findElements(by);
 				
 		boolean arrowFlag = true;
-		boolean returnFlag = false;
+		//boolean returnFlag = false;
 		Testutil.staticLongWait(by); 
 
 		System.out.println("arrows webelements found: " + arrows.size());
