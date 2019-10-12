@@ -69,7 +69,7 @@ public class CustomerQuoteTest extends TestBase {
 
 	@DataProvider
 	Object[][] getData() throws Exception {
-		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, "Quote", 5, 12, 5, 1);
+		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, "Quote", 5, 13, 5, 1);
 	}
 
 	@Test(enabled = false)
@@ -108,7 +108,7 @@ public class CustomerQuoteTest extends TestBase {
 	}
 
 	@Test(dataProvider = "getData", enabled = true)
-	public void selfQuote(String Num, String FirstName, String DateOfBirth, String Gender, String State,
+	public void selfQuote(String Num, String FirstName, String Email, String DateOfBirth, String Gender, String State,
 			String tobaccoUse, String healthRate, String distribution, String product, String requestType,
 			String signType, String paymentMethod) {
 		log.info(
@@ -127,7 +127,7 @@ public class CustomerQuoteTest extends TestBase {
 		 * actionPage.selectAction(requestType, Testutil.email_ID);
 		 */
 
-		quoteInformationPage = quoteInformationPage.Quote(rowNum, FirstName, "yug@sureify.com", DateOfBirth, Gender, State,
+		quoteInformationPage = quoteInformationPage.Quote(rowNum, FirstName, Email, DateOfBirth, Gender, State,
 				tobaccoUse, healthRate);
 
 		Assert.assertNotNull(quoteInformationPage);

@@ -76,24 +76,31 @@ public class ActionPage extends TestBase{
 				
 				//driver.findElement(By.cssSelector(".next-action-img-container .hidden-xs")).click();
 				//continueToApp.click();
-				actionTypeElement = By.cssSelector(".next-action-application-img-container:nth-child(1) .hidden-xs");
+				//actionTypeElement = By.cssSelector(".next-action-application-img-container:nth-child(1) .hidden-xs");
+				actionTypeElement = By.cssSelector(".hidden-xs > .next-step-action-btn:nth-child(1)");
+				
 				Testutil.WaitnClick(actionTypeElement);
+				
 				break;
 				
 			case "Email me quote":				
 				
 				//driver.findElement(By.cssSelector(".next-action-img-container .hidden-xs")).click();
 				//continueToApp.click();
-				actionTypeElement = By.cssSelector(".next-action-application-img-container:nth-child(2) .hidden-xs");
+				//actionTypeElement = By.cssSelector(".next-action-application-img-container:nth-child(2) .hidden-xs");
+				actionTypeElement = By.cssSelector(".hidden-xs > .next-step-action-btn:nth-child(2)");
 				Testutil.WaitnClick(actionTypeElement);
+				
 				break;	
 				
 			case "Connect me to a licensed agent":				
 				
 				//driver.findElement(By.cssSelector(".next-action-img-container .hidden-xs")).click();
 				//continueToApp.click();
-				actionTypeElement = By.cssSelector(".next-action-application-img-container:nth-child(3) .hidden-xs");
+				//actionTypeElement = By.cssSelector(".next-action-application-img-container:nth-child(3) .hidden-xs");
+				actionTypeElement = By.cssSelector(".hidden-xs > .next-step-action-btn:nth-child(3)");
 				Testutil.WaitnClick(actionTypeElement);
+				
 				break;
 				
 			case "Complete the application":
@@ -108,8 +115,8 @@ public class ActionPage extends TestBase{
 
 			}
 			
-			nextButton.click();
-			emailAddress.sendKeys(email);
+			//nextButton.click();
+			//emailAddress.sendKeys(email);
 			
 			phoneNo.sendKeys(phoneNumber);
 			

@@ -28,16 +28,13 @@ import com.lco.qa.util.Xlsutil;
 
 public class ProcessPage extends TestBase {
 
-	
 	AgentWebHomePage agentWebHomePage;
 	AgentWebLoginPage agentWebPage;
 	ProcessPage processPage;
 	PaymentPage paymentPage;
 	SignaturePage signaturePage;
 	BeneficiariesPage beneficiariesPage;
-	
-	
-	
+
 	// Page Factory - OR
 	@FindBy(xpath = "")
 	WebElement xyz;
@@ -73,10 +70,10 @@ public class ProcessPage extends TestBase {
 
 	@FindBy(xpath = "//div[contains(text(),'Customer Signature Type')]//following-sibling::*//span[@class='Select-multi-value-wrapper']//input")
 	WebElement signatureType;
-	
+
 	@FindBy(xpath = "//div[starts-with(text(),'Will')]//following-sibling::*//span[@class='Select-multi-value-wrapper']//input")
 	WebElement paymentType;
-	
+
 	@FindBy(css = ".Select-option.is-focused")
 	WebElement selectItem1;
 
@@ -101,7 +98,6 @@ public class ProcessPage extends TestBase {
 	// Initialize the Page objects
 	public ProcessPage() {
 		PageFactory.initElements(driver, this);
-		 
 
 	}
 
@@ -118,94 +114,95 @@ public class ProcessPage extends TestBase {
 		url = "https://vantislifeinsurancestg.sureify.com/questions?user=enFLeWZXdEZYRlBlZTlCQ0p6dGRZdz09&q_id=RGpyNHF4RW1tTzlpTFQwUVExbnBSQT09&auth_code=imYWgc5iOX3qI4xD51rEeGuPcM1hML&transaction_id=1c3a9f40-a3db-11e9-85c4-1dd9bff47fa9_1562849707828";
 
 		url = "https://mail.google.com/mail/u/0/#inbox";
-		
-		//url = "https://demo.docusign.net/Signing/?insession=1&ti=d901d7b23d724d5eb5d5234f98e42af5";
-		
-		//url = "https://vantislifeinsurancestg.sureify.com/questions?user=NTY0UEdKSmJVaUdkVzMxMTY0SXVlZz09&us_id=RHVRcVdIaEtiMWNySFpUL2hpRWQ4QT09&agent_number=888001234&ipAddress=192.168.43.249&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1558312848337&page_id=NEXT_STEPS_PAGE_ID&page_title=NEXT_STEPS_PAGE&q_id=eGc0OFZibmszRFdqN1cwWm5hKy9Sdz09&transaction_id=d6e62c50-7a97-11e9-ba19-3b6c8add9be1_1558312817557";
-		
-		int rowNum=2;
-		
-		
-		
+
+		// url =
+		// "https://demo.docusign.net/Signing/?insession=1&ti=d901d7b23d724d5eb5d5234f98e42af5";
+
+		// url =
+		// "https://vantislifeinsurancestg.sureify.com/questions?user=NTY0UEdKSmJVaUdkVzMxMTY0SXVlZz09&us_id=RHVRcVdIaEtiMWNySFpUL2hpRWQ4QT09&agent_number=888001234&ipAddress=192.168.43.249&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1558312848337&page_id=NEXT_STEPS_PAGE_ID&page_title=NEXT_STEPS_PAGE&q_id=eGc0OFZibmszRFdqN1cwWm5hKy9Sdz09&transaction_id=d6e62c50-7a97-11e9-ba19-3b6c8add9be1_1558312817557";
+
+		int rowNum = 2;
+
 		driver.navigate().to(url);
-		
 
 		// FindElements();
 
 		// for(int i=0;i<5; i++)
-		
-		//Testutil.selectFromDropdown("Alaska");
-		
-		//Testutil.selectFromDropdown(1);
-		
-				
+
+		// Testutil.selectFromDropdown("Alaska");
+
+		// Testutil.selectFromDropdown(1);
+
 		String count = prop.getProperty("iterator");
-		
+
 		int itrCount = Integer.parseInt(count);
-		//AgentWebHomeTest agentWebHomeTest;
+		// AgentWebHomeTest agentWebHomeTest;
 		agentWebHomePage = new AgentWebHomePage();
 		agentWebPage = new AgentWebLoginPage();
 		beneficiariesPage = new BeneficiariesPage();
 		signaturePage = new SignaturePage();
 		paymentPage = new PaymentPage();
-		//agentWebHomeTest = new AgentWebHomeTest();
-		
-		
-		//signaturePage.LaunchFromEmail(2, "CONTINUE APPLICATION", "Thank you! Your application has been submitted, we will be in touch with you shortly.", "Customer Payment form signature");
-		
-		//ProcessFields("self", itrCount, "DTC");
-		//ProcessFields("agent", itrCount, "Agent", "Email E Signature", "eft");
-		//ProcessFields("customer", itrCount, "Customer", "In Person E Signature", "cc");
-		
-		//ProcessFields(2, "customer", itrCount, "Customer", "In Person E Signature", "cc");
+		// agentWebHomeTest = new AgentWebHomeTest();
+
+		// signaturePage.LaunchFromEmail(2, "CONTINUE APPLICATION", "Thank you! Your
+		// application has been submitted, we will be in touch with you shortly.",
+		// "Customer Payment form signature");
+
+		// ProcessFields("self", itrCount, "DTC");
+		// ProcessFields("agent", itrCount, "Agent", "Email E Signature", "eft");
+		// ProcessFields("customer", itrCount, "Customer", "In Person E Signature",
+		// "cc");
+
+		// ProcessFields(2, "customer", itrCount, "Customer", "In Person E Signature",
+		// "cc");
 		ProcessFields(2, "agent", itrCount, "Agent", "Email E Signature", "eft");
-		
-		//payment("cc");
-		
-		
-		//agentWebPage.agentWebLogin(prop.getProperty("username"), prop.getProperty("password"));
-		//url = driver.getCurrentUrl(); 
-		
-		//signUp("agent","Email E Signature", "eft");
-		
-		//signTypeFlow(rowNum,"Email E Signature", "eft");
-		//driver.close();
-		//flowType("Email E Signature","eft");
-		//agentWebHomeTest.validateQuotationsnEApplications();
-		
+
+		// payment("cc");
+
+		// agentWebPage.agentWebLogin(prop.getProperty("username"),
+		// prop.getProperty("password"));
+		// url = driver.getCurrentUrl();
+
+		// signUp("agent","Email E Signature", "eft");
+
+		// signTypeFlow(rowNum,"Email E Signature", "eft");
+		// driver.close();
+		// flowType("Email E Signature","eft");
+		// agentWebHomeTest.validateQuotationsnEApplications();
+
 		paymentPage.makePayment(rowNum, "eft");
 
 		return new ProcessPage();
 
 	}
 
-	
-	/* 
-	 * This is one of the longest method in this entire project, and it is complex 
-	 * This method will first identify to see any Q n A question to answer, if not it would end the test
-	 *  
-	 *   
-	
-	
-	
-	
-	*/
-	public void ProcessFields(int rowNum, String clientType, int iteratorCount, String sheetName, String signType, String paymentType) {
-		
-		//String sheetName = "DTC";
-		
-		String currentURL ="";
+	/*
+	 * This is one of the longest method in this entire project, and it is complex
+	 * This method will first identify to see any Q n A question to answer, if not
+	 * it would end the test
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+	public void ProcessFields(int rowNum, String clientType, int iteratorCount, String sheetName, String signType,
+			String paymentType) {
+
+		// String sheetName = "DTC";
+
+		String currentURL = "";
 		currentURL = driver.getCurrentUrl();
-		
+
 		beneficiariesPage = new BeneficiariesPage();
-	
-		
-		
-		try{
+
+		try {
 			inputData = ProductUtil.GetInputData(sheetName, 129, 5);
-			//agentWebHomePage = new AgentWebHomePage();
-	
-			//Each element is initialized with integer flag to check its existence on the wizard
+			// agentWebHomePage = new AgentWebHomePage();
+
+			// Each element is initialized with integer flag to check its existence on the
+			// wizard
 			int formFlag = 0;
 			int checkboxFlag = 0;
 			int buttonFlag = 0;
@@ -213,11 +210,9 @@ public class ProcessPage extends TestBase {
 			int autoSuggFlag = 0;
 			int datePickerFlag = 0;
 			int googleAutoCompleteFlag = 0;
-			
-					
-			
-			
-			//There are around 8 different types of elements (variables prefixed with "by") in the entire wizard that runs through
+
+			// There are around 8 different types of elements (variables prefixed with "by")
+			// in the entire wizard that runs through
 			By byTextFieldL = null;
 			By byTextFieldF = null;
 			By byGoogleAutoCompleteL = null;
@@ -233,142 +228,114 @@ public class ProcessPage extends TestBase {
 			By byCheckboxF = null;
 			By byDatepickerL = null;
 			By byDatepickerF = null;
-			
-			
+
 			// wizard iterator
 			int i = 0;
-			
+
 			// to stop the wizard flow
 			int counter = 0;
-			
-			// checks the wizard flow and beneficiaries is completed
+
+			// checks the wizard flow and beneficiaries (entire execution) is completed
 			boolean doneFlag = false;
-			
+
 			boolean agentFlag = false;
-			
-			
+
+			// checks for the wizard flow (Q & A) completion
 			boolean flowFlag = false;
+
+			// String currentURL ="";
+
+			// Identification of all the elements in the entire wizard using cssSelector
+
+			byTextFieldL = By.cssSelector(".form-group");
+			byTextFieldF = By.cssSelector(".form-group .field .form-control");
+
+			byGoogleAutoCompleteL = By.cssSelector(".form-group");
+			byGoogleAutoCompleteF = By.cssSelector(".form-group .field .google-autocomplete-input-container");
+
+			byButtonL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
+
+			//byButtonF = By.cssSelector(".single-select-btn-container .c-button-default");
+			//byNoButtonF = By.cssSelector("button[class='c-button-default circular single-select-btn  btn btn-default']");
 			
-			//String currentURL ="";
-			
-			//Identification of all the elements in the entire wizard using cssSelector 
-			
-			/*
-			 * byTextFieldL = By.cssSelector(".form-group"); byTextFieldF =
-			 * By.cssSelector(".form-group .field .form-control");
-			 * 
-			 * 
-			 * byGoogleAutoCompleteL = By.cssSelector(".form-group"); byGoogleAutoCompleteF
-			 * = By.cssSelector(".form-group .field .google-autocomplete-input-container");
-			 * 
-			 * 
-			 * byButtonL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
-			 * 
-			 * byButtonF = By.cssSelector(".single-select-btn-container .c-button-default");
-			 * byNoButtonF = By.
-			 * cssSelector("button[class='c-button-default circular single-select-btn  btn btn-default']"
-			 * );
-			 * 
-			 * byAutoSuggL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); byautoSuggF
-			 * = By.xpath("//input[@autocomplete='off']");
-			 * 
-			 * byDropdownL = By.cssSelector(".c-subheader-text.fs18"); byDropdownF =
-			 * By.cssSelector(".Select-placeholder");
-			 * 
-			 * byCheckboxL = By.cssSelector(".custom-checkbox-container"); byCheckboxF =
-			 * By.cssSelector(".custom-checkbox-container .custom-checkbox-checkmark");
-			 * 
-			 * byDatepickerL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
-			 * byDatepickerF = By.cssSelector(".react-datepicker-wrapper");
-			 */	
-			
-			
+			byButtonF = By.xpath("//div[@class='single-select-btn-container ']//button");
+			byNoButtonF = By.xpath("//div[@class='single-select-btn-container ']//following-sibling::div//button");
+
+			byAutoSuggL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
+			byautoSuggF = By.xpath("//input[@autocomplete='off']");
+
+			byDropdownL = By.cssSelector(".c-subheader-text.fs18");
+			byDropdownF = By.cssSelector(".Select-placeholder");
+
+			byCheckboxL = By.cssSelector(".custom-checkbox-container");
+			byCheckboxF = By.cssSelector(".custom-checkbox-container .custom-checkbox-checkmark");
+
+			byDatepickerL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
+			byDatepickerF = By.cssSelector(".react-datepicker-wrapper");
+
 			// This method identifies the different elements on the current wizard page
 			HashMap<String, Integer> ele = FindElements();
-			
+
 			String fieldFlag = null;
-			// Below code would parse the above return HashMap, and sets the flag of corresponding element
+			// Below code would parse the above return HashMap, and sets the flag of
+			// corresponding element
 			for (Entry eleType : ele.entrySet()) {
-	
+
 				String line = eleType.getKey() + " " + eleType.getValue();
 				System.out.println("Fields: " + line);
-	
+
 				fieldFlag = eleType.getKey().toString();
-	
+
 				switch (fieldFlag) {
-	
+
 				case "googleAutoCompleteFlag":
-					byGoogleAutoCompleteL = By.cssSelector(".form-group");
-					byGoogleAutoCompleteF = By.cssSelector(".form-group .field .google-autocomplete-input-container");					
 					googleAutoCompleteFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
-					
+
 				case "formFlag":
-					byTextFieldL = By.cssSelector(".form-group");
-					byTextFieldF = By.cssSelector(".form-group .field .form-control");
-					
 					formFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
-					
+
 				case "buttonFlag":
-					byButtonL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); 
-																					
-					byButtonF = By.cssSelector(".single-select-btn-container .c-button-default");
-					byNoButtonF = By
-							.cssSelector("button[class='c-button-default circular single-select-btn  btn btn-default']");
 					buttonFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
 				case "autoSuggFlag":
-					byAutoSuggL = By.cssSelector(".c-subheader-text.fs18.col-sm-12"); 
-					byautoSuggF = By.xpath("//input[@autocomplete='off']");
 					autoSuggFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
 				case "dropDownFlag":
-					byDropdownF = By.cssSelector(".Select-placeholder");
-					byDropdownL = By.cssSelector(".c-subheader-text.fs18");
 					dropDownFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
 				case "checkboxFlag":
-					byCheckboxL = By.cssSelector(".custom-checkbox-container");
-					byCheckboxF = By.cssSelector(".custom-checkbox-container .custom-checkbox-checkmark");
 					checkboxFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
 				case "datePickerFlag":
-					byDatepickerL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
-					byDatepickerF = By.cssSelector(".react-datepicker-wrapper");
 					datePickerFlag = Integer.parseInt(eleType.getValue().toString());
 					break;
-	
+
 				default:
 					break;
-	
+
 				}
-	
+
 				System.out.println(line);
-	
+
 			}
-	
+
 			String pageType = "";
-			boolean flag = false, 
-					breakFlag = true, 
-					errorFlag = false, 
-					beneficiaryFlag = true;
-			
-			
-			//Based on the flag set to each element, the below code inputs the data in the Q n A fields
-	
+			boolean flag = false, breakFlag = true, errorFlag = false, beneficiaryFlag = true;
+
+			// Based on the flag set to each element, the below code inputs the data in the
+			// Q n A fields
+
 			do {
-	
-				
+
 				currentURL = driver.getCurrentUrl();
-				//Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
+				// Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
 				if (i == iteratorCount) {
 					System.out.println("Iterator Limit");
 					break;
-				}	
-				
-				
-	
+				}
+
 				if (autoSuggFlag > 0) {
 					pageType = "autoSugg";
 					System.out.println("This is a page filled with " + pageType);
@@ -376,29 +343,27 @@ public class ProcessPage extends TestBase {
 					// byautoSuggF,pageType);
 					breakFlag = checkPage(checkElement(autoSuggFlag, byAutoSuggL),
 							checkElement(autoSuggFlag, byautoSuggF), byAutoSuggL, byautoSuggF, pageType, sheetName);
-	
+
 					if (!breakFlag) {
 						System.out.println("Break point");
 						break;
 					}
 				}
-	
-				
-	
+
 				if (datePickerFlag > 0) {
 					pageType = "datepicker";
 					System.out.println("This is a page filled with " + pageType);
 					// checkPage(CheckNextElement(byDatepickerF),
 					// byDatepickerF,pageType);
 					breakFlag = checkPage(checkElement(datePickerFlag, byDatepickerL),
-							checkElement(datePickerFlag, byDatepickerF), byDatepickerL, byDatepickerF, pageType, sheetName);
+							checkElement(datePickerFlag, byDatepickerF), byDatepickerL, byDatepickerF, pageType,
+							sheetName);
 					if (!breakFlag) {
 						System.out.println("Break point");
 						break;
 					}
 				}
-	
-				
+
 				if (checkboxFlag > 0) {
 					pageType = "checkbox";
 					System.out.println("This is a page filled with " + pageType);
@@ -409,20 +374,18 @@ public class ProcessPage extends TestBase {
 						break;
 					}
 				}
-	
-				
+
 				if (formFlag > 0) {
 					pageType = "form";
 					System.out.println("This is a page filled with " + pageType);
-					breakFlag = checkPage(checkElement(formFlag, byTextFieldL), checkElement(formFlag, byTextFieldF), byTextFieldL,
-							byTextFieldF, pageType, sheetName);
+					breakFlag = checkPage(checkElement(formFlag, byTextFieldL), checkElement(formFlag, byTextFieldF),
+							byTextFieldL, byTextFieldF, pageType, sheetName);
 					if (!breakFlag) {
 						System.out.println("Break point");
 						break;
 					}
 				}
-	
-				
+
 				if (buttonFlag > 0) {
 					pageType = "button";
 					System.out.println("This is a page filled with " + pageType);
@@ -434,12 +397,11 @@ public class ProcessPage extends TestBase {
 						break;
 					}
 				}
-	
-				
+
 				if (dropDownFlag > 0) {
 					pageType = "dropdown";
 					System.out.println("This is a page filled with " + pageType);
-					
+
 					breakFlag = checkPage(checkElement(dropDownFlag, byDropdownL),
 							checkElement(dropDownFlag, byDropdownF), byDropdownL, byDropdownF, pageType, sheetName);
 					if (!breakFlag) {
@@ -447,19 +409,19 @@ public class ProcessPage extends TestBase {
 						break;
 					}
 				}
-	
+
 				boolean singlebutton = false;
-	
+
 				if (formFlag == 0 && checkboxFlag == 0 && buttonFlag == 0 && dropDownFlag == 0 && autoSuggFlag == 0
 						&& datePickerFlag == 0) {
-	
+
 					try {
 						flowFlag = true;
-						doneFlag = beneficiariesPage.addBeneficiaries(rowNum, clientType, signType, paymentType);					
-						//errorFlag = true;
+						doneFlag = beneficiariesPage.addBeneficiaries(rowNum, clientType, signType, paymentType);
+						// errorFlag = true;
 						System.out.println("completed");
 						singlebutton = true;
-	
+
 					} catch (NoSuchElementException e) {
 						System.out.println(e.getStackTrace());
 						System.out.println("issue with sign-up/beneficiary not reached");
@@ -472,78 +434,80 @@ public class ProcessPage extends TestBase {
 						System.out.println("other exception in addBeneficiaries");
 					}
 				}
-	
+
 				i++;
-				
+
+				// In Wizard flow, if the Q n A has only ONE Yes/No (Button) question
 				boolean singlebuttonFlag = false;
-	
+
 				if (formFlag == 0 && checkboxFlag == 0 && buttonFlag == 1 && dropDownFlag == 0 && autoSuggFlag == 0
-						&& datePickerFlag == 0){
+						&& datePickerFlag == 0) {
 					singlebutton = true;
 					singlebuttonFlag = true;
 				}
-				
+
+				// In Wizard flow, if the Q n A has only TWO Yes/No (Button) questions
 				boolean doubleButton = false;
-	
-				if (Testutil.doubleButtosFlag && singlebuttonFlag){
+
+				if (Testutil.doubleButtosFlag && singlebuttonFlag) {
 					singlebutton = false;
 					doubleButton = true;
-					
+
 				}
-				
-				
+
+				// Checks whether the Wizard flow (Q n A) is completed or still more to answer,
+				// not to confuse with addBeneficiaries buttons
 				boolean completeFlag = false;
-				
-				if(doubleButton && !Testutil.doubleButtosFlag ) completeFlag = true;
-				
-				if(clientType.equalsIgnoreCase("agent") && doneFlag) agentFlag = true;	
-				
-				if(flag || agentFlag){
+
+				if (doubleButton && !Testutil.doubleButtosFlag)
+					completeFlag = true;
+
+				if (clientType.equalsIgnoreCase("agent") && doneFlag)
+					agentFlag = true;
+
+				if (flag || agentFlag) {
 					System.out.println("execution completed for agent type");
 					Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Pass");
 					break;
 				}
-				
-				if(!doneFlag && flowFlag){
+
+				if (!doneFlag && flowFlag) {
 					System.out.println("something went wrong");
 					Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Fail");
 					break;
 				}
-				
-				
+
 				if (singlebutton || completeFlag || agentFlag) {
 					System.out.println("only button with single page " + i + ", auto load");
 				} else {
 					System.out.println("All submited in page " + i + ", going to next page. Clicking on Next button");
-	
+
 					driver.findElement(By.xpath("//button[@class='c-button-default circular  action btn btn-default']"))
 							.click();
-					
-				}	
-				
-				
-				
-				ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);			
-	
+
+				}
+
+				ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+
 				formFlag = 0;
 				checkboxFlag = 0;
 				buttonFlag = 0;
 				dropDownFlag = 0;
 				autoSuggFlag = 0;
 				datePickerFlag = 0;
-	
+
 				ele = null;
-	
+
 				ele = FindElements();
-	
+
 				for (Entry eleType : ele.entrySet()) {
-	
+
 					String line = eleType.getKey() + " " + eleType.getValue();
 					System.out.println("Fields: " + line);
 					fieldFlag = eleType.getKey().toString();
-	
+
 					switch (fieldFlag) {
-	
+
 					case "formFlag":
 						formFlag = Integer.parseInt(eleType.getValue().toString());
 						break;
@@ -556,69 +520,69 @@ public class ProcessPage extends TestBase {
 					case "dropDownFlag":
 						dropDownFlag = Integer.parseInt(eleType.getValue().toString());
 						break;
-					case "checkboxFlag": // byCheckboxL =
-						By.cssSelector(".custom-checkbox-container");
-						
+					case "checkboxFlag":
+						byCheckboxL = By.cssSelector(".custom-checkbox-container");
+
 						checkboxFlag = Integer.parseInt(eleType.getValue().toString());
 						break;
-					case "datePickerFlag": // byDatepickerL =
-						By.cssSelector(".c-subheader-text.fs18.col-sm-12");
-						
+					case "datePickerFlag":
+						byDatepickerL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
+
 						datePickerFlag = Integer.parseInt(eleType.getValue().toString());
 						break;
-	
+
 					default:
 						break;
-	
+
 					}
-	
+
 					System.out.println(line);
-	
+
 				}
-	
-				
-	
+
 				if (formFlag == 0 && checkboxFlag == 0 && buttonFlag == 0 && dropDownFlag == 0 && autoSuggFlag == 0
 						&& datePickerFlag == 0) {
 					counter++;
 					if (counter == 2)
 						flag = true;
 				}
-	
-				if (!breakFlag){
+
+				if (!breakFlag) {
 					System.out.println("break point stopped the execution");
 					Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Break");
 					break;
 				}
-					
-				if(flag || doneFlag){
+
+				if (flag || doneFlag) {
 					System.out.println("execution completed");
 					Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Pass");
 					break;
-				}			
-				
-				if(errorFlag){
+				}
+
+				if (errorFlag) {
 					System.out.println("execution completed with error");
 					Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Fail");
 					break;
 				}
-	
+
 			} while (formFlag > 0 || checkboxFlag > 0 || buttonFlag > 0 || dropDownFlag > 0 || autoSuggFlag > 0
 					|| datePickerFlag > 0 || beneficiaryFlag);
-	
-			//while (formFlag > 0 || checkboxFlag > 0 || buttonFlag > 0 || dropDownFlag > 0 || autoSuggFlag > 0 	|| datePickerFlag > 0 || flag  || doneFlag || errorFlag);
+
+			// while (formFlag > 0 || checkboxFlag > 0 || buttonFlag > 0 || dropDownFlag > 0
+			// || autoSuggFlag > 0 || datePickerFlag > 0 || flag || doneFlag || errorFlag);
 			// return new PersonalPage();
-			
-			//Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);	
+
+			// Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 			System.out.println("other exception, Test failed/by passed");
-						
+
 		}
 
 	}
 
-	//Find the elements in the current wizard page and fills the HashMap with its count and element Type
+	// Find the elements in the current wizard page and fills the HashMap with its
+	// count and element Type
 	public HashMap<String, Integer> FindElements() {
 
 		// By elementsCount = By.cssSelector(".questions-content-container >
@@ -678,8 +642,6 @@ public class ProcessPage extends TestBase {
 
 			}
 
-			
-
 			System.out.println("className: " + className);
 
 			if (className == "form-group")
@@ -698,8 +660,6 @@ public class ProcessPage extends TestBase {
 
 			System.out.println("fieldType: " + fieldType);
 
-			
-
 			if (i > 1 && fieldType != null)
 				if (ele.get(className) == null)
 					ele.put(fieldType, 1);
@@ -711,7 +671,8 @@ public class ProcessPage extends TestBase {
 
 	}
 
-	//Find the child elements in the current wizard page and fills the HashMap with its count and element Type
+	// Find the child elements in the current wizard page and fills the HashMap with
+	// its count and element Type
 	public HashMap<String, Integer> childElements() {
 
 		String fieldType = null;
@@ -730,8 +691,8 @@ public class ProcessPage extends TestBase {
 		int i = 0;
 		for (WebElement option : options) {
 			/*
-			 * if (option.getText().equali=0s(searchText)) { option.click(); //
-			 * click the desired option
+			 * if (option.getText().equali=0s(searchText)) { option.click(); // click the
+			 * desired option
 			 * 
 			 * }
 			 */
@@ -773,9 +734,8 @@ public class ProcessPage extends TestBase {
 		}
 		return ele;
 	}
-		
-	
-	//Checks the elements in the current wizard page
+
+	// Checks the elements in the current wizard page
 	public Iterator<WebElement> checkElement(int size, By byElement) {
 
 		if (size > 0) {
@@ -787,10 +747,9 @@ public class ProcessPage extends TestBase {
 
 	}
 
-	
-
-	//Checks the current wizard page to fill the input 
-	public boolean checkPage(Iterator<WebElement> l, Iterator<WebElement> f, By byL, By byF, String pageType, String sheetName) {
+	// Checks the current wizard page to fill the input
+	public boolean checkPage(Iterator<WebElement> l, Iterator<WebElement> f, By byL, By byF, String pageType,
+			String sheetName) {
 
 		int i = 0;
 		boolean flag = true;
@@ -813,14 +772,15 @@ public class ProcessPage extends TestBase {
 
 	}
 
-	
-	//Gets the label from the UI and read the corresponding value from the Input sheet 
-	public boolean mapUIFieldtoInputData(Iterator<WebElement> l, Iterator<WebElement> f, int i, String pageType, String sheetName) {
+	// Gets the label from the UI and read the corresponding value from the Input
+	// sheet
+	public boolean mapUIFieldtoInputData(Iterator<WebElement> l, Iterator<WebElement> f, int i, String pageType,
+			String sheetName) {
 
 		String FieldType, FieldValue = null, breakPoint = null, temp = null;
-		//Iterator tempIt = f;
+		// Iterator tempIt = f;
 		WebElement elementL = l.next();
-		//WebElement elementF = f.next();
+		// WebElement elementF = f.next();
 		WebElement elementF = null;
 
 		boolean flag = false;
@@ -828,50 +788,54 @@ public class ProcessPage extends TestBase {
 		// String returnText =element.getAttribute("type").toString();
 
 		String returnText = elementL.getText().toString();
-		
+
 		System.out.println("before returnText: " + returnText);
-		
-		
+
 		List<WebElement> labels = driver.findElements(By.cssSelector(".c-subheader-text.fs18.col-sm-12"));
-		
-		List<WebElement> buttons = driver.findElements(By.cssSelector("button[class='c-button-default circular single-select-btn  btn btn-default']"));
-		
-		
-		if(buttons.size()<=2){		
-			if (labels.size()==2) temp = driver.findElement(By.xpath("//div[@class='questions-content-container']//child::*//following-sibling::*//div")).getText().toString();
+
+		List<WebElement> buttons = driver.findElements(
+				By.cssSelector("button[class='c-button-default circular single-select-btn  btn btn-default']"));
+
+		if (buttons.size() <= 2) {
+			if (labels.size() == 2)
+				temp = driver
+						.findElement(By.xpath(
+								"//div[@class='questions-content-container']//child::*//following-sibling::*//div"))
+						.getText().toString();
 			System.out.println("temp returnText: " + temp);
-			if(Testutil.isNullOrEmpty(temp))
+			if (Testutil.isNullOrEmpty(temp))
 				System.out.println("returnText is null");
 			else
 				returnText = temp;
 		}
 
-		
-		
-		
-		
 		System.out.println("after returnText: " + returnText);
 
-		int len = returnText.length();
+		/*
+		 * if (returnText.charAt(0) == '*' && len > 1) returnText =
+		 * returnText.substring(len - (len - 1));
+		 */
 
-		/*if (returnText.charAt(0) == '*' && len > 1)
-			returnText = returnText.substring(len - (len - 1));*/
-		
-		if (returnText.charAt(len-1) == '*' && len > 1)
-			returnText = returnText.substring(0, (len - 1));
+		/*
+		 * int len = returnText.length(); if (returnText.charAt(len-1) == '*' && len >
+		 * 1) returnText = returnText.substring(0, (len - 1));
+		 * 
+		 * // String value = Testutil.getFromXls("Questions", "Question", //
+		 * returnText);
+		 * 
+		 * String lines[] = returnText.split("\\r?\\n");
+		 * 
+		 * if(lines.length>0) returnText = lines[0];
+		 * 
+		 */
 
-		// String value = Testutil.getFromXls("Questions", "Question",
-		// returnText);
-		
-		String lines[] = returnText.split("\\r?\\n");
-		
-		if(lines.length>0) returnText = lines[0];
-		
 		returnText = returnText.trim();
-		
+
+		returnText = returnText.replace("*", "");
+
 		System.out.println("formated returnText: " + returnText);
-		
-		//gets the inputData for the corresponding Label
+
+		// gets the inputData for the corresponding Label
 		String value = Testutil.getFromHashMap(inputData, returnText);
 		System.out.println("value:" + value);
 
@@ -885,7 +849,6 @@ public class ProcessPage extends TestBase {
 		}
 
 		if (value == "" || nullValue || flag) {
-			
 
 			FieldType = pageType;
 
@@ -894,8 +857,6 @@ public class ProcessPage extends TestBase {
 
 		} else {
 			String inputValues[] = value.split("_");
-
-			
 
 			if (inputValues.length > 2) {
 				breakPoint = inputValues[2];
@@ -908,22 +869,20 @@ public class ProcessPage extends TestBase {
 
 			nullValue = Testutil.isNullOrEmpty(breakPoint);
 
-			if (!nullValue){
-				
+			if (!nullValue) {
+
 				String curr_URL = driver.getCurrentUrl();
 				int row_num = xls.getCellRowNum(sheetName, "BreakPoint", breakPoint);
 				xls.setCellData(sheetName, "URL", row_num, curr_URL);
 				return false;
-				
+
 			}
 
-			
-			
-			int count=0;
+			int count = 0;
 
-			//if (returnText.contains(Testutil.doubleButtos)) {
-				
-			if (pageType.contains("button")) {	
+			// if (returnText.contains(Testutil.doubleButtos)) {
+
+			if (pageType.contains("button")) {
 
 				count++;
 				Testutil.doubleButtosFlag = true;
@@ -940,37 +899,30 @@ public class ProcessPage extends TestBase {
 				} catch (NoSuchElementException e) {
 					System.out.println("multiple buttons in a page not found");
 				}
-				
-				if (count>1) Testutil.doubleButtosFlag = false;
+
+				if (count > 1)
+					Testutil.doubleButtosFlag = false;
 
 			}
-
-			
 
 			int len1 = FieldValue.length();
 
 			if (FieldValue.contains("."))
 				FieldValue = FieldValue.substring(0, len1 - 2);
-			
-			
-			
 
 		}
-		
-		
+
 		if (returnText.contains("Home Address (")) {
-			
-			//By byGoogleAutoCompleteF = By.cssSelector(".form-group .field .google-autocomplete-input-container");
-			
+
+			// By byGoogleAutoCompleteF = By.cssSelector(".form-group .field
+			// .google-autocomplete-input-container");
+
 			WebElement elementGoogleF = driver.findElement(By.xpath("//input[@autocomplete]"));
-			
-			FillData(elementGoogleF, "autoGoogle", FieldValue);			
-			
-			
-			
-			
-		} else{
-			
+
+			FillData(elementGoogleF, "autoGoogle", FieldValue);
+
+		} else {
+
 			elementF = f.next();
 
 			FillData(elementF, FieldType, FieldValue);
@@ -980,7 +932,7 @@ public class ProcessPage extends TestBase {
 
 	}
 
-	//for future use
+	// for future use
 	public String IdentifyWebElementType(WebElement elementL, String returnText) {
 
 		String FieldType;
@@ -1163,7 +1115,7 @@ public class ProcessPage extends TestBase {
 						elementF.click();
 					else
 						elementF.click();
-						//noButton.click();
+					// noButton.click();
 				}
 			} else {
 				if (nullValue) {
@@ -1202,12 +1154,12 @@ public class ProcessPage extends TestBase {
 			else
 				elementF.sendKeys(FieldValue);
 
-			//Testutil.staticWait();
-			//byXpath = By.xpath("//ul[@class='dropdown-menu']");
+			// Testutil.staticWait();
+			// byXpath = By.xpath("//ul[@class='dropdown-menu']");
 			// selectAutoSugg.click();
 			// driver.findElement(By.xpath("//ul[@class='dropdown-menu']//li[1]//a//div")).click();
 			// driver.findElement(By.xpath("//ul[@class='dropdown-menu']//li[1]//a//div")).submit();
-			//selectOptionWithIndex(byXpath, "li", 1);
+			// selectOptionWithIndex(byXpath, "li", 1);
 
 			break;
 		case "DatePicker":
@@ -1307,6 +1259,3 @@ public class ProcessPage extends TestBase {
 	}
 
 }
-
-
-

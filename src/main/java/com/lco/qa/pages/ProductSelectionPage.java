@@ -205,9 +205,9 @@ public class ProductSelectionPage extends TestBase {
 				break;
 			}
 		
-			WaitForAzaxComponentToLoad(By.cssSelector(".plan-total-text"));
+			//WaitForAzaxComponentToLoad(By.cssSelector(".plan-total-text"));
 		
-			nextFinalBtn.click();
+			//nextFinalBtn.click();
 			return new ProductSelectionPage();
 			
 			

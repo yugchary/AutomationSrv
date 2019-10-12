@@ -228,16 +228,40 @@ public class BeneficiariesPage extends TestBase {
 			
 			Testutil.staticLongWait();
 			
-			paymentPage.paymentTypeFlow(rowNum, paymentType);
 			
-			Testutil.staticLongWait();
+			switch (paymentType) {
 			
-			signaturePage.signDoc(rowNum, "Customer Payment form signature");
-			Testutil.updateResult(Testutil.resultSheet, "Customer Payment form signature", rowNum, "Pass");
+			case "Check Or 1035 Transfer":
+			case "Bill Me":
+				
+				paymentPage.paymentTypeFlow(rowNum, paymentType);
+				
+				msg="Our underwriters will review your application. This may take anywhere between 3-5 business days.";
+				
+				if(ProductUtil.msgExist(rowNum, By.xpath("//div[@class='hidden-xs row']//*[contains(text(), '"+ msg +"')]"), msg)) {
+					returnFlag = true;
+					break;
+				}
+				
+				break;
 			
-			Testutil.staticLongWait();
+				
+			default:
+				paymentPage.paymentTypeFlow(rowNum, paymentType);
+				
+				Testutil.staticLongWait();
+				
+				signaturePage.signDoc(rowNum, "Customer Payment form signature");
+				Testutil.updateResult(Testutil.resultSheet, "Customer Payment form signature", rowNum, "Pass");
+				
+				Testutil.staticLongWait();
+				
+				returnFlag= signaturePage.signTypeFlow(rowNum, signType, paymentType);
+				break;
 			
-			returnFlag= signaturePage.signTypeFlow(rowNum, signType, paymentType);
+			
+			}
+			
 			
 			
 			break;
