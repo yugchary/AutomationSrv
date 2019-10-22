@@ -292,6 +292,14 @@ public class SignaturePage extends TestBase {
 				break;
 			}
 			
+			
+			msg="Congratulations you are approved! Please be on the lookout for an email from";
+			
+			if(ProductUtil.msgExist(rowNum, By.xpath("//*[contains(text(), '"+ msg +"')]"), msg)) {
+				returnFlag = true;
+				break;
+			}
+			
 			ProductUtil.clickButton("Continue to Customer Signature");
 			Testutil.staticLongWait();
 			signDoc(rowNum, "Application PDF");

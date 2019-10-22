@@ -1,4 +1,5 @@
 package com.lco.qa.util;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,7 +21,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class Xlsutil {
-	
+
 	public String path;
 	public FileInputStream fis = null;
 	public FileOutputStream fileOut = null;
@@ -35,17 +36,16 @@ public class Xlsutil {
 		try {
 			fis = new FileInputStream(path);
 			workbook = new XSSFWorkbook(fis);
-			//sheet = workbook.getSheetAt(0);
+			// sheet = workbook.getSheetAt(0);
 			sheet = workbook.getSheet(sheetName);
-			
-			
+
 			fis.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	// returns the row count in a sheet
 	public int getRowCount(String sheetName) {
 		int index = workbook.getSheetIndex(sheetName);
@@ -58,22 +58,22 @@ public class Xlsutil {
 		}
 
 	}
-	
+
 	// returns number of columns in a sheet
 	public int getColumnCount(String sheetName) {
-			// check if sheet exists
-			if (!isSheetExist(sheetName))
-				return -1;
+		// check if sheet exists
+		if (!isSheetExist(sheetName))
+			return -1;
 
-			sheet = workbook.getSheet(sheetName);
-			row = sheet.getRow(0);
+		sheet = workbook.getSheet(sheetName);
+		row = sheet.getRow(0);
 
-			if (row == null)
-				return -1;
+		if (row == null)
+			return -1;
 
-			return row.getLastCellNum();
+		return row.getLastCellNum();
 
-		}
+	}
 
 	// returns the data from a cell
 	public String getCellData(String sheetName, String colName, int rowNum) {
@@ -104,6 +104,13 @@ public class Xlsutil {
 
 			if (cell == null)
 				return "";
+			
+			if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+				cell.setCellType(Cell.CELL_TYPE_STRING);			
+				String cellText = cell.getStringCellValue();
+				//System.out.println(cellText);
+				return cellText;
+			}
 			// System.out.println(cell.getCellType());
 			if (cell.getCellType() == Cell.CELL_TYPE_STRING)
 				return cell.getStringCellValue();
@@ -154,14 +161,20 @@ public class Xlsutil {
 			cell = row.getCell(colNum);
 			if (cell == null)
 				return "";
+			
+			if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+				cell.setCellType(Cell.CELL_TYPE_STRING);			
+				String cellText = cell.getStringCellValue();
+				//System.out.println(cellText);
+				return cellText;
+			}
 
 			if (cell.getCellType() == Cell.CELL_TYPE_STRING)
 				return cell.getStringCellValue();
 			else if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC || cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
 
 				String cellText = String.valueOf(cell.getNumericCellValue());
-				if (HSSFDateUtil.isCellDateFormatted(cell)) {
-					// format in form of M/D/YY
+				if (HSSFDateUtil.isCellDateFormatted(cell)) { // format in form of M/D/YY double
 					double d = cell.getNumericCellValue();
 
 					Calendar cal = Calendar.getInstance();
@@ -172,6 +185,8 @@ public class Xlsutil {
 					// System.out.println(cellText);
 
 				}
+				
+				
 
 				return cellText;
 			} else if (cell.getCellType() == Cell.CELL_TYPE_BLANK)
@@ -239,7 +254,7 @@ public class Xlsutil {
 	}
 
 	// returns true if data is set successfully else false
-	
+
 	// returns true if sheet is created successfully else false
 	public boolean addSheet(String sheetname) {
 
@@ -276,8 +291,6 @@ public class Xlsutil {
 		return true;
 	}
 
-
-	
 	// find whether sheets exists
 	public boolean isSheetExist(String sheetName) {
 		int index = workbook.getSheetIndex(sheetName);
@@ -291,10 +304,9 @@ public class Xlsutil {
 			return true;
 	}
 
-	
 	// String sheetName, String testCaseName,String keyword ,String URL,String
 	// message
-	
+
 	public int getCellRowNum(String sheetName, String colName, String cellValue) {
 
 		for (int i = 2; i <= getRowCount(sheetName); i++) {
@@ -306,6 +318,4 @@ public class Xlsutil {
 
 	}
 
-	
-	
 }

@@ -39,7 +39,8 @@ public class PersonalPageTest extends TestBase {
 
 	@BeforeMethod
 	public void setup() {
-		url = prop.getProperty("url");
+		//url = prop.getProperty("url");
+		url = "https://google.co.in";
 		initialization(url);
 		personalPage = new PersonalPage();
 		//processPage = new ProcessPage();

@@ -111,9 +111,9 @@ public class ProcessPage extends TestBase {
 
 		String url = "https://vantislifeinsurancestg.sureify.com/questions?user=bmtwR3Y3VnZadE5NLy83SkkxbG1vQT09&text_accepted=No&vdtca&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&ipAddress=192.168.1.110&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1550364678937&q_id=d3B1RlpsUUpMNkdYY2Y0MStFQ1Nydz09&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&auth_code=Lq5nLFCGGzXq6dOb1ZkTO7vx1Wc4lM";
 
-		url = "https://vantislifeinsurancestg.sureify.com/questions?user=enFLeWZXdEZYRlBlZTlCQ0p6dGRZdz09&q_id=RGpyNHF4RW1tTzlpTFQwUVExbnBSQT09&auth_code=imYWgc5iOX3qI4xD51rEeGuPcM1hML&transaction_id=1c3a9f40-a3db-11e9-85c4-1dd9bff47fa9_1562849707828";
+		url = "https://vantislifeinsurancestg.sureify.com/questions?user=bGUwZDVvZHNiTFRjSDlaZkZQZ21Wdz09&text_accepted=No&vdtca&ipAddress=192.168.43.249&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1571719099145&page_id=NEXT_STEPS_PAGE_ID&page_title=NEXT_STEPS_PAGE&q_id=cVpuYzBCQ0lpc0lFM2xsRjgvYno2Zz09&transaction_id=4c586540-f485-11e9-a580-6b1cb3958247_1571718896020&auth_code=SN56ZFD8aFOAyWXQcrtLFitDBwOlE6";
 
-		url = "https://mail.google.com/mail/u/0/#inbox";
+		// url = "https://mail.google.com/mail/u/0/#inbox";
 
 		// url =
 		// "https://demo.docusign.net/Signing/?insession=1&ti=d901d7b23d724d5eb5d5234f98e42af5";
@@ -153,9 +153,8 @@ public class ProcessPage extends TestBase {
 		// ProcessFields("customer", itrCount, "Customer", "In Person E Signature",
 		// "cc");
 
-		// ProcessFields(2, "customer", itrCount, "Customer", "In Person E Signature",
-		// "cc");
-		ProcessFields(2, "agent", itrCount, "Agent", "Email E Signature", "eft");
+		ProcessFields(2, "customer", itrCount, "Customer", "In Person E Signature", "cc");
+		// ProcessFields(2, "agent", itrCount, "Agent", "Email E Signature", "eft");
 
 		// payment("cc");
 
@@ -255,9 +254,10 @@ public class ProcessPage extends TestBase {
 
 			byButtonL = By.cssSelector(".c-subheader-text.fs18.col-sm-12");
 
-			//byButtonF = By.cssSelector(".single-select-btn-container .c-button-default");
-			//byNoButtonF = By.cssSelector("button[class='c-button-default circular single-select-btn  btn btn-default']");
-			
+			// byButtonF = By.cssSelector(".single-select-btn-container .c-button-default");
+			// byNoButtonF = By.cssSelector("button[class='c-button-default circular
+			// single-select-btn btn btn-default']");
+
 			byButtonF = By.xpath("//div[@class='single-select-btn-container ']//button");
 			byNoButtonF = By.xpath("//div[@class='single-select-btn-container ']//following-sibling::div//button");
 
@@ -410,6 +410,7 @@ public class ProcessPage extends TestBase {
 					}
 				}
 
+				// to check flow is completed, left with single button
 				boolean singlebutton = false;
 
 				if (formFlag == 0 && checkboxFlag == 0 && buttonFlag == 0 && dropDownFlag == 0 && autoSuggFlag == 0
@@ -783,11 +784,14 @@ public class ProcessPage extends TestBase {
 		// WebElement elementF = f.next();
 		WebElement elementF = null;
 
-		boolean flag = false;
+		boolean flag = false, buttonFlag = true;
+		
 
 		// String returnText =element.getAttribute("type").toString();
 
 		String returnText = elementL.getText().toString();
+
+		String doubleButtonText = returnText;
 
 		System.out.println("before returnText: " + returnText);
 
@@ -796,6 +800,7 @@ public class ProcessPage extends TestBase {
 		List<WebElement> buttons = driver.findElements(
 				By.cssSelector("button[class='c-button-default circular single-select-btn  btn btn-default']"));
 
+		// logic to handle Medical questions with 2 question headings
 		if (buttons.size() <= 2) {
 			if (labels.size() == 2)
 				temp = driver
@@ -805,9 +810,18 @@ public class ProcessPage extends TestBase {
 			System.out.println("temp returnText: " + temp);
 			if (Testutil.isNullOrEmpty(temp))
 				System.out.println("returnText is null");
-			else
+			else {
 				returnText = temp;
+				//Testutil.doubleButtonsCount = 0;
+				// medical question with 2 buttons
+				buttonFlag = false;
+			}
+				
 		}
+
+		// logic to handle Medical questions with 2 button questions
+		if (returnText.contains("YesNo"))
+			returnText = doubleButtonText;
 
 		System.out.println("after returnText: " + returnText);
 
@@ -878,14 +892,25 @@ public class ProcessPage extends TestBase {
 
 			}
 
-			int count = 0;
+			int len1 = FieldValue.length();
 
+			if (FieldValue.contains("."))
+				FieldValue = FieldValue.substring(0, len1 - 2);
+
+			// int count = 0;
 			// if (returnText.contains(Testutil.doubleButtos)) {
 
 			if (pageType.contains("button")) {
 
-				count++;
-				Testutil.doubleButtosFlag = true;
+				// logic to handle Medical questions with 4 button questions where we need to click next
+				
+				buttons = driver.findElements(
+						By.cssSelector("button[class='c-button-default circular single-select-btn active btn btn-default']"));
+				
+				
+				if ((buttons.size() == 2)) {
+					Testutil.doubleButtonsCount++;					
+				}
 
 				try {
 
@@ -895,37 +920,41 @@ public class ProcessPage extends TestBase {
 					else
 						elementF = driver.findElement(By.xpath("//div[contains(text(),'" + returnText
 								+ "')]//following-sibling::*//div//button[contains(text(),'Yes')]"));
+					
+					
 
 				} catch (NoSuchElementException e) {
 					System.out.println("multiple buttons in a page not found");
 				}
 
-				if (count > 1)
-					Testutil.doubleButtosFlag = false;
+				if (Testutil.doubleButtonsCount == 2)
+					Testutil.doubleButtosFlag = true;		
 
 			}
 
-			int len1 = FieldValue.length();
-
-			if (FieldValue.contains("."))
-				FieldValue = FieldValue.substring(0, len1 - 2);
-
 		}
 
+		// in this page the label and field id's are not in sync
 		if (returnText.contains("Home Address (")) {
 
-			// By byGoogleAutoCompleteF = By.cssSelector(".form-group .field
-			// .google-autocomplete-input-container");
-
+			By byGoogleAutoCompleteF = By.cssSelector(".form-group .field .google-autocomplete-input-container");
 			WebElement elementGoogleF = driver.findElement(By.xpath("//input[@autocomplete]"));
-
-			FillData(elementGoogleF, "autoGoogle", FieldValue);
+			FillData(elementGoogleF, "autoGoogle", FieldValue, returnText);
 
 		} else {
+			
+			//handle medical questions with 2 and 4 buttons
+			if (Testutil.doubleButtonsCount <=0 && buttonFlag ) {
+				elementF = f.next();
+				
+			}
+			
+			//reseting the count
+			if(Testutil.doubleButtosFlag)
+				Testutil.doubleButtonsCount = 0;
+			
+			FillData(elementF, FieldType, FieldValue, returnText);
 
-			elementF = f.next();
-
-			FillData(elementF, FieldType, FieldValue);
 		}
 
 		return true;
@@ -1003,7 +1032,7 @@ public class ProcessPage extends TestBase {
 		return FieldType;
 	}
 
-	public void FillData(WebElement elementF, String FieldType, String FieldValue) {
+	public void FillData(WebElement elementF, String FieldType, String FieldValue, String FieldName) {
 
 		boolean nullValue = Testutil.isNullOrEmpty(FieldValue);
 		// String iFieldType = FieldType.compareToIgnoreCase(str);
@@ -1127,7 +1156,13 @@ public class ProcessPage extends TestBase {
 						noButton.click();
 				}
 			}
-			// elementF.click();
+			
+			/*
+			 * if (nullValue) noButton.click(); else elementF.click();
+			 */
+			
+			
+			
 			break;
 		case "MultiSelection":
 			break;
@@ -1148,7 +1183,9 @@ public class ProcessPage extends TestBase {
 
 			break;
 		case "autoGoogle":
+						
 			elementF.click();
+			
 			if (nullValue)
 				elementF.sendKeys("ab");
 			else

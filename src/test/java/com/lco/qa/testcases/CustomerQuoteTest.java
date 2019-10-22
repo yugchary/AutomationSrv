@@ -52,6 +52,7 @@ public class CustomerQuoteTest extends TestBase {
 	@BeforeMethod
 	public void setup() {
 		url = prop.getProperty("url");
+		//url = "https://google.co.in";
 		initialization(url);
 		productSelectionPage = new ProductSelectionPage();
 		quoteInformationPage = new QuoteInformationPage();
@@ -82,7 +83,14 @@ public class CustomerQuoteTest extends TestBase {
 		log.info(
 				"****************************** Ending actionPageTitleTest test cases execution *****************************************");
 	}
-
+    
+	@Test(enabled = false)
+	public void loginTest() {
+		extentTest = extent.startTest("loginPageTitleTest");
+		processPage = processPage.SampleTest(prop.getProperty("username"), prop.getProperty("password"));
+	}
+	
+	
 	@Test(dataProvider = "getData", enabled = false)
 	public void continueToApplication(String FirstName, String DateOfBirth, String Gender, String State,
 			String tobaccoUse, String healthRate, String stateCode) {

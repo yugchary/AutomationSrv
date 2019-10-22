@@ -57,6 +57,7 @@ public class Testutil extends TestBase {
 	public static String resultSheet = "Result";
 
 	public static boolean doubleButtosFlag = false;
+	public static int doubleButtonsCount = 0;
 	public static String doubleButtos = "Is the Proposed Insured currently confined to a hospital, nursing home, psychiatric facility or currently receiving home health care/assisted living care?";
 
 	static Workbook book;
@@ -135,6 +136,8 @@ public class Testutil extends TestBase {
 				// tabArray[ci][cj] = getCellData(i, j);
 
 				tabArray[ci][cj] = xl.getCellData(SheetName, j - 1, i);
+				
+				
 
 				//System.out.println(tabArray[ci][cj]);
 
