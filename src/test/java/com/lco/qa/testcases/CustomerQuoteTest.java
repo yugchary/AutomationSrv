@@ -99,7 +99,7 @@ public class CustomerQuoteTest extends TestBase {
 		extentTest = extent.startTest("actionPageTitleTest");
 		DateOfBirth = DateOfBirth.replace(".", "/");
 		quoteInformationPage.Quote(2, FirstName, "yug@sureify.com", DateOfBirth, Gender, State, tobaccoUse, healthRate);
-		productSelectionPage.ProductSelection(2);
+		productSelectionPage.ProductSelection(2, "");
 		System.out.println("product selected");
 		productSelectionPage.FinalizeProductSelection(2);
 		System.out.println("selected quote");
@@ -116,8 +116,8 @@ public class CustomerQuoteTest extends TestBase {
 	}
 
 	@Test(dataProvider = "getData", enabled = true)
-	public void selfQuote(String Num, String FirstName, String Email, String DateOfBirth, String Gender, String State,
-			String tobaccoUse, String healthRate, String distribution, String product, String requestType,
+	public void selfQuote(String Num, String FirstName, String Email, String Gender, String DateOfBirth, String State,
+			String healthRate, String tobaccoUse, String product, String distribution, String requestType,
 			String signType, String paymentMethod) {
 		log.info(
 				"****************************** Starting selfQuote test cases execution *****************************************");
@@ -147,8 +147,12 @@ public class CustomerQuoteTest extends TestBase {
 		//Assert.assertNotEquals(actual1, actual2);
 		
 		//Assert.assertNotEquals(quoteInformationPage, null);
+		
+		
+		
+		//productSelectionPage = productSelectionPage.GetProductIndex(2, "");
 
-		productSelectionPage = productSelectionPage.ProductSelection(2);
+		productSelectionPage = productSelectionPage.ProductSelection(2, product.trim());
 
 		Assert.assertNotNull(productSelectionPage);
 		

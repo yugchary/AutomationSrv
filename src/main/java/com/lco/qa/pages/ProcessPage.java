@@ -65,7 +65,8 @@ public class ProcessPage extends TestBase {
 	@FindBy(xpath = "//div[@class='react-datepicker__week']//div[@aria-label='day-12']")
 	WebElement dateSelect;
 
-	@FindBy(xpath = "//div[contains(text(),'State')]//following-sibling::*//span[@class='Select-multi-value-wrapper']//input")
+	//@FindBy(xpath = "//div[contains(text(),'State')]//following-sibling::*//span[@class='Select-multi-value-wrapper']//input")
+	@FindBy(xpath = "//div//following-sibling::*//span[@class='Select-multi-value-wrapper']//input")
 	WebElement stateValue;
 
 	@FindBy(xpath = "//div[contains(text(),'Customer Signature Type')]//following-sibling::*//span[@class='Select-multi-value-wrapper']//input")
@@ -111,7 +112,7 @@ public class ProcessPage extends TestBase {
 
 		String url = "https://vantislifeinsurancestg.sureify.com/questions?user=bmtwR3Y3VnZadE5NLy83SkkxbG1vQT09&text_accepted=No&vdtca&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&ipAddress=192.168.1.110&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1550364678937&q_id=d3B1RlpsUUpMNkdYY2Y0MStFQ1Nydz09&transaction_id=13a55130-324e-11e9-aff3-8fff83072c1a_1550364652995&auth_code=Lq5nLFCGGzXq6dOb1ZkTO7vx1Wc4lM";
 
-		url = "https://vantislifeinsurancestg.sureify.com/questions?user=bGUwZDVvZHNiTFRjSDlaZkZQZ21Wdz09&text_accepted=No&vdtca&ipAddress=192.168.43.249&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1571719099145&page_id=NEXT_STEPS_PAGE_ID&page_title=NEXT_STEPS_PAGE&q_id=cVpuYzBCQ0lpc0lFM2xsRjgvYno2Zz09&transaction_id=4c586540-f485-11e9-a580-6b1cb3958247_1571718896020&auth_code=SN56ZFD8aFOAyWXQcrtLFitDBwOlE6";
+		url = "https://vantislifeinsurancestg.sureify.com/questions?user=VTllQmZkNjBvQ3JhQmlQREVsMmlodz09&text_accepted=No&vdtca&ipAddress=192.168.43.249&timezoneOffset=-330&timezoneFormatted=GMT%200530%20(India%20Standard%20Time)&currentTime=1571794941897&page_id=NEXT_STEPS_PAGE_ID&page_title=NEXT_STEPS_PAGE&q_id=TXU1YXRjamYyTFFYdWp0cnJlaGkvZz09&transaction_id=40d08fc0-f536-11e9-818e-3f2d4a1ed244_1571794897596&auth_code=Wm4zZC17UaOG3mBUJv8B1Th3SJ4B8t";
 
 		// url = "https://mail.google.com/mail/u/0/#inbox";
 
@@ -844,6 +845,17 @@ public class ProcessPage extends TestBase {
 		 */
 
 		returnText = returnText.trim();
+		
+		String rawText = returnText;
+		
+		//for handling non-mandatory fields
+		boolean non_mandatoryFlag = false;
+		
+		if (!rawText.contains(("*"))) {
+			non_mandatoryFlag = true;		
+			elementF = f.next();
+			return true;
+		}
 
 		returnText = returnText.replace("*", "");
 
@@ -865,6 +877,7 @@ public class ProcessPage extends TestBase {
 		if (value == "" || nullValue || flag) {
 
 			FieldType = pageType;
+			System.out.println("i FieldType: " + i + FieldType);
 
 			// t.next().click();
 			System.out.println("i value: " + i + returnText);
@@ -951,7 +964,9 @@ public class ProcessPage extends TestBase {
 			
 			//reseting the count
 			if(Testutil.doubleButtosFlag)
-				Testutil.doubleButtonsCount = 0;
+				Testutil.doubleButtonsCount = 0;			
+			
+			
 			
 			FillData(elementF, FieldType, FieldValue, returnText);
 

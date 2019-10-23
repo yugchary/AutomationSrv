@@ -101,10 +101,14 @@ public class ProductSelectionPage extends TestBase {
 
 	}
 
-	public ProductSelectionPage ProductSelection(int rowNum) {
+	public ProductSelectionPage ProductSelection(int rowNum, String productName) {
 		
 		
 		//driver.findElement(By.cssSelector(".c-center.mt50.row .quote-this-product-container")).e
+		
+		int j = GetProductIndex(rowNum, productName);
+		
+		if (j==0) return null;
 		
 		try{
 			
@@ -119,8 +123,12 @@ public class ProductSelectionPage extends TestBase {
 			if (list.size()>0) {
 				while (t.hasNext()) {
 					i++;
-					t.next().click();
-					break;
+					
+					if (i == j) {
+						t.next().click();
+						break;
+					}
+					t.next();
 
 				}
 				nextBtn.click();
@@ -132,7 +140,7 @@ public class ProductSelectionPage extends TestBase {
 	        		System.out.println("No products available - message is NOT displayed");
 			}
 			
-			
+			//if (i==list.size()) return null;
 			
 			return new ProductSelectionPage();
 			
@@ -151,6 +159,67 @@ public class ProductSelectionPage extends TestBase {
 
 	}
 
+public int GetProductIndex(int rowNum, String productName) {
+		
+		
+		//driver.findElement(By.cssSelector(".c-center.mt50.row .quote-this-product-container")).e
+		
+		try{
+			
+			List<WebElement> list = driver.findElements(By.cssSelector(".single-product-container .single-product-content .header"));
+
+			System.out.println(list.size());
+
+			Iterator<WebElement> t = list.iterator();
+
+			int i = 0;
+			String getProductName = null;
+			
+			if (list.size()>0) {
+				while (t.hasNext()) {
+					i++;
+					
+					//System.out.println(t.next().getText());
+					
+				    
+					
+					getProductName = t.next().getText().trim();
+					
+					if (getProductName.equalsIgnoreCase(productName)) {
+						break;
+					}
+				}
+				
+			}else {
+				String returnText = driver.findElement(By.cssSelector(".c-center .inner-no-product-container")).getAttribute("innerHTML").toString();
+				if (returnText.contains("No products available"))
+	            	System.out.println("No products available - message is displayed");
+	        	else
+	        		System.out.println("No products available - message is NOT displayed");
+			}
+			
+			
+			
+			return i;
+			
+			
+			
+		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
+			System.out.println("other exception, Quote failed, Product Not Selected");
+			Testutil.updateResult(Testutil.resultSheet, "Quote", rowNum, "Fail");
+			Testutil.updateResult(Testutil.resultSheet, "Comments", rowNum, "other exception, Quote failed, Product Not Selected");
+			return 0; 
+			
+		}
+
+		
+
+	}
+
+
+	
+	
 	public void WaitForAzaxComponentToLoad(By by) {
 
 		List<WebElement> listItem = driver.findElements(by);

@@ -82,7 +82,7 @@ public class ProductSelectionTest extends TestBase {
 		
 		quoteInformationPage = quoteInformationPage.Quote(2, FirstName, "yug@sureify.com", DateOfBirth, Gender, State, tobaccoUse, healthRate);
 		
-		productSelectionPage = productSelectionPage.ProductSelection(2);
+		productSelectionPage = productSelectionPage.ProductSelection(2, "");
 		log.info("****************************** Ending selectProduct test cases execution *****************************************");
 	}
 	
@@ -91,7 +91,7 @@ public class ProductSelectionTest extends TestBase {
 		
 		log.info("****************************** Starting FinalizeProduct test cases execution *****************************************");
 		extentTest = extent.startTest("FinalizeProduct");
-		productSelectionPage.ProductSelection(2);
+		productSelectionPage.ProductSelection(2, "");
 		productSelectionPage.FinalizeProductSelection(2);
 		log.info("****************************** Ending FinalizeProduct test cases execution *****************************************");
 	}

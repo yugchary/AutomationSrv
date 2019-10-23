@@ -78,7 +78,7 @@ public class AgentWebQuoteTest extends TestBase {
 	
 	@DataProvider
 	Object[][] getData() throws Exception {
-		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Quote", 3, 12, 3, 1);
+		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Quote", 5, 13, 5, 1);
 	}
 
 	@Test(enabled = false)
@@ -105,7 +105,9 @@ public class AgentWebQuoteTest extends TestBase {
 	}
 
 	@Test(dataProvider = "getData", enabled = true)
-	public void agentQuote(String Num, String FirstName, String DateOfBirth, String Gender, String State, String tobaccoUse, String healthRate, String distribution, String product, String requestType, String signType, String paymentMethod) {
+	public void agentQuote(String Num, String FirstName, String Email, String Gender, String DateOfBirth, String State,
+			String healthRate, String tobaccoUse, String product, String distribution, String requestType,
+			String signType, String paymentMethod) {
 		log.info("****************************** Starting agentQuote test cases execution *****************************************");
 		extentTest = extent.startTest("agentQuote");
 		agentWebPage.agentWebLogin(prop.getProperty("username"), prop.getProperty("password"));
@@ -120,7 +122,7 @@ public class AgentWebQuoteTest extends TestBase {
 		
 		
 		
-		productSelectionPage = productSelectionPage.ProductSelection(2);
+		productSelectionPage = productSelectionPage.ProductSelection(2, product);
 		
 		Assert.assertNotNull(productSelectionPage);
 		
