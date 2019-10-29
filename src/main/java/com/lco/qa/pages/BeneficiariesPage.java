@@ -234,7 +234,9 @@ public class BeneficiariesPage extends TestBase {
 			case "Check Or 1035 Transfer":
 			case "Bill Me":
 				
-				paymentPage.paymentTypeFlow(rowNum, paymentType);
+				returnFlag = paymentPage.paymentTypeFlow(rowNum, paymentType);
+				
+				if (!returnFlag) break; 
 				
 				msg="Our underwriters will review your application. This may take anywhere between 3-5 business days.";
 				
@@ -247,7 +249,9 @@ public class BeneficiariesPage extends TestBase {
 			
 				
 			default:
-				paymentPage.paymentTypeFlow(rowNum, paymentType);
+				returnFlag = paymentPage.paymentTypeFlow(rowNum, paymentType);
+				
+				if (!returnFlag) break; 
 				
 				Testutil.staticLongWait();
 				
