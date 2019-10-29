@@ -49,7 +49,7 @@ public class ProductSelectionTest extends TestBase {
 	
 	@DataProvider
 	Object[][] getData() throws Exception {
-		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Quote1", 2, 7, 2, 1);
+		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH,"Quote1", 2, 7, 2, 1, 1);
 	}
 
 	@Test(enabled = false)

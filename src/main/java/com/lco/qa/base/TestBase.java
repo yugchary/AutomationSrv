@@ -45,10 +45,8 @@ public class TestBase {
 			// FileInputStream("C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\FreeCRMTests\\src\\main\\java\\com\\crm\\qa\\config\\config.properties");
 			// FileInputStream ip = new
 			// FileInputStream("C:\\Users\\akkyu01\\eclipse-workspace\\JavaTraining\\Sureify\\src\\main\\java\\com\\lco\\qa\\config\\config.properties");
-			FileInputStream ip = new FileInputStream(
-					"/home/yugander/Downloads/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/config/config.properties");
-			// FileInputStream ip = new
-			// FileInputStream("/usr/share/tag/config/config.properties");
+			FileInputStream ip = new FileInputStream("/home/yugander/Downloads/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/config/config.properties");
+			//FileInputStream ip = new FileInputStream("/usr/share/tag/config/config.properties");
 
 			// home/yugander/Downloads/git/ApplyandBuyAutomation/src/main/java/com/lco/qa/testdata/Input_Data.xlsx
 			prop.load(ip);
@@ -74,25 +72,24 @@ public class TestBase {
 			// LoanLap\\Yug\\Selenium\\chromedriver.exe");
 			// System.setProperty("webdriver.chrome.driver",BinariesLoc+"chromedriver.exe");
 			System.setProperty("webdriver.chrome.driver", BinariesLoc + "chromedriver");
-			driver = new ChromeDriver();
-
+			driver = new ChromeDriver();			
+			  
 			
-
 			/*
 			 * ChromeOptions options = new ChromeOptions();
 			 * 
 			 * try { // driver = new ChromeOptions(options); // driver = new
-			 * RemoteWebDriver(new // URL("http://localhost:4444/wd/hub"),options); //
-			 * driver = new RemoteWebDriver(new //
-			 * URL("http://172.18.0.4:5555/wd/hub"),options); driver = new
-			 * RemoteWebDriver(new URL(remoteWD_url), options);
+			 * RemoteWebDriver(new // URL("http://localhost:4444/wd/hub"),options); //driver
+			 * = new RemoteWebDriver(new // URL("http://172.18.0.4:5555/wd/hub"),options);
+			 * driver = new RemoteWebDriver(new URL(remoteWD_url), options);
 			 * 
-			 * // driver = new RemoteWebDriver(new URL("http://" + host + //
-			 * ":4444/wd/hub"),options);
+			 * // driver = new RemoteWebDriver(new URL("http://" + host +
+			 * //":4444/wd/hub"),options);
 			 * 
 			 * } catch (MalformedURLException e) { // TODO Auto-generated catch block
 			 * e.printStackTrace(); }
 			 */
+			 
 			
 		} else if (BrowserType.equalsIgnoreCase("IE")) {
 

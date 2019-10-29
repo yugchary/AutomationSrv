@@ -204,25 +204,35 @@ public class PaymentPage extends TestBase {
 				ProductUtil.selectDropdown("Withdrawl Date", "5th of the month");
 
 				ProductUtil.clickButton("Next");
-				ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+				
+				returnFlag = true;
+				break;
+				
+				
 
 			case "Check Or 1035 Transfer":
 
 				ProductUtil.selectDropdown("Will you pay", "Check Or 1035 Transfer");
 
 				ProductUtil.clickButton("Next");
+				returnFlag = true;
+				break;
 				
 			case "Bill Me":
 
 				ProductUtil.selectDropdown("Will you pay", "Bill Me");
 
 				ProductUtil.clickButton("Next");
+				returnFlag = true;
+				break;
 				
 			default:
 				break;
 
 			}
-			// Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
+			
+			ProductUtil.CheckElementDoNotExists(".fa.fa-circle-o-notch", true);
+			Testutil.updateResult(Testutil.resultSheet, "Payment Gateway", rowNum, "Pass");
 			return returnFlag;
 
 		} catch (Exception e) {

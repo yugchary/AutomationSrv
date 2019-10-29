@@ -135,6 +135,7 @@ public class QuoteInformationPage extends TestBase {
 			
 			
 			Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
+			Testutil.updateResult(Testutil.resultSheet, "Comments", rowNum, "Quote Passed");
 			return new QuoteInformationPage();
 			
 			

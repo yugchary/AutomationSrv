@@ -54,7 +54,7 @@ public class ProductUtil extends TestBase{
 		
 		Object[][] x = null;
 		try {
-			x = Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, SheetName, rowsCount, colsCount, 2, 1);
+			x = Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, SheetName, rowsCount, colsCount, 2, 1, rowsCount);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -153,13 +153,13 @@ public class ProductUtil extends TestBase{
 			
 			
 		    //Assert.assertTrue(yourButtonName.equalsIgnoreCase(msg));
-			Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);	
+			//Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);	
 			return returnFlag;
 		} catch (Exception e) {
 			System.out.println(e.getStackTrace());
 			System.out.println("other exception, msgExist failed");
 			//Testutil.updateResult(Testutil.resultSheet, "Quote", rowNum, "Fail");
-			Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
+			//Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
 			return false; 
 			
 		}

@@ -419,6 +419,8 @@ public class ProcessPage extends TestBase {
 
 					try {
 						flowFlag = true;
+						
+						Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Pass");
 						doneFlag = beneficiariesPage.addBeneficiaries(rowNum, clientType, signType, paymentType);
 						// errorFlag = true;
 						System.out.println("completed");
@@ -429,7 +431,7 @@ public class ProcessPage extends TestBase {
 						System.out.println("issue with sign-up/beneficiary not reached");
 						errorFlag = true;
 						singlebutton = true;
-						Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Fail");
+						Testutil.updateResult(Testutil.resultSheet, "Comments", rowNum, "issue with sign-up/beneficiary not reached");
 						Testutil.updateResult(Testutil.resultSheet, "URL", rowNum, currentURL);
 					} catch (Exception e) {
 						System.out.println(e.getStackTrace());
@@ -469,13 +471,13 @@ public class ProcessPage extends TestBase {
 
 				if (flag || agentFlag) {
 					System.out.println("execution completed for agent type");
-					Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Pass");
+					Testutil.updateResult(Testutil.resultSheet, "Comments", rowNum, "execution completed for agent type");
 					break;
 				}
 
 				if (!doneFlag && flowFlag) {
 					System.out.println("something went wrong");
-					Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Fail");
+					Testutil.updateResult(Testutil.resultSheet, "Comments", rowNum, "something went wrong in the entire flow");
 					break;
 				}
 
@@ -551,19 +553,19 @@ public class ProcessPage extends TestBase {
 
 				if (!breakFlag) {
 					System.out.println("break point stopped the execution");
-					Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Break");
+					Testutil.updateResult(Testutil.resultSheet, "Comments", rowNum, "break point stopped the execution");
 					break;
 				}
 
 				if (flag || doneFlag) {
 					System.out.println("execution completed");
-					Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Pass");
+					Testutil.updateResult(Testutil.resultSheet, "Comments", rowNum, "execution completed");
 					break;
 				}
 
 				if (errorFlag) {
 					System.out.println("execution completed with error");
-					Testutil.updateResult(Testutil.resultSheet, "Questions", rowNum, "Fail");
+					Testutil.updateResult(Testutil.resultSheet, "Comments", rowNum, "execution completed with error");
 					break;
 				}
 

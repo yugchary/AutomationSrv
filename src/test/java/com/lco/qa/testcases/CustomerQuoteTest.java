@@ -70,7 +70,7 @@ public class CustomerQuoteTest extends TestBase {
 
 	@DataProvider
 	Object[][] getData() throws Exception {
-		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, "Quote", 5, 13, 5, 1);
+		return Testutil.getTableArray(Testutil.TESTDATA_SHEET_PATH, "Quote", 5, 13, 5, 1, 1);
 	}
 
 	@Test(enabled = false)

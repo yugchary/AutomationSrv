@@ -8,6 +8,10 @@ RUN apt-get install -y jq
 
 RUN apt-get install -y iputils-ping
 
+RUN apt-get install -y libfreetype6-dev
+
+RUN apt-get install -y libfontconfig
+
 RUN export JAVA_OPTS="-Xmx12g -Xms12g"
 
 WORKDIR /usr/share/tag
@@ -25,7 +29,7 @@ ADD  target/selenium-LCO-docker.jar libs/selenium-LCO-docker.jar
 ADD  target/selenium-LCO-docker-tests.jar libs/selenium-LCO-docker-tests.jar
 
 #ADD  selenium_libs/chromedriver chromedriver
-#ADD  selenium_libs/geckodriver geckodriver
+#ADD  selenium_libs/geckodriver geckodrivera	
 
 ADD  src/main/resources/testNG_Sanity_lco.xml testNG_Sanity_lco.xml
 

@@ -279,26 +279,28 @@ public class SignaturePage extends TestBase {
     public boolean signTypeFlow(int rowNum, String signType, String paymentType){
     	
     	boolean returnFlag = false;
+    	
+    	String msg="Thank you! Your application has been submitted, we will be in touch with you shortly.";
+		
+		if(ProductUtil.msgExist(rowNum, By.xpath("//*[contains(text(), '"+ msg +"')]"), msg)) {
+			returnFlag = false;
+			//break;
+			return returnFlag;
+		}
+		
+		
+		msg="Congratulations you are approved! Please be on the lookout for an email from <a href=\"mailto:support@my-expedite.com\">support@my-expedite.com</a> with a link to download your policy.";
+		
+		if(ProductUtil.msgExist(rowNum, By.xpath("//*[contains(text(), '"+ msg +"')]"), msg)) {
+			returnFlag = true;
+			//break;
+			return returnFlag;
+		}
 
 		switch (signType) {
 
-		case "In Person E Signature":				
+		case "In Person E Signature":		
 			
-			
-			String msg="Thank you! Your application has been submitted, we will be in touch with you shortly.";
-			
-			if(ProductUtil.msgExist(rowNum, By.xpath("//*[contains(text(), '"+ msg +"')]"), msg)) {
-				returnFlag = false;
-				break;
-			}
-			
-			
-			msg="Congratulations you are approved! Please be on the lookout for an email from";
-			
-			if(ProductUtil.msgExist(rowNum, By.xpath("//*[contains(text(), '"+ msg +"')]"), msg)) {
-				returnFlag = true;
-				break;
-			}
 			
 			ProductUtil.clickButton("Continue to Customer Signature");
 			Testutil.staticLongWait();
